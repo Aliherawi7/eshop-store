@@ -1,0 +1,10 @@
+.product-rate{
+    display: flex;
+    align-items: center;
+}
+.star-rate-small{
+    font-size: 12px;
+}
+.star-rate-large{
+    font-size: 16px;
+}

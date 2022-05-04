@@ -1,0 +1,41 @@
+.store{
+    background-color: #f3f3f3;
+}
+.product{
+    font-family: "header2";
+    font-size: 30px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.store .basket:hover{
+    color: var(--green);
+}
+.store-entering{
+    animation-name: animate3;
+    animation-duration: 0.5s;
+}
+.product-list{
+    display: flex;
+    padding: 20px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (max-width:768px){
+    .product{
+        font-family: "header2";
+        font-size: 20px;
+        padding-top: 25px;
+        text-align: center;
+    }
+    .store .basket{
+        cursor: pointer;
+        position: absolute;
+        right: 30px;
+        top: 70px;
+        font-size: 30px;
+    }
+      
+}

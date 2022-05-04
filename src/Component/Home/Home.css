@@ -1,0 +1,31 @@
+.features{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.651);
+    padding : 20px;
+    display: grid;
+    grid-template-rows: 30% 70%;
+}
+.features .container{
+    display: flex;
+}
+.home{
+    background: url("../../../public/image/1.jpg") !important;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 87vh;
+}
+/* for transition animation */
+.home-entering{
+    animation-name: animate1;
+    animation-duration: 0.5s;
+}
+.home-exiting{
+    animation-name: animate1-exiting;
+    animation-duration: 0.5s;
+}
+
+@media (max-width:768px){
+    .features .container {
+        flex-direction: column;
+    }
+}

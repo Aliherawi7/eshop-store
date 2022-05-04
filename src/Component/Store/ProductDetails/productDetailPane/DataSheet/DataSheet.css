@@ -1,0 +1,51 @@
+.data-sheet{
+    width: 60%;
+    border: 1px solid rgb(189, 189, 189);
+    border-spacing: 0
+}
+.data-sheet tr{
+    padding: 10px;
+    font-size: 14px;
+}
+
+.data-sheet tbody{
+    padding: 0;
+    margin: 0;
+}
+.data-sheet tr td{
+    padding: 8px;
+}
+.data-sheet tr:nth-child(odd){
+    background-color: #ddd;
+}
+.data-sheet tr th{
+    padding: 10px;
+    padding-left: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: #ddd;
+    text-align: left;
+}
+
+.dataSheet-entering{
+    animation-name: animate2;
+    animation-duration: 0.5s;
+}
+.dataSheet-exiting{
+    animation-name: animate2;
+    animation-duration: 0.5s;
+}
+
+
+
+@media (max-width:768px){
+    .data-sheet{
+        width: 90%;
+    }
+    .data-sheet tr th{
+        font-size: 15px;
+    }
+    .data-sheet tr{
+        font-size: 12px;
+    }
+}

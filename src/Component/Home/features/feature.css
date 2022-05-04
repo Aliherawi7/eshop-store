@@ -1,0 +1,51 @@
+
+.features h2{
+    text-align: center;
+    font-family: "nexabold";
+    padding: 10px;
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--green);
+}
+.features .container{
+    display: flex;
+    justify-content: space-around;
+}
+.feature{
+    cursor: pointer;
+    margin: 15px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+    
+}
+.feature i{
+    color: var(--blue);
+    font-size: 35px;
+    padding: 0 10px;
+}
+
+.feature-text-container h3{
+    letter-spacing: 1px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 15px;
+    color: #000;
+}
+.feature-text-container p{
+    color: #000;
+    font-weight: 200;
+    font-size: 12px;
+}
+.feature:hover .feature-text-container h3{
+    color: var(--green);
+    transition: all 0.2s;
+}
+.feature:hover .feature-text-container p{
+    color: var(--green);
+    transition: all 0.2s;
+}
+.feature:hover i{
+    color: var(--green);
+    transition: all 0.2s;
+}

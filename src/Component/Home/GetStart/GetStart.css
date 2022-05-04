@@ -1,0 +1,62 @@
+.getstart{
+    padding: 20px 30px;
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.getstart .title{
+    width: 500px;
+    margin: auto;
+}
+.getstart .title h2{
+    font-family: "nexabold";
+    font-size: 40px;
+    font-weight: 900;
+    text-align: left;
+}
+.getstart .rearch-box{
+    margin: 10px;
+    margin: 30px 0 20px  0;
+    display: flex;
+}
+.getstart .rearch-box input{
+    width: 80%;
+    padding: 6px;
+    border: none;
+    outline: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: rgba(248, 248, 248, 0.514);
+    display: inline-block;
+    color: #000 ;
+}
+.getstart .rearch-box button{
+    color: #fff;
+    width: 20%;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.getstart .background{
+    background-color: #fff;
+    position: relative;
+    display: grid;
+    width: 650px;
+    height: 350px;  
+}
+@media (max-width:768px){
+    .getstart .title h2{
+        width: 100%;
+        text-align: center;
+        font-size: 25px;
+    }
+    .getstart .title p{
+        width: 85%;
+        text-align: center;
+        font-size: 14px;
+    }
+}

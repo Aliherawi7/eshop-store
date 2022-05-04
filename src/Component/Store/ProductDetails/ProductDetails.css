@@ -1,0 +1,86 @@
+.product-details{
+    width: 100%;
+    padding: 10px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.product-details img{
+    align-self: center;
+    width: 55%;
+    margin: auto;
+}
+
+
+.product-details .product-title{
+    margin-top: 20px;
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+.product-details .product-info{
+    margin-top: 20px ;
+    
+}
+
+.product-details .product-price{
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.product-details .product-description{
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 500;
+    
+}
+.add-to-card{
+    width: 80%;
+}
+.add-to-card input{
+    outline: none;
+    border-radius: 3px;
+    padding: 6px;
+    border: 0.5px solid rgb(197, 197, 197);
+    width: 20%;
+    min-width: 40px;
+}
+.add-to-card button{
+    width: 40%;
+    min-width: 70px;
+}
+@media(max-width:768px){
+    .product-details{
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.5fr 1fr;
+        justify-content: center;
+    }
+    .product-details img{
+        width: 60%;
+    }
+    .product-details img, .product-details .product-info{
+        margin: 0 auto;
+    }
+    
+}
+
+.product-entering{
+    animation-name: fadeIn;
+    animation-duration: 1.5s;
+}
+
+
+@keyframes fadeIn{
+    0%, 40%{
+        transform: translateY(50vh) scale(0.001);
+    }
+    40%,50%{
+        transform:translateY(0vh) ;
+    }
+    50%, 60%{
+        transform: translateY(0vh);
+    }
+    60%,100%{
+        transform: scale(1);
+    }
+}

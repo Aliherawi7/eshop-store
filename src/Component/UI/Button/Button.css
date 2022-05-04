@@ -1,0 +1,38 @@
+.btn{
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #000;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    margin: 3px;
+    transition: background 0.2s;
+    box-sizing: inherit;
+}
+
+.success{
+    background-color: var(--green);
+}
+.success:hover{
+    background-color: #279b57;
+    color: #fff;
+}
+
+.danger{
+    background-color: #db0808;
+}
+.danger:hover{
+    background-color: #ac0a0a;
+    color: #fff;
+}
+
+.outline {
+    background-color: transparent;
+    border: 1px solid var(--purple);
+}
+.outline:hover{
+    background-color: var(--purple);
+    color: #fff;
+}

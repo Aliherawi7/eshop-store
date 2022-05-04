@@ -1,0 +1,16 @@
+.nav-items{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+}
+nav{
+    justify-self: flex-start;
+}
+
+@media (max-width:768px){
+    .nav-items{
+        display: none;
+    }
+}

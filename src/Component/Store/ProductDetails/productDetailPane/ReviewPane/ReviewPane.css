@@ -1,0 +1,134 @@
+.form-title{
+    width: 80%;
+    border-bottom: 1px ridge #000;
+    margin:5px 15px;
+    margin-top: 40px;
+}
+.review-form{
+    width: 80%;
+    margin-left: 15px;
+}
+.review-form .input-container{
+    display: inline-block;
+    width: 35%;
+    margin-right: 5%;
+}
+
+.review-form .input-container label, 
+.review-form .input-container u{
+    width: 100%;
+    font-size: 15px;
+}
+
+.review-form select{
+    font-size: 12px;
+    border: none;
+    border-bottom: 2px solid #e1e1e1;
+    width: 20%;
+    outline: none;
+    padding:8px 0;
+}
+
+.review-form textarea{
+    margin-top: 15px;
+    padding: 5px;
+    display: block;
+    width: 100%;
+    height: 100px;
+    outline: none;
+    border:2px solid #e1e1e1;
+}
+.review-form button{
+    margin: 10px 0px;
+}
+
+/* pople review  */
+.last-review{
+    margin: 15px;
+}
+.people-review{
+    margin:10px auto;
+}
+.people-review img{
+    vertical-align: -20px;
+    font-size: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #000;
+}
+.people-review h4{
+    font-weight: 500;
+    font-size: 15px;
+    margin: auto 20px;
+    display: inline-block;
+}
+.people-review .review-text{
+    padding: 0 60px;
+    display: block;
+    font-size: 14px;
+
+}
+.people-review p{
+    font-size: 10px;
+    padding: 0 5px;
+}
+.people-review .date-rate .CustomerReviews ul{
+    vertical-align: 5px;
+}
+.people-review .date-rate{
+    display: flex;
+    margin-left: 54px;
+    align-items: center;
+}
+
+
+/* review rate */
+.weak{
+    color: #fa9440;
+    border-bottom: 2px solid #fa9440 !important;
+}
+.medium{
+    color: #0ab3e6;
+    border-bottom: 2px solid #0ab3e6 !important;
+}
+.good{
+    color: #1ce209;
+    border-bottom: 2px solid #1ce209 !important;
+}
+.notRated{
+    color: #ee0e0e;
+    border-bottom: 2px solid #ee0e0e !important;
+}
+.notReview{
+    color: #ee0e0e;
+    border: 2px solid #ee0e0e !important;
+}
+.Review{
+    border: 2px solid #1ce209 !important;
+}
+
+/* entering animation */
+.review-content-entering{
+    animation-name: animate2;
+    animation-duration: 0.5s;
+}
+
+@media (max-width:768px){
+    .review-form{
+        width: 100%;
+    }
+    .review-form .input-container{
+        display: block;
+        width: 70%;
+    }
+    .review-form select, .review-form textarea{
+        display: block;
+        width: 70%;
+    }
+    .review-form .input-container label, 
+    .review-form .input-container u{
+        font-size: 15px;
+        width: 100%;
+    }
+}

@@ -1,0 +1,10 @@
+.user-account{
+    font-size: 25px;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-self: flex-end;
+}
+.user-account i{
+    color: var(--green);
+}

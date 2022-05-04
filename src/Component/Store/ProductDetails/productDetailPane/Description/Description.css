@@ -1,0 +1,21 @@
+.description-content{
+    width: 80%;
+    border: 1px solid #ddd;
+}
+
+.description-content h4{
+    background-color: #ddd;
+    font-size: 15px;
+    font-weight: 900;
+    padding: 10px;
+}
+.description-content p{
+    padding: 10px;
+    font-size: 14px;
+    width: 80%;
+}
+
+.description-content-entering{
+    animation-name: animate2;
+    animation-duration: 0.5s;
+}

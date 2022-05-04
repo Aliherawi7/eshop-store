@@ -1,0 +1,26 @@
+.main-container{
+    min-height: 87vh;
+}
+.pop-up-menu{
+    position: fixed;
+    display: flex;
+    left: 0px;
+    top: 270px;
+    font-size: 25px;
+    color: var(--green);
+    flex-direction: column;
+    height: max-content;
+    transition: padding-left 0.3s;
+    z-index: 100;
+}
+.pop-up-menu i{
+    cursor: pointer;
+    padding:4px 10px;
+    transition: transform  0.3s;
+}
+.pop-up-menu i:hover{
+    transform: scale(1.2);
+}
+.pop-up-menu:hover{
+    padding-left: 15px;
+}

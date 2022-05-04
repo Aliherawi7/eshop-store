@@ -1,0 +1,21 @@
+.not-found-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.not-found-page h2, .not-found-page i{
+    margin-top: 50px;
+    padding: 3px;
+}
+.small{
+    font-size: 20px;
+    font-weight: 600;
+}
+.large{
+    font-size: 40px;
+    font-weight: 900;
+}
+.not-found-entering{
+    animation-name: animate1;
+    animation-duration: 0.5s;
+}

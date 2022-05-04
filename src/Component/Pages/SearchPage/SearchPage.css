@@ -1,0 +1,35 @@
+.search-box{
+    margin: auto;
+    margin-top: 20px;
+    width: 40%;
+
+}
+.search-box input{
+    width: 80%;
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgb(177, 177, 177);
+    transition: all 0.2s ease-in-out;
+}
+.search-box input:focus{
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 0px 1px 2px var(--green);
+}
+.search-page hr{
+    margin: auto;
+    margin-top: 20px;
+    width: 60%;
+}
+
+.search-entering{
+    animation-name: animate1;
+    animation-duration: .5s;
+}
+.product-list{
+    display: flex;
+    padding: 20px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}

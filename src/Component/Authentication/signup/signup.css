@@ -1,0 +1,39 @@
+.login-entering{
+    animation-name: login;
+    animation-duration: 1s;
+}
+
+.login-exiting{
+    animation-name: loginExit;
+    animation-duration: 1s;
+}
+
+.show-password{
+    background: transparent;
+    position: absolute;
+    right: 0;
+}
+
+
+@keyframes login{
+    0%,40%{
+        transform: translateX(100vh);
+    }
+    40%,80%{
+        transform: translateX(-60px);
+    }
+    80%,100%{
+        transform: rotateX(0);
+    }
+}
+@keyframes loginExit{
+    0%,40%{
+        transform: rotateX(0);
+    }
+    40%,80%{
+        transform: translateX(60px);
+    }
+    80%,100%{
+        transform: translateX(100vh);
+    }
+}

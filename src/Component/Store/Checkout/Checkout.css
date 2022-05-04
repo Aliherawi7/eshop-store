@@ -1,0 +1,132 @@
+.checkout{
+    padding: 20px;
+    text-align: center;
+}
+.checkout button{
+    text-transform: uppercase;
+    padding: 6px 10px;
+    font-weight: 600;
+}
+.checkout-entering{
+    animation-name: animate1;
+    animation-duration: 0.5s;
+}
+.deleteAnimation{
+    border: 2px solid red;
+    transform: translateX(-350px);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+}
+.table-container{
+    display: flex;
+}
+.checkout .item-table{
+    margin: auto;
+    width: 100%;
+    border-spacing: 0;
+}
+.checkout button{
+    margin: auto;
+    margin-right: 0;
+    margin-top: 10px;
+}
+.checkout .item-table tr th{
+    font-size: 15px;
+    font-weight: 500; 
+}
+.checkout .item-table tr td{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.item-table .remove-item{
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 900;
+    transition: transfrom 0.2s;
+    transform: scale(1);
+    padding: 0 5px;
+    margin-top: 0;
+
+}
+.item-table .remove-item:hover{
+    background-color: #49b63f;
+}
+.item-table img{
+    height: 80px;
+}
+
+.checkout .item-table tr td, .checkout .item-table tr th{
+    padding: 12px;
+    border: 1px solid #c5c5c5;
+}
+.checkout-title{
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+    padding-bottom: 10px;
+}
+.product-table{
+    margin-top: 50px;
+    margin-left: 30px;
+    width: 70%;
+}
+.cart-table-container{
+    width: 300px;
+    margin-left: 20px;
+}
+
+.cart-table{
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 50px;
+    width: 100%;
+}
+.cart-table thead tr th{
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+    border:none;
+    padding:0;
+    padding-bottom: 10px;
+}
+.cart-table tr th{
+    max-width: 36px;
+}
+.cart-table tr td, .cart-table tr th{
+    text-align: left;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 400;
+    border: 1px solid #c5c5c5;
+}
+.cart-table tr:nth-child(even){
+    background-color: rgb(235, 235, 235);
+}
+
+@media(max-width:768px){
+    .cart-table-container{
+        width: 60%;
+    }
+    .checkout .item-table tr td, .checkout .item-table tr th {
+        padding: 3px;
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .checkout .item-table tr >:first-child{
+        display: none;
+    }
+    .product-table{
+        margin-left: 0px;
+        width: 70%;
+    }
+    
+}
+@media(max-width:600px){
+    .table-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

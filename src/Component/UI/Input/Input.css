@@ -1,0 +1,84 @@
+.input-container{
+    position: relative;
+    margin: 20px 0;
+}
+.input-container input{
+    position: relative;
+    width: 100%;
+    padding: 5px 0;
+    height: 40px;
+    color: #000;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    z-index: 20;
+}
+.input-container label{
+    position: absolute;
+    font-size: 18px;
+    left: 0;
+    top: 10px;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(1, -0.33, 0, 1.15);
+    transform: translate(0px, 0px) scale(1);
+    transform-origin: left top;
+}
+.input-container input:focus ~ h4{
+    transform: translateY(-10px);
+}
+.input-container u{
+    background-color: #e1e1e1;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: background 0.3s;
+}
+.input-container u::before{
+    content: '';
+    background-color: #56db3b;
+    width: 0%;
+    height: 3px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: all 0.5s;
+}
+.input-container input:focus ~ u::before{
+    width: 100%;
+}
+.input-container input:focus ~ label{
+    top: -10px;
+    font-size: 13px;
+    color: #807d7dfa !important;
+}
+
+.focus label{
+    top: -10px !important;
+    font-size: 13px !important;
+    color: #807d7dfa !important;
+}
+
+.focus u::before{
+    width: 100%;
+    
+}
+
+.invalid u::before{
+    background-color: #e91607 !important;
+}
+.invalid input{
+    color: #e91607;
+}
+
+.warning-message{
+    color: #e91607;
+    font-size: 12px;
+    width: 100%;
+    position: absolute;
+    bottom: -14px;
+    left: 0;
+    text-align: left;
+}
+

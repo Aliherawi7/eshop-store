@@ -1,0 +1,141 @@
+.login-container{
+    width: 80%;
+    margin: auto;
+    background-color:#fff;
+    display: flex;
+    padding: 50px;
+    justify-content: center;
+    text-align: center;
+}
+.back-to-login{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    color: #000;
+    font-size: 25px;
+    padding: 0 10px;
+    float: left;
+}
+
+/* the eye icon on password inputs */
+.show-password{
+    background: transparent;
+    position: absolute;
+    right: 0;
+    padding: 5px 10px 5px 20px !important;
+    z-index: 60;
+    transition: all 0.1s ease-in-out;
+
+}
+.show-password:hover{
+    transform: scale(1.2);
+    transition: all 0.1s ease-in-out;
+}
+
+.scaleY{
+    transform: translateY(-100vh);
+    
+}
+.already-account{
+    display: block;
+    margin: 20px 0;
+    color: var(--purple);
+}
+.already-account:hover{
+    color: var(--green);
+}
+
+.signup , .login{
+    width: 60%;
+    position: relative;
+    transition: transform 0.3s;
+}
+.signup button, .login button{
+    font-size: 18px;
+    padding: 5px 25px;
+}
+.login-container h2{
+    text-align: center;
+}
+.login h3{
+    padding: 20px;
+}
+
+@media (max-width:768px){
+    .login-container{
+        width: 100%;
+        padding: 20px;
+
+    }
+}
+
+.login-entering{
+    animation-name: login;
+    animation-duration: 1.5s;
+}
+
+.login-exiting{
+    animation-name: loginExit;
+    animation-duration: 1.5s;
+}
+
+
+@keyframes login{
+    0%,40%{
+        transform: translateX(100vh);
+    }
+    40%,70%{
+        transform: translateX(-45px);
+    }
+    70%,100%{
+        transform: rotateX(0);
+    }
+}
+@keyframes loginExit{
+    0%,40%{
+        transform: rotateX(0);
+    }
+    40%,70%{
+        transform: translateX(45px);
+    }
+    70%,100%{
+        transform: translateX(100vh);
+    }
+}
+
+
+
+/* for signup also */
+.signup-entering{
+    animation-name: signupEntering;
+    animation-duration: 1.5s;
+}
+
+.signup-exiting{
+    animation-name: signupExit;
+    animation-duration: 1.5s;
+}
+
+
+@keyframes signupEntering{
+    0%,40%{
+        transform: translateX(-100vh);
+    }
+    40%,70%{
+        transform: translateX(45px);
+    }
+    70%,100%{
+        transform: rotateX(0);
+    }
+}
+@keyframes signupExit{
+    0%,40%{
+        transform: rotateX(0);
+    }
+    40%,70%{
+        transform: translateX(45px);
+    }
+    70%,100%{
+        transform: translateX(-100vh);
+    }
+}
