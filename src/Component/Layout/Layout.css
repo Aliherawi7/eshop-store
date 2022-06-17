@@ -24,3 +24,8 @@
 .pop-up-menu:hover{
     padding-left: 15px;
 }
+@media(max-width:768px){
+    .pop-up-menu{
+        display: none;
+    }
+}
