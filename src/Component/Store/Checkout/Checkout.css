@@ -106,9 +106,6 @@
 }
 
 @media(max-width:768px){
-    /* .cart-table-container{
-        width: 60%;
-    } */
     .checkout .item-table tr td, .checkout .item-table tr th {
         padding: 3px;
         font-size: 12px;
