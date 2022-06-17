@@ -52,7 +52,6 @@
 @media(max-width:768px){
     .product-details{
         grid-template-columns: 1fr;
-        grid-template-rows: 0.5fr 1fr;
         justify-content: center;
     }
     .product-details img{
@@ -60,6 +59,7 @@
     }
     .product-details img, .product-details .product-info{
         margin: 0 auto;
+        width: 100%;
     }
     
 }

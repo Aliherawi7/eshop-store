@@ -96,14 +96,11 @@
     color: #1ce209;
     border-bottom: 2px solid #1ce209 !important;
 }
-.notRated{
+.notRated,.notReview {
     color: #ee0e0e;
     border-bottom: 2px solid #ee0e0e !important;
 }
-.notReview{
-    color: #ee0e0e;
-    border: 2px solid #ee0e0e !important;
-}
+
 .Review{
     border: 2px solid #1ce209 !important;
 }
@@ -120,15 +117,21 @@
     }
     .review-form .input-container{
         display: block;
-        width: 70%;
+        width: 95%;
     }
     .review-form select, .review-form textarea{
         display: block;
-        width: 70%;
+        width: 95%;
+    }
+    .form-title{
+        width: 95%;
     }
     .review-form .input-container label, 
     .review-form .input-container u{
         font-size: 15px;
+        width: 100%;
+    }
+    .product-info button{
         width: 100%;
     }
 }

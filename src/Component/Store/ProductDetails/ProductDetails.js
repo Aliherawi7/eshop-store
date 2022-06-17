@@ -16,9 +16,6 @@ const ProductDetails = () => {
         { name: 'Zahra', avatar: '/image/people/2.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" }
     ])
     const { id } = useParams()
-    console.log(id)
-    const [dataSheetState, dateSheetSetState] = useState([])
-    let inputRef = React.createRef()
     const foundProduct = Products.find((item) => {
         console.log(item)
         return item.id === id
@@ -40,7 +37,6 @@ const ProductDetails = () => {
     let productDetails;
 
     //if data have been loaded from server
-    console.log(foundProduct)
     if (foundProduct) {
         productDetails = (
             <Transition timeout={1500} in={true} appear>
@@ -69,11 +65,8 @@ const ProductDetails = () => {
             <Loading />
         )
     }
-    return (
-        <React.Fragment>
-            {productDetails}
-        </React.Fragment>
-    )
+    return productDetails
+        
 }
 
 export default ProductDetails

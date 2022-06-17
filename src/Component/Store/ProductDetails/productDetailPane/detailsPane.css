@@ -35,6 +35,10 @@
 
 
 @media(max-width:768px){
+    .details-pane .description-content,
+    .details-pane .data-sheet{
+        width: 100%;
+    }
     .details-pane .tap-list li{
         cursor: pointer;
         padding: 6px 15px;

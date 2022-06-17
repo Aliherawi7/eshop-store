@@ -24,7 +24,12 @@
         text-decoration: none;
         justify-self: flex-start;
     }
-    .nav-brand h1{
-        font-family: 'header2';
+
+}
+@media(max-width:512px){
+    .nav-brand img{
+        margin-left: 10px;
+        width: 100px;
+        height: 55px;
     }
 }

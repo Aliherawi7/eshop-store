@@ -81,6 +81,7 @@ const ReviewPane = (props) => {
         }
         optionSetstate(oldState)
     }
+    // submit the review + checking the values
     const submitReview = () => {
         const checkName = inputState[0]
         const checkEmail = inputState[1]
@@ -110,9 +111,6 @@ const ReviewPane = (props) => {
             textareaSetState(oldState)
             return
         }
-
-        console.log('sending review...')
-
     }
 
     return (
