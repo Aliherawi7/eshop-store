@@ -67,6 +67,9 @@
         padding: 20px;
 
     }
+    .login-container .login, .signup{
+        width: 90%;
+    }
 }
 
 .login-entering{
