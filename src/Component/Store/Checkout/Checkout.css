@@ -106,9 +106,7 @@
 }
 
 @media(max-width:768px){
-    .cart-table-container{
-        width: 60%;
-    }
+
     .checkout .item-table tr td, .checkout .item-table tr th {
         padding: 3px;
         font-size: 12px;
@@ -117,11 +115,11 @@
     .checkout .item-table tr >:first-child{
         display: none;
     }
-    .product-table{
+    .product-table,
+    .cart-table-container{
         margin-left: 0px;
-        width: 70%;
+        width: 100%;
     }
-    
 }
 @media(max-width:600px){
     .table-container{
