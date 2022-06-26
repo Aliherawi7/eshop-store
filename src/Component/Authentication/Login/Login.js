@@ -66,8 +66,8 @@ const Login = (props) => {
     }
     // eye button hnadler 
     const eyeBtnHandler = (name) => {
-        const oldInputState = {...loginInputState}
-        if (eyeState.className === 'bi bi-eye' ) {
+        const oldInputState = { ...loginInputState }
+        if (eyeState.className === 'bi bi-eye') {
             eyeSetState({ className: 'bi bi-eye-slash' })
             oldInputState.password.type = 'password'
             setLoginInputState(oldInputState)
@@ -126,9 +126,11 @@ const Login = (props) => {
         <Transition timeout={1000} in={true} exit={true} appear>
             {(status) => (
                 <div className={`login-container login-${status}`}>
-                    <img className='eshop-logo' src='/image/eshop-logo.png' />
+                    <Link to="/">
+                        <img className='eshop-logo' src='/image/eshop-logo.png' />
+                    </Link>
                     <form className="login">
-                        <h2>Login</h2>
+                        <h2>Sign in</h2>
                         {loginInputArray.map((item) => {
                             return (
                                 <>
@@ -149,8 +151,14 @@ const Login = (props) => {
                             )
                         })}
                         <Button btnType={"success"} click={login}>Login</Button>
+                        <p>By clicking the sign in you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
                         <Link to="/signup" className="already-account">Don't have account?</Link>
                     </form>
+                    <ul className='login-with-third-party'>
+                        <li style={{ "--tp": "#c70202" }}><a><i className='bi bi-google'></i></a></li>
+                        <li style={{ "--tp": "#166bf3" }}><a><i className='bi bi-facebook'></i></a></li>
+                        <li style={{ "--tp": "#01b5f2" }}><a><i className='bi bi-twitter'></i></a></li>
+                    </ul>
                 </div>
             )}
 

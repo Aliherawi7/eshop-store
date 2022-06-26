@@ -21,6 +21,28 @@
     width: 120px;
     margin-bottom: 25px;
 }
+/* login with third party app */
+.login-with-third-party{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+.login-with-third-party li{
+    font-size: 25px;
+    margin-right: 14px;
+    color: var(--tp);
+    cursor: pointer;
+    padding: 6px 11px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+}
+.login-with-third-party li:hover{
+    background-color: #ddd;
+}
+.login-container form p{
+    font-size: 12px;
+    margin-top: 12px;
+}
 
 /* the eye icon on password inputs */
 .show-password{
@@ -55,9 +77,10 @@
     position: relative;
     transition: transform 0.3s;
 }
-.signup button, .login button{
+.signup  .success, .login .success{
     font-size: 18px;
     padding: 5px 25px;
+    width: 100%;
 }
 .login-container h2{
     text-align: left;

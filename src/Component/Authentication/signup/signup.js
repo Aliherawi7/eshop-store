@@ -200,7 +200,9 @@ const Signup = (props) => {
         <Transition timeout={1500} in={true} appear>
             {(status) => (
                 <div className={`login-container signup-${status}`}>
-                    <img className='eshop-logo' src='/image/eshop-logo.png' />
+                    <Link to="/">
+                        <img className='eshop-logo' src='/image/eshop-logo.png' />
+                    </Link>
                     <form className="signup" method="post">
                         <h2>Signup</h2>
                         {signUpInputArray.map((item) => {
@@ -227,6 +229,7 @@ const Signup = (props) => {
                             )
                         })}
                         <Button btnType={"success"} click={signup}>Signup</Button>
+                        <p>By clicking the sign in you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
                         <Link to="/login" className="already-account">Already have account?</Link>
                     </form>
                 </div>
