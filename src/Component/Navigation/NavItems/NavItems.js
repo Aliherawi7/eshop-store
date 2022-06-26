@@ -8,8 +8,8 @@ const NavItems =() => {
             <ul className="nav-items">
                 <NavItem link="/" >Home</NavItem>
                 <NavItem link="/store" >Store</NavItem>
-                <NavItem link="/vip" >VIP</NavItem>
-                <NavItem link="/contact" >Contact</NavItem>
+                <NavItem link="/best-sellers" >Best Sellers</NavItem>
+                <NavItem link="/customer-service" >Customer Service</NavItem>
                 <NavItem link="/about" >About</NavItem>
             </ul>
         </nav>
