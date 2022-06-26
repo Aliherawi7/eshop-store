@@ -10,7 +10,5 @@ nav{
 }
 
 @media (max-width:768px){
-    .nav-items{
-        display: none;
-    }
+    
 }

@@ -9,7 +9,7 @@
 }
 
 .store .basket:hover{
-    color: var(--green);
+    color: var(--mainColor);
 }
 .store-entering{
     animation-name: animate3;

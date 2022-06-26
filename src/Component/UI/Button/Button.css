@@ -13,10 +13,10 @@
 }
 
 .success{
-    background-color: var(--green);
+    background-color: var(--mainColor);
 }
 .success:hover{
-    background-color: #279b57;
+    background-color: #cf6a1c;;
     color: #fff;
 }
 

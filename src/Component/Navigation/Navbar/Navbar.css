@@ -28,7 +28,7 @@
 
 .account-container button i{
     font-size: 22px;
-    color : var(--green);
+    color : var(--mainColor);
 }
 
 .btnToggler{
@@ -73,9 +73,7 @@
 
 
 @media(max-width:768px){
-    .account-container{
-        display: none;
-    }
+
     .btnToggler{
         display: block;
     }

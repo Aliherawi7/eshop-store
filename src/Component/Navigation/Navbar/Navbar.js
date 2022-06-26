@@ -34,9 +34,6 @@ const Navbar = (props) => {
 
                 <div className="account-container">
                     <Button click={() => (navigate('/checkout'))}><i className="bi bi-cart3 basket"></i> <span style={{ color: '#fff' }}>: {basket.length}</span></Button>
-                    <AccountAvatar account="/account">
-                        <i className="bi bi-person-circle"></i>
-                    </AccountAvatar>
                 </div>
             </div>
             <div className="bottom-nav">

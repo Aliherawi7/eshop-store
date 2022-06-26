@@ -11,7 +11,7 @@
     transition: color 0.3s;
 }
 .nav-item a:hover{
-    color: var(--green);
+    color: var(--mainColor);
 }
 
 .nav-item a::after{
@@ -19,7 +19,7 @@
     border: solid 1px;
     width: 100%;
     height: 1px;
-    background-color: var(--green);
+    background-color: var(--mainColor);
     transition: all 0.2s cubic-bezier(1,-0.01, 0.3, 1.01);
     transform: scaleX(0);
     transform-origin: left;
@@ -29,7 +29,7 @@
 }
 
 .active a{
-    color:  var(--green) !important;
+    color:  var(--mainColor) !important;
     font-weight: 700;
 }
 .active a::after{

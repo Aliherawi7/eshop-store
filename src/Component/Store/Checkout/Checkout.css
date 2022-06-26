@@ -50,7 +50,7 @@
 
 }
 .item-table .remove-item:hover{
-    background-color: #49b63f;
+    background-color: var(--mainColor);
 }
 .item-table img{
     height: 80px;
