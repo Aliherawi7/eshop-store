@@ -1,8 +1,9 @@
 
 .nav-brand img{
     margin-left: 20px;
-    width: 120px;
-    height: 60px;
+    
+    width: 100px;
+    height: 30px;
 }
 .nav-brand h1{
     font-family: 'header2';
@@ -22,7 +23,7 @@
 @media(max-width:512px){
     .nav-brand img{
         margin-left: 10px;
-        width: 100px;
-        height: 55px;
+        width: 85px;
+        height: 25px;
     }
 }
