@@ -200,6 +200,7 @@ const Signup = (props) => {
         <Transition timeout={1500} in={true} appear>
             {(status) => (
                 <div className={`login-container signup-${status}`}>
+                    <img className='eshop-logo' src='/image/eshop-logo.png' />
                     <form className="signup" method="post">
                         <h2>Signup</h2>
                         {signUpInputArray.map((item) => {

@@ -4,8 +4,9 @@
     background-color:#fff;
     display: flex;
     padding: 50px;
-    justify-content: center;
+    align-items: center;
     text-align: center;
+    flex-direction: column;
 }
 .back-to-login{
     position: absolute;
@@ -15,6 +16,10 @@
     font-size: 25px;
     padding: 0 10px;
     float: left;
+}
+.login-container .eshop-logo{
+    width: 120px;
+    margin-bottom: 25px;
 }
 
 /* the eye icon on password inputs */
@@ -55,7 +60,7 @@
     padding: 5px 25px;
 }
 .login-container h2{
-    text-align: center;
+    text-align: left;
 }
 .login h3{
     padding: 20px;

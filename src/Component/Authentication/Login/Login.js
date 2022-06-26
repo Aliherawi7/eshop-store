@@ -126,6 +126,7 @@ const Login = (props) => {
         <Transition timeout={1000} in={true} exit={true} appear>
             {(status) => (
                 <div className={`login-container login-${status}`}>
+                    <img className='eshop-logo' src='/image/eshop-logo.png' />
                     <form className="login">
                         <h2>Login</h2>
                         {loginInputArray.map((item) => {
