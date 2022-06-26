@@ -26,10 +26,10 @@ footer .footer-link{
 footer div a{
     font-size: 14px;
     padding: 0 5px;
-    color: var(--green);
+    color: var(--mainColor);
 }
 footer a:hover{
-    color: #0ff00f;
+    color: #e0701a;
 }
 
 @media (max-width:768px){
