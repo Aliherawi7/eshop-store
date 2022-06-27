@@ -229,7 +229,7 @@ const Signup = (props) => {
                             )
                         })}
                         <Button btnType={"success"} click={signup}>Signup</Button>
-                        <p>By clicking the sign in you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
+                        <p>By clicking the sign up you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
                         <Link to="/login" className="already-account">Already have account?</Link>
                     </form>
                 </div>

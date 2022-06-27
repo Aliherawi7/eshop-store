@@ -150,9 +150,9 @@ const Login = (props) => {
                                 </>
                             )
                         })}
-                        <Button btnType={"success"} click={login}>Login</Button>
+                        <Button btnType={"success"} click={login}>Sign in</Button>
                         <p>By clicking the sign in you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
-                        <Link to="/signup" className="already-account">Don't have account?</Link>
+                        <Link to="/signup" className="already-account">create eshop account</Link>
                     </form>
                     <ul className='login-with-third-party'>
                         <li style={{ "--tp": "#c70202" }}><a><i className='bi bi-google'></i></a></li>

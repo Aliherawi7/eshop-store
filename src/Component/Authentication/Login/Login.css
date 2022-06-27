@@ -66,10 +66,13 @@
 .already-account{
     display: block;
     margin: 20px 0;
-    color: var(--purple);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #000;
 }
 .already-account:hover{
-    color: var(--green);
+    background-color: #ddd;
 }
 
 .signup , .login{
