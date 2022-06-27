@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import "./Navbar.css"
 import NavbarBrand from "../NavbarBrand/NavbarBrand"
 import NavItems from '../NavItems/NavItems'
-import AccountAvatar from '../user-account/AccountAvatar'
 import Button from '../../UI/Button/Button'
 import TogglerMenu from '../TogglerMenu/TogglerMenu'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
 
 const Navbar = (props) => {
@@ -31,8 +30,11 @@ const Navbar = (props) => {
                     <input name="search" value={input.value} onChange={(e) => (changeHandler(e))} placeholder="what do you need?" />
                     <Button btnType="success" click={searchBtnHandler}><i className="bi bi-search"></i></Button>
                 </form>
-
-                <div className="account-container">
+                <div className="status-box">
+                    <div className='acount-box'>
+                        <p>Hello guest</p>
+                        <Link to="/login"><strong>Sign in</strong></Link>
+                    </div>
                     <Button click={() => (navigate('/checkout'))}><i className="bi bi-cart3 basket"></i> <span style={{ color: '#fff' }}>: {basket.length}</span></Button>
                 </div>
             </div>
