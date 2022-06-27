@@ -7,8 +7,13 @@ const NotFound = (props) => {
         <Transition timeout={500} in={true} appear>
             {status => (
                 <div className={`not-found-page not-found-${status}`}>
-                    <i className={`bi bi-emoji-frown ${props.size}`}></i>
-                    <h2 className={props.size}> Not found </h2>
+                    <img
+                        src={
+                            require("../../../assets/Oops 404 Error with a broken robot-cuate.svg")
+                                .default
+                        }
+                        alt="404 page"
+                    />
                 </div>
             )}
 
