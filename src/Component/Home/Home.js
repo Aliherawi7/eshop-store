@@ -1,15 +1,20 @@
-import React,{useState} from 'react'
+import React from 'react'
 import "./Home.css"
 import Feature from './features/feature'
-import GetStart from './GetStart/GetStart'
 import {Transition} from 'react-transition-group'
+import Products from "../../products"
+import Slider from './Slider/Slider'
 
 const Home = () => {
+    let f = Math.round(Math.random()*Products.length)
+    const product = Products[6];
+    console.log(Products[6])
+    
     return (
         <Transition timeout={500} in={true}  appear>
             {(status) => (
                 <div className={`home home-${status}`}>
-                    <GetStart />
+                    <Slider />
                     <div className="features">
                         <h2>eShop Features</h2>
                         <div className="container">

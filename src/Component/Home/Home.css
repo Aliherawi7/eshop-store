@@ -9,9 +9,6 @@
     display: flex;
 }
 .home{
-    background: url("../../../public/image/1.jpg") !important;
-    background-repeat: no-repeat;
-    background-size: contain;
     min-height: 87vh;
 }
 /* for transition animation */
