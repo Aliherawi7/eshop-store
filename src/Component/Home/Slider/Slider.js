@@ -32,9 +32,10 @@ function Slider() {
             <div className='slider-container'>
                 <i className='slide-to-left bi bi-chevron-left' onClick={prev}></i>
                 {<product.component 
-                    image={Products[counter].image}
-                    animate={product.animate}
-                    name={Products[counter].name}
+                    image={Products[counter]?.image}
+                    animate={product?.animate}
+                    name={Products[counter]?.name}
+                    id={counter+1}
                     />}
                 <i className='slide-to-right bi bi-chevron-right' onClick={next}></i>
             </div>
