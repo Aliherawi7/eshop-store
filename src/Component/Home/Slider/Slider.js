@@ -2,37 +2,40 @@ import React, { useState } from 'react'
 import "./Slider.css"
 import Button from "../../UI/Button/Button"
 import Products from '../../../products'
-
+import sliderItems from "./SliderItem"
 let counter = 0;
+
+//for slider animation onclick
+const animations= {
+    LEFT_TO_RIGHT: 'left-to-right',
+    RIGHT_TO_LEFT: 'right-to-left',
+}
 function Slider() {
-    const [product, setProduct] = useState({temp: Products[counter]});
+    const [product, setProduct] = useState({component:sliderItems[counter], animate:""});
+    
     const next = ()=>{
         counter++;
         if(counter >=Products.length-1){
             counter=0; 
         }
-        setProduct({temp: Products[counter]})
+        setProduct({component:sliderItems[counter%2],animate:animations.RIGHT_TO_LEFT})
     }
     const prev = ()=>{
         counter--;
         if(counter <=-1){
             counter = Products.length-1 
         }
-        setProduct({temp: Products[counter]})
+        setProduct({component:sliderItems[counter%2],animate:animations.LEFT_TO_RIGHT})
     }
     return (
         <div className='slider'>
             <div className='slider-container'>
-                {counter}
                 <i className='slide-to-left bi bi-chevron-left' onClick={prev}></i>
-                <div className='slider-item'>
-                    <img className='slider-image' src={product.temp.image} alt='' />
-                    <div className='image-info'>
-                        <h1>TRENDY LABTOP</h1>
-                        <h2>UP TO 50% OFF ON TOP BRANDS</h2>
-                        <Button>SHOP NOW</Button>
-                    </div>
-                </div>
+                {<product.component 
+                    image={Products[counter].image}
+                    animate={product.animate}
+                    name={Products[counter].name}
+                    />}
                 <i className='slide-to-right bi bi-chevron-right' onClick={next}></i>
             </div>
         </div>
