@@ -5,9 +5,10 @@ import { Transition } from 'react-transition-group'
 import Products from "../../products"
 import Slider from './Slider/Slider'
 import Button from '../UI/Button/Button'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-
+    const navigate = useNavigate();
     return (
         <Transition timeout={500} in={true} appear>
             {(status) => (
@@ -18,21 +19,21 @@ const Home = () => {
                             <img src={Products[8].image} />
                             <div className='order-info'>
                                 <h1>{Products[8].name}</h1>
-                                <Button>SHOP NOW</Button>
+                                <Button click={()=>navigate('/store/productdetails/' + 9)}>SHOP NOW</Button>
                             </div>
                         </div>
                         <div className='ordered-item'>
                             <img src={Products[7].image} />
                             <div className='order-info'>
                                 <h1>{Products[7].name}</h1>
-                                <Button>SHOP NOW</Button>
+                                <Button click={()=>navigate('/store/productdetails/' + 8)}>SHOP NOW</Button>
                             </div>
                         </div>
                         <div className='ordered-item'>
                             <img src={Products[6].image} />
                             <div className='order-info'>
                                 <h1>{Products[6].name}</h1>
-                                <Button>SHOP NOW</Button>
+                                <Button click={()=>navigate('/store/productdetails/' + 7)}>SHOP NOW</Button>
                             </div>
                         </div>
                     </div>
