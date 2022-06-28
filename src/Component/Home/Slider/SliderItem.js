@@ -3,10 +3,9 @@ import "./Slider.css"
 import Button from "../../UI/Button/Button"
 
 function SliderItem({image , animate, name}) {
-    console.log(image)
     return (
         <div className={`slider-item ${animate}`}>
-            <img className='slider-image' src={image} alt='' />
+            <img className='slider-image' src={image} alt={name} />
             <div className='image-info'>
                 <h1><span style={{textTransform:"uppercase"}}>{name}</span></h1>
                 <h2>UP TO 50% OFF ON TOP BRANDS</h2>
@@ -16,10 +15,9 @@ function SliderItem({image , animate, name}) {
     )
 }
 function SliderItem1({image, animate, name}) {
-    console.log(image)
     return (
         <div className={`slider-item ${animate}`}>
-            <img className='slider-image' src={image} alt='' />
+            <img className='slider-image' src={image} alt={name} />
             <div className='image-info'>
                 <h1><span style={{textTransform:"uppercase"}}>{name}</span></h1>
                 <h2>UP TO 50% OFF ON TOP BRANDS</h2>
