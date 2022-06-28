@@ -1,20 +1,41 @@
 import React from 'react'
 import "./Home.css"
 import Feature from './features/feature'
-import {Transition} from 'react-transition-group'
+import { Transition } from 'react-transition-group'
 import Products from "../../products"
 import Slider from './Slider/Slider'
+import Button from '../UI/Button/Button'
 
 const Home = () => {
-    let f = Math.round(Math.random()*Products.length)
-    const product = Products[6];
-    console.log(Products[6])
-    
+
     return (
-        <Transition timeout={500} in={true}  appear>
+        <Transition timeout={500} in={true} appear>
             {(status) => (
                 <div className={`home home-${status}`}>
                     <Slider />
+                    <div className='most-ordered'>
+                        <div className='ordered-item'>
+                            <img src={Products[8].image} />
+                            <div className='order-info'>
+                                <h1>{Products[8].name}</h1>
+                                <Button>SHOP NOW</Button>
+                            </div>
+                        </div>
+                        <div className='ordered-item'>
+                            <img src={Products[7].image} />
+                            <div className='order-info'>
+                                <h1>{Products[7].name}</h1>
+                                <Button>SHOP NOW</Button>
+                            </div>
+                        </div>
+                        <div className='ordered-item'>
+                            <img src={Products[6].image} />
+                            <div className='order-info'>
+                                <h1>{Products[6].name}</h1>
+                                <Button>SHOP NOW</Button>
+                            </div>
+                        </div>
+                    </div>
                     <div className="features">
                         <h2>eShop Features</h2>
                         <div className="container">
