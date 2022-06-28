@@ -45,4 +45,12 @@
     .features .container {
         flex-direction: column;
     }
+    .home .most-ordered{
+        flex-direction: column;
+        align-items: center;
+    }
+    .home .most-ordered .ordered-item{
+        width: 95%;
+        align-items: center;
+    }
 }
