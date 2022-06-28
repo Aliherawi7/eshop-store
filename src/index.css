@@ -24,6 +24,7 @@
   @keyframes right-to-left {
     from {
       transform: translateX(100vh);
+      transition: transform ease-in;
     }
   
     to {
