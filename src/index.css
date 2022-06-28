@@ -1,2 +1,55 @@
 
 /* animations */
+/* all the aniations */
+@keyframes top-bottom-animate {
+    from {
+      transform: translateY(-100vh);
+    }
+  
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes bottom-top-animate {
+    from {
+      transform: translateY(100vh);
+    }
+  
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes right-to-left {
+    from {
+      transform: translateX(100vh);
+    }
+  
+    to {
+      transform: translateX(0vh);
+    }
+  }
+  
+  @keyframes left-to-right {
+    from {
+      transform: translateX(-100vh);
+    }
+  
+    to {
+      transform: translateX(0vh);
+    }
+  }
+  
+  @keyframes scaleX-top-to-bottom {
+    from {
+      transform-origin: top;
+      transform: scale(0);
+  
+    }
+  
+    to {
+      transform-origin: top;
+      transform: scale(1);
+    }
+  }
