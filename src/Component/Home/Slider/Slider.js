@@ -10,7 +10,7 @@ const animations= {
     RIGHT_TO_LEFT: 'right-to-left',
 }
 function Slider() {
-    const [product, setProduct] = useState({component:sliderItems[counter], animate:""});
+    const [product, setProduct] = useState({component:sliderItems[counter], animate:animations.LEFT_TO_RIGHT});
     
     const next = ()=>{
         counter++;
