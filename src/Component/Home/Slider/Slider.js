@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import "./Slider.css"
-import Button from "../../UI/Button/Button"
 import Products from '../../../products'
 import sliderItems from "./SliderItem"
 let counter = 0;

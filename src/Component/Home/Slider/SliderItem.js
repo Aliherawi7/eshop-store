@@ -3,7 +3,7 @@ import "./Slider.css"
 import Button from "../../UI/Button/Button"
 import { useNavigate } from 'react-router-dom'
 
-function SliderItem({image , animate, name ,id}) {
+export function SliderItem({image , animate, name ,id}) {
     const navigate = useNavigate()
     return (
         <div className={`slider-item ${animate}`}>
@@ -16,7 +16,7 @@ function SliderItem({image , animate, name ,id}) {
         </div>
     )
 }
-function SliderItem1({image, animate, name, id}) {
+export function SliderItem1({image, animate, name, id}) {
     const navigate = useNavigate()
     return (
         <div className={`slider-item ${animate}`}>
