@@ -1,4 +1,7 @@
-const Products = [{ "id": "1", "name": "iphone 13 pro", "price": "1000", "description": "product descrptions", "image": "/image/product/10.png", "amount": "0", "rate": 5.0, "color": "red", "size": "large", "brand": "Apple", "manufactureDate": "2022" },
+
+
+const Products = 
+[{ "id": "1", "name": "iphone 13 pro", "price": "1000", "description": "product descrptions", "image": "/image/product/1.png", "amount": "0", "rate": 5.0, "color": "red", "size": "large", "brand": "Apple", "manufactureDate": "2022" },
 { "id": "2", "name": "apple TV", "price": "340", "description": "product descrptions", "image": "/image/product/7.png", "amount": "0", "rate": 4.0, "color": "yellow", "size": "large", "brand": "Apple", "manufactureDate": "2022" },
 { "id": "3", "name": "macbook pro", "price": "700", "description": "product descrptions", "image": "/image/product/3.png", "amount": "0", "rate": 4.0, "color": "red", "size": "large", "brand": "Apple", "manufactureDate": "2021" },
 { "id": "4", "name": "iphone 13", "price": "999", "description": "product descrptions", "image": "/image/product/4.png", "amount": "0", "rate": 4.0, "color": "red", "size": "medium", "brand": "Apple", "manufactureDate": "2022" },
