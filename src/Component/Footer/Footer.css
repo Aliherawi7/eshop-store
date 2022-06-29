@@ -45,6 +45,7 @@ footer a:hover{
     }
     footer .footer-link{
         flex-direction: column;
+        width: 100%;
     }
     footer .footer-link div{
         text-align: center;
