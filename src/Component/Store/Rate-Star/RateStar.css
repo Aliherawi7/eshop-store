@@ -2,6 +2,10 @@
     display: flex;
     align-items: center;
 }
+.product-rate .start-logo{
+    padding: 3px;
+    color:#f8d800;
+}
 .star-rate-small{
     font-size: 12px;
 }
