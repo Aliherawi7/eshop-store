@@ -20,7 +20,7 @@ function About() {
                 </div>
             </div>
             <div className='part-b'>
-                <h2>visit one of out 5 locations</h2>
+                <h2>visit one of our 5 locations</h2>
                 <div className='locations'>
                 <img src='/image/locations.png' alt='eshop location'/>
                 </div>

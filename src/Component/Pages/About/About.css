@@ -51,10 +51,42 @@
     font-weight: 600;
     font-size: 25px;
     letter-spacing: 4px;
+    text-transform: uppercase;
     padding: 20px;
     background-color: #fff;
 }
 .about .part-b .locations{
     width: 100%;
     background-color: #cdd2d8;
+}
+.part-b .locations img{
+    width: 80%;
+    object-fit: contain;
+}
+
+@media(max-width:768px){
+    .about .part-a{
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .about .part-a-container{
+        width: unset;
+    }
+    .about .part-a img{
+        width: 100%;
+        box-shadow: 1px 1px 8px 2px rgba(0, 0, 0, 0.264);
+    }
+    
+    .about .part-a .eshop-desc{
+        width: 100%;
+        position: unset;
+        height: unset;
+    }
+    .about .part-b h2{
+        font-size: 15px; 
+    }
+
 }
