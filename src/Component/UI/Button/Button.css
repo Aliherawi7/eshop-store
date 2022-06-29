@@ -30,9 +30,9 @@
 
 .outline {
     background-color: transparent;
-    border: 1px solid var(--purple);
+    border: 1px solid var(--mainColor);
 }
 .outline:hover{
-    background-color: var(--purple);
+    background-color: var(--mainColor);
     color: #fff;
 }
