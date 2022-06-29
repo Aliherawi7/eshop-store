@@ -10,6 +10,7 @@ import ProductDetails from './Component/Store/ProductDetails/ProductDetails'
 import NotFound from './Component/Pages/NotFoundPage/NotFound'
 import SearchPage from './Component/Pages/SearchPage/SearchPage'
 import Checkout from './Component/Store/Checkout/Checkout'
+import About from './Component/Pages/About/About';
 function App() {
   const [authState, authSetstate] = useState({auth:false})
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/store/productdetails/:id" element={ <ProductDetails />} />
           <Route path="/search/:id"  element={<SearchPage/>}/>
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound size="large"/>}/>
         </Routes>
       </Layout>
