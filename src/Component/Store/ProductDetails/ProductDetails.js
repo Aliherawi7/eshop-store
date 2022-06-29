@@ -45,7 +45,7 @@ const ProductDetails = () => {
                         <div className="product-details">
                             <img src={foundProduct.image} alt={foundProduct.name} />
                             <div className="product-info">
-                                <h3 className="product-title">product title: {foundProduct.name}</h3>
+                                <h3 className="product-title">{foundProduct.name}</h3>
                                 <RateStar rate={foundProduct.rate} size={"large"} type={'Customer reviews'}/>
                                 <h4 className="product-price">price: ${foundProduct.price}</h4>
                                 <p className="product-description">descriptions: descriptions about the product</p>

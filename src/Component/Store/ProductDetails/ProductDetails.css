@@ -14,8 +14,9 @@
 .product-details .product-title{
     margin-top: 20px;
     padding: 10px 0;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 25px;
+    letter-spacing: 4px;
+    font-weight: 700;
 }
 .product-details .product-info{
     margin-top: 20px ;
@@ -45,11 +46,15 @@
     width: 20%;
     min-width: 40px;
 }
-.add-to-card button{
-    width: 40%;
+.product-info button{
+    width: 50%;
     min-width: 70px;
 }
 @media(max-width:768px){
+    .product-details img, .product-details .product-info{
+        margin: 0 auto;
+        width: 100%;
+    }
     .product-details{
         grid-template-columns: 1fr;
         justify-content: center;
@@ -57,10 +62,7 @@
     .product-details img{
         width: 60%;
     }
-    .product-details img, .product-details .product-info{
-        margin: 0 auto;
-        width: 100%;
-    }
+    
     
 }
 
