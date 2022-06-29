@@ -29,5 +29,5 @@ export function SliderItem1({image, animate, name, id}) {
         </div>
     )
 }
-const sliderItems = [SliderItem, SliderItem1]
-export default sliderItems
+const SliderItems = [SliderItem, SliderItem1];
+export default SliderItems;

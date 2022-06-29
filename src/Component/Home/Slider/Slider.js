@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Slider.css"
 import Products from '../../../products'
-import sliderItems from "./SliderItem"
+import SliderItems from "./SliderItem"
 
 let counter = 0;
 
@@ -11,8 +11,8 @@ const animations = {
     RIGHT_TO_LEFT: 'right-to-left',
 }
 function Slider() {
-    const [product, setProduct] = useState({
-        component: sliderItems[counter],
+    const [Product, setProduct] = useState({
+        component: SliderItems[counter],
         animate: animations.LEFT_TO_RIGHT
     });
 
@@ -21,22 +21,22 @@ function Slider() {
         if (counter >= Products.length - 1) {
             counter = 0;
         }
-        setProduct({ component: sliderItems[counter % 2], animate: animations.RIGHT_TO_LEFT })
+        setProduct({ component: SliderItems[counter % 2], animate: animations.RIGHT_TO_LEFT })
     }
     const prev = () => {
         counter--;
         if (counter <= -1) {
             counter = Products.length - 1
         }
-        setProduct({ component: sliderItems[counter % 2], animate: animations.LEFT_TO_RIGHT })
+        setProduct({ component: SliderItems[counter % 2], animate: animations.LEFT_TO_RIGHT })
     }
     return (
         <div className='slider'>
             <div className='slider-container'>
                 <i className='slide-to-left bi bi-chevron-left' onClick={prev}></i>
-                {<product.component
+                {<Product.component
                     image={Products[counter]?.image}
-                    animate={product?.animate}
+                    animate={Product?.animate}
                     name={Products[counter]?.name}
                     id={counter + 1}
                 />}
