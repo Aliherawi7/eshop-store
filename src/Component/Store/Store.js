@@ -1,5 +1,4 @@
 import React from 'react'
-import { Transition } from "react-transition-group"
 import "./Store.css"
 import Loading from '../UI/Loading/Loading'
 import Products from '../../products'
@@ -9,7 +8,7 @@ const Store = () => {
     let producstElement;
     if (Products) {
         producstElement = (
-            <div className="store">
+            <div className="store store-entering">
                 <div className="product-list">
                     {Products.map((item) => (
                         <Product
@@ -29,14 +28,10 @@ const Store = () => {
         )
     }
     return (
-        <Transition timeout={500} in={true} appear>
-            {(status) => (
-                <div className={`store store-${status}`}>
-                    <h2 className="product">Products</h2>
-                    {producstElement}
-                </div>
-            )}
-        </Transition>
+        <div className={`store store-entering`}>
+            <h2 className="product">Products</h2>
+            {producstElement}
+        </div>
     )
 }
 

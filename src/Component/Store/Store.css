@@ -13,7 +13,9 @@
 }
 .store-entering{
     animation-name: animate3;
-    animation-duration: 0.5s;
+    animation-duration: .4s;
+    animation-timing-function: ease;
+    
 }
 .product-list{
     display: flex;

@@ -9,7 +9,7 @@
     to {
       transform: translateY(0);
     }
-  }
+}
   
   @keyframes bottom-top-animate {
     from {
@@ -42,15 +42,3 @@
     }
   }
   
-  @keyframes scaleX-top-to-bottom {
-    from {
-      transform-origin: top;
-      transform: scale(0);
-  
-    }
-  
-    to {
-      transform-origin: top;
-      transform: scale(1);
-    }
-  }

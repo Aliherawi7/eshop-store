@@ -4,7 +4,6 @@ import Button from '../../UI/Button/Button'
 import { useParams } from 'react-router-dom'
 import Loading from '../../UI/Loading/Loading'
 import DetailsPane from './productDetailPane/detailsPane'
-import { Transition } from 'react-transition-group'
 import { useStateValue } from '../../../StateProvider'
 import Products from '../../../products'
 import RateStar from '../Rate-Star/RateStar'
@@ -38,33 +37,29 @@ const ProductDetails = () => {
     //if data have been loaded from server
     if (foundProduct) {
         productDetails = (
-            <Transition timeout={1500} in={true} appear>
-                {(status) => (
-                    <div className={`product-${status}`}>
-                        <div className="product-details">
-                            <img src={foundProduct.image} alt={foundProduct.name} />
-                            <div className="product-info">
-                                <h3 className="product-title">{foundProduct.name}</h3>
-                                <RateStar rate={foundProduct.rate} size={"large"} type={'Customer reviews'}/>
-                                <h4 className="product-price">price: ${foundProduct.price}</h4>
-                                <p className="product-description">descriptions: descriptions about the product</p>
-                                    <Button btnType="outline" click={addToBasket}>
-                                        Add <i className="bi bi-cart4"></i>
-                                    </Button>
-                            </div>
-                        </div>
-                        <DetailsPane people={people} dataSheet={foundProduct} description={foundProduct.description} />
+            <div className={`product-entering`}>
+                <div className="product-details">
+                    <img src={foundProduct.image} alt={foundProduct.name} />
+                    <div className="product-info">
+                        <h3 className="product-title">{foundProduct.name}</h3>
+                        <RateStar rate={foundProduct.rate} size={"large"} type={'Customer reviews'} />
+                        <h4 className="product-price">price: ${foundProduct.price}</h4>
+                        <p className="product-description">descriptions: descriptions about the product</p>
+                        <Button btnType="outline" click={addToBasket}>
+                            Add <i className="bi bi-cart4"></i>
+                        </Button>
                     </div>
-                )}
-            </Transition>
+                </div>
+                <DetailsPane people={people} dataSheet={foundProduct} description={foundProduct.description} />
+            </div>
         )
-    } else {
-        //if data have not been loaded from server
-        productDetails = (
-            <Loading />
-        )
-    }
-    return productDetails
+    }else {
+    //if data have not been loaded from server
+    productDetails = (
+        <Loading />
+    )
+}
+return productDetails
         
 }
 
