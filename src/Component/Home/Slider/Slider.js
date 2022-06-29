@@ -12,7 +12,7 @@ const animations = {
 }
 function Slider() {
     const [Product, setProduct] = useState({
-        component: SliderItems[counter],
+        component: SliderItems[counter%2],
         animate: animations.LEFT_TO_RIGHT
     });
 
@@ -30,6 +30,7 @@ function Slider() {
         }
         setProduct({ component: SliderItems[counter % 2], animate: animations.LEFT_TO_RIGHT })
     }
+
     return (
         <div className='slider'>
             <div className='slider-container'>

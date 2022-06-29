@@ -18,6 +18,7 @@ export function SliderItem({image , animate, name ,id}) {
 }
 export function SliderItem1({image, animate, name, id}) {
     const navigate = useNavigate()
+
     return (
         <div className={`slider-item ${animate}`}>
             <img className='slider-image' src={image} alt={name} />
