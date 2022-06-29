@@ -1,0 +1,60 @@
+.about{
+    background-color: #cdd2d8d5;
+}
+.about .about-us{
+    text-transform: uppercase;
+    font-size: 30px;
+    text-align: center;
+    padding: 20px;
+    
+}
+.about h1, .about h2, .about p{
+    font-family: "nexalight";
+}
+.about .part-a{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+.about .part-a-container{
+    width: 800px;
+    position: relative;
+}
+.about .part-a img{
+    width: 550px;
+    box-shadow: 1px 1px 8px 2px rgba(0, 0, 0, 0.264);
+}
+
+.about .part-a .eshop-desc{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    padding: 20px;
+    background-color: var(--mainColor);
+    width: 310px;
+    height: 267px;
+    color: #fff;
+    position: absolute;
+    right: 40px;
+    top: 50px;
+    box-shadow: 1px 1px 8px 2px rgba(0, 0, 0, 0.264);
+}
+.about .part-a .eshop-desc button{
+    color: var(--mainColor);
+    font-weight: 500;
+    align-self: start;
+    margin-top: 15px;
+}
+
+.about .part-b h2{
+    text-align: center;
+    font-weight: 600;
+    font-size: 25px;
+    letter-spacing: 4px;
+    padding: 20px;
+    background-color: #fff;
+}
+.about .part-b .locations{
+    width: 100%;
+    background-color: #cdd2d8;
+}
