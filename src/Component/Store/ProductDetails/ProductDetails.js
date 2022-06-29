@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "./ProductDetails.css"
 import Button from '../../UI/Button/Button'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Loading from '../../UI/Loading/Loading'
 import DetailsPane from './productDetailPane/detailsPane'
 import { Transition } from 'react-transition-group'
@@ -17,7 +17,6 @@ const ProductDetails = () => {
     ])
     const { id } = useParams()
     const foundProduct = Products.find((item) => {
-        console.log(item)
         return item.id === id
     })
 
