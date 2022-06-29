@@ -5,7 +5,7 @@
     flex-direction: column;
     z-index: 1000;
     position: sticky;
-    top: 0;
+    top: -5px;
 }
 .top-nav{
     height: 60px;
@@ -19,7 +19,7 @@
     height: 40px;
     display: flex;
     align-items: center;
-    padding: 0 16px;
+    padding-left: 8px;
 }
 .status-box{
     display: flex;
@@ -46,7 +46,7 @@
 .btnToggler{
     position: absolute;
     right: 10px;
-    top: 0px;
+    top: 50px;
     display: none;
 }
 .btnToggler button{
@@ -57,15 +57,15 @@
 .btnToggler button i{
     color: #fff;
     padding: 0px;
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 900;
 }
- .rearch-box{
+.rearch-box{
     margin: 10px;
     display: flex;
     flex: 1 1;
 }
- .rearch-box input{
+.rearch-box input{
     width: 100%;
     padding: 6px;
     border: none;
@@ -82,11 +82,26 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-
+.bottom-nav .rearch-box{
+    display: none;
+    width: 70%;
+    flex: unset;
+}
 
 @media(max-width:768px){
-
+    .top-nav {
+        justify-content: space-between;
+    }
     .btnToggler{
         display: block;
+    }
+    .bottom-nav .rearch-box{
+        display: flex;
+    }
+    .top-nav .rearch-box{
+        display: none;
+    }
+    .bottom-nav-items{
+        display: none;
     }
 }
