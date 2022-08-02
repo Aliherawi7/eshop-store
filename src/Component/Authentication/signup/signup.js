@@ -3,7 +3,7 @@ import "../Login/Login.css"
 import Input from "../../UI/Input/Input"
 import Button from '../../UI/Button/Button'
 import { Link } from 'react-router-dom'
-import { Transition } from 'react-transition-group'
+
 const Signup = (props) => {
     const [passwordEyeState, passwordEyeSetState] = useState({
         passwordEyeIcon: 'bi bi-eye-slash', repeatPasswordEyeIcon: 'bi bi-eye-slash'
@@ -72,7 +72,7 @@ const Signup = (props) => {
             if (updatedElement.value !== updatedForm['passwordRepeat'].value && updatedForm['passwordRepeat'].isUsed) {
                 updatedForm['passwordRepeat'].warningMessage = 'not matched'
                 updatedForm['passwordRepeat'].isValid = false
-            } else if(updatedElement.value === updatedForm['passwordRepeat'].value){
+            } else if (updatedElement.value === updatedForm['passwordRepeat'].value) {
                 updatedForm['passwordRepeat'].isValid = true
                 updatedForm['passwordRepeat'].warningMessage = ''
             }
@@ -180,10 +180,6 @@ const Signup = (props) => {
             return
         }
 
-        // fetch("http://localhost:8080/spring").then((respone) => {
-        //     console.log(respone.json())
-        // })
-
 
     }
 
@@ -197,48 +193,41 @@ const Signup = (props) => {
     }
 
     return (
-        <Transition timeout={1500} in={true} appear>
-            {(status) => (
-                <div className={`login-container signup-${status}`}>
-                    <Link to="/">
-                        <img className='eshop-logo' src='/image/eshop-logo.png' />
-                    </Link>
-                    <form className="signup" method="post">
-                        <h2>Signup</h2>
-                        {signUpInputArray.map((item) => {
-                            return (
-                                <>
-                                    {(item.config.name != 'email') ?
-                                        <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.config.name))}>
-                                            <i className={(item.config.name == 'password') ?
-                                                passwordEyeState.passwordEyeIcon : passwordEyeState.repeatPasswordEyeIcon}></i>
-                                        </Button> : null}
-                                    <Input
-                                        type={item.config.type}
-                                        name={item.config.type}
-                                        placeholder={item.config.placeholder}
-                                        value={item.config.value}
-                                        isValid={item.config.isValid}
-                                        isUsed={item.config.isUsed}
-                                        key={item.id}
-                                        change={(event) => changeSignupHandler(event, item.id)}
-                                        warningMessage={item.config.warningMessage}
-                                    />
+        <div className={`login-container signup-entering`}>
+            <Link to="/">
+                <img className='eshop-logo' src='/image/eshop-logo.png' />
+            </Link>
+            <form className="signup" method="post">
+                <h2>Signup</h2>
+                {signUpInputArray.map((item) => {
+                    return (
+                        <>
+                            {(item.config.name != 'email') ?
+                                <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.config.name))}>
+                                    <i className={(item.config.name == 'password') ?
+                                        passwordEyeState.passwordEyeIcon : passwordEyeState.repeatPasswordEyeIcon}></i>
+                                </Button> : null}
+                            <Input
+                                type={item.config.type}
+                                name={item.config.type}
+                                placeholder={item.config.placeholder}
+                                value={item.config.value}
+                                isValid={item.config.isValid}
+                                isUsed={item.config.isUsed}
+                                key={item.id}
+                                change={(event) => changeSignupHandler(event, item.id)}
+                                warningMessage={item.config.warningMessage}
+                            />
 
-                                </>
-                            )
-                        })}
-                        <Button btnType={"success"} click={signup}>Signup</Button>
-                        <p>By clicking the sign up you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
-                        <Link to="/login" className="already-account">Already have account?</Link>
-                    </form>
-                </div>
-            )}
+                        </>
+                    )
+                })}
+                <Button btnType={"success"} click={signup}>Signup</Button>
+                <p>By clicking the sign up you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
+                <Link to="/login" className="already-account">Already have account?</Link>
+            </form>
+        </div>
 
-
-
-
-        </Transition>
 
     )
 }
