@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './ReviewPane.css'
 import Input from '../../../../UI/Input/Input'
 import Button from '../../../../UI/Button/Button'
-import Transition from 'react-transition-group/cjs/Transition'
 import RateStar from '../../../Rate-Star/RateStar'
 
 const ReviewPane = (props) => {
@@ -114,67 +113,63 @@ const ReviewPane = (props) => {
     }
 
     return (
-        <Transition timeout={500} in={props.transition} appear>
-            {(status) => (
-                <div className={`review-content review-content-${status}`}>
-                    <div className="last-review">
-                        {props.people.map((item) => {
-                            return (
-                                <div className="people-review" key={Math.random()}>
-                                    <img src={item.avatar} />
-                                    <h4>{item.name}</h4>
-                                    <p className="review-text">{item.reviewText}</p>
-                                    <div className="date-rate">
-                                        <p>{item.date}</p>
-                                        <RateStar rate={4} size={"small"} />
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <h4 className="form-title">ADD REVIEW</h4>
-                    <form className="review-form">
-                        {
-                            inputState.map((item) => {
-                                return (
-                                    <Input
-                                        type={item.name}
-                                        name={item.name}
-                                        key={item.name}
-                                        placeholder={item.name}
-                                        className="input-name"
-                                        value={item.value}
-                                        isUsed={item.isUsed}
-                                        isValid={item.isValid}
-                                        warningMessage={item.warningMessage}
-                                        change={(event) => (inputChangeHandler(event, item.name))}
-                                    />
-                                )
-                            })
-                        }
-                        {
-                            <select className={optionState.rateLevel} onChange={(event) => (optionChangeHandler(event))}>
-                                <option selected disabled>Rating</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+        <div className={`review-content review-content-entering`}>
+            <div className="last-review">
+                {props.people.map((item) => {
+                    return (
+                        <div className="people-review" key={Math.random()}>
+                            <img src={item.avatar} />
+                            <h4>{item.name}</h4>
+                            <p className="review-text">{item.reviewText}</p>
+                            <div className="date-rate">
+                                <p>{item.date}</p>
+                                <RateStar rate={4} size={"small"} />
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+            <h4 className="form-title">ADD REVIEW</h4>
+            <form className="review-form">
+                {
+                    inputState.map((item) => {
+                        return (
+                            <Input
+                                type={item.name}
+                                name={item.name}
+                                key={item.name}
+                                placeholder={item.name}
+                                className="input-name"
+                                value={item.value}
+                                isUsed={item.isUsed}
+                                isValid={item.isValid}
+                                warningMessage={item.warningMessage}
+                                change={(event) => (inputChangeHandler(event, item.name))}
+                            />
+                        )
+                    })
+                }
+                {
+                    <select className={optionState.rateLevel} onChange={(event) => (optionChangeHandler(event))}>
+                        <option selected disabled>Rating</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
 
-                        }
-                        <textarea
-                            placeholder={textareaState.name}
-                            onChange={(event) => (textareaChangeHandler(event))}
-                            value={textareaState.value}
-                            className={textareaState.emptyState}>
+                }
+                <textarea
+                    placeholder={textareaState.name}
+                    onChange={(event) => (textareaChangeHandler(event))}
+                    value={textareaState.value}
+                    className={textareaState.emptyState}>
 
-                        </textarea>
-                        <Button btnType="success" click={submitReview}>submit review</Button>
-                    </form>
-                </div>
-            )}
-        </Transition>
+                </textarea>
+                <Button btnType="success" click={submitReview}>submit review</Button>
+            </form>
+        </div>
     )
 }
 

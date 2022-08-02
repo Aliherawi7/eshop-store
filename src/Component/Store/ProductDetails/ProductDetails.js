@@ -12,7 +12,7 @@ const ProductDetails = () => {
     const [state, dispatch] = useStateValue()
     const [people, peopleSetState] = useState([
         { name: 'Ali', avatar: '/image/people/1.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" },
-        { name: 'Zahra', avatar: '/image/people/2.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" }
+        { name: 'Maria', avatar: '/image/people/2.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" }
     ])
     const { id } = useParams()
     const foundProduct = Products.find((item) => {
