@@ -1,6 +1,5 @@
 import React from 'react'
 import './Checkout.css'
-import { Transition } from 'react-transition-group'
 import Button from '../../UI/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
