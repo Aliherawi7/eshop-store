@@ -3,7 +3,6 @@ import "./Login.css"
 import Input from "../../UI/Input/Input"
 import Button from '../../UI/Button/Button'
 import { Link } from 'react-router-dom'
-import { Transition } from 'react-transition-group'
 const Login = (props) => {
     const [loginInputState, setLoginInputState] = useState({
         email: {
@@ -123,46 +122,41 @@ const Login = (props) => {
     }
 
     return (
-        <Transition timeout={1000} in={true} exit={true} appear>
-            {(status) => (
-                <div className={`login-container login-${status}`}>
-                    <Link to="/">
-                        <img className='eshop-logo' src='/image/eshop-logo.png' />
-                    </Link>
-                    <form className="login">
-                        <h2>Sign in</h2>
-                        {loginInputArray.map((item) => {
-                            return (
-                                <>
-                                    {(item.config.name !== 'email') ?
-                                        <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.name))}><i className={eyeState.className}></i></Button> : null}
-                                    <Input
-                                        type={item.config.type}
-                                        name={item.config.name}
-                                        placeholder={item.config.placeholder}
-                                        value={item.config.value}
-                                        isValid={item.config.isValid}
-                                        isUsed={item.config.isUsed}
-                                        key={item.id}
-                                        change={(event) => changeLoginHandler(event, item.id)}
-                                        warningMessage={item.config.warningMessage}
-                                    />
-                                </>
-                            )
-                        })}
-                        <Button btnType={"success"} click={login}>Sign in</Button>
-                        <p>By clicking the sign in you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
-                        <Link to="/signup" className="already-account">create eshop account</Link>
-                    </form>
-                    <ul className='login-with-third-party'>
-                        <li style={{ "--tp": "#c70202" }}><a><i className='bi bi-google'></i></a></li>
-                        <li style={{ "--tp": "#166bf3" }}><a><i className='bi bi-facebook'></i></a></li>
-                        <li style={{ "--tp": "#01b5f2" }}><a><i className='bi bi-twitter'></i></a></li>
-                    </ul>
-                </div>
-            )}
-
-        </Transition>
+        <div className={`login-container login-entering`}>
+            <Link to="/">
+                <img className='eshop-logo' src='/image/eshop-logo.png' />
+            </Link>
+            <form className="login">
+                <h2>Sign in</h2>
+                {loginInputArray.map((item) => {
+                    return (
+                        <>
+                            {(item.config.name !== 'email') ?
+                                <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.name))}><i className={eyeState.className}></i></Button> : null}
+                            <Input
+                                type={item.config.type}
+                                name={item.config.name}
+                                placeholder={item.config.placeholder}
+                                value={item.config.value}
+                                isValid={item.config.isValid}
+                                isUsed={item.config.isUsed}
+                                key={item.id}
+                                change={(event) => changeLoginHandler(event, item.id)}
+                                warningMessage={item.config.warningMessage}
+                            />
+                        </>
+                    )
+                })}
+                <Button btnType={"success"} click={login}>Sign in</Button>
+                <p>By clicking the sign in you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
+                <Link to="/signup" className="already-account">create eshop account</Link>
+            </form>
+            <ul className='login-with-third-party'>
+                <li style={{ "--tp": "#c70202" }}><a><i className='bi bi-google'></i></a></li>
+                <li style={{ "--tp": "#166bf3" }}><a><i className='bi bi-facebook'></i></a></li>
+                <li style={{ "--tp": "#01b5f2" }}><a><i className='bi bi-twitter'></i></a></li>
+            </ul>
+        </div>
 
 
     )
