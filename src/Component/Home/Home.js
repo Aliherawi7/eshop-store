@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Home.css"
 import Feature from './features/feature'
-import { Transition } from 'react-transition-group'
 import Products from "../../products"
 import Slider from './Slider/Slider'
 import Button from '../UI/Button/Button'
