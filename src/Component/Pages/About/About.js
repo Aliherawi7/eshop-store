@@ -13,7 +13,7 @@ function About() {
                         <h2>Our Story</h2>
                         <p>
                             we get our name from Electronic Shop, meaning: we have everything you need form electric products
-                            . We value each customer in ouR day to day life, as well as in our products
+                            . We value each customer in our day to day life, as well as in our products
                         </p>
                         <Button>READ MORE</Button>
                     </div>
