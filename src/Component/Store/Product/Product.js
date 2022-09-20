@@ -4,12 +4,28 @@ import Button from '../../UI/Button/Button'
 import { useStateValue } from '../../../StateProvider'
 import { useNavigate } from 'react-router-dom'
 import RateStar from '../Rate-Star/RateStar'
+import { actions } from '../../../reducer'
 
 const Product = ({ image, id, name, price, rating }) => {
     const navigate = useNavigate()
-    const [state, dispatch] = useStateValue()
+    const [{basket}, dispatch] = useStateValue()
     const addToBasket = (e) => {
         e.stopPropagation()
+        const index = basket.findIndex(item =>{
+            return item.id == id;
+        })
+        
+        if(index >=0){
+            dispatch({
+                type: actions.CHANGE_QUANTITY,
+                item:{
+                    id:id,
+                    index:index,
+                    quantity: basket[index].quantity+1
+                }
+            })
+            return;
+        }
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
@@ -17,7 +33,8 @@ const Product = ({ image, id, name, price, rating }) => {
                 image: image,
                 price: price,
                 rating: rating,
-                id: id
+                id: id,
+                quantity:1
             }
         })
     }
