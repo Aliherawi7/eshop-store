@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import "./ProductDetails.css"
 import Button from '../../UI/Button/Button'
 import { useParams } from 'react-router-dom'
@@ -9,7 +9,7 @@ import Products from '../../../products'
 import RateStar from '../Rate-Star/RateStar'
 
 const ProductDetails = () => {
-    const [state, dispatch] = useStateValue()
+    const [, dispatch] = useStateValue()
     const [people, peopleSetState] = useState([
         { name: 'Ali', avatar: '/image/people/1.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" },
         { name: 'Maria', avatar: '/image/people/2.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" }
@@ -27,7 +27,8 @@ const ProductDetails = () => {
                 name: foundProduct.name,
                 price: foundProduct.price,
                 image: foundProduct.image,
-                rate: foundProduct.rate
+                rate: foundProduct.rate,
+                quantity: 1
             }
         })
     }
