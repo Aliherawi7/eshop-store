@@ -48,5 +48,6 @@
     .home .most-ordered .ordered-item{
         width: 95%;
         align-items: center;
+        margin-bottom: 10px;
     }
 }
