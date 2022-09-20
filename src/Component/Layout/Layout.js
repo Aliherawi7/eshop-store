@@ -7,11 +7,11 @@ const Layout = (props) =>{
     return(
         <div>
             <Navbar/>
-            <div class="pop-up-menu">
-                <i class="bi bi-facebook "></i>
-                <i class="bi bi-twitter "></i>
-                <i class="bi bi-pinterest "></i>
-                <i class="bi bi-basket-fill "></i>
+            <div className="pop-up-menu">
+                <i className="bi bi-facebook "></i>
+                <i className="bi bi-twitter "></i>
+                <i className="bi bi-pinterest "></i>
+                <i className="bi bi-basket-fill "></i>
 
             </div>
             <main className="main-container">{props.children}</main>
