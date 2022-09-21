@@ -104,6 +104,26 @@
 .cart-table tr:nth-child(even){
     background-color: rgb(235, 235, 235);
 }
+.item-table .quantity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item-table input{
+    outline: none;
+    padding: 5px;
+    width: 50px;
+    margin: 5px;
+    text-align: center;
+}
+.item-table i{
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.color-red{
+    color:red
+}
 
 @media(max-width:768px){
 
