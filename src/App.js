@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Layout from './Component/Layout/Layout';
 import Loading from './Component/UI/Loading/Loading';
@@ -14,7 +14,6 @@ const SearchPage = React.lazy(() => import('./Component/Pages/SearchPage/SearchP
 const Checkout = React.lazy(() => import('./Component/Store/Checkout/Checkout'));
 const About = React.lazy(() => import('./Component/Pages/About/About'));
 function App() {
-  const [authState, authSetstate] = useState({ auth: false })
   return (
     <Suspense fallback={<Loading />}>
       <Router>
