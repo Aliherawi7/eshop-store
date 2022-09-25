@@ -13,6 +13,7 @@ const NotFound = React.lazy(() => import('./Component/Pages/NotFoundPage/NotFoun
 const SearchPage = React.lazy(() => import('./Component/Pages/SearchPage/SearchPage'));
 const Checkout = React.lazy(() => import('./Component/Store/Checkout/Checkout'));
 const About = React.lazy(() => import('./Component/Pages/About/About'));
+const AdminPanel = React.lazy(()=> import('./Component/Admin-panel/AdminPanel'))
 function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -28,6 +29,7 @@ function App() {
             <Route path="/search/:id" element={<SearchPage />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/about" element={<About />} />
+            <Route path='/admin-panel' element={<AdminPanel />}/>
             <Route path="*" element={<NotFound size="large" />} />
           </Routes>
         </Layout>
