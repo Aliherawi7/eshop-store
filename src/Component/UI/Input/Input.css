@@ -45,6 +45,9 @@
     bottom: 0;
     transition: all 0.5s;
 }
+.input-container input[value=""]::-webkit-datetime-edit{
+    color:transparent
+}
 .input-container input:focus ~ u::before{
     width: 100%;
 }
