@@ -2,13 +2,44 @@ import React, { useState } from 'react'
 import "../Login/Login.css"
 import Input from "../../UI/Input/Input"
 import Button from '../../UI/Button/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useStateValue } from '../../../StateProvider'
+import { actions } from '../../../reducer'
 
-const Signup = (props) => {
+const Signup = () => {
+    const navigate = useNavigate();
+    const [, dispatch] = useStateValue();
     const [passwordEyeState, passwordEyeSetState] = useState({
         passwordEyeIcon: 'bi bi-eye-slash', repeatPasswordEyeIcon: 'bi bi-eye-slash'
     })
     const [signupInputState, setSignupInputState] = useState({
+        name:{
+            type:'text',
+            placeholder: 'name',
+            name: 'name',
+            value: '',
+            isValid: false,
+            isUsed: false,
+            warningMessage: ''
+        },
+        lastName:{
+            type:'text',
+            placeholder: 'last name',
+            name: 'lastName',
+            value: '',
+            isValid: false,
+            isUsed: false,
+            warningMessage: ''
+        },
+        dob:{
+            type:'date',
+            placeholder: 'date of birth',
+            name: 'dob',
+            value: '',
+            isValid: false,
+            isUsed: false,
+            warningMessage: ''
+        },
         email: {
             type: 'email',
             placeholder: 'email',
@@ -26,7 +57,6 @@ const Signup = (props) => {
             isValid: false,
             isUsed: false,
             warningMessage: ''
-
         },
         passwordRepeat: {
             type: 'password',
@@ -45,7 +75,25 @@ const Signup = (props) => {
         const updatedElement = updatedForm[item]
         updatedElement.value = event.target.value
         updatedElement.isUsed = true
-
+        if(item === "name" || item === "lastName"){
+            console.log("in name state checking")
+            if(updatedElement.value.length >=2){
+                updatedElement.isValid = true;
+                updatedElement.warningMessage = "";
+            }else{
+                updatedElement.isValid = false
+                updatedElement.warningMessage = 'invalid value'
+            }
+        }
+        if(item === "dob"){
+            if(updatedElement.value.length >=0){
+                updatedElement.isValid = true;
+                updatedElement.warningMessage = "";
+            }else{
+                updatedElement.isValid = false
+                updatedElement.warningMessage = 'invalid value'
+            }
+        }
         if (item === 'email') {
             let pattern = /([a-z0-9_-]+)@([\da-z-]+)([a-z\.]{2,6})/ig;
             if (pattern.test(updatedElement.value)) {
@@ -88,6 +136,8 @@ const Signup = (props) => {
             }
         }
 
+
+
         if (updatedElement.value.length == 0) {
             updatedElement.isUsed = false
             updatedElement.isValid = false
@@ -113,7 +163,7 @@ const Signup = (props) => {
     const eyeBtnHandler = (name, inputName) => {
         const oldEyeState = { ...passwordEyeState }
         const oldInputState = { ...signupInputState }
-        console.log('in passsssssssssss')
+        
         if (name == 'password') {
             if (passwordEyeState.passwordEyeIcon == 'bi bi-eye') {
                 oldEyeState.passwordEyeIcon = 'bi bi-eye-slash'
@@ -146,13 +196,19 @@ const Signup = (props) => {
     }
 
 
-    // sign up sending dataa to server
+    // sign up sending data to server
     const signup = () => {
-        const checkEmail = signupInputState.email
-        const checkPassword = signupInputState.password
-        const checkPasswordRepeat = signupInputState.passwordRepeat
-        console.log(checkPasswordRepeat.isValid, 'check email')
-        if (checkPasswordValidation(checkEmail.value) == 'empty' || !checkEmail.isValid) {
+        const name = signupInputState.name;
+        const lastName = signupInputState.lastName
+        const dob = signupInputState.dob
+        const email = signupInputState.email
+        const password = signupInputState.password
+        const passwordRepeat = signupInputState.passwordRepeat
+
+        if(!name.isValid || !lastName.isValid || !dob.isValid){
+            return;
+        }
+        if (checkPasswordValidation(email.value) == 'empty' || !email.isValid) {
             const holder = { ...signupInputState };
             holder.email.warningMessage = 'fill it'
             holder.email.isUsed = true
@@ -160,8 +216,7 @@ const Signup = (props) => {
             setSignupInputState(holder)
             return
         }
-        console.log(checkPassword, 'check pass')
-        if (checkPasswordValidation(checkPassword.value) == 'short' || !checkPassword.isValid) {
+        if (checkPasswordValidation(passwordRepeat.value) == 'short' || !passwordRepeat.isValid) {
             const holder = { ...signupInputState };
             holder.password.warningMessage = 'fill it'
             holder.password.isUsed = true
@@ -169,8 +224,7 @@ const Signup = (props) => {
             setSignupInputState(holder)
             return
         }
-        console.log(checkPasswordRepeat, 'check reap')
-        if (checkPasswordValidation(checkPasswordRepeat.value) == 'empty' || !checkPasswordRepeat.isValid) {
+        if (checkPasswordValidation(passwordRepeat.value) == 'empty' || !passwordRepeat.isValid) {
             console.log('in pass repeat')
             const holder = { ...signupInputState };
             holder.passwordRepeat.warningMessage = 'fill it'
@@ -180,6 +234,46 @@ const Signup = (props) => {
             return
         }
 
+        fetch("http://localhost:8080/api/users/signup",{
+            headers:{
+                'Content-Type':"application/json"
+            },
+            method:"POST",
+            body:JSON.stringify({
+                name:name.value,
+                lastName:lastName.value,
+                dob:dob.value,
+                email:email.value,
+                password:password.value,
+                imgUrl:""
+            }) 
+        }).then(res => {
+            if(res.ok){
+               console.log("successfully added") 
+               return res.json();
+            }
+            
+        }).then(data =>{
+            console.log(data)
+            localStorage.setItem("accessToken", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+            localStorage.setItem("name", data.userInformationDTO?.name)
+            localStorage.setItem("lastName", data.userInformationDTO?.lastName)
+            localStorage.setItem("email", data.userInformationDTO?.email)
+            localStorage.setItem("imgUrl", data.userInformationDTO?.imgUrl)
+            localStorage.setItem("roles", data.userInformationDTO?.roles)
+            console.log(localStorage.getItem("roles"))
+            dispatch({
+                type: actions.ADD_USER_INFORMATION,
+                item: {
+                    ...data.userInformationDTO,
+                    access_token: data.access_token,
+                }
+            })
+            navigate("/")
+        }).catch(error =>{
+            console.log(error)
+        })
 
     }
 
@@ -202,7 +296,7 @@ const Signup = (props) => {
                 {signUpInputArray.map((item) => {
                     return (
                         <>
-                            {(item.config.name != 'email') ?
+                            {(item.config.name === 'password' || item.config.name ==='passwordRepeat') ?
                                 <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.config.name))}>
                                     <i className={(item.config.name == 'password') ?
                                         passwordEyeState.passwordEyeIcon : passwordEyeState.repeatPasswordEyeIcon}></i>
