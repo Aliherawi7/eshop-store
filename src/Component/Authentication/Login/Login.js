@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import "./Login.css"
 import Input from "../../UI/Input/Input"
 import Button from '../../UI/Button/Button'
-import { Link } from 'react-router-dom'
-const Login = (props) => {
+import { Link, useNavigate } from 'react-router-dom'
+import { useStateValue } from "../../../StateProvider"
+import { actions } from '../../../reducer'
+const Login = () => {
+    const navigate = useNavigate();
     const [loginInputState, setLoginInputState] = useState({
         email: {
             type: 'email',
@@ -24,8 +27,8 @@ const Login = (props) => {
             warningMessage: ''
         }
     })
+    const [state, dispatch] = useStateValue()
     const [eyeState, eyeSetState] = useState({ className: 'bi bi-eye-slash' })
-
     const changeLoginHandler = (event, item) => {
         const updatedForm = { ...loginInputState }
         const updatedElement = updatedForm[item]
@@ -98,18 +101,37 @@ const Login = (props) => {
             setLoginInputState(holder)
             return
         }
+        
 
-        fetch("http://localhost:8080/login", {
-            method: "POST",
+        fetch("http://localhost:8080/api/login", {
             headers: {
-                Accept: 'application/json',
-                Authorization: 'login'
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({ name: checkEmail.value, password: checkPassword.value })
-        }).then((response) => {
-            console.log(response)
-        })
+            method: "POST",
+            body: new URLSearchParams({
+                'email': checkEmail.value,
+                'password': checkPassword.value
+            })
 
+        }).then(resposne => {
+            if (resposne.ok) {
+                return resposne.json();
+            }
+        }).then(data => {
+            console.log(data.userInformationDTO)
+            localStorage.setItem("accessToken", data?.access_token);
+            localStorage.setItem("refresh_token", data?.refresh_token);
+            localStorage.setItem("name", data.userInformationDTO?.name)
+            localStorage.setItem("lastName", data.userInformationDTO?.lastName)
+            localStorage.setItem("email", data.userInformationDTO?.email)
+            localStorage.setItem("imgUrl", data.userInformationDTO?.imgUrl)
+            localStorage.setItem("roles", data.userInformationDTO?.roles)
+            dispatch({
+                type:actions.ADD_USER_INFORMATION,
+                item: data.userInformationDTO
+            })
+            navigate("/")
+        }).catch(error => console.log(error))
 
     }
 
@@ -130,9 +152,9 @@ const Login = (props) => {
                 <h2>Sign in</h2>
                 {loginInputArray.map((item) => {
                     return (
-                        <>
+                        <React.Fragment key={item.id}>
                             {(item.config.name !== 'email') ?
-                                <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.name))}><i className={eyeState.className}></i></Button> : null}
+                                <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.name))}><i className={eyeState.className} key={item.id}></i></Button> : null}
                             <Input
                                 type={item.config.type}
                                 name={item.config.name}
@@ -144,7 +166,7 @@ const Login = (props) => {
                                 change={(event) => changeLoginHandler(event, item.id)}
                                 warningMessage={item.config.warningMessage}
                             />
-                        </>
+                        </React.Fragment>
                     )
                 })}
                 <Button btnType={"success"} click={login}>Sign in</Button>
