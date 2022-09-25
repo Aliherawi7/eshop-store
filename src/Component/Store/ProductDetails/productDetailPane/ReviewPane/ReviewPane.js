@@ -150,8 +150,8 @@ const ReviewPane = (props) => {
                     })
                 }
                 {
-                    <select className={optionState.rateLevel} onChange={(event) => (optionChangeHandler(event))}>
-                        <option selected disabled>Rating</option>
+                    <select className={optionState.rateLevel} defaultValue={"Rating"} onChange={(event) => (optionChangeHandler(event))}>
+                        <option disabled>Rating</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
