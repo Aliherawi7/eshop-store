@@ -6,10 +6,11 @@ import Button from '../../UI/Button/Button'
 import TogglerMenu from '../TogglerMenu/TogglerMenu'
 import { useNavigate, Link } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
+import { actions, getBasketTotalItems } from "../../../reducer"
 
 const Navbar = (props) => {
     const [stateTogglerMenu, setstateTogglerMenu] = useState({ show: false })
-    const [{ basket }, dispatch] = useStateValue()
+    const [state, dispatch] = useStateValue()
     const [input, setInput] = useState({ value: '' })
     const navigate = useNavigate()
     const togglerMenu = () => {
@@ -22,6 +23,12 @@ const Navbar = (props) => {
     const changeHandler = (e) => {
         setInput({ value: e.target.value })
     }
+    const signout = ()=>{
+        localStorage.clear();
+        dispatch({
+            type:actions.REMOVE_USER_INFORMATION
+        })
+    }
     return (
         <header className="header-nav">
             <div className='top-nav'>
@@ -32,11 +39,16 @@ const Navbar = (props) => {
                 </form>
                 <div className="status-box">
                     <div className='acount-box'>
-                        <p>Hello guest</p>
-                        <Link to="/login"><strong>Sign in</strong></Link>
+                        <p>
+                            Hello {state.userInfo.name ? state.userInfo.name +" "+state.userInfo?.lastName:"guest"}
+                        </p>
+                        {
+                            state.userInfo.name ? <Link to="/" onClick={signout}><strong>Sign out</strong></Link>:
+                            <Link to="/login"><strong>Sign in</strong></Link>
+                        }
                     </div>
 
-                    <Button click={() => (navigate('/checkout'))}><i className="bi bi-cart3 basket"></i> <span style={{ color: '#fff' }}>: {basket.length}</span></Button>
+                    <Button click={() => (navigate('/checkout'))}><i className="bi bi-cart3 basket"></i> <span style={{ color: '#fff' }}>: {getBasketTotalItems(state.basket)}</span></Button>
                 </div>
             </div>
             <div className="bottom-nav">
