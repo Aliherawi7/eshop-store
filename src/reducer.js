@@ -1,10 +1,21 @@
+
 export const initialState = {
-    basket: []
+    basket: [],
+    userInfo: {
+        access_token:localStorage.getItem("access_token"),
+        name: localStorage.getItem("name"),
+        lastName: localStorage.getItem("lastName"),
+        email: localStorage.getItem("email"),
+        imgUrl: localStorage.getItem("imgUrl"),
+        roles: localStorage.getItem("roles")?.split(',')
+    }
 }
 export const actions = {
     ADD_TO_BASKET: "ADD_TO_BASKET",
     REMOVE_FROM_BASKET:'REMOVE_FROM_BASKET',
     CHANGE_QUANTITY:"CHANGE_QUANTITY",
+    ADD_USER_INFORMATION: "ADD_USER_INFORMATION",
+    REMOVE_USER_INFORMATION: 'REMOVE_USER_INFORMATION'
 }
 
 
@@ -54,6 +65,18 @@ const reducer = (state, action) => {
                   
             }
             return state
+        }
+        case actions.ADD_USER_INFORMATION:{
+            return{
+                ...state,
+                userInfo: action.item
+            }
+        }
+        case actions.REMOVE_USER_INFORMATION:{
+            return {
+                ...state,
+                userInfo: {}
+            }
         }
 
         default:
