@@ -5,15 +5,81 @@
 }
 
 .admin-panel .admin-menu{
-    width: 200px;
+    width: 270px;
     background-color: #1f1d2c;
     color: #65636f;
-    padding: 20px;  
+    padding: 20px 0;
+
 }
 .admin-panel .account-info{
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+}
+.admin-panel .account-info h3{
+    color: #d2d0da;
+}
+.admin-panel .account-info p{
+    font-size: 12px;
+}
+.admin-panel .account-info a{
+    margin-top: 16px;
+    margin-left: 20px;
+}
+.admin-panel .account-info i{
+    padding: 5px 8px;
+    border-radius: 14px;
+    font-size: 18px;
+    color: #fff;
+    background-color: var(--i);
+}
+.admin-panel .account-info i:hover{
+    transform: scale(3);
+    color: var(--mainColor);
 }
 .admin-panel .text-menu{
     margin-bottom: 20px; 
     font-size: 14px;
+    margin-left: 20px;
 }
+
+.admin-panel .admin-menu .menu-list{
+    list-style-type: none;
+    margin-top: 20px;
+}
+.admin-panel .admin-menu .menu-list li{
+    position: relative;
+    cursor: pointer;
+    list-style-type: none;
+    padding: 20px 0;
+    padding-left: 20px;
+    border-bottom: 1px solid #2f2c42;
+}
+.admin-panel .admin-menu .menu-list li i{
+    padding: 8px 10px;
+    margin-right: 10px;
+    border-radius: 14px;
+    color: #fff;
+    background-color: var(--i);
+}
+
+.admin-panel .admin-menu .menu-list li:hover {
+    background-color:#262837;
+    color: #fff;
+    border-left: 2px solid var(--i);
+}
+
+.active-menu{
+    background-color:#262837;
+    color: #fff;
+    border-left: 2px solid ;
+}
+
+
+.info-panel{
+    background-color: #262837;
+    width: 100%;
+    color: #fff;
+}
+
