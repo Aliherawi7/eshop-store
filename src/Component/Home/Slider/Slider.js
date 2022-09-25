@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Slider.css"
 import Products from '../../../products'
 import SliderItems from "./SliderItem"
@@ -15,6 +15,18 @@ function Slider() {
         component: SliderItems[counter%2],
         animate: animations.LEFT_TO_RIGHT
     });
+    useEffect(() => {
+      
+      const interval = setInterval(()=>{
+        next();
+      }, 4000)
+      console.log("in useEffect slider")
+        return () => {
+          clearInterval(interval);
+        }
+    
+    }, [])
+    
 
     const next = () => {
         counter++;
