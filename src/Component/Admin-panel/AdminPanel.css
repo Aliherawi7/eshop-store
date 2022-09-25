@@ -1,0 +1,19 @@
+.admin-panel{
+    display: flex;
+    height: 100vh;
+    background-color: #ededed;
+}
+
+.admin-panel .admin-menu{
+    width: 200px;
+    background-color: #1f1d2c;
+    color: #65636f;
+    padding: 20px;  
+}
+.admin-panel .account-info{
+    margin-bottom: 20px; 
+}
+.admin-panel .text-menu{
+    margin-bottom: 20px; 
+    font-size: 14px;
+}
