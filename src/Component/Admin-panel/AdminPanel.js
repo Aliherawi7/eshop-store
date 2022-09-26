@@ -2,11 +2,13 @@ import React from 'react'
 import "./AdminPanel.css"
 import { useStateValue } from "../../StateProvider"
 import { Link } from 'react-router-dom';
+import NotFound from "../Pages/NotFoundPage/NotFound"
 
 function AdminPanel() {
   const [state, dispatch] = useStateValue();
   console.log(state)
   return (
+    state.userInfo.roles.includes("ADMIN")? 
     <div className='admin-panel'>
       <div className='admin-menu'>
         <div className='account-info'>
@@ -29,7 +31,7 @@ function AdminPanel() {
       <div className='info-panel'>
         right side
       </div>
-    </div>
+    </div> :<NotFound />
   )
 }
 
