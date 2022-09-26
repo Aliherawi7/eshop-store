@@ -8,7 +8,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
 import { actions, getBasketTotalItems } from "../../../reducer"
 
-const Navbar = (props) => {
+const Navbar = () => {
     const [stateTogglerMenu, setstateTogglerMenu] = useState({ show: false })
     const [state, dispatch] = useStateValue()
     const [input, setInput] = useState({ value: '' })
@@ -23,12 +23,13 @@ const Navbar = (props) => {
     const changeHandler = (e) => {
         setInput({ value: e.target.value })
     }
-    const signout = ()=>{
+    const signout = () => {
         localStorage.clear();
         dispatch({
-            type:actions.REMOVE_USER_INFORMATION
+            type: actions.REMOVE_USER_INFORMATION
         })
     }
+    console.log(state)
     return (
         <header className="header-nav">
             <div className='top-nav'>
@@ -40,14 +41,19 @@ const Navbar = (props) => {
                 <div className="status-box">
                     <div className='acount-box'>
                         <p>
-                            Hello {state.userInfo.name ? state.userInfo.name +" "+state.userInfo?.lastName:"guest"}
+                            Hello {state.userInfo.name ? state.userInfo.name + " " + state.userInfo?.lastName : "guest"}
                         </p>
                         {
-                            state.userInfo.name ? <Link to="/" onClick={signout}><strong>Sign out</strong></Link>:
-                            <Link to="/login"><strong>Sign in</strong></Link>
+                            state.userInfo?.name ? <Link to="/" onClick={signout}><strong>Sign out</strong></Link> :
+                                <Link to="/login"><strong>Sign in</strong></Link>
                         }
-                    </div>
 
+                    </div>
+                    {
+                        state.userInfo?.roles?.includes("ADMIN") ? <Link to="/admin-panel">
+                            <i className='bi bi-gear-fill' style={{ "--i": "#2f3142" }}></i>
+                        </Link> : ""
+                    }
                     <Button click={() => (navigate('/checkout'))}><i className="bi bi-cart3 basket"></i> <span style={{ color: '#fff' }}>: {getBasketTotalItems(state.basket)}</span></Button>
                 </div>
             </div>
