@@ -24,10 +24,17 @@
 .status-box{
     display: flex;
     margin: 0 15px;
+    align-items: center;
 }
-.status-box .acount-box p,.acount-box a{
+.status-box .acount-box p, .acount-box a{
     font-size: 12px;
     color: #fff;
+    font-weight: 400;
+}
+.status-box  a i{
+    font-size: 20px;
+    padding: 5px;
+    color: var(--mainColor);
     font-weight: 400;
 }
 .status-box .acount-box{
