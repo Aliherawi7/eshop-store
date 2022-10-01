@@ -1,70 +1,82 @@
-
-
-
-
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   visibility: hidden;
   width: 8px;
   height: 0;
 
 }
-*::-webkit-scrollbar-track{
+
+*::-webkit-scrollbar-track {
   opacity: 0;
   background-color: rgba(255, 255, 255, 0);
-
 }
-*::-webkit-scrollbar-thumb{
+
+*::-webkit-scrollbar-thumb {
   opacity: 0;
   background-color: var(--mainColor);
   border-radius: 10px;
 }
 
 
+.about-entring {
+  animation-name: top-bottom-animate;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.6, 0.01, 0.18, 1);
+}
 
-
-
-
-
+.fade-in {
+  animation-name: fade-in;
+  animation-duration: .4s;
+  animation-timing-function: cubic-bezier(0.55, 0.01, 0.12, 0.97);
+}
 
 /* all the aniations */
 @keyframes top-bottom-animate {
-    from {
-      transform: translateY(-100vh);
-    }
-  
-    to {
-      transform: translateY(0);
-    }
-}
-  
-  @keyframes bottom-top-animate {
-    from {
-      transform: translateY(100vh);
-    }
-  
-    to {
-      transform: translateY(0);
-    }
+  from {
+    transform: translateY(-100vh);
   }
-  
-  @keyframes right-to-left {
-    from {
-      transform: translateX(100vh);
-    }
-  
-    to {
-      transform: translateX(0vh);
-    }
-  }
-  
-  @keyframes left-to-right {
-    from {
-      transform: translateX(-100vh);
-    }
-  
-    to {
-      transform: translateX(0vh);
 
-    }
+  to {
+    transform: translateY(0);
   }
-  
+}
+
+@keyframes bottom-top-animate {
+  from {
+    transform: translateY(100vh);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes right-to-left {
+  from {
+    transform: translateX(100vh);
+  }
+
+  to {
+    transform: translateX(0vh);
+  }
+}
+
+@keyframes left-to-right {
+  from {
+    transform: translateX(-100vh);
+  }
+
+  to {
+    transform: translateX(0vh);
+
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
