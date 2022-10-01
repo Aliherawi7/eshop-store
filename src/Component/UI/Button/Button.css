@@ -7,9 +7,16 @@
     border-radius: 4px;
     font-family: inherit;
     font-size: 14px;
-    margin: 3px;
     transition: background 0.2s;
     box-sizing: inherit;
+}
+.white{
+    background-color: #fff;;
+    color: #000
+}
+.white:hover{
+    color: #fff;
+    background-color: var(--mainColor);
 }
 
 .success{
