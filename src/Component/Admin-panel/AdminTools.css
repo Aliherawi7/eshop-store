@@ -1,0 +1,159 @@
+.models-statistics {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.model-statistics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    background-color: var(--i);
+    padding: 20px;
+    border-radius: 16px;
+    margin: 5px 10px;
+}
+
+.model-statistics i {
+    font-size: 25px;
+}
+
+.model-statistics p {
+    font-size: 35px;
+    font-weight: 900;
+    margin: 5px 0;
+}
+
+.model-statistics span {
+    font-size: 12px;
+}
+
+
+/* products statistics */
+.panel-statistics .model-table {
+    border-spacing: 0;
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    background-color: var(--i);
+    overflow-x: scroll;
+}
+.panel-statistics .model-table::-webkit-scrollbar {
+    visibility: visible;
+    width: 8px;
+    height: 8px;
+}
+
+.panel-statistics .model-table .section-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.panel-statistics .model-table .section-header button {
+    padding: 5px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 10px;
+    height: max-content;
+}
+
+.panel-statistics .model-table .section-header button i {
+    font-size: 16px;
+    font-weight: 900;
+    margin-left: 10px;
+}
+
+.panel-statistics .model-table p {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.panel-statistics table {
+    margin-top: 10px;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.panel-statistics table thead{
+    text-align: left;
+    background-color: #fff;
+}
+
+.panel-statistics table th[name=id]{
+    border-top-left-radius: 10px;
+    padding-left: 20px;
+}
+.panel-statistics table td[name=id]{
+    padding-left: 20px;
+}
+
+.panel-statistics table th[name=last] {
+    border-top-right-radius: 10px;
+    text-align: center;
+}
+
+.panel-statistics table th {
+    padding: 5px 0;
+    padding-right: 20px;
+    color: var(--i);
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.panel-statistics table td {
+    padding: 5px 0;
+    padding-right: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    text-align: left;
+}
+.panel-statistics table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.329);
+}
+
+.panel-statistics table td[name=last]:hover {
+    cursor: pointer;
+    color: #000;
+}
+
+.panel-statistics table td[name=last]{
+    text-align: center;
+}
+
+.panel-statistics table td[name=last]:hover span {
+    transform: translateX(20px)
+}
+.panel-statistics .action-buttons{
+    
+    position: relative;
+}
+.panel-statistics i:hover{
+    color: #000 !important;
+}
+.panel-statistics .show-actions:hover + .buttons-box{
+    transform: scaleX(1);
+}
+.panel-statistics .action-buttons .buttons-box{
+    width: 70px;
+    position: absolute;
+    top: 0;
+    left: -25px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .3s linear;
+}
+.panel-statistics .action-buttons .buttons-box:focus,
+.panel-statistics .action-buttons .buttons-box:hover,
+.panel-statistics .action-buttons .buttons-box:active
+{
+    transform: scaleX(1);
+}
+.panel-statistics .action-buttons .buttons-box i{
+    margin: 3px;
+    padding: 3px;
+    color:#fff;
+}
