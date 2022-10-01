@@ -1,0 +1,105 @@
+
+.add-product-form{
+    padding: 0 40px;
+
+}
+.add-new-product .header-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+.add-product-form form{
+    display: flex;
+    flex-direction: column;
+
+}
+.add-product-form form .input-box{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 48%;
+}
+
+.add-product-form form .input-group{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+}
+.add-product-form form .button-container{
+    display: flex;
+    justify-content: space-between;
+}
+.add-product-form form .input-box label{
+    font-size: 14px;
+    font-weight: 300;
+}
+.add-product-form form .input-box input{
+    outline: none;
+    background-color: transparent;
+    border: 1px solid var(--i);
+    color: var(--i);
+    font-weight: 600;
+    padding: 4px 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+.add-product-form form .input-box input[type=checkbox]{
+    height: 20px;
+    width: 40px;
+    z-index: 100;
+    opacity: 0;
+}
+.add-product-form .check-box{
+    position: absolute;
+    border: 1px solid var(--i);
+    width: 40px;
+    height: 27px;
+    top: 24px;
+    border-radius: 3px;
+}
+.add-product-form input[type=checkbox]:checked + .check-box::after{
+    content: "";
+    top: 50%;
+    background-color: transparent;
+    width: 20px;
+    height: 10px;
+    margin-top: -10px;
+    border-style: solid;
+    border-color: #fff;
+    border-width: 0 0 3px 3px;
+    transform: rotate(-45deg) scale(1);
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    box-sizing: content-box;
+}
+.add-product-form input[type=checkbox]:checked + .check-box{
+    background-color: var(--i);
+}
+
+.add-product-form form .input-box input:hover,
+.add-product-form form .input-box input:active,
+.add-product-form form .input-box input:focus{
+    border-color: var(--mainColor);
+}
+.add-product-form form button{
+   margin-top: 10px;
+   background-color: var(--i);
+}
+.add-product-form form button i{
+    margin-left: 5px;
+ }
+.add-product-form form .incomplete-inputs{
+    color: red;
+}
+@media(max-width: 786px){
+    .add-product-form form .input-box{
+        width: 100%;
+    }
+    .add-product-form form .input-box input[type=date]{
+        width: 100%;
+    }
+}
