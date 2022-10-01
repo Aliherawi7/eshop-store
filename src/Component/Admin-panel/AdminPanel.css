@@ -1,15 +1,27 @@
+
 .admin-panel{
     display: flex;
-    height: 100vh;
-    background-color: #ededed;
+    background-color: #1f1d2c;
+    position: relative;
 }
 
 .admin-panel .admin-menu{
     width: 270px;
     background-color: #1f1d2c;
     color: #65636f;
-    padding: 20px 0;
+    padding-top: 45px;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    top: 95px;
+    transition: left .6s cubic-bezier(0.61, 0, 0.48, 0.99);
 
+}
+.admin-panel .admin-menu .admin-menu-button{
+    position: fixed;
+    z-index: 100;
+    color: #fff;
+    font-size: 30px;
 }
 .admin-panel .account-info{
     margin-bottom: 20px;
@@ -24,19 +36,19 @@
     font-size: 12px;
 }
 .admin-panel .account-info a{
-    margin-top: 16px;
-    margin-left: 20px;
+    margin:0 20px;
 }
 .admin-panel .account-info i{
     padding: 5px 8px;
-    border-radius: 14px;
+    border-radius: 40px;
     font-size: 18px;
     color: #fff;
     background-color: var(--i);
 }
-.admin-panel .account-info i:hover{
-    transform: scale(3);
+.admin-panel .account-info a:hover ,.admin-panel .account-info a i{
+    transform: rotate(180deg);
     color: var(--mainColor);
+    transition: transform 1s;
 }
 .admin-panel .text-menu{
     margin-bottom: 20px; 
@@ -73,13 +85,31 @@
 .active-menu{
     background-color:#262837;
     color: #fff;
-    border-left: 2px solid ;
+    border-left: 2px solid var(--i);
 }
 
 
 .info-panel{
     background-color: #262837;
-    width: 100%;
     color: #fff;
+    padding: 20px;
+    position: fixed;
+    bottom: 0px;
+    right: 0;
+    left: 270px;
+    top: 95px;
+    overflow-y: scroll;
+    transition: left .6s cubic-bezier(0.61, 0, 0.48, 0.99);
 }
+
+@media(max-width: 540px){
+    .admin-panel .admin-menu{
+        left: -270px ;
+        z-index: 100;
+    }
+    .admin-panel .info-panel{
+        left: 0;
+    }
+}
+
 
