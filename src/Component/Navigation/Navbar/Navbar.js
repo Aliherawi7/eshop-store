@@ -50,7 +50,7 @@ const Navbar = () => {
 
                     </div>
                     {
-                        state.userInfo?.roles?.includes("ADMIN") ? <Link to="/admin-panel">
+                        state.userInfo?.roles?.includes("ADMIN") ? <Link to="/admin-panel" className='settings'>
                             <i className='bi bi-gear-fill' style={{ "--i": "#2f3142" }}></i>
                         </Link> : ""
                     }
