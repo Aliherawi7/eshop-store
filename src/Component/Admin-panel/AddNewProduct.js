@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import "./AddNewProduct.css"
 import Button from "../UI/Button/Button";
-import Modal from "../UI/Modal/Modal";
+import { toast } from "react-toastify";
+import { actions } from "../../reducer";
+import { useStateValue } from "../../StateProvider";
 
 export function AddNewProduct(props) {
+    const [, dispatch] = useStateValue();
     const [state, setState] = useState({
         image: '',
         name: '',
@@ -16,7 +19,6 @@ export function AddNewProduct(props) {
         price: '',
         productionDate: '',
     });
-    const [modalStart, setModalStart] = useState(false);
     const inputsName = {
         IMAGE: 'IMAGE',
         NAME: 'NAME',
@@ -28,7 +30,6 @@ export function AddNewProduct(props) {
         QUANTITY_IN_DEPOT: 'QUANTITY_IN_DEPOT',
         PRICE: 'PRICE',
         PRODUTION_DATE: 'PRODUCTION'
-
     }
     const inputsHandler = (e, inputName) => {
         const value = e.target.value;
@@ -121,28 +122,47 @@ export function AddNewProduct(props) {
         //check if there is an empty input then show warning message
         if (inCompletes.length > 0) {
             setWarningMessage(inCompletes)
-            return;
+            //return;
         } else {
             setWarningMessage([])
         }
+        dispatch({
+            type: actions.LOADING,
+            item: true
+        })
+        const formData = new FormData();
+        for(let item in state){
+            formData.append(item+"", state[item])
+        }
+
         fetch('http://localhost:8080/api/products/save', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 'Authorization': localStorage.getItem('accessToken')
             },
-            body: JSON.stringify(state)
+            body: formData
         }).then(res => {
+            dispatch({
+                type: actions.LOADING,
+                item: false
+            })
             if (res.ok) {
-                setModalStart(true)
-                clearAll();
-
+                //clearAll();
+                toast.success("product successfully saved.",{
+                    position:"bottom-center"
+                })
+                console.log(res)
+                return res.json();
+            }else{
+                toast.error("Oops. something went wrong",{
+                    position:"bottom-center"
+                })
             }
-        }).catch(error => {
-            console.log(error)
+        }).then(data =>{
+            console.log(data)
         })
 
-        setModalStart(false)
     }
 
     const clearAll = () => {
@@ -169,7 +189,6 @@ export function AddNewProduct(props) {
                     Back <i className="bi bi-arrow-return-left"></i>
                 </Button>
             </div>
-            {modalStart ? <Modal messageType={true} start={modalStart}></Modal> : ""}
             <div className='add-product-form'>
                 <form style={{ "--i": "#32a7e1" }}>
                     <div className="input-group">
