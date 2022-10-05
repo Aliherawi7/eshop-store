@@ -6,6 +6,7 @@ import './assets/css/style.css';
 import './assets/css/bootstrap-icons.css'
 import { StateProvider } from './StateProvider';
 import reducer, { initialState } from './reducer'
+import "react-toastify/dist/ReactToastify.css"
 
 ReactDOM.render(
   <React.StrictMode>
