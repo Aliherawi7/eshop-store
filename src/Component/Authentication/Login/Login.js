@@ -118,14 +118,16 @@ const Login = () => {
                 return resposne.json();
             }
         }).then(data => {
-            console.log(data.userInformationDTO)
+            console.log(data)
             localStorage.setItem("accessToken", data?.access_token);
-            localStorage.setItem("refresh_token", data?.refresh_token);
+            localStorage.setItem("refreshToken", data?.refresh_token);
             localStorage.setItem("name", data.userInformationDTO?.name)
             localStorage.setItem("lastName", data.userInformationDTO?.lastName)
             localStorage.setItem("email", data.userInformationDTO?.email)
             localStorage.setItem("imgUrl", data.userInformationDTO?.imgUrl)
             localStorage.setItem("roles", data.userInformationDTO?.roles)
+            data.userInformationDTO.access_token = data?.access_token
+            console.log(localStorage.getItem('accessToken'))
             dispatch({
                 type:actions.ADD_USER_INFORMATION,
                 item: data.userInformationDTO
