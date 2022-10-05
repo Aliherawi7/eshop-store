@@ -9,7 +9,19 @@
             bottom: 0;
             left: 0;
             background: #f7fafd;
-        } 
+        }
+        .small-loading {
+            position: fixed;
+            z-index: 999999;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 240px;
+            opacity: 0;
+            visibility: hidden;
+            background: var(--i);
+            transition:  opacity .4s linear, visibility .5s linear;
+        }
 
         .spinner {
             position: absolute;
@@ -57,3 +69,4 @@
                 transform: scale(1.0);
             }
         }
+        
