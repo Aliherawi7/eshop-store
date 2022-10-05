@@ -29,7 +29,6 @@ const Navbar = () => {
             type: actions.REMOVE_USER_INFORMATION
         })
     }
-    console.log(state)
     return (
         <header className="header-nav">
             <div className='top-nav'>
