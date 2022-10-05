@@ -3,6 +3,7 @@ import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Layout from './Component/Layout/Layout';
 import Loading from './Component/UI/Loading/Loading';
+import { ToastContainer } from 'react-toastify';
 
 const Home = React.lazy(() => import('./Component/Home/Home'));
 const Store = React.lazy(() => import("./Component/Store/Store"));
@@ -34,6 +35,7 @@ function App() {
           </Routes>
         </Layout>
       </Router>
+      <ToastContainer />
     </Suspense>
   );
 }
