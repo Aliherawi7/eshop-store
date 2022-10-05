@@ -33,6 +33,7 @@
 
 /* products statistics */
 .panel-statistics .model-table {
+    position: relative;
     border-spacing: 0;
     padding: 20px;
     border-radius: 15px;
@@ -40,6 +41,7 @@
     background-color: var(--i);
     overflow-x: scroll;
 }
+
 .panel-statistics .model-table::-webkit-scrollbar {
     visibility: visible;
     width: 8px;
@@ -52,6 +54,8 @@
 }
 
 .panel-statistics .model-table .section-header button {
+    position: absolute;
+    right: 20px;
     padding: 5px 10px;
     text-align: center;
     font-weight: 600;
@@ -77,16 +81,17 @@
     width: 100%;
 }
 
-.panel-statistics table thead{
+.panel-statistics table thead {
     text-align: left;
     background-color: #fff;
 }
 
-.panel-statistics table th[name=id]{
+.panel-statistics table th[name=id] {
     border-top-left-radius: 10px;
     padding-left: 20px;
 }
-.panel-statistics table td[name=id]{
+
+.panel-statistics table td[name=id] {
     padding-left: 20px;
 }
 
@@ -111,6 +116,7 @@
     color: #fff;
     text-align: left;
 }
+
 .panel-statistics table tr:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.329);
 }
@@ -120,24 +126,28 @@
     color: #000;
 }
 
-.panel-statistics table td[name=last]{
+.panel-statistics table td[name=last] {
     text-align: center;
 }
 
 .panel-statistics table td[name=last]:hover span {
     transform: translateX(20px)
 }
-.panel-statistics .action-buttons{
-    
+
+.panel-statistics .action-buttons {
+
     position: relative;
 }
-.panel-statistics i:hover{
+
+.panel-statistics i:hover {
     color: #000 !important;
 }
-.panel-statistics .show-actions:hover + .buttons-box{
+
+.panel-statistics .show-actions:hover+.buttons-box {
     transform: scaleX(1);
 }
-.panel-statistics .action-buttons .buttons-box{
+
+.panel-statistics .action-buttons .buttons-box {
     width: 70px;
     position: absolute;
     top: 0;
@@ -146,14 +156,27 @@
     transform-origin: right;
     transition: transform .3s linear;
 }
+
 .panel-statistics .action-buttons .buttons-box:focus,
 .panel-statistics .action-buttons .buttons-box:hover,
-.panel-statistics .action-buttons .buttons-box:active
-{
+.panel-statistics .action-buttons .buttons-box:active {
     transform: scaleX(1);
 }
-.panel-statistics .action-buttons .buttons-box i{
+
+.panel-statistics .action-buttons .buttons-box i {
     margin: 3px;
     padding: 3px;
-    color:#fff;
+    color: #fff;
+}
+
+@media(max-width: 768px) {
+
+    .panel-statistics table th{
+        font-size: 14px;
+
+    }
+    .panel-statistics table td {
+        font-size: 12px;
+
+    }
 }
