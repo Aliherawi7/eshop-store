@@ -4,6 +4,8 @@ import { useStateValue } from "../../StateProvider"
 import { Link } from 'react-router-dom';
 import NotFound from "../Pages/NotFoundPage/NotFound"
 import admintTools from './AdminTools';
+import SmallLoading from '../UI/Loading/SmallLoading';
+import { actions } from '../../reducer'
 
 let counter = 0
 function AdminPanel() {
@@ -11,6 +13,9 @@ function AdminPanel() {
   const [currentComponent, setCurrentComponent] = useState({ component: admintTools[counter] });
   const [adminMenu, setAdminMenu] = useState(false);
   useEffect(() => {
+    dispatch({
+      type: actions.LOADING
+    })
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 500)
@@ -20,13 +25,13 @@ function AdminPanel() {
     counter = id
     setCurrentComponent({ component: admintTools[counter] })
   }
-
+  
   return (
     state.userInfo.roles.includes("ADMIN") ?
       <div className='admin-panel fade-in'>
-        <div className='admin-menu-button' onClick={()=> setAdminMenu(!adminMenu)}><i className='bi bi-filter-left'></i></div>
-        <div className='admin-menu' style={{left: adminMenu? '270px':'-270px'}}>
-          
+        <div className='admin-menu-button' onClick={() => setAdminMenu(!adminMenu)}><i className='bi bi-filter-left'></i></div>
+        <div className='admin-menu' >
+
           <div className='account-info'>
             <i className='bi bi-person-circle'></i>
             <div>
@@ -60,7 +65,10 @@ function AdminPanel() {
           </ul>
         </div>
         <div className='info-panel'>
-          <currentComponent.component />
+          <div className='panel-container'>
+            <currentComponent.component />
+            <SmallLoading visible={state?.loading} backgroundColor={'#262837'} />
+          </div>
         </div>
       </div> : <NotFound />
   )
