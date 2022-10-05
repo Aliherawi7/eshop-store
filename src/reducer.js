@@ -8,14 +8,16 @@ export const initialState = {
         email: localStorage.getItem("email"),
         imgUrl: localStorage.getItem("imgUrl"),
         roles: localStorage.getItem("roles")?.split(',')
-    }
+    },
+    loading:false
 }
 export const actions = {
     ADD_TO_BASKET: "ADD_TO_BASKET",
     REMOVE_FROM_BASKET:'REMOVE_FROM_BASKET',
     CHANGE_QUANTITY:"CHANGE_QUANTITY",
     ADD_USER_INFORMATION: "ADD_USER_INFORMATION",
-    REMOVE_USER_INFORMATION: 'REMOVE_USER_INFORMATION'
+    REMOVE_USER_INFORMATION: 'REMOVE_USER_INFORMATION',
+    LOADING:"LOADING"
 }
 
 
@@ -76,6 +78,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 userInfo: {}
+            }
+        }
+        case actions.LOADING:{
+            return {
+                ...state,
+                loading: action.item
             }
         }
 
