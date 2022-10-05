@@ -5,9 +5,20 @@ import Button from "../UI/Button/Button"
 import AddNewProduct from './AddNewProduct'
 import AddNewCategory from './AddNewCategory'
 import BarChart from './BarChart'
-import Modal from '../UI/Modal/Modal'
+import { toast } from 'react-toastify'
+import { useStateValue } from '../../StateProvider'
+import { actions } from '../../reducer'
+import { BytesToFile } from '../Utils/BytesToFile'
 
 export function Dashboard() {
+    const [state, dispatch] = useStateValue();
+    useEffect(() => {
+        dispatch({
+            type: actions.LOADING,
+            item: false
+        })
+
+    }, [])
 
     return (
         <div className='dashboard fade-in'>
@@ -47,36 +58,67 @@ export function Dashboard() {
 
 export function ProductsPanel() {
     const [state, setState] = useState(true);
-    const [modalState, setModalState] = useState();
+    const [, dispatch] = useStateValue();
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/api/products').then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-        }).then(data => {
-            setProducts(data)
+        dispatch({
+            type: actions.LOADING,
+            item: true
         })
-
-        return () => {
-
+        const getData = () => {
+            fetch('http://localhost:8080/api/products').then(res => {
+                dispatch({
+                    type: actions.LOADING
+                })
+                if (res.ok) {
+                    return res.json();
+                }
+            }).then(data => {
+                data = data.map(item =>{
+                    item.image = BytesToFile(item.image, "image/png");
+                    return item;
+                })
+                console.log(data)
+                setProducts(data)
+            }).catch(error => {
+                dispatch({
+                    type: actions.LOADING,
+                    item: false
+                })
+                console.log(error)
+            })
         }
+
+        getData();
+
+
     }, [])
 
-    const deleteProduct = (id)=> {
-        setModalState({messageType:false, start:false})
-        fetch("http://localhost:8080/api/products/delete/"+id,{
-            method:'DELETE',
-            headers:{
-                'Content-Type':'application/json',
-                'Authentication': localStorage.getItem("access_token")
+    const deleteProduct = (id) => {
+        fetch("http://localhost:8080/api/products/delete/" + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("accessToken")
             },
 
-        }).then(res =>{
-            if(res.ok){
+        }).then(res => {
+            if (res.ok) {
                 console.log("deleted")
-            }else{
-                setModalState({messageType:false, start:true})
+                toast.done("product successfully deleted.", {
+                    position: "bottom-right",
+                    closeOnClick: true,
+                    autoClose: true,
+                    closeButton: true
+                })
+            } else {
+                toast.error("couldn't removed the product.", {
+                    position: "bottom-right",
+                    closeOnClick: true,
+                    autoClose: true,
+                    closeButton: true,
+                    responsive: true
+                })
             }
         })
     }
@@ -84,7 +126,6 @@ export function ProductsPanel() {
     return (state ?
         <div className='products-statistics panel-statistics fade-in'>
             <div className='products-table model-table' style={{ "--i": "#32a7e1" }}>
-                <Modal start={modalState?.start} messageType={modalState?.messageType} ></Modal>
                 <div className='section-header'>
                     <div>
                         <h2>Products</h2>
@@ -107,16 +148,16 @@ export function ProductsPanel() {
                         <th name='last'>ACTIONS</th>
                     </thead>
                     <tbody>
-                        {Products.map(product => {
+                        {products.map(product => {
                             return (
                                 <tr key={product.id}>
                                     <td name='id'>{product.id}</td>
-                                    <td >{product.name.toUpperCase()}</td>
+                                    <td ><img src={product.image} />{product.name?.toUpperCase()}</td>
                                     <td >{product.category?.toUpperCase()}</td>
-                                    <td >{product.brand.toUpperCase()}</td>
+                                    <td >{product.brandName?.toUpperCase()}</td>
                                     <td name="price">${product.price}</td>
-                                    <td>{product.amount}</td>
-                                    <td>{product.amount > 0 ? "available" : 'not available'}</td>
+                                    <td>{product.quantityInDepot}</td>
+                                    <td>{product.quantityInDepot > 0 ? "available" : 'not available'}</td>
                                     <td name='last'>
                                         <div className='action-buttons'>
                                             <i className='bi bi-three-dots-vertical show-actions'></i>
@@ -132,6 +173,7 @@ export function ProductsPanel() {
                     </tbody>
                 </table>
             </div>
+
         </div>
         : <AddNewProduct back={() => setState(true)} />
     )
@@ -148,7 +190,7 @@ export function CategoriesPanel() {
                     <div className='section-header'>
                         <div>
                             <h2>Categories</h2>
-                            <p>{Products.length} categories</p>
+                            <p>{categories.length} categories</p>
                         </div>
                         <Button btnType="white" click={() => setState(false)}>
                             add Category
@@ -192,13 +234,57 @@ export function CategoriesPanel() {
 }
 
 export function OrdersPanel() {
+    const [state, dispatch] = useStateValue();
+    const [orders, setOrders] = useState([]);
+    useEffect(() => {
+        let ordersList = []
+        dispatch({
+            type: actions.LOADING,
+            item: true
+        })
+        const getData = () => {
+            fetch('http://localhost:8080/api/orders', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("accessToken")
+                }
+            }).then(res => {
+                dispatch({
+                    type: actions.LOADING,
+                    item: false
+                })
+                console.log(res)
+                if (res.status === 200) {
+                    return res.json();
+                    console.log(res.json())
+                } else if (res.status == 204) {
+                    console.log('no cont')
+
+                }
+
+            }).then(data => {
+                console.log(data)
+                ordersList = data
+                setOrders(ordersList)
+
+            }).catch(error => {
+                console.log(error)
+                dispatch({
+                    type: actions.LOADING,
+                    item: false
+                })
+            })
+        }
+        getData();
+    }, [])
+
     return (
         <div className='orders-statistics panel-statistics fade-in'>
             <div className='orders-table model-table' style={{ "--i": "#26ad80" }}>
                 <div className='section-header'>
                     <div>
                         <h2>Recent Orders</h2>
-                        <p>{Products.length} orders</p>
+                        <p>{orders.length} orders</p>
                     </div>
                     <Button btnType="white">
                         add order
@@ -220,18 +306,18 @@ export function OrdersPanel() {
 
                     </thead>
                     <tbody>
-                        {Products.map(product => {
+                        {orders.map(order => {
                             return (
-                                <tr>
-                                    <td name='id'>{product.id}</td>
+                                <tr key={order.id}>
+                                    <td name='id'>{order.id}</td>
                                     <td>{'ali herawi'}</td>
-                                    <td>{product.name.toUpperCase()}</td>
-                                    <td >{product.brand.toUpperCase()}</td>
-                                    <td >{product.amount}</td>
-                                    <td>${product.amount * product.price}</td>
-                                    <td>{'Afghanistan'}</td>
-                                    <td>{product.amount > 0 ? "paid" : 'unpaid'}</td>
-                                    <td>{product.amount > 110 ? "4" : '5'}</td>
+                                    <td>{order.productId}</td>
+                                    <td >{order.brand?.toUpperCase()}</td>
+                                    <td >{order.quantity}</td>
+                                    <td>${order?.amount * order.quantity}</td>
+                                    <td>{order.shippingAddress}</td>
+                                    <td>{order?.amount > 0 ? "paid" : 'unpaid'}</td>
+                                    <td>{order?.amount > 110 ? "4" : '5'}</td>
                                     <td name='last'>
                                         <div className='action-buttons'>
                                             <i className='bi bi-three-dots-vertical show-actions'></i>
@@ -252,8 +338,85 @@ export function OrdersPanel() {
 }
 
 export function UsersPanel() {
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const getData = () => {
+            fetch('http://localhost:8080/api/users', {
+                headers: {
+                    'Authorization': localStorage.getItem("accessToken")
+                }
+            }).then(res => {
+                console.log(res)
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    throw new Error()
+                }
+            }).then(data => {
+                console.log(data)
+                setUsers(data)
+                console.log(users)
+            })
+        }
+        getData();
+
+    }, [])
+
+
     return (
-        <div className='orders-statistics panel-statistics  fade-in'>Users</div>
+        <div className='orders-statistics panel-statistics  fade-in'>
+            <div className='orders-table model-table' style={{ "--i": "#26ad80" }}>
+                <div className='section-header'>
+                    <div>
+                        <h2>Recent Users</h2>
+                        <p>{users.length} Users</p>
+                    </div>
+                    <Button btnType="white">
+                        add
+                        <i className='bi bi-plus-lg'></i>
+                    </Button>
+                </div>
+                <table>
+                    <thead>
+                        <th name='id'>ID</th>
+                        <th >USER NAME</th>
+                        <th>EMAIL</th>
+                        <th>TOTAL ORDERS</th>
+                        <th>TOTAL SPEDING</th>
+                        <th>LOCATION</th>
+                        <th>ROLES</th>
+                        <th >Status</th>
+                        <th name='last'>ACTIONS</th>
+
+                    </thead>
+                    <tbody>
+                        {users.map(user => {
+                            return (
+                                <tr key={user.id}>
+                                    <td name='id'>{user?.id}</td>
+                                    <td>{user?.name.toUpperCase() + ' ' + user?.lastName.toUpperCase()}</td>
+                                    <td >{user.email}</td>
+                                    <td >{user?.totalOrders}</td>
+                                    <td>${user?.totalSpending}</td>
+                                    <td>{user?.location}</td>
+                                    <td>[ {user.roles.map(role => role + ", ")}]</td>
+                                    <td>{user.active ? "active" : "deactive"}</td>
+                                    <td name='last'>
+                                        <div className='action-buttons'>
+                                            <i className='bi bi-three-dots-vertical show-actions'></i>
+                                            <div className='buttons-box'>
+                                                <i className='bi bi-trash' style={{ "--i": 'red' }}></i>
+                                                <i className='bi bi-pencil' ></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
 
