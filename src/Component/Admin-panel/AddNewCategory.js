@@ -1,16 +1,18 @@
 import React, { useState } from "react"
 import "./AddNewProduct.css"
 import Button from "../UI/Button/Button";
-import Modal from "../UI/Modal/Modal";
+import { useStateValue } from "../../StateProvider";
+import { actions } from "../../reducer";
 
 export function AddNewCategory(props) {
+    const [{loading},dispatch] = useStateValue(); 
     const [state, setState] = useState({
         name: '',
         description: '',
         quantityInDepot: '',
         status:false
     });
-    const [modalStart, setModalStart] = useState(false);
+
     const inputsName = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
@@ -75,6 +77,9 @@ export function AddNewCategory(props) {
         } else {
             setWarningMessage([])
         }
+        dispatch({
+            type: actions.LOADING
+        })
         fetch('http://localhost:8080/api/categories/save', {
             method: 'POST',
             headers: {
@@ -82,8 +87,8 @@ export function AddNewCategory(props) {
                 'Authorization': localStorage.getItem('accessToken')
             },
             body: JSON.stringify(state)
+
         }).then(res => {
-            setModalStart(true)
             if (res.ok) {
                 
                 clearAll();
@@ -92,7 +97,7 @@ export function AddNewCategory(props) {
             console.log(error)
         })
 
-        setModalStart(false)
+        
     }
 
     const clearAll = () => {
@@ -112,7 +117,6 @@ export function AddNewCategory(props) {
                     Back <i className="bi bi-arrow-return-left"></i>
                 </Button>
             </div>
-            {modalStart ? <Modal messageType={true} start={modalStart}></Modal> : ""}
             <div className='add-product-form'>
                 <form style={{ "--i": "#b44ac6" }}>
                     <div className="input-group">
