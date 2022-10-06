@@ -132,18 +132,18 @@ export function ProductsPanel() {
                         <p>{Products.length} products</p>
                     </div>
                     <Button btnType="white" click={() => setState(false)}>
-                        add products
+                        add
                         <i className='bi bi-plus-lg'></i>
                     </Button>
                 </div>
                 <table>
                     <thead>
                         <th name='id'>ID</th>
-                        <th>NAME</th>
+                        <th name="name">NAME</th>
                         <th>CATEGORIES</th>
                         <th>BRAND NAME</th>
                         <th>PRICE</th>
-                        <th>AMOUNT</th>
+                        <th>INVENTORY</th>
                         <th >STATE</th>
                         <th name='last'>ACTIONS</th>
                     </thead>
@@ -152,7 +152,7 @@ export function ProductsPanel() {
                             return (
                                 <tr key={product.id}>
                                     <td name='id'>{product.id}</td>
-                                    <td ><img src={product.image} />{product.name?.toUpperCase()}</td>
+                                    <td name='name'><img src={product.image} />{product.name?.toUpperCase()}</td>
                                     <td >{product.category?.toUpperCase()}</td>
                                     <td >{product.brandName?.toUpperCase()}</td>
                                     <td name="price">${product.price}</td>
@@ -193,7 +193,7 @@ export function CategoriesPanel() {
                             <p>{categories.length} categories</p>
                         </div>
                         <Button btnType="white" click={() => setState(false)}>
-                            add Category
+                            add
                             <i className='bi bi-plus-lg'></i>
                         </Button>
                     </div>
@@ -287,7 +287,7 @@ export function OrdersPanel() {
                         <p>{orders.length} orders</p>
                     </div>
                     <Button btnType="white">
-                        add order
+                        add
                         <i className='bi bi-plus-lg'></i>
                     </Button>
                 </div>
