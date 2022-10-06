@@ -94,6 +94,15 @@
 .panel-statistics table td[name=id] {
     padding-left: 20px;
 }
+.panel-statistics table td[name=name] {
+    display: flex;
+    align-items: center;
+}
+.panel-statistics table td[name=name] img{
+    width: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
 
 .panel-statistics table th[name=last] {
     border-top-right-radius: 10px;
@@ -170,7 +179,7 @@
 }
 
 @media(max-width: 768px) {
-
+    
     .panel-statistics table th{
         font-size: 14px;
 
