@@ -191,17 +191,20 @@ export function AddNewProduct(props) {
             </div>
             <div className='add-product-form'>
                 <form style={{ "--i": "#32a7e1" }}>
-                    <div className="input-group">
+                    <div className="input-group upload">
                         <div className="input-box">
                             <label>product image</label>
+                            <img src={state.image ? URL.createObjectURL(state.image) : "/image/slide-17.jpg"} />
                             <input type="file" accept='image/*' placeholder="image" onChange={(e) => inputsHandler(e, inputsName.IMAGE)} />
+                            <i className="bi bi-cloud-upload"></i>
                         </div>
+                    
+                    </div>
+                    <div className="input-group">
                         <div className="input-box">
                             <label>Product Name</label>
                             <input type="text" value={state.name} placeholder="product name" onChange={(e) => inputsHandler(e, inputsName.NAME)} />
                         </div>
-                    </div>
-                    <div className="input-group">
                         <div className="input-box">
                             <label>Categroy</label>
                             <input type="text" value={state.category} placeholder="category" onChange={(e) => inputsHandler(e, inputsName.CATEGORY)} />
