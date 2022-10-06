@@ -22,6 +22,46 @@
     width: 48%;
 }
 
+.add-product-form form .input-box i{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    font-size: 70px;
+    color: var(--i);
+    right: 0;
+    top: 35px;
+    left: 0;
+    bottom: 0;
+}
+.add-product-form form .input-box input[type=file]:hover + i{
+    cursor: pointer;
+    color: var(--mainColor);
+}
+.add-product-form form .input-box img{
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+.add-product-form form .input-box input[type=file]{
+    cursor: pointer;
+    top: 28px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 79%;
+    width: 100%;
+    z-index: 200;
+    opacity: 0;
+}
+.add-product-form form .input-box .upload-button input{
+    opacity: 0;
+}
+
 .add-product-form form .input-group{
     display: flex;
     justify-content: space-between;
@@ -96,10 +136,16 @@
     color: red;
 }
 @media(max-width: 786px){
+    .add-product-form,
+    .add-new-product .header-box{
+        padding: 0;
+    
+    }
     .add-product-form form .input-box{
         width: 100%;
     }
     .add-product-form form .input-box input[type=date]{
         width: 100%;
     }
+
 }
