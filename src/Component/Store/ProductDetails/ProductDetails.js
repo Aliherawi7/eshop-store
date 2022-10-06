@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ProductDetails.css"
 import Button from '../../UI/Button/Button'
 import { useParams } from 'react-router-dom'
@@ -8,30 +8,48 @@ import { useStateValue } from '../../../StateProvider'
 import Products from '../../../products'
 import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
+import { BytesToFile } from '../../Utils/BytesToFile'
 
 const ProductDetails = () => {
-    const [{basket}, dispatch] = useStateValue()
+    const [{ basket }, dispatch] = useStateValue()
+    const [product, setProduct] = useState();
+    let producstElement;
     const [people, peopleSetState] = useState([
         { name: 'Ali', avatar: '/image/people/1.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" },
         { name: 'Maria', avatar: '/image/people/2.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" }
     ])
     const { id } = useParams()
+    useEffect(() => {
+        const getData = () => {
+            fetch('http://localhost:8080/api/products/' + id,{
+                headers:{
+                    'Authorization': localStorage.getItem('accessToken')
+                }
+            }).then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            }).then(data => {
+                console.log(data)
+                data.image = BytesToFile(data.image, { contentType: "image/png" });
+                setProduct(data);
+            })
+        }
+        getData();
 
-    const foundProduct = Products.find((item) => {
-        return item.id === id
-    })
+    }, [])
 
     const addToBasket = () => {
-        const index = basket.findIndex(item =>{
+        const index = basket.findIndex(item => {
             return item.id == id;
         })
-        
-        if(index >=0){
+
+        if (index >= 0) {
             dispatch({
                 type: actions.CHANGE_QUANTITY,
-                item:{
-                    id:id,
-                    index:index,
+                item: {
+                    id: id,
+                    index: index,
                     quantity: basket[index].quantity + 1
                 }
             })
@@ -40,12 +58,12 @@ const ProductDetails = () => {
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
-                name: foundProduct.name,
-                image: foundProduct.image,
-                price: foundProduct.price,
-                rating: foundProduct.rating,
+                name: product.name,
+                image: product.image,
+                price: product.price,
+                rating: product.rating,
                 id: id,
-                quantity:1
+                quantity: 1
             }
         })
     }
@@ -53,32 +71,32 @@ const ProductDetails = () => {
     let productDetails;
 
     //if data have been loaded from server
-    if (foundProduct) {
-        productDetails = (
+    if (product) {
+        producstElement = (
             <div className={`product-entering`}>
                 <div className="product-details">
-                    <img src={foundProduct.image} alt={foundProduct.name} />
+                    <img src={product.image} alt={product.name} />
                     <div className="product-info">
-                        <h3 className="product-title">{foundProduct.name}</h3>
-                        <RateStar rate={foundProduct.rate} size={"large"} type={'Customer reviews'} />
-                        <h4 className="product-price">price: ${foundProduct.price}</h4>
+                        <h3 className="product-title">{product.name}</h3>
+                        <RateStar rate={product.rate} size={"large"} type={'Customer reviews'} />
+                        <h4 className="product-price">price: ${product.price}</h4>
                         <p className="product-description">descriptions: descriptions about the product</p>
                         <Button btnType="outline" click={addToBasket}>
                             Add <i className="bi bi-cart4"></i>
                         </Button>
                     </div>
                 </div>
-                <DetailsPane people={people} dataSheet={foundProduct} description={foundProduct.description} />
+                <DetailsPane people={people} dataSheet={product} description={product.description} />
             </div>
         )
-    }else {
-    //if data have not been loaded from server
-    productDetails = (
-        <Loading />
-    )
-}
-return productDetails
-        
+    } else {
+        //if data have not been loaded from server
+        producstElement = (
+            <Loading />
+        )
+    }
+    return producstElement
+
 }
 
 export default ProductDetails
