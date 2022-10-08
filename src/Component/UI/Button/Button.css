@@ -20,7 +20,7 @@
 }
 
 .success{
-    background-color: var(--mainColor);
+    background-color: var(--mainColor) !important;
 }
 .success:hover{
     background-color: #cf6a1c;;
@@ -28,10 +28,10 @@
 }
 
 .danger{
-    background-color: #db0808;
+    background-color: #db0808 !important;
 }
 .danger:hover{
-    background-color: #ac0a0a;
+    background-color: #ac0a0a !important;
     color: #fff;
 }
 
