@@ -26,12 +26,28 @@
     margin: 0 15px;
     align-items: center;
 }
-.status-box .acount-box p, .acount-box a{
+.status-box .authentication{
+    position: relative;
+}
+.status-box .acount-box{
+    margin-right: 10px;
+    align-items: center;
+    display: flex;
+}
+.status-box .acount-box a{
+    padding: 0 5px;
+    border-right: 2px solid;
     font-size: 12px;
     color: #fff;
     font-weight: 400;
 }
-.status-box  a i{
+.status-box .acount-box i{
+
+    font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+}
+.status-box acount-box a i{
     font-size: 20px;
     padding: 5px;
     color: var(--mainColor);
@@ -39,15 +55,83 @@
 }
 .status-box .acount-box{
     margin-right: 10px;
+    
+}
+.status-box .user-account{
+    cursor: pointer;
+    display: flex;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid;
+    padding-right: 10px;
+    margin-right: 10px;
+    height: 20px;
+}
+.status-box .user-account img{
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 30px;
+    margin-right: 5px;
 }
 .status-box button{
+    position: relative;
     padding:0 5px;
     background-color: transparent;
 }
 
-.status-box button i{
+.status-box i{
     font-size: 22px;
     color : var(--mainColor);
+}
+.status-box button span{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    background: red;
+    padding: 2px;
+    left: 15px;
+    top: -4px;
+    min-width: 18px;
+    border-radius: 50%;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+.status-box .user-account:hover + .account-settings{
+    opacity: 1;
+    visibility: visible;
+}
+.status-box .authentication .account-settings{
+    position: absolute;
+    height: 90px;
+    background: #fff;
+    width: 100px;
+    top: 25px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    padding: 10px 10px;
+    opacity: 0;
+    visibility: hidden;
+}
+.status-box .authentication .account-settings i{
+    padding-right: 8px;
+    font-size: 14px;
+}
+.status-box .authentication .account-settings a{
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+.status-box .authentication .account-settings a:hover{
+    color: var(--mainColor)
+}
+.status-box .authentication .account-settings:hover{
+    opacity: 1;
+    visibility: visible;
 }
 
 .btnToggler{
@@ -93,6 +177,35 @@
     display: none;
     width: 70%;
     flex: unset;
+}
+
+.nav-brand img{
+    margin-left: 20px;
+    
+    width: 100px;
+    height: 30px;
+}
+.nav-brand h1{
+    font-family: 'header2';
+}
+
+@media(max-width:768px){
+    .nav-brand{
+        font-size: 10px;
+        font-weight: 600;
+        padding: 5px 8px;
+        color: var(--mainColor);
+        text-decoration: none;
+        justify-self: flex-start;
+    }
+
+}
+@media(max-width:512px){
+    .nav-brand img{
+        margin-left: 10px;
+        width: 85px;
+        height: 25px;
+    }
 }
 
 @media(max-width:768px){
