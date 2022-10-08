@@ -1,38 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Home.css"
 import Feature from './features/feature'
-import Products from "../../products"
 import Slider from './Slider/Slider'
 import Button from '../UI/Button/Button'
 import { useNavigate } from 'react-router-dom'
+import { BytesToFile } from '../Utils/BytesToFile'
 
 const Home = () => {
     const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
+    const [topSales, setTopSates]= useState([])
+    useEffect(() => {
+        const getData = () => {
+            fetch('http://localhost:8080/api/products')
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                }).then(data => {
+                    setTopSates(data.slice(5, 8))
+                    setProducts(data)
+                })
+        }
+        getData();
+        
+
+    }, [])
+
     return (
         <div className={`home home-entering`}>
             <Slider />
             <div className='most-ordered'>
-                <div className='ordered-item'>
-                    <img src={Products[8].image} />
-                    <div className='order-info'>
-                        <h1>{Products[8].name}</h1>
-                        <Button click={() => navigate('/store/productdetails/' + 9)}>SHOP NOW</Button>
-                    </div>
-                </div>
-                <div className='ordered-item'>
-                    <img src={Products[7].image} />
-                    <div className='order-info'>
-                        <h1>{Products[7].name}</h1>
-                        <Button click={() => navigate('/store/productdetails/' + 8)}>SHOP NOW</Button>
-                    </div>
-                </div>
-                <div className='ordered-item'>
-                    <img src={Products[6].image} />
-                    <div className='order-info'>
-                        <h1>{Products[6].name}</h1>
-                        <Button click={() => navigate('/store/productdetails/' + 7)}>SHOP NOW</Button>
-                    </div>
-                </div>
+                {topSales?.map(item => {
+                    return (
+                        <div className='ordered-item' key={item.id}>
+                            <img src={BytesToFile(item.image)} />
+                            <div className='order-info'>
+                                <h1>{item.name}</h1>
+                                <Button click={() => navigate('/store/productdetails/' + item.id)}>SHOP NOW</Button>
+                            </div>
+                        </div>)
+                })}
             </div>
             <div className="features">
                 <h2>eShop Features</h2>
