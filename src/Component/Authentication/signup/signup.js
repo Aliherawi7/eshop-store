@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
 import { actions } from '../../../reducer'
 
+
 const Signup = () => {
     const navigate = useNavigate();
     const [, dispatch] = useStateValue();
@@ -13,8 +14,17 @@ const Signup = () => {
         passwordEyeIcon: 'bi bi-eye-slash', repeatPasswordEyeIcon: 'bi bi-eye-slash'
     })
     const [signupInputState, setSignupInputState] = useState({
-        name:{
-            type:'text',
+        image: {
+            type: 'file',
+            placeholder: 'image',
+            name: 'image',
+            value: '',
+            isValid: false,
+            isUsed: false,
+            warningMessage: ''
+        },
+        name: {
+            type: 'text',
             placeholder: 'name',
             name: 'name',
             value: '',
@@ -22,8 +32,8 @@ const Signup = () => {
             isUsed: false,
             warningMessage: ''
         },
-        lastName:{
-            type:'text',
+        lastName: {
+            type: 'text',
             placeholder: 'last name',
             name: 'lastName',
             value: '',
@@ -31,8 +41,8 @@ const Signup = () => {
             isUsed: false,
             warningMessage: ''
         },
-        dob:{
-            type:'date',
+        dob: {
+            type: 'date',
             placeholder: 'date of birth',
             name: 'dob',
             value: '',
@@ -68,6 +78,7 @@ const Signup = () => {
             warningMessage: ''
 
         }
+
     })
 
     const changeSignupHandler = (event, item) => {
@@ -75,21 +86,33 @@ const Signup = () => {
         const updatedElement = updatedForm[item]
         updatedElement.value = event.target.value
         updatedElement.isUsed = true
-        if(item === "name" || item === "lastName"){
-            console.log("in name state checking")
-            if(updatedElement.value.length >=2){
+        if (item === "image") {
+            updatedElement.value = event.target.files[0]
+            if (updatedElement.value) {
                 updatedElement.isValid = true;
                 updatedElement.warningMessage = "";
-            }else{
+            } else {
+                updatedElement.isValid = false
+                updatedElement.warningMessage = 'invalid value'
+            }
+            updatedForm[item] = updatedElement
+            setSignupInputState(updatedForm)
+            return;
+        }
+        if (item === "name" || item === "lastName") {
+            if (updatedElement.value.length >= 2) {
+                updatedElement.isValid = true;
+                updatedElement.warningMessage = "";
+            } else {
                 updatedElement.isValid = false
                 updatedElement.warningMessage = 'invalid value'
             }
         }
-        if(item === "dob"){
-            if(updatedElement.value.length >=0){
+        if (item === "dob") {
+            if (updatedElement.value.length >= 0) {
                 updatedElement.isValid = true;
                 updatedElement.warningMessage = "";
-            }else{
+            } else {
                 updatedElement.isValid = false
                 updatedElement.warningMessage = 'invalid value'
             }
@@ -163,7 +186,7 @@ const Signup = () => {
     const eyeBtnHandler = (name, inputName) => {
         const oldEyeState = { ...passwordEyeState }
         const oldInputState = { ...signupInputState }
-        
+
         if (name == 'password') {
             if (passwordEyeState.passwordEyeIcon == 'bi bi-eye') {
                 oldEyeState.passwordEyeIcon = 'bi bi-eye-slash'
@@ -205,7 +228,7 @@ const Signup = () => {
         const password = signupInputState.password
         const passwordRepeat = signupInputState.passwordRepeat
 
-        if(!name.isValid || !lastName.isValid || !dob.isValid){
+        if (!name.isValid || !lastName.isValid || !dob.isValid) {
             return;
         }
         if (checkPasswordValidation(email.value) == 'empty' || !email.isValid) {
@@ -233,45 +256,38 @@ const Signup = () => {
             setSignupInputState(holder)
             return
         }
-
-        fetch("http://localhost:8080/api/users/signup",{
-            headers:{
-                'Content-Type':"application/json"
-            },
-            method:"POST",
-            body:JSON.stringify({
-                name:name.value,
-                lastName:lastName.value,
-                dob:dob.value,
-                email:email.value,
-                password:password.value,
-                imgUrl:""
-            }) 
+        const formData = new FormData();
+        for (let item in signupInputState) {
+            formData.append(item + "", signupInputState[item].value)
+        }
+        fetch("http://localhost:8080/api/users/signup", {
+            method: "POST",
+            body: formData
         }).then(res => {
-            if(res.ok){
-               console.log("successfully added") 
-               return res.json();
+            if (res.ok) {
+                console.log("successfully added")
+                return res.json();
             }
-            
-        }).then(data =>{
+        }).then(data => {
             console.log(data)
             localStorage.setItem("accessToken", data.access_token);
             localStorage.setItem("refresh_token", data.refresh_token);
             localStorage.setItem("name", data.userInformationDTO?.name)
             localStorage.setItem("lastName", data.userInformationDTO?.lastName)
             localStorage.setItem("email", data.userInformationDTO?.email)
-            localStorage.setItem("imgUrl", data.userInformationDTO?.imgUrl)
+            localStorage.setItem("image",data.userInformationDTO?.image)
             localStorage.setItem("roles", data.userInformationDTO?.roles)
-            console.log(localStorage.getItem("roles"))
+            //console.log(localStorage.getItem("roles"))
+
             dispatch({
                 type: actions.ADD_USER_INFORMATION,
                 item: {
                     ...data.userInformationDTO,
-                    access_token: data.access_token,
+                    accessToken: data.accessToken,
                 }
             })
             navigate("/")
-        }).catch(error =>{
+        }).catch(error => {
             console.log(error)
         })
 
@@ -296,7 +312,7 @@ const Signup = () => {
                 {signUpInputArray.map((item) => {
                     return (
                         <>
-                            {(item.config.name === 'password' || item.config.name ==='passwordRepeat') ?
+                            {(item.config.name === 'password' || item.config.name === 'passwordRepeat') ?
                                 <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.config.name))}>
                                     <i className={(item.config.name == 'password') ?
                                         passwordEyeState.passwordEyeIcon : passwordEyeState.repeatPasswordEyeIcon}></i>
