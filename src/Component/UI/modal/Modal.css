@@ -1,0 +1,29 @@
+.modal{
+    width: 35%;
+    z-index: 300;
+    position: fixed;
+    background-color: #fff;
+    border-radius: 5px;
+    left: 35%;
+    padding: 20px;
+    top: 40%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+    text-align: center;
+}
+.modal h2{
+    color: #000;
+    font-weight: 500;
+}
+.modal button{
+    margin: 15px 20px !important;
+    padding: 5px 20px !important;
+}
+
+@media(max-width: 768){
+    .modal{
+        width: 25%;
+        left: 25%;
+        top: 20%;
+    }
+}
