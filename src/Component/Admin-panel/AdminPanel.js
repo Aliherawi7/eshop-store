@@ -6,6 +6,7 @@ import NotFound from "../Pages/NotFoundPage/NotFound"
 import admintTools from './AdminTools';
 import SmallLoading from '../UI/Loading/SmallLoading';
 import { actions } from '../../reducer'
+import { BytesToFile } from '../Utils/BytesToFile';
 
 let counter = 0
 function AdminPanel() {
@@ -33,7 +34,7 @@ function AdminPanel() {
         <div className='admin-menu' >
 
           <div className='account-info'>
-            <i className='bi bi-person-circle'></i>
+            <img src={BytesToFile(localStorage.getItem("image"))? BytesToFile(localStorage.getItem("image")):""} className='bi bi-person-circle' />
             <div>
               <h3>{state.userInfo?.name + " " + state.userInfo?.lastName}</h3>
               <p>{state.userInfo?.email}</p>
