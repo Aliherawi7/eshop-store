@@ -1,9 +1,6 @@
 import React from 'react'
 import "./TogglerMenu.css"
 import NavItems from '../NavItems/NavItems'
-import Button from "../../UI/Button/Button"
-import { useNavigate } from 'react-router-dom'
-import {useStateValue} from '../../../StateProvider'
 
 const TogglerMenu = (props) => {
     return (
