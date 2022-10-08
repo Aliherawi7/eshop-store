@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import Loading from '../../UI/Loading/Loading'
 import DetailsPane from './productDetailPane/detailsPane'
 import { useStateValue } from '../../../StateProvider'
-import Products from '../../../products'
 import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
 import { BytesToFile } from '../../Utils/BytesToFile'
@@ -21,11 +20,7 @@ const ProductDetails = () => {
     const { id } = useParams()
     useEffect(() => {
         const getData = () => {
-            fetch('http://localhost:8080/api/products/' + id,{
-                headers:{
-                    'Authorization': localStorage.getItem('accessToken')
-                }
-            }).then(res => {
+            fetch('http://localhost:8080/api/products/' + id).then(res => {
                 if (res.ok) {
                     return res.json();
                 }
@@ -67,8 +62,6 @@ const ProductDetails = () => {
             }
         })
     }
-
-    let productDetails;
 
     //if data have been loaded from server
     if (product) {
