@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useStateValue } from '../../StateProvider'
 import { actions } from '../../reducer'
 import { BytesToFile } from '../Utils/BytesToFile'
+import Modal from '../UI/modal/Modal'
 
 export function Dashboard() {
     const [state, dispatch] = useStateValue();
@@ -60,6 +61,7 @@ export function ProductsPanel() {
     const [state, setState] = useState(true);
     const [, dispatch] = useStateValue();
     const [products, setProducts] = useState([]);
+    const [showModal, setShowModal] = useState({show:false, productId:-1})
     useEffect(() => {
         dispatch({
             type: actions.LOADING,
@@ -74,7 +76,7 @@ export function ProductsPanel() {
                     return res.json();
                 }
             }).then(data => {
-                data = data.map(item =>{
+                data = data.map(item => {
                     item.image = BytesToFile(item.image, "image/png");
                     return item;
                 })
@@ -95,22 +97,27 @@ export function ProductsPanel() {
     }, [])
 
     const deleteProduct = (id) => {
+        setShowModal(true)
         fetch("http://localhost:8080/api/products/delete/" + id, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("accessToken")
             },
 
         }).then(res => {
             if (res.ok) {
-                console.log("deleted")
+                const productIndex = products.findIndex(item => {
+                    return item.id == id;
+                })
+                const newProductList = [...products];
+                newProductList.splice(productIndex, 1)
                 toast.done("product successfully deleted.", {
                     position: "bottom-right",
                     closeOnClick: true,
                     autoClose: true,
                     closeButton: true
                 })
+                setProducts(newProductList)
             } else {
                 toast.error("couldn't removed the product.", {
                     position: "bottom-right",
@@ -122,7 +129,6 @@ export function ProductsPanel() {
             }
         })
     }
-
     return (state ?
         <div className='products-statistics panel-statistics fade-in'>
             <div className='products-table model-table' style={{ "--i": "#32a7e1" }}>
@@ -148,29 +154,39 @@ export function ProductsPanel() {
                         <th name='last'>ACTIONS</th>
                     </thead>
                     <tbody>
-                        {products.map(product => {
-                            return (
-                                <tr key={product.id}>
-                                    <td name='id'>{product.id}</td>
-                                    <td name='name'><img src={product.image} />{product.name?.toUpperCase()}</td>
-                                    <td >{product.category?.toUpperCase()}</td>
-                                    <td >{product.brandName?.toUpperCase()}</td>
-                                    <td name="price">${product.price}</td>
-                                    <td>{product.quantityInDepot}</td>
-                                    <td>{product.quantityInDepot > 0 ? "available" : 'not available'}</td>
-                                    <td name='last'>
-                                        <div className='action-buttons'>
-                                            <i className='bi bi-three-dots-vertical show-actions'></i>
-                                            <div className='buttons-box'>
-                                                <i className='bi bi-trash' onClick={() => deleteProduct(product.id)} style={{ "--i": 'red' }}></i>
-                                                <i className='bi bi-pencil' ></i>
+                        <Modal show={showModal.show} ModalClose={() => setShowModal({...showModal, show:false})}>
+                            <h2>Are you sure?</h2>
+                            <Button btnType="danger" click={()=>deleteProduct(showModal.productId)}>Yes</Button>
+                            <Button btnType="success" click={() => setShowModal(!showModal)}>No</Button>
+                        </Modal>
+                            {products.map(product => {
+                                return (
+
+
+                                    <tr key={product.id}>
+                                        <td name='id'>{product.id}</td>
+                                        <td name='name'><img src={product.image} />{product.name?.toUpperCase()}</td>
+                                        <td >{product.category?.toUpperCase()}</td>
+                                        <td >{product.brandName?.toUpperCase()}</td>
+                                        <td name="price">${product.price}</td>
+                                        <td>{product.quantityInDepot}</td>
+                                        <td>{product.quantityInDepot > 0 ? "available" : 'not available'}</td>
+                                        <td name='last'>
+                                            <div className='action-buttons'>
+                                                <i className='bi bi-three-dots-vertical show-actions'></i>
+                                                <div className='buttons-box'>
+                                                    <i className='bi bi-trash' onClick={() => setShowModal({show: true, productId:product.id})} style={{ "--i": 'red' }}></i>
+                                                    <i className='bi bi-pencil' ></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            )
-                        })}
+                                        </td>
+                                    </tr>
+
+                                )
+                            })}
+                        
                     </tbody>
+
                 </table>
             </div>
 
