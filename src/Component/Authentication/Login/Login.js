@@ -5,6 +5,7 @@ import Button from '../../UI/Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStateValue } from "../../../StateProvider"
 import { actions } from '../../../reducer'
+import { BytesToFile } from '../../Utils/BytesToFile'
 const Login = () => {
     const navigate = useNavigate();
     const [loginInputState, setLoginInputState] = useState({
@@ -124,7 +125,7 @@ const Login = () => {
             localStorage.setItem("name", data.userInformationDTO?.name)
             localStorage.setItem("lastName", data.userInformationDTO?.lastName)
             localStorage.setItem("email", data.userInformationDTO?.email)
-            localStorage.setItem("imgUrl", data.userInformationDTO?.imgUrl)
+            localStorage.setItem("image",data.userInformationDTO?.image)
             localStorage.setItem("roles", data.userInformationDTO?.roles)
             data.userInformationDTO.access_token = data?.access_token
             console.log(localStorage.getItem('accessToken'))
