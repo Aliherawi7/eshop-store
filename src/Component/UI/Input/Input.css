@@ -13,6 +13,37 @@
     border: none;
     z-index: 20;
 }
+.image-input{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+.image-input img{
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.image-input input{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100px;
+    right: 100px;
+    opacity: 0;
+    z-index: 10;
+
+}
+.image-input i{
+    position: absolute;
+    top: 40%;
+    font-size: 50px;
+    z-index: 5;
+}
+.image-input input:hover + i{
+    color: var(--mainColor);
+}
 .input-container label{
     position: absolute;
     font-size: 18px;
