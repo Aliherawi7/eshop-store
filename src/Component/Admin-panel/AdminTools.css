@@ -142,10 +142,14 @@
 .panel-statistics table td[name=last]:hover span {
     transform: translateX(20px)
 }
-
+.panel-statistics .show-actions{
+    position: absolute;
+    right: 25%;
+    
+}
 .panel-statistics .action-buttons {
-
     position: relative;
+    height: 20px;
 }
 
 .panel-statistics i:hover {
@@ -157,10 +161,12 @@
 }
 
 .panel-statistics .action-buttons .buttons-box {
-    width: 70px;
+    width: 60px;
     position: absolute;
     top: 0;
-    left: -25px;
+    right: 35%;
+    background-color: #e0e0e063;
+    border-radius: 5px;
     transform: scaleX(0);
     transform-origin: right;
     transition: transform .3s linear;
