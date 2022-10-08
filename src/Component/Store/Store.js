@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./Store.css"
 import Loading from '../UI/Loading/Loading'
-import Products from '../../products'
 import Product from './Product/Product'
 import { BytesToFile } from '../Utils/BytesToFile'
 
@@ -15,7 +14,6 @@ const Store = () => {
                   return res.json();
               }
           }).then(data =>{
-              console.log(data)
               data.map(item =>{
                   item.image = BytesToFile(item.image, {contentType: "image/png"})
                   return item
