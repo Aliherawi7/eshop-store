@@ -35,22 +35,17 @@
     display: flex;
 }
 .status-box .acount-box a{
-    padding: 0 5px;
+    padding: 0 10px;
     border-right: 2px solid;
     font-size: 12px;
     color: #fff;
     font-weight: 400;
 }
-.status-box .acount-box i{
 
-    font-size: 16px;
-    color: #fff;
-    font-weight: 400;
-}
-.status-box acount-box a i{
+.status-box .acount-box i{
     font-size: 20px;
     padding: 5px;
-    color: var(--mainColor);
+    color: #fff;
     font-weight: 400;
 }
 .status-box .acount-box{
@@ -75,17 +70,19 @@
     height: 30px;
     margin-right: 5px;
 }
-.status-box button{
+.status-box .basket-icon{
     position: relative;
     padding:0 5px;
+    margin-left: 5px;
     background-color: transparent;
 }
 
-.status-box i{
+.status-box .basket-icon i,
+.status-box .settings i{
     font-size: 22px;
     color : var(--mainColor);
 }
-.status-box button span{
+.status-box .basket-icon span{
     color: rgb(255, 255, 255);
     position: absolute;
     background: red;
@@ -117,6 +114,7 @@
     padding: 10px 10px;
     opacity: 0;
     visibility: hidden;
+    right: 0;
 }
 .status-box .authentication .account-settings i{
     padding-right: 8px;
@@ -126,7 +124,8 @@
     font-weight: 400;
     margin-bottom: 5px;
 }
-.status-box .authentication .account-settings a:hover{
+.status-box .authentication .account-settings a:hover,
+.acount-box a:hover{
     color: var(--mainColor)
 }
 .status-box .authentication .account-settings:hover{
