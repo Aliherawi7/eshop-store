@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./AdminPanel.css"
 import { useStateValue } from "../../StateProvider"
 import { Link } from 'react-router-dom';
@@ -12,7 +12,8 @@ let counter = 0
 function AdminPanel() {
   const [state, dispatch] = useStateValue();
   const [currentComponent, setCurrentComponent] = useState({ component: admintTools[counter] });
-  const [adminMenu, setAdminMenu] = useState(false);
+  const infoPanel = useRef();
+  const [fullScreen, setFullScreen] = useState(false);
   useEffect(() => {
     dispatch({
       type: actions.LOADING
@@ -26,11 +27,22 @@ function AdminPanel() {
     counter = id
     setCurrentComponent({ component: admintTools[counter] })
   }
+  const handleFullScreen = ()=>{
+    
+    const element = infoPanel.current;
+    console.log(element.style.left)
+    if(element.style.left == "0px"){
+      element.style.left= "245px"
+      
+    }else{
+      element.style.left = 0
+    }
+    
+  }
   
   return (
     state.userInfo.roles.includes("ADMIN") ?
       <div className='admin-panel fade-in'>
-        <div className='admin-menu-button' onClick={() => setAdminMenu(!adminMenu)}><i className='bi bi-filter-left'></i></div>
         <div className='admin-menu' >
 
           <div className='account-info'>
@@ -65,7 +77,8 @@ function AdminPanel() {
             </li>
           </ul>
         </div>
-        <div className='info-panel'>
+        <div className='info-panel' ref={infoPanel}>
+          <span className='full-screen-panel' onClick={handleFullScreen} ><i className='bi bi-filter-left'></i></span>
           <div className='panel-container'>
             <currentComponent.component />
             <SmallLoading visible={state?.loading} backgroundColor={'#262837'} />
