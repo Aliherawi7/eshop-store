@@ -53,8 +53,8 @@ const Navbar = () => {
                                 <i className="bi bi-chevron-down"></i>
                             </div>
                             <div className='account-settings'>
-                                <Link to="/login"><i className='bi bi-heart'></i>Favorites</Link>
-                                <Link to="/" onClick={() => setShowModal(true)}><i className='bi bi-box-arrow-left'></i>Logout</Link>
+                                <Link to="/"><i className='bi bi-heart'></i>Favorites</Link>
+                                <Link to="" onClick={() => setShowModal(true)}><i className='bi bi-box-arrow-left'></i>Logout</Link>
                                 <Link to="/"><i className='bi bi-gear'></i>Settings</Link>
                             </div>
                         </div> :
@@ -69,8 +69,10 @@ const Navbar = () => {
                             <i className='bi bi-gear-fill' style={{ "--i": "#2f3142" }}></i>
                         </Link> : ""
                     }
-                    <Button click={() => (navigate('/checkout'))}>
-                        <i className="bi bi-cart3 basket"></i> <span style={{ color: '#fff' }}>{getBasketTotalItems(state.basket)}</span></Button>
+                    <Link to='/checkout' className='basket-icon'>
+                        <i className="bi bi-cart3 basket"></i>
+                        <span style={{ color: '#fff' }}>{getBasketTotalItems(state.basket)}</span>
+                    </Link>
                 </div>
             </div>
             <div className="bottom-nav">
