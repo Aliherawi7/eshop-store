@@ -4,7 +4,7 @@ import './Description.css'
 const Description = (props) => {
 
     return (
-        <div className={`description-content description-content-entering`}>
+        <div className={`description-content fade-in`}>
             <h4>Descriptions</h4>
             <p>{props.description}
                 (This Data Is Static)

@@ -104,11 +104,6 @@
     border: 2px solid #1ce209 !important;
 }
 
-/* entering animation */
-.review-content-entering{
-    animation-name: animate2;
-    animation-duration: 0.5s;
-}
 
 @media (max-width:768px){
     .review-form{

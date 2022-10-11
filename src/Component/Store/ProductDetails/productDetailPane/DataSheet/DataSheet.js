@@ -12,7 +12,7 @@ const DataSheet = (props) => {
 
     }
     return (
-        <table className={`data-sheet dataSheet-entering`}>
+        <table className={`data-sheet fade-in`}>
             <tbody>
                 <tr><th>Title</th><th>Info</th></tr>
                 {data.map((item) => {

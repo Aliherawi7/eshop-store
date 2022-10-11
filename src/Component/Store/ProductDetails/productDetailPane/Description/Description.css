@@ -13,9 +13,5 @@
     padding: 10px;
     font-size: 14px;
     width: 80%;
-}
-
-.description-content-entering{
-    animation-name: animate2;
-    animation-duration: 0.5s;
+    min-height: 300px;
 }

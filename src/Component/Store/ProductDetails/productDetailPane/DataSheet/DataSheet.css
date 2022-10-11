@@ -27,16 +27,6 @@
     text-align: left;
 }
 
-.dataSheet-entering{
-    animation-name: animate2;
-    animation-duration: 0.5s;
-}
-.dataSheet-exiting{
-    animation-name: animate2;
-    animation-duration: 0.5s;
-}
-
-
 
 @media (max-width:768px){
     .data-sheet{
