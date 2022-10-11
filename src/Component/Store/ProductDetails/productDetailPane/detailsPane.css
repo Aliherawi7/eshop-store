@@ -13,6 +13,9 @@
     color: #000;
     justify-content: center;
     background-color: #fff;
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 .content-pane{
     display: none;
@@ -23,11 +26,10 @@
     background-color: #cacaca96;
 }
 .tap-active{
-    border-top-right-radius: 1px;
-    border-top-left-radius: 1px;
     border: 1px solid #ddd ;
     border-bottom: 1px solid #fff;
     margin-bottom: -2px ;
+    background-color: var(--mainColor) !important;
 }
 .content-active{
     display:block ;

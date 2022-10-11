@@ -6,6 +6,7 @@
 .data-sheet tr{
     padding: 10px;
     font-size: 14px;
+    font-weight: 500;
 }
 
 .data-sheet tbody{
@@ -16,14 +17,13 @@
     padding: 8px;
 }
 .data-sheet tr:nth-child(odd){
-    background-color: #ddd;
+    background-color: var(--mainColor);
 }
 .data-sheet tr th{
     padding: 10px;
     padding-left: 8px;
     font-size: 15px;
     font-weight: 700;
-    background-color: #ddd;
     text-align: left;
 }
 

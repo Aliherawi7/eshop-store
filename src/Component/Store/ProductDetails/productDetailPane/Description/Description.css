@@ -4,7 +4,7 @@
 }
 
 .description-content h4{
-    background-color: #ddd;
+    background-color: var(--mainColor);
     font-size: 15px;
     font-weight: 900;
     padding: 10px;

@@ -123,6 +123,7 @@
 .status-box .authentication .account-settings a{
     font-weight: 400;
     margin-bottom: 5px;
+    color: #000;
 }
 .status-box .authentication .account-settings a:hover,
 .acount-box a:hover{
