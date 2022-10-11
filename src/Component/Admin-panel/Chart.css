@@ -1,0 +1,30 @@
+.chart{
+    margin-top: 40px;
+    display: flex;
+    flex-flow: wrap;
+    margin-right: 10px;
+}
+
+.chart canvas{
+    display: block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: #1f1d2c;
+    padding: 10px;
+    box-shadow: 1px 1px 23px 2px #000;
+    height: 280px !important;
+    width: 500px !important;
+    object-fit: contain;
+    color: #fff;
+}
+.line-chart canvas{
+
+}
+
+@media(max-width: 768px){
+    .chart canvas{
+        height: fit-content;
+        width: 100% !important;
+    }
+    
+}
