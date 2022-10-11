@@ -6,7 +6,7 @@
 }
 
 .admin-panel .admin-menu{
-    width: 260px;
+    width: 245px;
     background-color: #1f1d2c;
     color: #65636f;
     padding-top: 45px;
@@ -30,8 +30,8 @@
     align-items: center;
 }
 .admin-panel .account-info img{
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     margin: 3px;
@@ -100,19 +100,31 @@
     background-color: #262837;
     color: #fff;
     padding: 20px;
+    padding-top: 40px;
     position: fixed;
     bottom: 0px;
     right: 0;
-    left: 260px;;
+    left: 245px;
     top: 100px;
     overflow-y: scroll;
     transition: left .6s cubic-bezier(0.61, 0, 0.48, 0.99);
 }
 
+.info-panel .full-screen-panel{
+    position: absolute;
+    left: 16px;
+    font-size: 40px;
+    top: -5px;
+    cursor: pointer;
+}
+.info-panel .full-screen-panel:hover{
+    color: var(--mainColor);
+}
+
 @media(max-width: 540px){
     .admin-panel .info-panel,
     .admin-panel .small-loading{
-        left: 0;
+        left: 0 ;
     }
 
 }
