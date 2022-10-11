@@ -51,7 +51,7 @@ function AdminPanel() {
               <h3>{state.userInfo?.name + " " + state.userInfo?.lastName}</h3>
               <p>{state.userInfo?.email}</p>
             </div>
-            <Link to="/"><i className='bi bi-gear-fill' style={{ "--i": "#2f3142" }}></i></Link>
+            <Link to="/account"><i className='bi bi-gear-fill' style={{ "--i": "#2f3142" }}></i></Link>
           </div>
           <span className='text-menu'>menu</span>
           <ul className='menu-list'>

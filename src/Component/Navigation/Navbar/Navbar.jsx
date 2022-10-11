@@ -55,7 +55,7 @@ const Navbar = () => {
                             <div className='account-settings'>
                                 <Link to="/"><i className='bi bi-heart'></i>Favorites</Link>
                                 <Link to="" onClick={() => setShowModal(true)}><i className='bi bi-box-arrow-left'></i>Logout</Link>
-                                <Link to="/"><i className='bi bi-gear'></i>Settings</Link>
+                                <Link to="/account"><i className='bi bi-gear'></i>Settings</Link>
                             </div>
                         </div> :
                         <div className='acount-box'>

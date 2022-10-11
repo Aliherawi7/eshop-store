@@ -15,6 +15,7 @@ const SearchPage = React.lazy(() => import('./Component/Pages/SearchPage/SearchP
 const Checkout = React.lazy(() => import('./Component/Store/Checkout/Checkout'));
 const About = React.lazy(() => import('./Component/Pages/About/About'));
 const AdminPanel = React.lazy(()=> import('./Component/Admin-panel/AdminPanel'))
+const Account = React.lazy(() => import("./Component/Pages/Account/Account"))
 function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -23,7 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/store" element={<Store />} />
-            <Route path="/account" element={<Login />} />
+            <Route path='/account' element={<Account />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/store/productdetails/:id" element={<ProductDetails />} />
