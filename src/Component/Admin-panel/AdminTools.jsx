@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import "./AdminTools.css"
-import Products from '../../products'
 import Button from "../UI/Button/Button"
 import CustomeProduct from './CustomeProduct'
 import AddNewCategory from './AddNewCategory'
@@ -150,7 +149,7 @@ export function ProductsPanel() {
                 <div className='section-header'>
                     <div>
                         <h2>Products</h2>
-                        <p>{Products.length} products</p>
+                        <p>{products.length} products</p>
                     </div>
                     <Button btnType="white" click={addProduct}>
                         add
