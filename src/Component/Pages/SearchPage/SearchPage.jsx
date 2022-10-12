@@ -3,7 +3,6 @@ import './SearchPage.css'
 import Button from '../../UI/Button/Button'
 import Product from '../../Store/Product/Product'
 import { useParams } from 'react-router-dom'
-import products from '../../../products'
 import NotFound from '../NotFoundPage/NotFound'
 const SearchPage = () => {
     const { id } = useParams()
@@ -17,12 +16,14 @@ const SearchPage = () => {
         }
     }
     function findItems(text) {
-        return products.filter((item) => {
-            const newId = text.toString().toLowerCase().trim()
-            if (item.name.toLowerCase().search(newId) >= 0) {
-                return item
+        fetch("").then(res => {
+            if(res.ok){
+                return res.json();
             }
+        }).then(data => {
+            return data;
         })
+        return ''
     }
     return (
         <div className={`search-page search-entering`}>
