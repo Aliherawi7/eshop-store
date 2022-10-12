@@ -1,0 +1,37 @@
+.account-tools h2{
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.account-setting form{
+    display: flex;
+}
+.account-setting .input-group{
+    margin-right: 20px;
+    width: 100%;
+}
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.input-container label{
+    padding: 5px 0;
+    font-size: 14px;
+    font-weight: 400;
+}
+.input-container input{
+    border: 1px solid #8c8c8c;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #161515;
+    outline: none;
+    color: #fff;
+}
+.input-container input::placeholder{
+    color:#767676;
+}
+
+.account-tools .button-container button{
+    margin-right: 10px;
+}
