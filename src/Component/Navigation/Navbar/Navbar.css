@@ -53,21 +53,31 @@
     
 }
 .status-box .user-account{
+    position: relative;
     cursor: pointer;
     display: flex;
     color: #fff;
     align-items: center;
     justify-content: center;
-    border-right: 2px solid;
     padding-right: 10px;
     margin-right: 10px;
-    height: 20px;
+    height: 30px;
+}
+.status-box .user-account::after{
+    position: absolute;
+    content: '';
+    width: 1px;
+    top: 5px;
+    bottom: 4px;
+    right: 0px;
+    background-color: #fff;
+
 }
 .status-box .user-account img{
-    width: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     object-fit: cover;
-    height: 30px;
     margin-right: 5px;
 }
 .status-box .basket-icon{
@@ -106,7 +116,7 @@
     height: 90px;
     background: #fff;
     width: 100px;
-    top: 25px;
+    top: 30px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -114,7 +124,7 @@
     padding: 10px 10px;
     opacity: 0;
     visibility: hidden;
-    right: 0;
+    right: -5px;
 }
 .status-box .authentication .account-settings i{
     padding-right: 8px;
@@ -127,7 +137,8 @@
 }
 .status-box .authentication .account-settings a:hover,
 .acount-box a:hover{
-    color: var(--mainColor)
+    color: var(--mainColor);
+    font-weight: 500;
 }
 .status-box .authentication .account-settings:hover{
     opacity: 1;

@@ -95,7 +95,6 @@
     border-left: 2px solid var(--i);
 }
 
-
 .info-panel{
     background-color: #262837;
     color: #fff;
@@ -105,7 +104,7 @@
     bottom: 0px;
     right: 0;
     left: 245px;
-    top: 100px;
+    top: 95px;
     overflow-y: scroll;
     transition: left .6s cubic-bezier(0.61, 0, 0.48, 0.99);
 }

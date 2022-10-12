@@ -1,3 +1,90 @@
 .account-setting{
-    min-height: 100vh;
+    
 }
+
+.account-setting .account-profile{
+    margin-top: 40px;
+    text-align: center;     
+}
+.account-setting .account-profile img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.account-setting .menu{
+    width: 200px;
+    background: #000;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    top: 100px;
+    bottom: 0;
+}
+.account-setting .menu ul{
+    margin-top: 25px;
+    list-style: none;
+    
+}
+.account-setting .menu ul li{
+    cursor: pointer;
+    position: relative;
+    padding: 15px 25px;
+    padding-left: 40px; 
+}
+.account-setting .menu ul li i{
+    padding-right: 3px; 
+}
+
+.account-setting .menu ul .active{
+    background: #161515;
+    color: var(--mainColor);
+}
+.account-setting .menu ul .active::after{
+    position: absolute;
+    content: '';
+    width: 5px;
+    background-color: var(--mainColor);
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+
+
+.account-setting .panel{
+    background: #161515;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    left: 200px;
+    top: 100px;
+    bottom: 0;
+    right: 0;
+    padding-left: 40px;
+    overflow-y: scroll;
+    transition: left .6s cubic-bezier(0.61, 0, 0.48, 0.99);
+}
+
+.account-setting .panel .full-screen-panel{
+    position: absolute;
+    left: 16px;
+    font-size: 40px;
+    top: -5px;
+    cursor: pointer;
+}
+.account-setting .panel .full-screen-panel:hover{
+    color: var(--mainColor);
+}
+
+
+@media(max-width: 540px){
+    .account-setting .panel,
+    .account-setting .small-loading{
+        left: 0 ;
+    }
+
+}
+
