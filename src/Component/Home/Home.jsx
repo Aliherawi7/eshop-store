@@ -29,7 +29,7 @@ const Home = () => {
 
     return (
         <div className={`home home-entering`}>
-            <Slider />
+            <Slider size={10} />
             <div className='most-ordered'>
                 {topSales?.map(item => {
                     return (
