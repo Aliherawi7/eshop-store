@@ -10,17 +10,17 @@
     margin-right: 20px;
     width: 100%;
 }
-.input-container{
+.account-setting .input-container{
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
-.input-container label{
+.account-setting .input-container label{
     padding: 5px 0;
     font-size: 14px;
     font-weight: 400;
 }
-.input-container input{
+.account-setting .input-container input{
     border: 1px solid #8c8c8c;
     border-radius: 5px;
     padding: 5px;
@@ -28,10 +28,19 @@
     outline: none;
     color: #fff;
 }
-.input-container input::placeholder{
+.account-setting .input-container input::placeholder{
     color:#767676;
 }
 
 .account-tools .button-container button{
     margin-right: 10px;
+}
+
+
+@media(max-width: 540px){
+
+    .account-setting form{
+        flex-flow: wrap;
+    }
+
 }
