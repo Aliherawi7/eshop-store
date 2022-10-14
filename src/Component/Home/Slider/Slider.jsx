@@ -3,9 +3,7 @@ import "./Slider.css"
 import { BytesToFile } from "../../Utils/BytesToFile"
 import { Link } from "react-router-dom"
 
-let counter = 0;
-
-function Slider() {
+function Slider({ size = 5, delay = 8, counter = 0 }) {
     let [products, setProducts] = useState([]);
     const slides = useRef();
     useEffect(() => {
@@ -24,29 +22,35 @@ function Slider() {
 
         }
         getData();
-        const interval = window.setInterval( () =>{
+        const interval = window.setInterval(() => {
             next();
-        }, 7000);
+        }, (delay * 1000));
         return () => {
             clearInterval(interval);
         }
 
+
     }, [])
 
     const next = () => {
-        counter -=100;
-        if(counter <= -(products.length-1) * 100){
+        counter -= 100;
+        if (counter <= (-(size) * 100)) {
             counter = 0
+            slides.current.style.transition = "transform 0s ease";
+        }else{
+            slides.current.style.transition = "transform 2s cubic-bezier(0.71, 0.15, 0.3, 0.81)";
         }
-        slides.current.style.transform =`translateX(${counter}vw)`;
+        slides.current.style.transform = `translateX(${counter}vw)`;
     }
     const prev = () => {
-        counter +=100;
-        if(counter >= 100){
-            counter = -((products.length -1) * 100)
+        counter += 100;
+        if (counter >= 100) {
+            counter = -(size) * 100
+            slides.current.style.transition = "transform 0s ease";
+        }else{
+            slides.current.style.transition = "transform 2s cubic-bezier(0.71, 0.15, 0.3, 0.81)";
         }
-        slides.current.style.transform =`translateX(${counter}vw)`;
-  
+        slides.current.style.transform = `translateX(${counter}vw)`;
     }
     return (
         <div className='slider'>
@@ -64,7 +68,8 @@ function Slider() {
                                         <Link to={'/store/productdetails/' + item.id}>SHOP NOW</Link>
                                     </div>
                                 </div>
-                            )})
+                            )
+                        })
                         }
                     </div>
                 </div>
