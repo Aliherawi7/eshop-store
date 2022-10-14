@@ -13,7 +13,7 @@
     position: fixed;
     bottom: 0px;
     left: 0;
-    top: 95px;
+    top: 100px;
     transition: left .6s cubic-bezier(0.62, -0.02, 0.53, 0.98);
 
 }
@@ -104,7 +104,7 @@
     bottom: 0px;
     right: 0;
     left: 230px;
-    top: 95px;
+    top: 100px;
     overflow-y: scroll;
     transition: left .6s cubic-bezier(0.62, -0.02, 0.53, 0.98);
 }

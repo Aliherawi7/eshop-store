@@ -34,9 +34,10 @@ function App() {
             <Route path='/admin-panel' element={<AdminPanel />}/>
             <Route path="*" element={<NotFound size="large" />} />
           </Routes>
+          <ToastContainer />
         </Layout>
       </Router>
-      <ToastContainer />
+      
     </Suspense>
   );
 }
