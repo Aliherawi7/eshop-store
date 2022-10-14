@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
 }
 .not-found-page img{
     object-fit: contain;
