@@ -8,6 +8,7 @@ import { useStateValue } from '../../../StateProvider'
 import { actions, getBasketTotalItems } from "../../../reducer"
 import { BytesToFile } from '../../Utils/BytesToFile'
 import Modal from '../../UI/modal/Modal'
+import BasketPreview from '../BasketPreview/BasketPreview'
 
 const Navbar = () => {
     const [stateTogglerMenu, setstateTogglerMenu] = useState({ show: false })
@@ -73,6 +74,7 @@ const Navbar = () => {
                         <i className="bi bi-cart3 basket"></i>
                         <span style={{ color: '#fff' }}>{getBasketTotalItems(state.basket)}</span>
                     </Link>
+                    <BasketPreview />
                 </div>
             </div>
             <div className="bottom-nav">
