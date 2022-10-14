@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./Slider.css"
-import SliderItems from "./SliderItem"
 import { BytesToFile } from "../../Utils/BytesToFile"
+import { Link } from "react-router-dom"
 
-let counter = 1;
+let counter = 0;
 
-//for slider animation onclick
-const animations = {
-    LEFT_TO_RIGHT: 'left-to-right',
-    RIGHT_TO_LEFT: 'right-to-left',
-}
 function Slider() {
     let [products, setProducts] = useState([]);
-
-    const [slide, setSlide] = useState({
-        component: SliderItems[counter % 2],
-        animate: animations.LEFT_TO_RIGHT
-    });
+    const slides = useRef();
     useEffect(() => {
         const getData = () => {
             fetch('http://localhost:8080/api/products').then(res => {
@@ -33,43 +24,50 @@ function Slider() {
 
         }
         getData();
-        const interval = setInterval(() => {
+        const interval = window.setInterval( () =>{
             next();
-        }, 4000)
-
+        }, 7000);
         return () => {
             clearInterval(interval);
         }
 
     }, [])
 
-
     const next = () => {
-        counter++;
-        if (counter >= 10) {
-            counter = 1;
+        counter -=100;
+        if(counter <= -(products.length-1) * 100){
+            counter = 0
         }
-        setSlide({ component: SliderItems[counter % 2], animate: animations.RIGHT_TO_LEFT })
-
+        slides.current.style.transform =`translateX(${counter}vw)`;
     }
     const prev = () => {
-        counter--;
-        if (counter <= 0) {
-            counter = 10;
+        counter +=100;
+        if(counter >= 100){
+            counter = -((products.length -1) * 100)
         }
-        setSlide({ component: SliderItems[counter % 2], animate: animations.LEFT_TO_RIGHT })
+        slides.current.style.transform =`translateX(${counter}vw)`;
+  
     }
-
     return (
         <div className='slider'>
             <div className='slider-container'>
                 <i className='slide-to-left bi bi-chevron-left' onClick={prev}></i>
-                {<slide.component
-                    image={products[counter]?.image}
-                    animate={slide?.animate}
-                    name={products[counter]?.name}
-                    id={products[counter]?.id}
-                />}
+                <div className='slides'>
+                    <div className='slides-container' ref={slides}>
+                        {products.map(item => {
+                            return (
+                                <div className={`slider-item `} key={item.id}>
+                                    <img className='slider-image' src={item.image} alt={item.name} />
+                                    <div className='image-info'>
+                                        <h1><span style={{ textTransform: "uppercase" }}>{item.name}</span></h1>
+                                        <h2>UP TO 50% OFF ON TOP BRANDS</h2>
+                                        <Link to={'/store/productdetails/' + item.id}>SHOP NOW</Link>
+                                    </div>
+                                </div>
+                            )})
+                        }
+                    </div>
+                </div>
                 <i className='slide-to-right bi bi-chevron-right' onClick={next}></i>
             </div>
         </div>
