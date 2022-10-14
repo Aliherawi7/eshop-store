@@ -6,7 +6,7 @@
 }
 
 .admin-panel .admin-menu{
-    width: 245px;
+    width: 230px;
     background-color: #1f1d2c;
     color: #65636f;
     padding-top: 45px;
@@ -14,7 +14,7 @@
     bottom: 0px;
     left: 0;
     top: 95px;
-    transition: left .6s cubic-bezier(0.61, 0, 0.48, 0.99);
+    transition: left .6s cubic-bezier(0.62, -0.02, 0.53, 0.98);
 
 }
 .admin-panel .admin-menu .admin-menu-button{
@@ -103,10 +103,10 @@
     position: fixed;
     bottom: 0px;
     right: 0;
-    left: 245px;
+    left: 230px;
     top: 95px;
     overflow-y: scroll;
-    transition: left .6s cubic-bezier(0.61, 0, 0.48, 0.99);
+    transition: left .6s cubic-bezier(0.62, -0.02, 0.53, 0.98);
 }
 
 .info-panel .full-screen-panel{
