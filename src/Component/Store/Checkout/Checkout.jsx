@@ -74,7 +74,7 @@ const Checkout = () => {
                                             onClick={() => decreaseQuantity(item.id)}></i>
                                     </div>
                                 </td>
-                                <td>{item.price * item.quantity + '$'}</td>
+                                <td><strong>{"$" + item.price * item.quantity}</strong></td>
                             </tr>)
                         })}
                     </table>
@@ -95,7 +95,7 @@ const Checkout = () => {
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td>{getBasketTotal(basket) + getBasketTotalItems(basket) + '$'}</td>
+                            <td><strong>{'$' + getBasketTotal(basket) + getBasketTotalItems(basket)}</strong></td>
                         </tr>
                     </table>
                     <Button btnType="success" click={() => (alert("done"))}>Proceed to checkout</Button>
