@@ -26,6 +26,42 @@
     margin: 0 15px;
     align-items: center;
 }
+
+.status-box .basket-icon{
+    position: relative;
+    padding:0 5px;
+    margin-left: 5px;
+    background-color: transparent;
+}
+.status-box .basket-icon:hover +.basket-preview,
+.status-box .basket-preview:hover
+{
+    opacity: 1;
+    visibility: visible;
+}
+.status-box .basket-icon i,
+.status-box .settings i{
+    font-size: 22px;
+    color : var(--mainColor);
+}
+.status-box .basket-icon span{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    background: red;
+    padding: 2px;
+    left: 15px;
+    top: -4px;
+    min-width: 18px;
+    border-radius: 50%;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+/* Account button styles */
+
 .status-box .authentication{
     position: relative;
 }
@@ -80,33 +116,7 @@
     object-fit: cover;
     margin-right: 5px;
 }
-.status-box .basket-icon{
-    position: relative;
-    padding:0 5px;
-    margin-left: 5px;
-    background-color: transparent;
-}
 
-.status-box .basket-icon i,
-.status-box .settings i{
-    font-size: 22px;
-    color : var(--mainColor);
-}
-.status-box .basket-icon span{
-    color: rgb(255, 255, 255);
-    position: absolute;
-    background: red;
-    padding: 2px;
-    left: 15px;
-    top: -4px;
-    min-width: 18px;
-    border-radius: 50%;
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-}
 .status-box .user-account:hover + .account-settings{
     opacity: 1;
     visibility: visible;
@@ -125,6 +135,7 @@
     opacity: 0;
     visibility: hidden;
     right: -5px;
+    transition: visibility .3s ease, opacity .3s ease;
 }
 .status-box .authentication .account-settings i{
     padding-right: 8px;
@@ -144,6 +155,10 @@
     opacity: 1;
     visibility: visible;
 }
+/* end Account button styles */
+
+
+/* responsive navbar button */
 
 .btnToggler{
     position: absolute;
