@@ -32,7 +32,7 @@ function AdminPanel() {
     const element = infoPanel.current;
     console.log(element.style.left)
     if(element.style.left == "0px"){
-      element.style.left= "245px"
+      element.style.left= "230px"
       
     }else{
       element.style.left = 0
