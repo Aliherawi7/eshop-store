@@ -58,6 +58,9 @@
 .panel-statistics .model-table .section-header {
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    left: 20px;
+    right: 0px;
 }
 
 .panel-statistics .model-table .section-header button {
@@ -83,7 +86,7 @@
 }
 
 .panel-statistics table {
-    margin-top: 10px;
+    margin-top: 60px;
     border-spacing: 0;
     width: 100%;
 }
