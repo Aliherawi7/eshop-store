@@ -2,9 +2,13 @@
     display: flex;
     align-items: center;
 }
-.product-rate .start-logo{
+.product-rate .star-fill{
     padding: 3px;
     color:#f8d800;
+}
+.product-rate .star-empty{
+    padding: 3px;
+    color:#575757;
 }
 .star-rate-small{
     font-size: 12px;
