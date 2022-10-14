@@ -15,8 +15,8 @@
 }
 .search-box button{
     position: absolute;
-    right: -3px;
-    top: -3px;
+    right: 0;
+    top: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
