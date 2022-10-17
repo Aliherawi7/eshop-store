@@ -36,6 +36,57 @@
     animation-name: animate1;
     animation-duration: 0.5s;
 }
+.home h2{
+    margin-top: 40px;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+
+.features .container{
+    display: flex;
+    justify-content: space-around;
+}
+.feature{
+    cursor: pointer;
+    margin: 15px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+    
+}
+.feature i{
+    color: var(--blue);
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.feature-text-container h3{
+    letter-spacing: 1px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 15px;
+    color: #000;
+}
+.feature-text-container p{
+    color: #000;
+    font-weight: 200;
+    font-size: 12px;
+}
+.popular-brands .brands-container{
+    margin:20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;  
+
+}
+
+.brands-container svg{
+    max-width: 80px;
+    padding: 0px 20px;
+    margin: 0 10px;
+}
 
 @media (max-width:768px){
     .features .container {
@@ -49,5 +100,9 @@
         width: 95%;
         align-items: center;
         margin-bottom: 10px;
+    }
+    .brands-container svg{
+        padding: 0px 5px;
+        margin: 0 10px;
     }
 }
