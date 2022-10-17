@@ -148,10 +148,7 @@
 .panel-statistics table td[name=last] {
     text-align: center;
 }
-
-.panel-statistics table td[name=last]:hover span {
-    transform: translateX(20px)
-}
+s
 .panel-statistics .show-actions{
     position: absolute;
     right: 25%;
@@ -174,7 +171,7 @@
     width: 60px;
     position: absolute;
     top: 0;
-    right: 35%;
+    right: 10px;
     background-color: #e0e0e063;
     border-radius: 5px;
     transform: scaleX(0);
