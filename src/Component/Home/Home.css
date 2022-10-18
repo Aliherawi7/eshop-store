@@ -1,13 +1,14 @@
-.home{
+.home {
     min-height: 87vh;
 }
 
-.home .most-ordered{
+.home .most-ordered {
     display: flex;
     margin-top: 10px;
     justify-content: space-around;
 }
-.home .most-ordered .ordered-item{
+
+.home .most-ordered .ordered-item {
     display: flex;
     width: 33%;
     height: 200px;
@@ -15,93 +16,116 @@
     justify-content: space-around;
     align-items: center;
     box-sizing: border-box;
-    margin:0 5px;
+    margin: 0 5px;
     text-align: center;
 }
-.most-ordered .ordered-item img{
+
+.most-ordered .ordered-item img {
     width: 130px;
 }
-.most-ordered .ordered-item h1{
+
+.most-ordered .ordered-item h1 {
     font-size: 18px;
 }
-.most-ordered .ordered-item button{
+
+.most-ordered .ordered-item button {
     background-color: #000;
     color: #fff;
     border-radius: 2px;
     margin-top: 30px;
     padding: 5px 10px;
 }
+
 /* for transition animation */
-.home-entering{
+.home-entering {
     animation-name: animate1;
     animation-duration: 0.5s;
 }
-.home h2{
-    margin-top: 40px;
-    font-weight: 500 !important;
+
+.home h2 {
+    padding: 15px;
+    font-weight: 400 !important;
     text-align: center;
+    font-size: 20px;
+}
+
+.features,
+.popular-brands {
+    background-color: #f5f5f5;
+    padding: 15px 0;
+    margin: 10px 0;
 }
 
 
-.features .container{
+.features .container {
     display: flex;
     justify-content: space-around;
 }
-.feature{
+
+.feature {
     cursor: pointer;
     margin: 15px 4px;
     display: flex;
-    align-items: center;
-    justify-content: center
-    
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 170px;
+
 }
-.feature i{
-    color: var(--blue);
+
+.feature i {
+    color: var(--mainColor);
     font-size: 20px;
     padding: 0 10px;
 }
 
-.feature-text-container h3{
+.feature-text-container h3 {
     letter-spacing: 1px;
     width: 100%;
     font-weight: 600;
     font-size: 15px;
     color: #000;
 }
-.feature-text-container p{
+
+.feature-text-container p {
     color: #000;
     font-weight: 200;
     font-size: 12px;
 }
-.popular-brands .brands-container{
-    margin:20px 0;
+
+.popular-brands .brands-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f5f5f5;  
-
+    overflow-y: hidden;
+    overflow-x: scroll ;
+    padding: 20px;
 }
 
-.brands-container svg{
-    max-width: 80px;
-    padding: 0px 20px;
-    margin: 0 10px;
+.brands-container img {
+    margin: 0px 20px;
+    width: 15%;
+    object-fit: contain;
+    max-height: 100px;
+    margin-right: 20px;
+    transition: transform 0.45s;
 }
 
-@media (max-width:768px){
+@media (max-width:768px) {
     .features .container {
         flex-direction: column;
+
     }
-    .home .most-ordered{
+
+    .home .most-ordered {
         flex-direction: column;
         align-items: center;
     }
-    .home .most-ordered .ordered-item{
+
+    .home .most-ordered .ordered-item {
         width: 95%;
         align-items: center;
         margin-bottom: 10px;
     }
-    .brands-container svg{
+
+    .brands-container svg {
         padding: 0px 5px;
         margin: 0 10px;
     }
