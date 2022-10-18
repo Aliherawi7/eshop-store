@@ -1,10 +1,10 @@
 
 .toggler-menu{
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: left;
     position: absolute;
-    top: 90px;
+    top: 85px;
     left: 0;
     width: 100%;
     padding: 0 5px;
@@ -32,5 +32,8 @@
 @media (max-width:768px){
     .account-toggler{
         display: block;
+    }
+    .toggler-menu{
+        display: flex;
     }
 }
