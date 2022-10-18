@@ -95,7 +95,7 @@ const Checkout = () => {
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td><strong>{'$' + getBasketTotal(basket) + getBasketTotalItems(basket)}</strong></td>
+                            <td><strong>{'$' + (getBasketTotal(basket) + getBasketTotalItems(basket))}</strong></td>
                         </tr>
                     </table>
                     <Button btnType="success" click={() => (alert("done"))}>Proceed to checkout</Button>
