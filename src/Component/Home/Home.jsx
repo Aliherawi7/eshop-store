@@ -18,7 +18,8 @@ const Home = () => {
                         return res.json();
                     }
                 }).then(data => {
-                    setTopSates(data.slice(5, 8))
+                    var randomNumber = Math.random() * 10;
+                    setTopSates(data.slice(randomNumber, randomNumber+4))
                     setProducts(data)
                 })
             fetch('http://localhost:8080/api/brands')
@@ -42,19 +43,7 @@ const Home = () => {
 
     return (
         <div className={`home home-entering`}>
-            <Slider size={10} />
-            <div className='most-ordered'>
-                {topSales?.map(item => {
-                    return (
-                        <div className='ordered-item' key={item.id}>
-                            <img src={BytesToFile(item.image)} />
-                            <div className='order-info'>
-                                <h1>{item.name}</h1>
-                                <Button click={() => navigate('/store/productdetails/' + item.id)}>SHOP NOW</Button>
-                            </div>
-                        </div>)
-                })}
-            </div>
+            <Slider size={18} />
             <div className="features">
                 <div className="container">
                     <div className="feature">
@@ -87,6 +76,19 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <div className='most-ordered'>
+                {topSales?.map(item => {
+                    return (
+                        <div className='ordered-item' key={item.id} style={{backgroundColor: item.color+"87"}}>
+                            <img src={BytesToFile(item.image)} />
+                            <div className='order-info'>
+                                <h1>{item.name}</h1>
+                                <Button click={() => navigate('/store/productdetails/' + item.id)}>SHOP NOW</Button>
+                            </div>
+                        </div>)
+                })}
+            </div>
+            
             <div className='popular-brands'>
                 <h2>Popular Brands</h2>
                 <div className='brands-container'>
