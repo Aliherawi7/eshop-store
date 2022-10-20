@@ -2,6 +2,9 @@
     margin: 0 10px;
     position: relative;
 }
+.nav-item:first-child{
+    margin-left: 0 !important;
+}
 .nav-item a{
     color: #fff;
     font-family: inherit;
@@ -10,6 +13,7 @@
     display: inline-block;
     text-decoration: none;
     transition: color 0.3s;
+    text-transform: capitalize;
 }
 .nav-item a:hover{
     color: var(--mainColor);
