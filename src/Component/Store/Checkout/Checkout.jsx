@@ -23,7 +23,7 @@ const Checkout = () => {
             }
         })
     }
-    
+
     const decreaseQuantity = (id) => {
         const index = basket.findIndex(item => {
             return item.id == id;
@@ -51,57 +51,46 @@ const Checkout = () => {
 
     return (
         <div className={`checkout checkout-entering`}>
-            <h2>Checkout</h2>
-            <div className="table-container">
-                <div className="product-table">
-                    <h1 className="checkout-title">Your shopping Basket</h1>
-                    <table className="item-table">
-                        <tr>
-                            <th>Item</th>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Total Amount</th>
-                        </tr>
-                        {basket.map((item) => {
-                            return (<tr className={'item.deleteAnimation'} key={item.id}>
-                                <td><img src={item.image} /></td>
-                                <td>{item.name}</td>
-                                <td >
-                                    <div className='quantity'>
-                                        <i className='bi bi-plus' onClick={(e) => increaseQuantity(item.id)}></i>
-                                        <input type="text" value={item.quantity} className="quantity-input" />
-                                        <i className={'bi bi-' + (item.quantity > 1 ? 'dash-lg' : 'trash color-red')}
-                                            onClick={() => decreaseQuantity(item.id)}></i>
-                                    </div>
-                                </td>
-                                <td><strong>{"$" + item.price * item.quantity}</strong></td>
-                            </tr>)
-                        })}
-                    </table>
-                    <Button btnType="success" click={() => (navigate('/store'))} >
-                        Update Cart <i className="bi bi-cart4"></i>
-                    </Button>
-                </div>
-                <div className="cart-table-container">
-                    <table className="cart-table" >
-                        <thead><tr><th>Cart Totals</th></tr></thead>
-                        <tr>
-                            <th>Cart Subtotal</th>
-                            <td>{getBasketTotal(basket) + "$"}</td>
-                        </tr>
-                        <tr>
-                            <th>Shiping Total</th>
-                            <td>{getBasketTotalItems(basket)}</td>
-                        </tr>
-                        <tr>
-                            <th>Total</th>
-                            <td><strong>{'$' + (getBasketTotal(basket) + getBasketTotalItems(basket))}</strong></td>
-                        </tr>
-                    </table>
-                    <Button btnType="success" click={() => (alert("done"))}>Proceed to checkout</Button>
-                </div>
-
+            <div className='basket-header'>
+            <h2>My Bag</h2>
+            <span className="small-title">Total {getBasketTotalItems(basket)} {getBasketTotalItems(basket) >1? "items": "item"}</span>
             </div>
+            <div className="table-container">
+                <div className="products-in-basket">
+                    {basket.map((item) => {
+                        return (
+                            <div className={'item-in-basket'} key={item.id}>
+                                <div className='image-container'>
+                                    <img src={item.image} />
+                                </div>
+                                <div className='details'>
+                                    <h3>{item.name}</h3>
+                                    <strong className="small-title">{"$" + item.price * item.quantity}</strong>
+                                    <div className='control-quantity'>
+                                        <div className='quantity align_center'>
+                                            <i className='bi bi-plus' onClick={(e) => increaseQuantity(item.id)}></i>
+                                            <input type="text" value={item.quantity} className="quantity-input" />
+                                            <i className={'bi bi-' + (item.quantity > 1 ? 'dash-lg' : 'trash color-red')}
+                                                onClick={() => decreaseQuantity(item.id)}></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>)
+                    })}
+                </div>
+                {/* <Button btnType="success" click={() => (navigate('/store'))} >
+                    Update Cart <i className="bi bi-cart4"></i>
+                </Button> */}
+            </div>
+            <div className="cart-table-container">
+                <div className="cart-total" >
+                    <span className="small-title">Total</span>
+                    <span><strong>{'$' + getBasketTotal(basket)}</strong></span>
+                </div>
+                <Button btnType="success" click={() => (alert("done"))}>Next</Button>
+            </div>
+
         </div>
     )
 }
