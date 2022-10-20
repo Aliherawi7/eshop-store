@@ -229,7 +229,7 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
 
                         <div className="input-box">
                             <label>Product Color</label>
-                            <input type="text" value={state.color} placeholder="color" onChange={(e) => inputsHandler(e, inputsName.COLOR)} />
+                            <input type="color" value={state.color} placeholder="color" onChange={(e) => inputsHandler(e, inputsName.COLOR)} />
                         </div>
                     </div>
 
