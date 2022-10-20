@@ -7,7 +7,7 @@ function About() {
         window.scrollTo(0,0);
     }, [])
     return (
-        <div className='about about-entring'>
+        <div className='about fade-in'>
             <h1 className='about-us'>about us</h1>
             <div className='part-a'>
                 <div className='part-a-container'>
