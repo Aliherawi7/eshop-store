@@ -71,3 +71,9 @@
     font-size: 12px;
     font-weight: 500;
 }
+
+@media(max-width: 768px){
+    .basket-preview{
+        display: none;
+    }
+}
