@@ -1,11 +1,70 @@
 .store{
     background-color: #fff;
+    min-height: 90vh;
+}
+.store .product-categories{
+    margin: 10px;
+    display: flex; 
+    justify-content: center;
+}
+.store .product-categories span{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 15px;
+    transition: color 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+.store .product-categories span i{
+    font-size: 40px;
+}
+.store .sort-product .active{
+    color: var(--mainColor);
+    font-weight: 700;
+}
+.store .product-categories span:hover{
+    color: var(--mainColor);
+}
+
+.store .sort-product{
+    margin: 0 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+.store .sort-product i{
+    font-size: 24px;
+}
+.store .sort-product .sort-title{
+    margin-right: 10px;
+    font-weight: 500;
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+}
+.store .sort-product span{
+    cursor: pointer;
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+}
+.store .active{
+    color: var(--mainColor);
 }
 .product{
-    font-family: "header2";
     font-size: 30px;
     padding-top: 30px;
     text-align: center;
+    font-weight: 500;
 }
 
 .store .basket:hover{
@@ -14,7 +73,7 @@
 .store-entering{
     animation-name: animate3;
     animation-duration: .4s;
-    animation-timing-function: ease;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);;
     
 }
 .product-list{
@@ -26,7 +85,6 @@
 
 @media (max-width:768px){
     .product{
-        font-family: "header2";
         font-size: 20px;
         padding-top: 25px;
         text-align: center;
