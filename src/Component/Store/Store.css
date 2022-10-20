@@ -19,7 +19,6 @@
 }
 .product-list{
     display: flex;
-    padding: 20px;
     flex-shrink: 0;
     flex-wrap: wrap;
     justify-content: center;

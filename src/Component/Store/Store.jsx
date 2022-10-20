@@ -37,6 +37,8 @@ const Store = () => {
                             price={item.price}
                             rating={item.rate}
                             key={item.id}
+                            color={item.color}
+                            discount={item.discount}
                         />
                     ))}
                 </div>
