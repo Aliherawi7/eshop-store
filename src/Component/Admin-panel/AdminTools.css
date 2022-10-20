@@ -104,6 +104,9 @@
 .panel-statistics table td[name=id] {
     padding-left: 20px;
 }
+.panel-statistics tr {
+    height: 50px;
+}
 .panel-statistics table td[name=name] {
     display: flex;
     align-items: center;
