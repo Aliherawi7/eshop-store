@@ -5,10 +5,13 @@
     justify-content: center;
     justify-self: center;
 }
+
 nav{
     justify-self: flex-start;
 }
 
 @media (max-width:768px){
-    
+    .nav-item:first-child {
+        margin-left: 10px !important; 
+    }
 }
