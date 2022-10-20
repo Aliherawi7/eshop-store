@@ -1,5 +1,4 @@
 .details-pane{
-    padding: 40px;
     padding-top: 0;
 }
 .details-pane .tap-list{
@@ -20,7 +19,7 @@
 .content-pane{
     display: none;
     width: 100%;
-    margin-top: 20px;
+    margin:20px 0;
 }
 .details-pane .tap-list li:hover{
     background-color: #cacaca96;
@@ -45,6 +44,10 @@
         cursor: pointer;
         padding: 6px 15px;
         font-size: 15px;
+    }
+    .product-details .product-title {
+        font-size: 16px;
+        letter-spacing: 2px;;
     }
 }
 @media(max-width:400px){
