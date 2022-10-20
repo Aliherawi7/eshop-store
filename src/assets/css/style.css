@@ -21,7 +21,7 @@
     --purple: #9b59b6;
     --black: #34495e;
     --outline: #1abc9c;
-
+    --mainColorGradient : linear-gradient(to left, #ff8c00, #ff0080);
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;

@@ -16,6 +16,15 @@
   border-radius: 10px;
 }
 
+.align_center{
+  display: flex;
+  align-items: center;
+}
+
+sub{
+  font-weight: 100;
+  font-size: 12px;
+}
 
 .about-entring {
   animation-name: top-bottom-animate;

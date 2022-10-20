@@ -1,6 +1,6 @@
 .main-container{
     min-height: 74vh;
-    
+    padding: 0 15px;
 }
 .pop-up-menu{
     position: fixed;

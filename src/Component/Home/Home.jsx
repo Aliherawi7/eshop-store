@@ -42,7 +42,7 @@ const Home = () => {
     }, [])
 
     return (
-        <div className={`home home-entering`}>
+        <div className={`home home-entering fade-in`}>
             <Slider size={18} />
             <div className="features">
                 <div className="container">
