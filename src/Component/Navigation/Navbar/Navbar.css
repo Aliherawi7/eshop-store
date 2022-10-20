@@ -1,6 +1,6 @@
 .header-nav {
     width: 100%;
-    height: 15vh;
+    height: 100px;
     display: flex;
     flex-direction: column;
     z-index: 1000;
@@ -21,7 +21,7 @@
     height: 40px;
     display: flex;
     align-items: center;
-    padding-left: 8px;
+    padding-left: 15px;
 }
 
 .status-box {
@@ -180,7 +180,7 @@
 .btnToggler {
     position: absolute;
     right: 10px;
-    top: 38px;
+    top: 50px;
     display: none;
 }
 
@@ -198,7 +198,6 @@
 }
 
 .rearch-box {
-    margin: 10px;
     display: flex;
     flex: 1 1;
 }
@@ -229,8 +228,8 @@
 }
 
 .nav-brand img {
-    margin-left: 20px;
-
+    margin-left: 15px;
+    margin-right: 10px;
     width: 100px;
     height: 30px;
 }
@@ -243,7 +242,6 @@
     .nav-brand {
         font-size: 10px;
         font-weight: 600;
-        padding: 5px 8px;
         color: var(--mainColor);
         text-decoration: none;
         justify-self: flex-start;
@@ -270,9 +268,9 @@
 
 @media(max-width:512px) {
     .nav-brand img {
-        margin-left: 10px;
-        width: 85px;
-        height: 25px;
+        margin-left: 15px;
+        width: 50px;
+        height: 18px;
     }
 }
 
