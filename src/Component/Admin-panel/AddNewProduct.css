@@ -84,6 +84,7 @@
     padding: 4px 10px;
     margin: 5px 0;
     border-radius: 3px;
+    width: 100%;
 }
 
 .add-product-form form .input-box input[type=checkbox]{
