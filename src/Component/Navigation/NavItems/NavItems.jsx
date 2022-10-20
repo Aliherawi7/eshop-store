@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import NavItem from '../NavItem/NavItem'
 import "./NavItems.css"
 
