@@ -1,6 +1,6 @@
 .product-details{
     width: 100%;
-    padding: 10px 40px;
+    padding: 10px 0px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -19,8 +19,7 @@
     font-weight: 700;
 }
 .product-details .product-info{
-    margin-top: 20px ;
-    
+    margin: 20px 0;
 }
 
 .product-details .product-price{

@@ -71,7 +71,7 @@ const ProductDetails = () => {
                     <img src={product.image} alt={product.name} />
                     <div className="product-info">
                         <h3 className="product-title">{product.name}</h3>
-                        <RateStar rate={product.rate} size={"large"} type={'Customer reviews'} />
+                        <RateStar rate={product.rate} size={"large"} />
                         <h4 className="product-price">price: ${product.price}</h4>
                         <p className="product-description">descriptions: descriptions about the product</p>
                         <Button btnType="outline" click={addToBasket}>
