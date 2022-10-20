@@ -64,7 +64,7 @@ function Slider({ size = 5, delay = 8,}) {
                                     <img className='slider-image' src={item.image} alt={item.name} />
                                     <div className='image-info'>
                                         <h1><span style={{ textTransform: "uppercase" }}>{item.name}</span></h1>
-                                        <h2>UP TO 50% OFF ON TOP BRANDS</h2>
+                                        <h2>UP TO {item.discount}% OFF ON TOP BRANDS</h2>
                                         <Link to={'/store/productdetails/' + item.id}>SHOP NOW</Link>
                                     </div>
                                 </div>
