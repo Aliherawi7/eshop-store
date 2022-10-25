@@ -1,10 +1,10 @@
 import React from 'react'
 import "./product.css"
-import Button from '../../UI/Button/Button'
 import { useStateValue } from '../../../StateProvider'
 import { useNavigate } from 'react-router-dom'
 import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
+import { toast } from 'react-toastify'
 
 const Product = ({ image, id, name, price, rating, color, discount }) => {
     const navigate = useNavigate()
@@ -39,8 +39,27 @@ const Product = ({ image, id, name, price, rating, color, discount }) => {
         })
     }
 
+    const addToFavorite = (productId, e)=>{
+        e.stopPropagation();
+        console.log(localStorage.getItem('accessToken'))
+        fetch("http://localhost:8080/api/favorites",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("accessToken")
+            },
+            body: JSON.stringify({productId: productId})
+        }).then(res => {
+            if(res.ok){
+                toast.success("successfully added",{
+                    position:'bottom-right'
+                });
+            }
+        })
+    }
+
     return (
-        <section className="card" onClick={() => navigate('/shop/productdetails/' + id)}>
+        <section className="card entering-animation" onClick={() => navigate('/shop/productdetails/' + id)}>
             <span className='discount-logo'></span>
             <img src={image} alt="slider" />
             <RateStar rate={rating} size={'small'} />
@@ -59,9 +78,9 @@ const Product = ({ image, id, name, price, rating, color, discount }) => {
                     </span>
                 </div>
             </div>
-            <div className="card-button" >
+            <div className="card-button">
                 <i className="bi bi-cart4" onClick={(e) => (addToBasket(e))}></i>
-                <i className="bi bi-heart" onClick={(e) => (addToBasket(e))}></i>
+                <i className="bi bi-heart" onClick={(e) => (addToFavorite(id, e))}></i>
                 <i className="bi bi-share-fill" onClick={(e) => (addToBasket(e))}></i>
             </div>
         </section>
