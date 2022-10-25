@@ -25,7 +25,6 @@ const ProductDetails = () => {
                     return res.json();
                 }
             }).then(data => {
-                console.log(data)
                 data.image = BytesToFile(data.image, { contentType: "image/png" });
                 setProduct(data);
             })
