@@ -20,6 +20,9 @@
   display: flex;
   align-items: center;
 }
+a:active{
+  transform: scale(0.98);
+}
 
 sub{
   font-weight: 100;
