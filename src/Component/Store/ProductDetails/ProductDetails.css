@@ -6,10 +6,9 @@
 }
 .product-details img{
     align-self: center;
-    width: 55%;
+    width: 50%;
     margin: auto;
 }
-
 
 .product-details .product-title{
     margin-top: 20px;
