@@ -5,11 +5,13 @@ import Button from '../../UI/Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
 import { actions } from '../../../reducer'
+import SmallLoading from '../../UI/Loading/SmallLoading'
 
 
 const Signup = () => {
     const navigate = useNavigate();
     const [, dispatch] = useStateValue();
+    const [loading, setloading] = useState(false)
     const [passwordEyeState, passwordEyeSetState] = useState({
         passwordEyeIcon: 'bi bi-eye-slash', repeatPasswordEyeIcon: 'bi bi-eye-slash'
     })
@@ -80,6 +82,7 @@ const Signup = () => {
         }
 
     })
+
 
     const changeSignupHandler = (event, item) => {
         const updatedForm = { ...signupInputState }
@@ -221,6 +224,7 @@ const Signup = () => {
 
     // sign up sending data to server
     const signup = () => {
+        setloading(true)
         const name = signupInputState.name;
         const lastName = signupInputState.lastName
         const dob = signupInputState.dob
@@ -265,13 +269,22 @@ const Signup = () => {
             body: formData
         }).then(res => {
             if (res.ok) {
-                console.log("successfully added")
                 return res.json();
+            }else{
+                throw new Error(res.status)
             }
         }).then(data => {
-            console.log(data)
-            localStorage.setItem("accessToken", data.access_token);
-            localStorage.setItem("refresh_token", data.refresh_token);
+            const inputs = {...signupInputState}
+            if(data.error_message){
+                inputs.email.warningMessage = data.error_message;
+                inputs.email.isValid = false;
+                setSignupInputState(inputs)
+                console.log(data)
+                setloading(false)
+                return 
+            }
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refresh_token", data.refreshToken);
             localStorage.setItem("name", data.userInformationDTO?.name)
             localStorage.setItem("lastName", data.userInformationDTO?.lastName)
             localStorage.setItem("email", data.userInformationDTO?.email)
@@ -286,10 +299,13 @@ const Signup = () => {
                     accessToken: data.accessToken,
                 }
             })
+            setloading(false)
             navigate("/")
         }).catch(error => {
             console.log(error)
+            setloading(false)
         })
+        
 
     }
 
@@ -311,7 +327,7 @@ const Signup = () => {
                 <h2>Signup</h2>
                 {signUpInputArray.map((item) => {
                     return (
-                        <>
+                        <React.Fragment key={item.id}>
                             {(item.config.name === 'password' || item.config.name === 'passwordRepeat') ?
                                 <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.config.name))}>
                                     <i className={(item.config.name == 'password') ?
@@ -329,13 +345,14 @@ const Signup = () => {
                                 warningMessage={item.config.warningMessage}
                             />
 
-                        </>
+                        </React.Fragment>
                     )
                 })}
                 <Button btnType={"success"} click={signup}>Signup</Button>
                 <p>By clicking the sign up you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
                 <Link to="/login" className="already-account">Already have account?</Link>
             </form>
+            <SmallLoading visible={loading} position="fixed" backgroundColor={"#ededed66"} top="100px" left="0" bottom="0"/>
         </div>
 
 
