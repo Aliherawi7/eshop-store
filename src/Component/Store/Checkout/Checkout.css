@@ -202,9 +202,6 @@
         box-shadow:unset;
         border-top: 1px solid #ebebeb;
     }
-}
-
-@media(max-width:567px) {
     .products-in-basket{
         position: fixed;
         background: #fff;
@@ -214,6 +211,10 @@
         right: 0;
         top: 170px;
     }
+}
+
+@media(max-width:567px) {
+    
     .item-in-basket {
         width: 100%;
         justify-content: space-around;
