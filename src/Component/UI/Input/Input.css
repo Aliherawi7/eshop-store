@@ -1,17 +1,19 @@
 .input-container{
     position: relative;
-    margin: 20px 0;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column
 }
 .input-container input{
     position: relative;
     width: 100%;
-    padding: 5px 0;
-    height: 40px;
+    padding: 8px;
     color: #000;
     background-color: transparent;
     outline: none;
-    border: none;
     z-index: 20;
+    border-radius: 5px;
+    border: 1px solid var(--mainColor);
 }
 .image-input{
     display: flex;
@@ -33,7 +35,6 @@
     right: 100px;
     opacity: 0;
     z-index: 10;
-
 }
 .image-input i{
     position: absolute;
@@ -46,9 +47,9 @@
 }
 .input-container label{
     position: absolute;
-    font-size: 18px;
-    left: 0;
-    top: 10px;
+    font-size: 12px;
+    left: 8px;
+    top: 8px;
     z-index: 1;
     transition: all 0.3s cubic-bezier(1, -0.33, 0, 1.15);
     transform: translate(0px, 0px) scale(1);
@@ -57,62 +58,34 @@
 .input-container input:focus ~ h4{
     transform: translateY(-10px);
 }
-.input-container u{
-    background-color: #e1e1e1;
-    width: 100%;
-    height: 2px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transition: background 0.3s;
-}
-.input-container u::before{
-    content: '';
-    background-color: #56db3b;
-    width: 0%;
-    height: 3px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transition: all 0.5s;
-}
+
 .input-container input[value=""]::-webkit-datetime-edit{
     color:transparent
 }
 .input-container input:focus ~ u::before{
     width: 100%;
 }
-.input-container input:focus ~ label{
-    top: -10px;
-    font-size: 13px;
-    color: #807d7dfa !important;
-}
 
+.input-container input:focus ~ label,
 .focus label{
     top: -10px !important;
-    font-size: 13px !important;
-    color: #807d7dfa !important;
+    font-size: 12px;
+    left: 10px ;
+    background: #fff;
+    z-index: 50;
+    padding: 0 4px;
 }
 
-.focus u::before{
-    width: 100%;
-    
-}
-
-.invalid u::before{
-    background-color: #e91607 !important;
-}
 .invalid input{
     color: #e91607;
+    border-color: #e91607;
+    box-shadow: 0px 0px 0px 1px #e91607;
 }
 
 .warning-message{
     color: #e91607;
     font-size: 12px;
     width: 100%;
-    position: absolute;
-    bottom: -14px;
-    left: 0;
     text-align: left;
 }
 
