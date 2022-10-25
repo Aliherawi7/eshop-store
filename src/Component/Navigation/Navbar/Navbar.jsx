@@ -47,14 +47,13 @@ const Navbar = () => {
                             <Button btnType="danger" click={logout}>Yes</Button>
                             <Button btnType="success" click={() => setShowModal(!showModal)}>No</Button>
                         </Modal>
-                    {state.userInfo.email ?
+                    {localStorage.getItem("email") != null ?
                         <div className='authentication'>
                             <div className='user-account'>
-                                <img src={BytesToFile(localStorage.getItem("image")) ? BytesToFile(localStorage.getItem("image")) : ""} className='bi bi-person-circle' />
-                                <i className="bi bi-chevron-down"></i>
+                                <img src={BytesToFile(localStorage.getItem("image"), "image/png") ? BytesToFile(localStorage.getItem("image")) : ""} className='bi bi-person-circle' />
                             </div>
                             <div className='account-settings'>
-                                <Link to="/"><i className='bi bi-heart'></i>Favorites</Link>
+                                <Link to="/favorite"><i className='bi bi-heart'></i>Favorites</Link>
                                 <Link to="" onClick={() => setShowModal(true)}><i className='bi bi-box-arrow-left'></i>Logout</Link>
                                 <Link to="/account"><i className='bi bi-gear'></i>Settings</Link>
                             </div>
