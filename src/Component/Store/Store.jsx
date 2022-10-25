@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./Store.css"
-import Loading from '../UI/Loading/Loading'
+import SmallLoading from '../UI/Loading/SmallLoading'
 import Product from './Product/Product'
 import { BytesToFile } from '../Utils/BytesToFile'
 
@@ -9,7 +9,7 @@ const Store = () => {
     const [products, setProducts] = useState([]);
     const [sortedProduct, setSortedProduct] = useState([])
     const [categoryCounter, setCategoryCounter] = useState(0)
-    const [sortByCounter, setSortByCounter] = useState();
+    const [sortByCounter, setSortByCounter] = useState(0);
     useEffect(() => {
         const getData = () => {
             fetch('http://localhost:8080/api/products').then(res => {
@@ -46,7 +46,7 @@ const Store = () => {
         setSortByCounter(id);
     }
 
-    if (products) {
+    if (products.length >0) {
         producstElement = (
             <div className="store fade-in">
                 <div className='sort-product'>
@@ -88,8 +88,9 @@ const Store = () => {
             </div>
         )
     } else {
+        console.log("in else")
         producstElement = (
-            <Loading />
+            <SmallLoading visible={true} position="absolute" top="100px" left="0" bottom="0"/>
         )
     }
     return (
@@ -128,7 +129,9 @@ const Store = () => {
 
             </div>
 
-            {producstElement}
+            <section style={{position:"relative"}}>
+                {producstElement}
+            </section>
         </div>
     )
 }
