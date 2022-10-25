@@ -3,32 +3,17 @@ import "./Slider.css"
 import { BytesToFile } from "../../Utils/BytesToFile"
 import { Link } from "react-router-dom"
 let counter = 0
-function Slider({ size = 5, delay = 8,}) {
-    let [products, setProducts] = useState([]);
+function Slider({products, size = 5, delay = 8,}) {
+    let [product, setProduct] = useState(products);
     const slides = useRef();
     useEffect(() => {
-        const getData = () => {
-            fetch('http://localhost:8080/api/products').then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-            }).then(data => {
-                const p = data.map(item => {
-                    item.image = BytesToFile(item.image)
-                    return item
-                });
-                setProducts(p)
-            })
-
-        }
-        getData();
+        setProduct(products)
         const interval = window.setInterval(() => {
             next();
         }, (delay * 1000));
         return () => {
             clearInterval(interval);
         }
-
 
     }, [])
 
@@ -58,14 +43,14 @@ function Slider({ size = 5, delay = 8,}) {
                 <i className='slide-to-left bi bi-chevron-left' onClick={prev}></i>
                 <div className='slides'>
                     <div className='slides-container' ref={slides} style={{transform:`translateX(${counter}vw)`}}>
-                        {products.map(item => {
+                        {product.map(item => {
                             return (
                                 <div className={`slider-item `} key={item.id}>
-                                    <img className='slider-image' src={item.image} alt={item.name} />
+                                    <img className='slider-image' src={BytesToFile(item.image, "image/png")} alt={item.name} />
                                     <div className='image-info'>
                                         <h1><span style={{ textTransform: "uppercase" }}>{item.name}</span></h1>
                                         <h2>UP TO {item.discount}% OFF ON TOP BRANDS</h2>
-                                        <Link to={'/store/productdetails/' + item.id}>SHOP NOW</Link>
+                                        <Link to={'/shop/productdetails/' + item.id}>SHOP NOW</Link>
                                     </div>
                                 </div>
                             )
