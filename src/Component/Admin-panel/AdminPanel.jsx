@@ -13,7 +13,7 @@ function AdminPanel() {
   const [state, dispatch] = useStateValue();
   const [currentComponent, setCurrentComponent] = useState({ component: admintTools[counter] });
   const infoPanel = useRef();
-  const [fullScreen, setFullScreen] = useState(false);
+  
   useEffect(() => {
     dispatch({
       type: actions.LOADING
@@ -25,6 +25,10 @@ function AdminPanel() {
 
   const currentComponentHandler = (id) => {
     counter = id
+    dispatch({
+      type: actions.LOADING,
+      item: true
+    })
     setCurrentComponent({ component: admintTools[counter] })
   }
   const handleFullScreen = ()=>{
