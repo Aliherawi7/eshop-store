@@ -1,4 +1,8 @@
 export function BytesToFile(data, type) {
+    
+    if(data == "undefined"){
+        return ""
+    }
     let binaryString = window.atob(data);
     let binaryLength = binaryString.length;
     let bytes = new Uint8Array(binaryLength);
