@@ -24,7 +24,6 @@ const Home = () => {
                 })
             fetch('http://localhost:8080/api/brands')
                 .then(res => {
-                    console.log(res)
                     if (res.ok) {
                         return res.json();
                     }
@@ -32,7 +31,6 @@ const Home = () => {
                     data.forEach(item => {
                         item.logo = BytesToFile(item.logo, "image/png")
                     })
-                    console.log(data)
                     setBrands(data);
                 })
         }
@@ -43,7 +41,7 @@ const Home = () => {
 
     return (
         <div className={`home home-entering fade-in`}>
-            <Slider size={18} />
+            {products.length > 0 ? <Slider size={18} products={products}/> :""}
             <div className="features">
                 <div className="container">
                     <div className="feature">
@@ -79,7 +77,7 @@ const Home = () => {
             <div className='most-ordered'>
                 {topSales?.map(item => {
                     return (
-                        <div className='ordered-item' key={item.id} style={{backgroundColor: item.color+"87"}}>
+                        <div className='ordered-item' key={item.id}>
                             <img src={BytesToFile(item.image)} />
                             <div className='order-info'>
                                 <h1>{item.name}</h1>
