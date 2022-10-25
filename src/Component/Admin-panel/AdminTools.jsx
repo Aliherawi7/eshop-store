@@ -13,12 +13,30 @@ import ProductLineChart from './ProductLineChart'
 
 export function Dashboard() {
     const [state, dispatch] = useStateValue();
+    const [modelSummary, setmodelSummary] = useState({})
     useEffect(() => {
+        async function getSummary() {
+            await fetch('http://localhost:8080/api/statistics/models', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("accessToken")
+                }
+            }).then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error(res.status);
+                }
+            }).then(data => {
+                setmodelSummary(data)
+            })
+        }
+        getSummary();
         dispatch({
             type: actions.LOADING,
             item: false
         })
-
     }, [])
 
     return (
@@ -27,26 +45,26 @@ export function Dashboard() {
                 <div className='model-statistics' style={{ "--i": "#6969d9" }}>
                     <i className='bi bi-box'></i>
                     <h4>Products</h4>
-                    <p className='statistics'>765</p>
+                    <p className='statistics'>{modelSummary?.products}</p>
                     <span className='precent-statistics'>Increased 35%</span>
                 </div>
 
                 <div className='model-statistics' style={{ "--i": "#26ad80" }}>
                     <i className='bi bi-basket-fill'></i>
                     <h4>Orders</h4>
-                    <p className='statistics'>1076</p>
+                    <p className='statistics'>{modelSummary?.orders}</p>
                     <span className='precent-statistics'>Increased 50%</span>
                 </div>
                 <div className='model-statistics' style={{ "--i": "#b44ac6" }}>
                     <i className='bi bi-boxes'></i>
                     <h4>Categories</h4>
-                    <p className='statistics'>15</p>
+                    <p className='statistics'>{modelSummary?.categories}</p>
                     <span className='precent-statistics'>Increased 40%</span>
                 </div>
                 <div className='model-statistics' style={{ "--i": "#fe8907" }}>
                     <i className='bi bi-people-fill'></i>
                     <h4>Users</h4>
-                    <p className='statistics'>765</p>
+                    <p className='statistics'>{modelSummary?.users}</p>
                     <span className='precent-statistics'>Increased 45%</span>
                 </div>
 
@@ -67,36 +85,25 @@ export function ProductsPanel() {
     const [showModal, setShowModal] = useState({ show: false, productId: -1 })
     let [productDetail, setProductDetail] = useState({});
     useEffect(() => {
-        dispatch({
-            type: actions.LOADING,
-            item: true
-        })
-        const getData = () => {
-            fetch('http://localhost:8080/api/products').then(res => {
-                dispatch({
-                    type: actions.LOADING
-                })
-                if (res.ok) {
-                    return res.json();
-                }
-            }).then(data => {
-                // data = data.map(item => {
-                //     item.image = ;
-                //     return item;
-                // })
-                console.log(data)
+        const getData = async () => {
+            let response = await fetch('http://localhost:8080/api/products');
+
+            if (response.ok) {
+                let data = await response.json();
                 setProducts(data)
-            }).catch(error => {
-                dispatch({
-                    type: actions.LOADING,
-                    item: false
-                })
-                console.log(error)
+               
+            }else{
+                
+            }
+            dispatch({
+                type: actions.LOADING,
+                item: false
             })
+            console.log("after func")
+            
+
         }
-
         getData();
-
 
     }, [])
 
@@ -108,8 +115,17 @@ export function ProductsPanel() {
                 'Authorization': localStorage.getItem("accessToken")
             },
 
-        }).then(res => {
-            if (res.ok) {
+        })
+        const getData = async () => {
+            let response = await fetch("http://localhost:8080/api/products/delete/" + id, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': localStorage.getItem("accessToken")
+                },
+            });
+
+            if (response.ok) {
+                let data = await response.json();
                 const productIndex = products.findIndex(item => {
                     return item.id == id;
                 })
@@ -122,7 +138,8 @@ export function ProductsPanel() {
                     closeButton: true
                 })
                 setProducts(newProductList)
-            } else {
+               
+            }else{
                 toast.error("couldn't removed the product.", {
                     position: "bottom-right",
                     closeOnClick: true,
@@ -131,7 +148,14 @@ export function ProductsPanel() {
                     responsive: true
                 })
             }
-        })
+            dispatch({
+                type: actions.LOADING,
+                item: false
+            })
+            
+
+        }
+        getData();
     }
 
     const addProduct = () => {
@@ -174,7 +198,7 @@ export function ProductsPanel() {
                             <th name='last'>ACTIONS</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
 
                         {products.map(product => {
@@ -228,6 +252,15 @@ export function ProductsPanel() {
 export function CategoriesPanel() {
     const [categories, setCategories] = useState([]);
     const [state, setState] = useState(true);
+    const [  ,dispatch] = useStateValue();
+    useEffect(() => {
+        dispatch({
+            type: actions.LOADING,
+            item: false
+        })
+    
+    }, [])
+    
     return (
         state ?
             <div className='categories-statistics panel-statistics fade-in'>
@@ -285,44 +318,30 @@ export function OrdersPanel() {
     const [orders, setOrders] = useState([]);
     useEffect(() => {
         let ordersList = []
-        dispatch({
-            type: actions.LOADING,
-            item: true
-        })
-        const getData = () => {
-            fetch('http://localhost:8080/api/orders', {
+        const getData = async () => {
+            let response = await fetch('http://localhost:8080/api/orders', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': localStorage.getItem("accessToken")
                 }
-            }).then(res => {
-                dispatch({
-                    type: actions.LOADING,
-                    item: false
-                })
-                console.log(res)
-                if (res.status === 200) {
-                    return res.json();
-                    console.log(res.json())
-                } else if (res.status == 204) {
-                    console.log('no cont')
+            });
 
-                }
-
-            }).then(data => {
-                console.log(data)
+            if (response.ok) {
+                let data = await response.json();
                 ordersList = data
                 setOrders(ordersList)
-
-            }).catch(error => {
-                console.log(error)
-                dispatch({
-                    type: actions.LOADING,
-                    item: false
-                })
+               
+            }else{
+                
+            }
+            dispatch({
+                type: actions.LOADING,
+                item: false
             })
+
         }
         getData();
+        
     }, [])
 
     return (
@@ -387,6 +406,7 @@ export function OrdersPanel() {
 
 export function UsersPanel() {
     const [users, setUsers] = useState([]);
+    const [ ,dispatch] = useStateValue();
     useEffect(() => {
         const getData = () => {
             fetch('http://localhost:8080/api/users', {
@@ -394,7 +414,10 @@ export function UsersPanel() {
                     'Authorization': localStorage.getItem("accessToken")
                 }
             }).then(res => {
-                console.log(res)
+                dispatch({
+                    type: actions.LOADING,
+                    item: false
+                })
                 if (res.ok) {
                     return res.json()
                 } else {
