@@ -29,8 +29,9 @@
     transform: scaleX(0);
     transform-origin: left;
     position: absolute;
-    top: 20px;
+    top: 25px;
     left: 0;
+    border-radius: 10px;
 }
 
 .active a{
