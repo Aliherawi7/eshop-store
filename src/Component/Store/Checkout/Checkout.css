@@ -205,7 +205,15 @@
 }
 
 @media(max-width:567px) {
-
+    .products-in-basket{
+        position: fixed;
+        background: #fff;
+        overflow-y: scroll;
+        bottom: 90px;
+        left: 0;
+        right: 0;
+        top: 170px;
+    }
     .item-in-basket {
         width: 100%;
         justify-content: space-around;
