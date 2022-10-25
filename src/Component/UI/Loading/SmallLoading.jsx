@@ -1,12 +1,17 @@
 import React from 'react'
 import "./Loading.css"
 
-function SmallLoading(props) {
+function SmallLoading({visible, backgroundColor, top, left, right, bottom, position = "fixed" }) {
     return (
         <div className="small-loading" style={{
-            visibility: props?.visible ? "visible":"hidden",
-            backgroundColor:props?.backgroundColor,
-            opacity: props?.visible ? 1:0,
+            visibility: visible ? "visible":"hidden",
+            backgroundColor:backgroundColor,
+            opacity: visible ? 1:0,
+            top: top,
+            bottom: bottom,
+            left: left,
+            right:right,
+            position: position
             }}>
             <div className="spinner">
                 <div className="bounce1"></div>

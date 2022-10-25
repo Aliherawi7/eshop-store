@@ -6,7 +6,6 @@ const Input = (props) => {
     let containerClass = ["input-container"]
 
     if (!props.isValid && props.isUsed) {
-        console.log(props.isValid, props.isUsed, "in input")
         containerClass.push("invalid")
 
     } else if (containerClass.length > 1) {
@@ -40,7 +39,6 @@ const Input = (props) => {
                     onChange={props.change}
                 />
                 <label>{props.placeholder}</label>
-                <u></u>
                 <span className="warning-message">{props.warningMessage}</span>
             </div>
         )
