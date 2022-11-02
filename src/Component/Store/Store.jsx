@@ -21,11 +21,15 @@ const Store = () => {
                     item.image = BytesToFile(item.image, { contentType: "image/png" })
                     return item
                 })
+                
                 setProducts(data);
                 setSortedProduct(data)
+            }).catch(error => {
+                console.log(error)
+                getData();
             })
         }
-
+        
         return getData();
     }, [])
 
@@ -78,7 +82,7 @@ const Store = () => {
                             image={item.image}
                             name={item.name}
                             price={item.price}
-                            rating={item.rate}
+                            rating={item?.rate}
                             key={item.id}
                             color={item.color}
                             discount={item.discount}
@@ -88,7 +92,6 @@ const Store = () => {
             </div>
         )
     } else {
-        console.log("in else")
         producstElement = (
             <SmallLoading visible={true} position="absolute" top="100px" left="0" bottom="0"/>
         )
