@@ -24,11 +24,11 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Store />} />
+            <Route path="/store" element={<Store />} />
             <Route path='/account' element={<Account />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/shop/productdetails/:id" element={<ProductDetails />} />
+            <Route path="/store/productdetails/:id" element={<ProductDetails />} />
             <Route path="/search/:id" element={<SearchPage />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/about" element={<About />} />
