@@ -87,13 +87,22 @@
 .admin-panel .admin-menu .menu-list li:hover {
     background-color:#262837;
     color: #fff;
-    border-left: 2px solid var(--i);
 }
+.admin-panel .admin-menu .menu-list .active-menu::after{
+    position: absolute;
+    content: '';
+    width: 5px;
+    background-color: var(--i);
+    border-radius: 5px;
+    top: 0;
+    left: 5px;
+    bottom: 0;
+}
+
 
 .active-menu{
     background-color:#262837;
     color: #fff;
-    border-left: 2px solid var(--i);
 }
 
 .info-panel{
