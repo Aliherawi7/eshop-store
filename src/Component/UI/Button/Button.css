@@ -31,6 +31,13 @@
     color: #fff;
 }
 
+.transparent{
+    background-color: transparent;
+}
+.transparent:hover{
+    background-color: #ddd;
+}
+
 .danger{
     background-color: #db0808 !important;
 }
