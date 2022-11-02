@@ -8,17 +8,18 @@ import { useStateValue } from '../../../StateProvider'
 import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
 import { BytesToFile } from '../../Utils/BytesToFile'
+import { toast } from 'react-toastify'
+import Modal from '../../UI/modal/Modal'
 
 const ProductDetails = () => {
     const [{ basket }, dispatch] = useStateValue()
     const [product, setProduct] = useState();
+    const [showModal, setShowModal] = useState(false)
     let producstElement;
-    const [people, peopleSetState] = useState([
-        { name: 'Ali', avatar: '/image/people/1.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" },
-        { name: 'Maria', avatar: '/image/people/2.jpg', reviewText: "this is a sample test", date: "Today, 11:10 am" }
-    ])
+
     const { id } = useParams()
     useEffect(() => {
+        window.scrollTo(0, 0)
         const getData = () => {
             fetch('http://localhost:8080/api/products/' + id).then(res => {
                 if (res.ok) {
@@ -62,23 +63,78 @@ const ProductDetails = () => {
         })
     }
 
+    const addToFavorite = () => {
+        fetch("http://localhost:8080/api/favorites", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("accessToken")
+            },
+            body: JSON.stringify({ productId: product.id })
+        }).then(res => {
+            if (res.ok) {
+                toast.success("successfully added", {
+                    position: 'bottom-right'
+                });
+            }
+        })
+    }
+
     //if data have been loaded from server
     if (product) {
         producstElement = (
-            <div className={`product-entering`}>
-                <div className="product-details">
-                    <img src={product.image} alt={product.name} />
-                    <div className="product-info">
-                        <h3 className="product-title">{product.name}</h3>
-                        <RateStar rate={product.rate} size={"large"} />
-                        <h4 className="product-price">price: ${product.price}</h4>
-                        <p className="product-description">descriptions: descriptions about the product</p>
-                        <Button btnType="outline" click={addToBasket}>
-                            Add <i className="bi bi-cart4"></i>
-                        </Button>
+            <div className="fade-in">
+
+                <div className="product_details">
+                    <section className='product_images'>
+                        <Button btnType="transparent zoom-btn" click={() => setShowModal(!showModal)} ><i className='bi bi-zoom-in'></i></Button>
+                        <img src={product.image} className="product_image" alt={product.name} />
+                        <Modal show={showModal} ModalClose={() => setShowModal(!showModal)}>
+                            <img src={product.image} alt={product.name} />
+                        </Modal>
+                        <div className='different_sides align_center'>
+                            <div className='image_side active'><img src={product.image} alt={product.name} /></div>
+                            <div className='image_side'><img src={product.image} alt={product.name} /></div>
+                            <div className='image_side'><img src={product.image} alt={product.name} /></div>
+                        </div>
+                    </section>
+                    <div className="product-info border-bottom">
+                        <div className='border-bottom'>
+                            <p>{product.category}</p>
+                            <h3 className="product-title">{product.name}</h3>
+                            <div className='price-rate border-bottom'>
+                                <div className='product-price'>
+                                    {product.discount ?
+                                        <div className='before-discount'>
+                                            <i className='bi bi-currency-dollar'></i>{product.price}
+                                        </div>
+                                        : ""
+                                    }
+                                    <div className='after-discount'>
+                                        <i className='bi bi-currency-dollar'></i>
+                                        {product.price - (product.price * product.discount / 100)}
+                                    </div>
+                                    <span className='discount-value'>{product.discount ? product.discount + "% " : ""}Discount</span>
+                                </div>
+                                <div className='rate-review align_center'>
+                                    <RateStar rate={product.rate} size={"large"} />
+                                    <span>21 Reviews</span>
+                                </div>
+
+                            </div>
+                            <p className="product-description border-bottom">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod nisi velit accusantium corporis doloremque. At laboriosam eum architecto ullam, eos sed provident blanditiis deleniti sapiente et ipsa. Totam, explicabo fugit?</p>
+                            <Button btnType="outline" click={addToBasket}>
+                                Add To Cart
+                            </Button>
+                            <Button btnType="outline" click={addToFavorite}>
+                                Add To Favorite
+                            </Button>
+                        </div>
+                        <DetailsPane dataSheet={product} description={product.description} />
                     </div>
+
                 </div>
-                <DetailsPane people={people} dataSheet={product} description={product.description} />
+
             </div>
         )
     } else {
