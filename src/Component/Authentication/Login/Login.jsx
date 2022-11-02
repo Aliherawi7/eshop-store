@@ -28,7 +28,7 @@ const Login = () => {
             warningMessage: ''
         }
     })
-    const [state, dispatch] = useStateValue()
+    const [, dispatch] = useStateValue()
     const [eyeState, eyeSetState] = useState({ className: 'bi bi-eye-slash' })
     const [signinState, setSigninState] = useState("Sign in")
 
@@ -125,9 +125,7 @@ const Login = () => {
             }
             
         }).then(data => {
-            console.log(data)
             if (data.error_message) {
-                console.log("in if")
                 const updatInputMessage = { ...loginInputState };
                 if (data.error_message.includes("email")) {
                     console.log("in 2 if")
