@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./Slider.css"
 import { BytesToFile } from "../../Utils/BytesToFile"
 import { Link } from "react-router-dom"
-let counter = 0
+
 function Slider({products, size = 5, delay = 8,}) {
     let [product, setProduct] = useState(products);
+    let counter = 0
     const slides = useRef();
     useEffect(() => {
         setProduct(products)
@@ -42,7 +43,7 @@ function Slider({products, size = 5, delay = 8,}) {
             <div className='slider-container'>
                 <i className='slide-to-left bi bi-chevron-left' onClick={prev}></i>
                 <div className='slides'>
-                    <div className='slides-container' ref={slides} style={{transform:`translateX(${counter}vw)`}}>
+                    <div className='slides-container' ref={slides} >
                         {product.map(item => {
                             return (
                                 <div className={`slider-item `} key={item.id}>
