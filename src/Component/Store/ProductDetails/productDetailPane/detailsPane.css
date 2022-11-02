@@ -1,37 +1,77 @@
 .details-pane{
     padding-top: 0;
 }
-.details-pane .tap-list{
-    list-style: none;
-    border-bottom: 1px solid #ddd;
+
+.details-pane .title{
+    background-color: #f47c2069;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px;
 }
 .details-pane .tap-list li{
+    position: relative;
     cursor: pointer;
     padding: 6px 25px;
     display: inline-flex;
-    color: #000;
+    color: #4e4b4b;
     justify-content: center;
     background-color: #fff;
     border-radius: 10px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
 }
 .content-pane{
     display: none;
     width: 100%;
     margin:20px 0;
 }
-.details-pane .tap-list li:hover{
-    background-color: #cacaca96;
-}
+
 .tap-active{
-    border: 1px solid #ddd ;
-    border-bottom: 1px solid #fff;
-    margin-bottom: -2px ;
-    background-color: var(--mainColor) !important;
+    color: #000;
+    font-weight: 600;
 }
+.tap-active::after{
+    position: absolute;
+    content: '';
+    width: 50px;
+    height: 4px;
+    border-radius: 10px;
+    bottom: -4px;
+    left: 25%;
+    right: 0;
+    background-color: var(--mainColor) !important;
+    animation-name: activeJumping;
+    animation-duration: .4s;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+
+}
+
+.description-content{
+    width: 80%;
+}
+
+.description-content h4{
+    background-color: #f47c2069;
+    font-size: 15px;
+    font-weight: 900;
+    padding: 10px;
+}
+.description-content p{
+    padding: 10px;
+    font-size: 14px;
+    width: 80%;
+    min-height: 300px;
+}
+
 .content-active{
     display:block ;
+}
+@keyframes activeJumping {
+    from{
+        transform: scaleX(0);
+    }
+    to{
+        transform: scale(1);
+    }
 }
 
 
@@ -49,11 +89,7 @@
         font-size: 16px;
         letter-spacing: 2px;;
     }
-}
-@media(max-width:400px){
-    .details-pane .tap-list li{
-        cursor: pointer;
-        padding: 6px 10px;
-        font-size: 10px;
+    .tap-active::after{
+        left: 20%;
     }
 }

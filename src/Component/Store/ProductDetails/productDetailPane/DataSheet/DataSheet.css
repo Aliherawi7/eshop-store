@@ -1,6 +1,5 @@
 .data-sheet{
-    width: 60%;
-    border: 1px solid rgb(189, 189, 189);
+    width: 80%;
     border-spacing: 0
 }
 .data-sheet tr{
@@ -14,12 +13,13 @@
     margin: 0;
 }
 .data-sheet tr td{
-    padding: 8px;
+    padding: 4px 10px;
 }
 .data-sheet tr:nth-child(odd){
-    background-color: var(--mainColor);
+    background-color: #f47c2008;
 }
 .data-sheet tr th{
+    background-color: #f47c2069;
     padding: 10px;
     padding-left: 8px;
     font-size: 15px;

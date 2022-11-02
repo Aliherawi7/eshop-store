@@ -1,8 +1,9 @@
 .form-title{
-    width: 80%;
-    border-bottom: 1px ridge #000;
-    margin:5px 15px;
+    border-bottom: 1px ridge #e1e1e1;
+    margin: 15px 15px;
     margin-top: 40px;
+    font-weight: 400;
+    font-size: 14px;
 }
 .review-form{
     width: 80%;
@@ -14,22 +15,17 @@
     margin-right: 5%;
 }
 
-.review-form .input-container label, 
-.review-form .input-container u{
-    width: 100%;
-    font-size: 15px;
-}
-
 .review-form select{
     font-size: 12px;
-    border: none;
-    border-bottom: 2px solid #e1e1e1;
     width: 20%;
     outline: none;
-    padding:8px 0;
+    border-radius: 5px;
+    border:2px solid #e1e1e1;
+    padding:2px;
 }
 
 .review-form textarea{
+    border-radius: 5px;
     margin-top: 15px;
     padding: 5px;
     display: block;
@@ -48,36 +44,62 @@
 }
 .people-review{
     margin:10px auto;
+    display: flex;
 }
 .people-review img{
-    vertical-align: -20px;
-    width: 50px;
-    height: 50px;
+    vertical-align: -30px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     border: 1px solid #000;
 }
-.people-review h4{
-    font-weight: 500;
-    font-size: 15px;
-    margin: auto 20px;
-    display: inline-block;
-}
-.people-review .review-text{
-    padding: 0 60px;
-    display: block;
-    font-size: 14px;
+.people-review .review-header{
+    display: flex;
+    align-items: center;
 
 }
+.people-review .name-rate{
+    margin: 0 20px;
+    width: 110px;
+}
+.people-review .name-rate h4{
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 14px;
+    display: inline-block;
+    text-transform: capitalize;
+}
+.people-review .review-body{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.people-review .review-text{
+    font-size: 14px;
+}
 .people-review p{
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 5px;
 }
+.people-review .likes-date-rate{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.people-review .likes-date-rate .likes-dislikes div{
+    margin-right:30px ;
+    cursor: pointer;
+    color: #b9b9b9;
+    width: 20px;
+}
+
 .people-review .date-rate .CustomerReviews ul{
     vertical-align: 5px;
 }
 .people-review .date-rate{
     display: flex;
-    margin-left: 54px;
     align-items: center;
 }
 
@@ -85,19 +107,19 @@
 /* review rate */
 .weak{
     color: #fa9440;
-    border-bottom: 2px solid #fa9440 !important;
+    border: 2px solid #fa9440 !important;
 }
 .medium{
     color: #0ab3e6;
-    border-bottom: 2px solid #0ab3e6 !important;
+    border: 2px solid #0ab3e6 !important;
 }
 .good{
     color: #1ce209;
-    border-bottom: 2px solid #1ce209 !important;
+    border: 2px solid #1ce209 !important;
 }
 .notRated,.notReview {
     color: #ee0e0e;
-    border-bottom: 2px solid #ee0e0e !important;
+    border: 2px solid #ee0e0e !important;
 }
 
 .Review{
