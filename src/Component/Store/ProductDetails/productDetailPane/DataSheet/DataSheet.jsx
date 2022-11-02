@@ -19,7 +19,11 @@ const DataSheet = (props) => {
                     return (
                         <tr key={Math.random()}>
                             <td>{item.title}</td>
-                            <td>{item.value}</td>
+                            {item.title === 'color'? 
+                            <td><input type="color" value={item.value} onChange={() => ""} /></td>:
+                            <td>{item.value}</td>  
+                        }
+
                         </tr>
                     )
                 })}
