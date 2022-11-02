@@ -59,7 +59,7 @@ const Product = ({ image, id, name, price, rating, color, discount }) => {
     }
 
     return (
-        <section className="card entering-animation" onClick={() => navigate('/shop/productdetails/' + id)}>
+        <section className="card entering-animation" onClick={() => navigate('/store/productdetails/' + id)}>
             <span className='discount-logo'></span>
             <img src={image} alt="slider" />
             <RateStar rate={rating} size={'small'} />
