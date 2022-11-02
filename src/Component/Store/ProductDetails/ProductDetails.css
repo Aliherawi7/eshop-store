@@ -1,33 +1,120 @@
-.product-details{
+.product_details{
     width: 100%;
     padding: 10px 0px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-.product-details img{
-    align-self: center;
-    width: 50%;
-    margin: auto;
+    display: flex;
 }
 
-.product-details .product-title{
-    margin-top: 20px;
-    padding: 10px 0;
-    font-size: 25px;
-    letter-spacing: 4px;
-    font-weight: 700;
+/*product image section */
+
+.product_details .product_images{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.product-details .product-info{
+.product_details .product_images .different_sides{
+    margin-top: 90px;
+}
+.product_details .different_sides .image_side{
+    margin-right: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+.product_details .different_sides .active{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.different_sides .image_side img{
+    width: 50px;
+}
+
+.product_images .zoom-btn{
+    position: absolute;
+    right: 80px;
+    top: 50px;
+    font-size: 18px;
+    padding: 5px 15px;
+}
+.product_images .modal{
+    width: 70%;
+    height: 70%;
+    left: 16%;
+    top: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product_details .product_images .product_image{
+    margin-top: 100px;
+    width: 250px;
+}
+.product_images .modal img{
+    margin-top: 0px;
+    width: 40%;
+    position: relative;
+}
+
+.price-rate{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    flex-flow: wrap;
+}
+
+.border-bottom{
+    padding-bottom: 20px !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.product_details .product-title{
+    font-size: 25px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.product_details .product-info{
     margin: 20px 0;
 }
+.product_details .product-price{
+    display: flex;
+}
+.product_details .before-discount{
+    font-size: 14px;
+    color: #fd5050;
+    text-decoration: line-through;
+    font-weight: 700;
+    display: flex;
+    align-items: flex-end;
+    margin-right: 10px;
+}
 
-.product-details .product-price{
+.product_details .after-discount{
+    font-size: 20px;
+    font-family:'Segoe UI';
+    font-weight: 700;
+}
+
+.product_details .discount-value{
+    border-radius: 20px;
+    background: #cd3f4b;
+    padding: 0 8px;
+    font-size: 12px;
+    color: #fff;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.product_details .product-price{
     padding: 10px 0;
     font-size: 15px;
     font-weight: 500;
 }
 
-.product-details .product-description{
+.product_details .product-description{
     padding: 10px 0;
     font-size: 14px;
     font-weight: 500;
@@ -45,28 +132,33 @@
     min-width: 40px;
 }
 .product-info button{
-    width: 50%;
+    margin:5px;
     min-width: 70px;
+    border-radius: 20px;
 }
+
 @media(max-width:768px){
-    .product-details img, .product-details .product-info{
+    .product_details .product-info{
         margin: 0 auto;
         width: 100%;
     }
-    .product-details{
-        grid-template-columns: 1fr;
-        justify-content: center;
+    .product_details{
+        flex-direction: column;
     }
-    .product-details img{
-        width: 50%;
-    }
-    
-    
-}
+    .product_details .product_images img{
+        margin: 50px 0;
+        width: 180px;
 
-.product-entering{
-    animation-name: fadeIn;
-    animation-duration: 1.5s;
+    }
+    .product_details .modal img{
+        width: 90%;
+    }
+    .product_details .zoom-btn {
+        right: 0px;
+        top: 10px;
+    }
+
+    
 }
 
 
