@@ -224,7 +224,7 @@ const Signup = () => {
 
     // sign up sending data to server
     const signup = () => {
-        setloading(true)
+        const image = signupInputState.image
         const name = signupInputState.name;
         const lastName = signupInputState.lastName
         const dob = signupInputState.dob
@@ -233,6 +233,19 @@ const Signup = () => {
         const passwordRepeat = signupInputState.passwordRepeat
 
         if (!name.isValid || !lastName.isValid || !dob.isValid) {
+            const holder = { ...signupInputState };
+            if(!name.isValid){
+                holder.name.warningMessage = "fill it"
+                holder.isUsed =true
+                
+            }else if(!lastName.isValid){
+                holder.lastName.warningMessage = "fill it"
+                holder.isUsed = true; 
+            }else{
+                holder.dob.warningMessage = "fill it";
+                holder.dob.isUsed = true;
+            }
+            setSignupInputState(holder)
             return;
         }
         if (checkPasswordValidation(email.value) == 'empty' || !email.isValid) {
@@ -260,10 +273,17 @@ const Signup = () => {
             setSignupInputState(holder)
             return
         }
+        if(!image.isValid){
+            const holder = {...signupInputState}
+            holder.image.warningMessage = "choose a picture"
+            holder.image.isUsed = true
+            setSignupInputState(holder)
+        }
         const formData = new FormData();
         for (let item in signupInputState) {
             formData.append(item + "", signupInputState[item].value)
         }
+        setloading(true)
         fetch("http://localhost:8080/api/users/signup", {
             method: "POST",
             body: formData
@@ -340,6 +360,7 @@ const Signup = () => {
                                 value={item.config.value}
                                 isValid={item.config.isValid}
                                 isUsed={item.config.isUsed}
+                                defaultValue=""
                                 key={item.id}
                                 change={(event) => changeSignupHandler(event, item.id)}
                                 warningMessage={item.config.warningMessage}
