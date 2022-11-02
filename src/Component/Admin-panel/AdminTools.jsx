@@ -15,6 +15,10 @@ export function Dashboard() {
     const [state, dispatch] = useStateValue();
     const [modelSummary, setmodelSummary] = useState({})
     useEffect(() => {
+        dispatch({
+            type: actions.LOADING,
+            item: true
+        })
         async function getSummary() {
             await fetch('http://localhost:8080/api/statistics/models', {
                 method: "GET",
@@ -85,6 +89,10 @@ export function ProductsPanel() {
     const [showModal, setShowModal] = useState({ show: false, productId: -1 })
     let [productDetail, setProductDetail] = useState({});
     useEffect(() => {
+        dispatch({
+            type: actions.LOADING,
+            item: true
+        })
         const getData = async () => {
             let response = await fetch('http://localhost:8080/api/products');
 
@@ -99,9 +107,6 @@ export function ProductsPanel() {
                 type: actions.LOADING,
                 item: false
             })
-            console.log("after func")
-            
-
         }
         getData();
 
@@ -254,6 +259,10 @@ export function CategoriesPanel() {
     const [state, setState] = useState(true);
     const [  ,dispatch] = useStateValue();
     useEffect(() => {
+        // dispatch({
+        //     type: actions.LOADING,
+        //     item: true
+        // })
         dispatch({
             type: actions.LOADING,
             item: false
@@ -317,6 +326,10 @@ export function OrdersPanel() {
     const [state, dispatch] = useStateValue();
     const [orders, setOrders] = useState([]);
     useEffect(() => {
+        dispatch({
+            type: actions.LOADING,
+            item: true
+        })
         let ordersList = []
         const getData = async () => {
             let response = await fetch('http://localhost:8080/api/orders', {
@@ -381,7 +394,7 @@ export function OrdersPanel() {
                                     <td>{order.productId}</td>
                                     <td >{order.brand?.toUpperCase()}</td>
                                     <td >{order.quantity}</td>
-                                    <td>${order?.amount * order.quantity}</td>
+                                    <td>${order?.amount}</td>
                                     <td>{order.shippingAddress}</td>
                                     <td>{order?.amount > 0 ? "paid" : 'unpaid'}</td>
                                     <td>{order?.amount > 110 ? "4" : '5'}</td>
@@ -408,6 +421,10 @@ export function UsersPanel() {
     const [users, setUsers] = useState([]);
     const [ ,dispatch] = useStateValue();
     useEffect(() => {
+        dispatch({
+            type: actions.LOADING,
+            item: true
+        })
         const getData = () => {
             fetch('http://localhost:8080/api/users', {
                 headers: {
@@ -424,9 +441,7 @@ export function UsersPanel() {
                     throw new Error()
                 }
             }).then(data => {
-                console.log(data)
                 setUsers(data)
-                console.log(users)
             })
         }
         getData();
