@@ -25,10 +25,6 @@ function AdminPanel() {
 
   const currentComponentHandler = (id) => {
     counter = id
-    dispatch({
-      type: actions.LOADING,
-      item: true
-    })
     setCurrentComponent({ component: admintTools[counter] })
   }
   const handleFullScreen = ()=>{
