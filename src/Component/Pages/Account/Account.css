@@ -48,7 +48,7 @@
     background-color: var(--mainColor);
     border-radius: 5px;
     top: 0;
-    left: 0;
+    left: 5px;
     bottom: 0;
 }
 
