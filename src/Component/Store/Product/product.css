@@ -24,24 +24,24 @@
     transform: scale(1.2);
 }
 
-.product-info h4{
+.card .product-info h4{
     font-size: 16px;
     font-family: inherit;
     font-weight: 300;
     margin: 5px 0;
 }
-.product-info .product-price{
+.card .product-info .product-price{
     display: flex;
     flex-direction: column;
 }
-.product-info .before-discount{
+.card .product-info .before-discount{
     font-size: 12px;
     color: #fd5050;
     text-decoration: line-through;
     font-weight: 700;
 }
 
-.product-info .after-discount{
+.card .product-info .after-discount{
     font-size: 18px;
     font-family:'Segoe UI';
     font-weight: 700;
