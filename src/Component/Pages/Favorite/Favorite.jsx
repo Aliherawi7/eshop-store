@@ -28,7 +28,6 @@ function Favorite() {
                     setproduct(data);
             })
         }
-        console.log(localStorage.getItem('accessToken'))
         getDate()
     }, [])
     const removeFavorite = (productId, e) => {
@@ -51,7 +50,6 @@ function Favorite() {
         })
         const newList = [...product]
         newList.splice(productIndex, 1)
-        console.log(newList)
         setproduct(newList)
     }
 
@@ -62,10 +60,10 @@ function Favorite() {
                 <span className="small-title">Total {product.length} {product.length > 1 ? "items" : "item"}</span>
             </div>
             <div className='favorites-list'>
-                {
+                {product.length > 0 ?
                     product.map(item => {
                         return (
-                            <section className="card entering-animation" key={item.id} onClick={() => navigate('/shop/productdetails/' + item.id)}>
+                            <section className="card entering-animation" key={item.id} onClick={() => navigate('/store/productdetails/' + item.id)}>
                                 <span className='discount-logo'></span>
                                 <img src={BytesToFile(item.image, "image/png")} alt="slider" />
                                 <RateStar rate={item.rate} size={'small'} />
@@ -90,7 +88,7 @@ function Favorite() {
                                 </div>
                             </section>
                         )
-                    })
+                    }): <h2>No Product found</h2>
                 }
             </div>
         </div>
