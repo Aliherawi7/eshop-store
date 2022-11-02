@@ -19,6 +19,9 @@
     display: flex;
     position: relative;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 .image-input img{
     width: 210px;

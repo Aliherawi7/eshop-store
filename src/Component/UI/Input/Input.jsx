@@ -27,6 +27,7 @@ const Input = (props) => {
                 className={classArray.join(' ')}
                 onChange={props.change} />
             <i className='bi bi-cloud-upload'></i>
+            <span className="warning-message">{props.warningMessage}</span>
         </div>)
     } else {
         element = (
