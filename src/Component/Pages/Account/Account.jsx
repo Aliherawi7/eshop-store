@@ -13,7 +13,6 @@ function Account() {
   const handleFullScreen = ()=>{
     
     const element = infoPanel.current;
-    console.log(element.style.left)
     if(element.style.left == "0px"){
       element.style.left= "200px"
       
