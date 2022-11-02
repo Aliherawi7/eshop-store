@@ -4,15 +4,15 @@ import Button from "../UI/Button/Button";
 import { toast } from "react-toastify";
 import { actions } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
-import { BytesToFile, getBlobOfFile} from "../Utils/BytesToFile";
+import { BytesToFile, getBlobOfFile } from "../Utils/BytesToFile";
 
-export function CustomeProduct({id = '', image = '', name = '', category = '', color = '',
+export function CustomeProduct({ id = '', image = '', name = '', category = '', color = '',
     brandName = '', size = '', description = '', quantityInDepot = '',
-    price = '', productionDate = '', back }
+    price = '', productionDate = '', discount = '', back }
 ) {
     const [, dispatch] = useStateValue();
     const [state, setState] = useState({
-        image: image? getBlobOfFile(image, "image/png"): "",
+        image: image ? getBlobOfFile(image, "image/png") : "",
         name,
         category,
         color,
@@ -22,6 +22,7 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
         quantityInDepot,
         price,
         productionDate,
+        discount
     });
     const inputsName = {
         IMAGE: 'IMAGE',
@@ -33,7 +34,8 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
         DESCRIPTION: 'DESCRIPTION',
         QUANTITY_IN_DEPOT: 'QUANTITY_IN_DEPOT',
         PRICE: 'PRICE',
-        PRODUTION_DATE: 'PRODUCTION'
+        PRODUTION_DATE: 'PRODUCTION',
+        DISCOUNT: "DISCOUNT"
     }
     const inputsHandler = (e, inputName) => {
         const value = e.target.value;
@@ -98,7 +100,12 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
                     productionDate: value
                 })
                 break;
-
+            case inputsName.DISCOUNT:
+                setState({
+                    ...state,
+                    discount: value
+                })
+                break;
             default:
                 break;
         }
@@ -140,13 +147,13 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
         }
         let httpMethod = 'POST';
         let restApi = 'save'
-        if(id != ''){
+        if (id != '') {
             formData.append("id", id)
             httpMethod = 'PUT'
             restApi = id
         }
-
-        fetch('http://localhost:8080/api/products/'+restApi, {
+        console.log(state)
+        fetch('http://localhost:8080/api/products/' + restApi, {
             method: httpMethod,
             headers: {
                 // "Content-Type": "application/json",
@@ -163,16 +170,13 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
                 toast.success("product successfully saved.", {
                     position: "bottom-center"
                 })
-                console.log(res)
-                return res.json();
             } else {
                 toast.error("Oops. something went wrong", {
                     position: "bottom-center"
                 })
+                throw new Error(res.status);
             }
-        }).then(data => {
-            console.log(data)
-        })
+        }).catch(error => console.log(error))
 
     }
 
@@ -191,7 +195,7 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
         });
         setWarningMessage([])
     }
- 
+
     return (
         <div className='add-new-product fade-in'>
             <div className="header-box">
@@ -206,7 +210,7 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
                         <div className="input-box">
                             <label>product image</label>
                             <img
-                                src={state.image ? URL.createObjectURL(state.image): "/image/slide-17.jpg"}
+                                src={state.image ? URL.createObjectURL(state.image) : "/image/slide-17.jpg"}
                             />
                             <input type="file" accept='image/*' placeholder="image" onChange={(e) => inputsHandler(e, inputsName.IMAGE)} />
                             <i className="bi bi-cloud-upload"></i>
@@ -250,11 +254,20 @@ export function CustomeProduct({id = '', image = '', name = '', category = '', c
                             <label>Production date</label>
                             <input type="date" value={state.productionDate} placeholder="Production date" onChange={(e) => inputsHandler(e, inputsName.PRODUTION_DATE)} />
                         </div>
+
                     </div>
-                    <div className="input-box">
-                        <label>Descriptions</label>
-                        <input type="text" value={state.description} placeholder="descriptions" onChange={(e) => inputsHandler(e, inputsName.DESCRIPTION)} />
+                    <div className="input-group">
+                        <div className="input-box">
+                            <label>Discount</label>
+                            <input type="number" value={state.discount} defaultValue={0} placeholder="discount" onChange={(e) => inputsHandler(e, inputsName.DISCOUNT)} />
+                        </div>
+                        <div className="input-box">
+                            <label>Descriptions</label>
+                            <input type="text" value={state.description} placeholder="descriptions" onChange={(e) => inputsHandler(e, inputsName.DESCRIPTION)} />
+                        </div>
                     </div>
+
+
                     <div className="input-box incomplete-inputs">
                         <span>{warningMessage.length > 0 ? "Please fill the: " + warningMessage.map(item => ' ' + item) : ""}</span>
                     </div>
