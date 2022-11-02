@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./Chart.css"
-import data from '../../data';
 import './Chart.css'
 import {
     Chart as ChartJS,
@@ -23,17 +22,42 @@ import {
   );
 
 function ProductLineChart() {
-    const [revenueData] = useState({
-        labels: data.revenueByMonths.labels,
+    const [revenueData, setRevenueData] = useState({
+        labels: [],
         datasets: [
           {
             label:"chart of products",
-            data: data.revenueByMonths.data,
+            data: [],
             backgroundColor: "#32a7e1",
             borderColor: "#3498db",
           },
         ],
       });
+      useEffect(() => {
+        fetch("http://localhost:8080/api/statistics/summaryByMonth?model=products",{
+          headers:{
+            "Content-Type":"application/json",
+            "Authorization": localStorage.getItem("accessToken")
+          }
+        }).then(res => res.json())
+        .then(data => {
+          setRevenueData({
+            labels: data.labels,
+            datasets: [
+              {
+                label: "summary of products",
+                data: data.data,
+                backgroundColor: "#32a7e1",
+                borderColor: "#3498db",
+              },
+            ],
+          })
+        })
+      
+        return () => {
+          
+        }
+      }, [])
 
 
     return (
