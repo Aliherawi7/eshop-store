@@ -161,9 +161,9 @@
 
 .cart-table-container {
     position: fixed;
-    bottom: 330px;
+    bottom: 310px;
     left: 650px;
-    top: 174px;
+    top: 195px;
     right: 15px;
     display: flex;
     flex-direction: column;
