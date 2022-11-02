@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './RateStar.css'
 function RateStar({ size, rate, type }) {
-    
+
+    if(rate < 0 && rate >5){
+        rate = 4
+    }
     return (
         <div className={`product-rate  star-rate-${size}`}>
-            {Array(rate).fill().map(() => {
+            {Array(Number.parseInt(rate)).fill().map(() => {
                 return <i key={Math.random()} className="star-fill bi bi-star-fill" ></i>
             })}
-            {Array(5 - rate).fill().map(() => {
+            {Array(5 - Number.parseInt(rate)).fill().map(() => {
                 return <i key={Math.random()} className="star-empty bi bi-star-fill" ></i>
             })}
             <span style={{ paddingLeft: '5px' }}>{type}</span>
