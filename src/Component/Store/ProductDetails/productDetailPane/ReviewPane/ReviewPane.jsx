@@ -1,31 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ReviewPane.css'
 import Button from '../../../../UI/Button/Button'
 import RateStar from '../../../Rate-Star/RateStar'
+import { BytesToFile } from '../../../../Utils/BytesToFile'
+import { toast } from 'react-toastify'
 
-const ReviewPane = (props) => {
+const ReviewPane = ({ productId }) => {
+    const [reviews, setReviews] = useState([])
     const [textareaState, textareaSetState] = useState({
-        name: 'review', value: '', emptyState: ''
+        name: 'review', value: '', isValid: false, warningMessage: ''
     })
     const [optionState, optionSetstate] = useState({
         name: 'rate', value: '', isValid: false, rateLevel: ''
     })
+    useEffect(() => {
+        function getReviews() {
+            fetch('http://localhost:8080/api/comments/products/' + productId, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    console.log(productId)
+                    data.map(item => {
+                        item.userImage = BytesToFile(item.userImage, { contentType: "image/png" })
+                        return item
+                    })
+                    setReviews(data);
+                })
+        }
+        getReviews();
+    }, [])
+
+
 
     const textareaChangeHandler = (e) => {
         const oldState = { ...textareaState }
         oldState.value = e.target.value
-        if (oldState.value === '') {
-            oldState.emptyState = ''
+        oldState.isValid = true
+        if (oldState.value.length > 5) {
+            oldState.warningMessage = ''
         } else {
-            oldState.emptyState = 'Review'
+            oldState.warningMessage = 'Review'
         }
         textareaSetState(oldState)
     }
     const optionChangeHandler = (event) => {
         const oldState = { ...optionState }
-
+        oldState.value = event.target.value
         if (event.target.value < 3) {
             oldState.rateLevel = "weak"
+
         } else if (event.target.value < 4) {
             oldState.rateLevel = "medium"
         }
@@ -37,6 +63,7 @@ const ReviewPane = (props) => {
         }
         optionSetstate(oldState)
     }
+    
     // submit the review + checking the values
     const submitReview = () => {
         if (!optionState.isValid) {
@@ -47,28 +74,120 @@ const ReviewPane = (props) => {
         }
         if (textareaState.value === '') {
             const oldState = { ...textareaState }
-            oldState.emptyState = 'type something, please'
+            oldState.warningMessage = 'type something, please'
+            oldState.isValid = false
             textareaSetState(oldState)
             return
         }
+        fetch("http://localhost:8080/api/comments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("accessToken")
+            },
+            body: JSON.stringify({
+                productId: productId,
+                message: textareaState.value,
+                rate: optionState.value
+            })
+        }).then(res => {
+            if (res.ok) {
+                toast.success("comment added successfully");
+                return res.json();
+            } else {
+                toast.error("oaps something went wrong");
+                throw new Error(res.status);
+            }
+        }).then(data => {
+            data.userImage = BytesToFile(data.userImage, "image/png")
+            console.log(data)
+            clearInput();
+            setReviews([...reviews, data])
+        }).catch(error => console.log(error));
+    }
+
+    // clear review input after sending the review to the server
+    const clearInput = ()=>{
+        textareaSetState({
+            name: 'review', value: '', isValid: false, warningMessage: ''
+        })
+        optionSetstate({
+            name: 'rate', value: '', isValid: false, rateLevel: ''
+        })
+    }
+
+    // perform the like action on comment
+    const likesTheComment = (commentId) =>{
+        fetch(`http://localhost:8080/api/comments/${commentId}/like`, {
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("accessToken")
+                }
+            }).then(res => res.json())
+                .then(data => {
+                    data.userImage = BytesToFile(data.userImage, "image/png")
+                    const reviewIndex = reviews.findIndex(item =>{
+                        return item.commentId  == commentId
+                    })
+                    const temp = [...reviews];
+                    temp[reviewIndex] = data
+                    setReviews(temp);
+                })
+    }
+    // perform the like action on comment
+    const dislikesTheComment = (commentId) =>{
+        fetch(`http://localhost:8080/api/comments/${commentId}/dislike`, {
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem("accessToken")
+                }
+            }).then(res => res.json())
+                .then(data => {
+                    data.userImage = BytesToFile(data.userImage, "image/png")
+                    const reviewIndex = reviews.findIndex(item =>{
+                        return item.commentId  == commentId
+                    })
+                    const temp = [...reviews];
+                    temp[reviewIndex] = data
+                    setReviews(temp);
+                })
     }
 
     return (
         <div className={`review-content fade-in`}>
+            <h4 className="title">All Reviews {reviews.length}</h4>
             <div className="last-review">
-                {props.people.map((item) => {
+                {reviews.length > 0 ? reviews.map((item) => {
                     return (
-                        <div className="people-review" key={Math.random()}>
-                            <img src={item.avatar} />
-                            <h4>{item.name}</h4>
-                            <p className="review-text">{item.reviewText}</p>
-                            <div className="date-rate">
-                                <p>{item.date}</p>
-                                <RateStar rate={4} size={"small"} />
+                        <div className="people-review border-bottom" key={Math.random()}>
+                            <div className='review-header'>
+                                <img src={item.userImage} />
+                                <div className='name-rate'>
+                                    <h4>{item.userName}</h4>
+                                    <RateStar rate={item.rate} size={"small"} />
+                                </div>
+                            </div>
+                            <div className='review-body'>
+                                <p className="review-text">{item.message}</p>
+                                <div className="likes-date-rate">
+                                    <div className='likes-dislikes align_center' >
+                                        <div className='align_center' onClick={() => likesTheComment(item.commentId)}>
+                                            <i className='bi bi-hand-thumbs-up-fill' style={{color:"#39a1f2",padding:"5px" }}></i>
+                                            <label style={{color:"#6fc04b"}}>{item.likes ==0 ? "":item.likes}</label>
+                                        </div>
+                                        <div className='align_center' onClick={() => dislikesTheComment(item.commentId)}>
+                                            <i className='bi bi-hand-thumbs-down-fill' style={{padding:"5px"}}></i>
+                                            <label style={{color:"#e15817"}}>{item.disLikes ==0 ? "":item.disLikes}</label>
+                                        </div>
+                                    </div>
+                                    <p>{item.commentDate}</p>
+                                </div>
                             </div>
                         </div>
                     )
-                })}
+                }) : <p>Be first reviewer</p>}
             </div>
             <h4 className="form-title">ADD REVIEW</h4>
             <form className="review-form">
