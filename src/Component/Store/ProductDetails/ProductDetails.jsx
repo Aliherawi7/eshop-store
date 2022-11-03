@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./ProductDetails.css"
 import Button from '../../UI/Button/Button'
 import { useParams } from 'react-router-dom'
@@ -10,17 +10,23 @@ import { actions } from '../../../reducer'
 import { BytesToFile } from '../../Utils/BytesToFile'
 import { toast } from 'react-toastify'
 import Modal from '../../UI/modal/Modal'
+import Product from '../Product/Product'
 
 const ProductDetails = () => {
     const [{ basket }, dispatch] = useStateValue()
     const [product, setProduct] = useState();
+    const [relatedProduct, setRelatedProduct] = useState([])
     const [showModal, setShowModal] = useState(false)
+    const sliderRef = useRef();
+    const sliderItemRef = useRef();
     let producstElement;
 
+    
     const { id } = useParams()
     useEffect(() => {
         window.scrollTo(0, 0)
-        const getData = () => {
+
+        const getProductInfo = () => {
             fetch('http://localhost:8080/api/products/' + id).then(res => {
                 if (res.ok) {
                     return res.json();
@@ -28,11 +34,28 @@ const ProductDetails = () => {
             }).then(data => {
                 data.image = BytesToFile(data.image, { contentType: "image/png" });
                 setProduct(data);
+                console.log(data)
+                getRalatedProducts(data.category);
+                console.log("after the get related")
             })
         }
-        getData();
+        getProductInfo();
+        function getRalatedProducts(category) {
+            fetch('http://localhost:8080/api/products/find?category=' + category).then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            }).then(relatedProducts => {
+                relatedProducts.map(item => {
+                    item.image = BytesToFile(item.image, { contentType: "image/png" })
+                    return item
+                })
+                setRelatedProduct(relatedProducts);
+            })
+        }
 
-    }, [])
+
+    }, [id])
 
     const addToBasket = () => {
         const index = basket.findIndex(item => {
@@ -78,6 +101,16 @@ const ProductDetails = () => {
                 });
             }
         })
+    }
+
+    function slideTo(direction){
+        console.dir(sliderItemRef.current)
+        const cardWidth = sliderItemRef.current.offsetWidth+20;
+        if(direction === "left"){
+            sliderRef.current.scroll(sliderRef.current.scrollLeft - cardWidth, 0)
+        }else if(direction === "right"){
+            sliderRef.current.scroll(sliderRef.current.scrollLeft + cardWidth, 0)
+        }
     }
 
     //if data have been loaded from server
@@ -132,8 +165,32 @@ const ProductDetails = () => {
                         </div>
                         <DetailsPane dataSheet={product} description={product.description} />
                     </div>
-
                 </div>
+                <section className='related_products'>
+                    <h2 className='section-title'>
+                        <span style={{ color: "var(--mainColor)" }}>Related</span> Products
+                    </h2>
+                    <div className='related_product_container' >
+                        <span className='scroll_btn' onClick={() => slideTo("left")}><i className='bi bi-chevron-left'></i></span>
+                        <div className='related_product_slider' ref={sliderRef} draggable>
+                            {relatedProduct.map(item => {
+                                return <Product
+                                    id={item.id}
+                                    image={item.image}
+                                    name={item.name}
+                                    price={item.price}
+                                    rating={item?.rate}
+                                    key={item.id}
+                                    color={item.color}
+                                    discount={item.discount}
+                                    customeRef = {sliderItemRef}
+                                />
+                            })}
+                        </div>
+                        
+                        <span className='scroll_btn right'  onClick={() => slideTo("right")}><i className='bi bi-chevron-right'></i></span>
+                    </div>
+                </section>
 
             </div>
         )
