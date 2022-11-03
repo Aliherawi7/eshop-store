@@ -7,9 +7,8 @@
     border-radius: 4px;
     font-family: inherit;
     font-size: 14px;
-    transition: background 0.2s;
     box-sizing: inherit;
-    transition: transform 0.3 ease;
+    transition: background-color 0.3s ease;
 }
 .btn:active{
     transform: scale(0.98);

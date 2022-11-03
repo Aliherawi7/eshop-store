@@ -22,6 +22,12 @@ body{
   display: flex;
   align-items: center;
 }
+.section-title{
+  font-weight: 600;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
 a:active{
   transform: scale(0.98);
 }
