@@ -22,17 +22,17 @@ const Home = () => {
                     var randomNumber = Math.random() * 10;
                     setTopSates(data.slice(randomNumber, randomNumber + 4));
                     setProducts(data);
-                }).catch(error =>{
+                }).catch(error => {
                     console.log(error);
                     getData();
                 })
         }
-        const getBrands = () => {    
+        const getBrands = () => {
             fetch('http://localhost:8080/api/brands')
                 .then(res => {
                     if (res.ok) {
                         return res.json();
-                    }else{
+                    } else {
                         throw new Error(res.status)
                     }
                 }).then(data => {
@@ -40,14 +40,14 @@ const Home = () => {
                         item.logo = BytesToFile(item.logo, "image/png")
                     })
                     setBrands(data);
-                }).catch(error =>{
+                }).catch(error => {
                     getBrands()
                     console.log(error)
                 })
         }
         getData();
         getBrands();
-        
+
     }, [])
 
     return (
@@ -86,7 +86,9 @@ const Home = () => {
                 </div>
             </div>
             <div>
-                <h2 className='section-title'><span style={{ color: "var(--mainColor)" }}>Featured</span> Products</h2>
+                <h2 className='section-title'>
+                    <span style={{ color: "var(--mainColor)" }}>Featured</span> Products
+                </h2>
                 <div className='most-ordered'>
                     {topSales?.map(item => {
                         return (
@@ -94,7 +96,7 @@ const Home = () => {
                                 <img src={BytesToFile(item.image)} />
                                 <div className='order-info'>
                                     <h1>{item.name}</h1>
-                                    <Button click={() => navigate('/shop/productdetails/' + item.id)}>SHOP NOW</Button>
+                                    <Button click={() => navigate('/store/productdetails/' + item.id)}>SHOP NOW</Button>
                                 </div>
                             </div>)
                     })}
@@ -102,7 +104,9 @@ const Home = () => {
             </div>
 
             <div className='popular-brands'>
-                <h2 className='section-title'>Popular Brands</h2>
+                <h2 className='section-title'>
+                    <span style={{ color: "var(--mainColor)" }}>Popular</span> Brands
+                </h2>
                 <div className='brands-container'>
                     {brands.map(brand => {
                         return (
