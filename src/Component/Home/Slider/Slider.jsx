@@ -38,6 +38,7 @@ function Slider({products, size = 5, delay = 8,}) {
         }
         slides.current.style.transform = `translateX(${counter}vw)`;
     }
+
     return (
         <div className='slider'>
             <div className='slider-container'>
@@ -51,7 +52,7 @@ function Slider({products, size = 5, delay = 8,}) {
                                     <div className='image-info'>
                                         <h1><span style={{ textTransform: "uppercase" }}>{item.name}</span></h1>
                                         <h2>UP TO {item.discount}% OFF ON TOP BRANDS</h2>
-                                        <Link to={'/shop/productdetails/' + item.id}>SHOP NOW</Link>
+                                        <Link to={'/store/productdetails/' + item.id}>SHOP NOW</Link>
                                     </div>
                                 </div>
                             )

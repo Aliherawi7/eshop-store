@@ -18,15 +18,14 @@
 
 .slider-container .slides .slides-container {
     display: flex;
-    flex-shrink: 0;
-    width: max-content;
-    transition: transform 2s cubic-bezier(0.71, 0.15, 0.3, 0.81);
+    transition : transform 2s cubic-bezier(0.71, 0.15, 0.3, 0.81);
 }
 
 .slider-item {
     display: flex;
     justify-content: space-around;
     width: 100vw;
+    flex-shrink: 0;
     padding: 20px 150px;
 }
 
