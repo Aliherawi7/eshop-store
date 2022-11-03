@@ -6,7 +6,7 @@ import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
 import { toast } from 'react-toastify'
 
-const Product = ({ image, id, name, price, rating, color, discount }) => {
+const Product = ({ image, id, name, price, rating, color, discount, customeRef}) => {
     const navigate = useNavigate()
     const [{ basket }, dispatch] = useStateValue()
     const addToBasket = (e) => {
@@ -59,8 +59,8 @@ const Product = ({ image, id, name, price, rating, color, discount }) => {
     }
 
     return (
-        <section className="card entering-animation" onClick={() => navigate('/store/productdetails/' + id)}>
-            <span className='discount-logo'></span>
+        <section className="card entering-animation" onClick={() => navigate('/store/productdetails/' + id)} ref={customeRef}>
+            {discount > 0 ? <span className='discount-value'>{discount ? discount + "% " : ""}</span> :""}
             <img src={image} alt="slider" />
             <RateStar rate={rating} size={'small'} />
             <div className="product-info">
@@ -74,7 +74,7 @@ const Product = ({ image, id, name, price, rating, color, discount }) => {
                     }
                     <span className='after-discount'>
                         <sup><i className='bi bi-currency-dollar'></i></sup>
-                        {price - (price * discount / 100)}<sub>{discount ? "("+discount+"%)": ""}</sub>
+                        {price - (price * discount / 100)}
                     </span>
                 </div>
             </div>
