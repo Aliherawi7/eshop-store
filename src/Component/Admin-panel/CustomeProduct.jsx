@@ -8,7 +8,7 @@ import { BytesToFile, getBlobOfFile } from "../Utils/BytesToFile";
 
 export function CustomeProduct({ id = '', image = '', name = '', category = '', color = '',
     brandName = '', size = '', description = '', quantityInDepot = '',
-    price = '', productionDate = '', discount = '', back }
+    price = '', productionDate = '', discount = 0, back }
 ) {
     const [, dispatch] = useStateValue();
     const [state, setState] = useState({
@@ -259,7 +259,7 @@ export function CustomeProduct({ id = '', image = '', name = '', category = '', 
                     <div className="input-group">
                         <div className="input-box">
                             <label>Discount</label>
-                            <input type="number" value={state.discount} defaultValue={0} placeholder="discount" onChange={(e) => inputsHandler(e, inputsName.DISCOUNT)} />
+                            <input type="number" value={state.discount} placeholder="discount" onChange={(e) => inputsHandler(e, inputsName.DISCOUNT)} />
                         </div>
                         <div className="input-box">
                             <label>Descriptions</label>
