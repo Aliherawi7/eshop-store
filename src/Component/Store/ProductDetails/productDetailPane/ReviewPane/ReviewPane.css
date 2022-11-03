@@ -17,7 +17,7 @@
 
 .review-form select{
     font-size: 12px;
-    width: 20%;
+    width: 100px;
     outline: none;
     border-radius: 5px;
     border:2px solid #e1e1e1;
@@ -41,6 +41,8 @@
 /* pople review  */
 .last-review{
     margin: 15px;
+    max-height: 370px;
+    overflow-y: scroll;
 }
 .people-review{
     margin:10px auto;
@@ -130,23 +132,12 @@
 @media (max-width:768px){
     .review-form{
         width: 100%;
+        margin-left: 15px;
     }
-    .review-form .input-container{
-        display: block;
-        width: 95%;
+    .people-review{
+        flex-flow: wrap;
     }
-    .review-form select, .review-form textarea{
-        display: block;
-        width: 95%;
-    }
-    .form-title{
-        width: 95%;
-    }
-    .review-form .input-container label, 
-    .review-form .input-container u{
-        font-size: 15px;
-        width: 100%;
-    }
+
     .product-info button{
         width: 100%;
     }
