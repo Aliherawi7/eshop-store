@@ -64,7 +64,7 @@ function ProductLineChart() {
         <div className='line-chart chart'>
             <Line
                 data={revenueData}
-                title={"summary of orders"}
+                title={"summary of products"}
             />
         </div>
     )
