@@ -210,7 +210,7 @@ export function ProductsPanel() {
                             return (
                                 <tr key={product.id}>
                                     <td name='id'>{product.id}</td>
-                                    <td name='name'><img src={BytesToFile(product.image, "image/png")} />{product.name?.toUpperCase()}</td>
+                                    <td name='name'><img src={BytesToFile(product.images[0], "image/png")} />{product.name?.toUpperCase()}</td>
                                     <td >{product.category?.toUpperCase()}</td>
                                     <td >{product.brandName?.toUpperCase()}</td>
                                     <td name="price">${product.price}</td>
