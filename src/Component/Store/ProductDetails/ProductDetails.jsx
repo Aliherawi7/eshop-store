@@ -3,7 +3,7 @@ import "./ProductDetails.css"
 import Button from '../../UI/Button/Button'
 import { useParams } from 'react-router-dom'
 import Loading from '../../UI/Loading/Loading'
-import DetailsPane from './productDetailPane/detailsPane'
+import DetailsPane from './productDetailPane/DetailsPane'
 import { useStateValue } from '../../../StateProvider'
 import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
@@ -15,13 +15,12 @@ import Product from '../Product/Product'
 const ProductDetails = () => {
     const [{ basket }, dispatch] = useStateValue()
     const [product, setProduct] = useState();
-    const [relatedProduct, setRelatedProduct] = useState([])
+    const [relatedProduct, setRelatedProduct] = useState([]);
+    const [productImage, setProductImage] = useState('');
     const [showModal, setShowModal] = useState(false)
     const sliderRef = useRef();
     const sliderItemRef = useRef();
     let producstElement;
-
-    
     const { id } = useParams()
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -32,11 +31,14 @@ const ProductDetails = () => {
                     return res.json();
                 }
             }).then(data => {
-                data.image = BytesToFile(data.image, { contentType: "image/png" });
-                setProduct(data);
                 console.log(data)
+                data.images = data.images.map((item) => {
+                    return BytesToFile(item, { contentType: "image/png" });
+                })
+                setProduct(data);
+                setProductImage(data.images[0])
                 getRalatedProducts(data.category);
-                console.log("after the get related")
+
             })
         }
         getProductInfo();
@@ -46,10 +48,12 @@ const ProductDetails = () => {
                     return res.json();
                 }
             }).then(relatedProducts => {
+
                 relatedProducts.map(item => {
-                    item.image = BytesToFile(item.image, { contentType: "image/png" })
-                    return item
+                    item.images[0] = BytesToFile(item.images[0], { contentType: "image/png" })
+                    return item;
                 })
+                console.log(relatedProduct)
                 setRelatedProduct(relatedProducts);
             })
         }
@@ -61,6 +65,9 @@ const ProductDetails = () => {
         const index = basket.findIndex(item => {
             return item.id == id;
         })
+
+        // if there are not enough product in depot
+        if (index >= 0 && basket[index].quantity >= product.quantityInDepot) { return; }
 
         if (index >= 0) {
             dispatch({
@@ -77,7 +84,7 @@ const ProductDetails = () => {
             type: 'ADD_TO_BASKET',
             item: {
                 name: product.name,
-                image: product.image,
+                image: product.images[0],
                 price: product.price,
                 rating: product.rating,
                 id: id,
@@ -103,14 +110,29 @@ const ProductDetails = () => {
         })
     }
 
-    function slideTo(direction){
+    function slideTo(direction) {
         console.dir(sliderItemRef.current)
-        const cardWidth = sliderItemRef.current.offsetWidth+20;
-        if(direction === "left"){
+        const cardWidth = sliderItemRef.current.offsetWidth + 20;
+        if (direction === "left") {
             sliderRef.current.scroll(sliderRef.current.scrollLeft - cardWidth, 0)
-        }else if(direction === "right"){
+        } else if (direction === "right") {
             sliderRef.current.scroll(sliderRef.current.scrollLeft + cardWidth, 0)
         }
+    }
+
+    function modalSlide(previosImage, direction){
+        const index = product?.images.findIndex(item => {
+            return item == previosImage
+        })
+        switch(direction){
+            case 'left':
+                setProductImage(product.images[index - 1 < 0  ? product.images.length-1 : index-1]);
+                break;
+            case 'right':
+                setProductImage(product.images[index + 1 == product.images.length ? 0 : index+1]);
+                break
+        }
+        
     }
 
     //if data have been loaded from server
@@ -121,14 +143,20 @@ const ProductDetails = () => {
                 <div className="product_details">
                     <section className='product_images'>
                         <Button btnType="transparent zoom-btn" click={() => setShowModal(!showModal)} ><i className='bi bi-zoom-in'></i></Button>
-                        <img src={product.image} className="product_image" alt={product.name} />
+                        <img src={productImage} className="product_image" alt={product.name} />
                         <Modal show={showModal} ModalClose={() => setShowModal(!showModal)}>
-                            <img src={product.image} alt={product.name} />
+                            <span className='slide-left' onClick={() => modalSlide(productImage, 'left')}> <i className='bi bi-chevron-left'></i></span>
+                            <img src={productImage} alt={product.name} />
+                            <span className='slide-left right' onClick={() => modalSlide(productImage, 'right')}><i className='bi bi-chevron-right'></i></span>
                         </Modal>
                         <div className='different_sides align_center'>
-                            <div className='image_side active'><img src={product.image} alt={product.name} /></div>
-                            <div className='image_side'><img src={product.image} alt={product.name} /></div>
-                            <div className='image_side'><img src={product.image} alt={product.name} /></div>
+                            {product.images.map((item) => {
+                                return (
+                                    <div className={'image_side'+ (item == productImage ? ' active': '')} onClick={()=> setProductImage(item)}>
+                                        <img src={item} alt={product.name} />
+                                    </div>
+                                )
+                            })}
                         </div>
                     </section>
                     <div className="product-info border-bottom">
@@ -151,7 +179,7 @@ const ProductDetails = () => {
                                 </div>
                                 <div className='rate-review align_center'>
                                     <RateStar rate={product.rate} size={"large"} />
-                                    <span>21 Reviews</span>
+                                    <span>{product.reviews} Reviews</span>
                                 </div>
 
                             </div>
@@ -175,20 +203,20 @@ const ProductDetails = () => {
                         <div className='related_product_slider' ref={sliderRef} draggable>
                             {relatedProduct.map(item => {
                                 return <Product
-                                    id={item.id}
-                                    image={item.image}
+                                    id={item.productId}
+                                    image={item.images[0]}
                                     name={item.name}
                                     price={item.price}
                                     rating={item?.rate}
-                                    key={item.id}
+                                    key={item.productId}
                                     color={item.color}
                                     discount={item.discount}
-                                    customeRef = {sliderItemRef}
+                                    customeRef={sliderItemRef}
                                 />
                             })}
                         </div>
-                        
-                        <span className='scroll_btn right'  onClick={() => slideTo("right")}><i className='bi bi-chevron-right'></i></span>
+
+                        <span className='scroll_btn right' onClick={() => slideTo("right")}><i className='bi bi-chevron-right'></i></span>
                     </div>
                 </section>
 

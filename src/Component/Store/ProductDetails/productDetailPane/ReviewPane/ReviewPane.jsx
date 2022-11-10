@@ -4,9 +4,11 @@ import Button from '../../../../UI/Button/Button'
 import RateStar from '../../../Rate-Star/RateStar'
 import { BytesToFile } from '../../../../Utils/BytesToFile'
 import { toast } from 'react-toastify'
+import { useParams } from 'react-router-dom'
 
-const ReviewPane = ({ productId }) => {
+const ReviewPane = () => {
     const [reviews, setReviews] = useState([])
+    const { id } = useParams()
     const [textareaState, textareaSetState] = useState({
         name: 'review', value: '', isValid: false, warningMessage: ''
     })
@@ -15,23 +17,22 @@ const ReviewPane = ({ productId }) => {
     })
     useEffect(() => {
         function getReviews() {
-            fetch('http://localhost:8080/api/comments/products/' + productId, {
+            fetch('http://localhost:8080/api/comments/products/' + id, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             }).then(res => res.json())
                 .then(data => {
-                    console.log(data)
-                    console.log(productId)
                     data.map(item => {
                         item.userImage = BytesToFile(item.userImage, { contentType: "image/png" })
                         return item
                     })
                     setReviews(data);
+                    console.log(reviews, "reivew in fetch")
                 })
         }
         getReviews();
-    }, [])
+    }, [id])
 
 
 
@@ -63,7 +64,7 @@ const ReviewPane = ({ productId }) => {
         }
         optionSetstate(oldState)
     }
-    
+
     // submit the review + checking the values
     const submitReview = () => {
         if (!optionState.isValid) {
@@ -86,7 +87,7 @@ const ReviewPane = ({ productId }) => {
                 "Authorization": localStorage.getItem("accessToken")
             },
             body: JSON.stringify({
-                productId: productId,
+                productId: id,
                 message: textareaState.value,
                 rate: optionState.value
             })
@@ -107,7 +108,7 @@ const ReviewPane = ({ productId }) => {
     }
 
     // clear review input after sending the review to the server
-    const clearInput = ()=>{
+    const clearInput = () => {
         textareaSetState({
             name: 'review', value: '', isValid: false, warningMessage: ''
         })
@@ -117,42 +118,42 @@ const ReviewPane = ({ productId }) => {
     }
 
     // perform the like action on comment
-    const likesTheComment = (commentId) =>{
+    const likesTheComment = (commentId) => {
         fetch(`http://localhost:8080/api/comments/${commentId}/like`, {
-                method:"POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("accessToken")
-                }
-            }).then(res => res.json())
-                .then(data => {
-                    data.userImage = BytesToFile(data.userImage, "image/png")
-                    const reviewIndex = reviews.findIndex(item =>{
-                        return item.commentId  == commentId
-                    })
-                    const temp = [...reviews];
-                    temp[reviewIndex] = data
-                    setReviews(temp);
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("accessToken")
+            }
+        }).then(res => res.json())
+            .then(data => {
+                data.userImage = BytesToFile(data.userImage, "image/png")
+                const reviewIndex = reviews.findIndex(item => {
+                    return item.commentId == commentId
                 })
+                const temp = [...reviews];
+                temp[reviewIndex] = data
+                setReviews(temp);
+            })
     }
     // perform the like action on comment
-    const dislikesTheComment = (commentId) =>{
+    const dislikesTheComment = (commentId) => {
         fetch(`http://localhost:8080/api/comments/${commentId}/dislike`, {
-                method:"POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem("accessToken")
-                }
-            }).then(res => res.json())
-                .then(data => {
-                    data.userImage = BytesToFile(data.userImage, "image/png")
-                    const reviewIndex = reviews.findIndex(item =>{
-                        return item.commentId  == commentId
-                    })
-                    const temp = [...reviews];
-                    temp[reviewIndex] = data
-                    setReviews(temp);
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("accessToken")
+            }
+        }).then(res => res.json())
+            .then(data => {
+                data.userImage = BytesToFile(data.userImage, "image/png")
+                const reviewIndex = reviews.findIndex(item => {
+                    return item.commentId == commentId
                 })
+                const temp = [...reviews];
+                temp[reviewIndex] = data
+                setReviews(temp);
+            })
     }
 
     return (
@@ -174,12 +175,13 @@ const ReviewPane = ({ productId }) => {
                                 <div className="likes-date-rate">
                                     <div className='likes-dislikes align_center' >
                                         <div className='align_center' onClick={() => likesTheComment(item.commentId)}>
-                                            <i className='bi bi-hand-thumbs-up-fill' style={{color:"#39a1f2",padding:"5px" }}></i>
-                                            <label style={{color:"#6fc04b"}}>{item.likes ==0 ? "":item.likes}</label>
+                                            <i className='bi bi-hand-thumbs-up-fill' style={{ color: "#39a1f2", padding: "5px" }}></i>
+                                            <label style={{ color: "#6fc04b" }}>{item.likes == 0 ? "" : item.likes}</label>
                                         </div>
                                         <div className='align_center' onClick={() => dislikesTheComment(item.commentId)}>
-                                            <i className='bi bi-hand-thumbs-down-fill' style={{padding:"5px"}}></i>
-                                            <label style={{color:"#e15817"}}>{item.disLikes ==0 ? "":item.disLikes}</label>
+                                            <i className='bi bi-hand-thumbs-down-fill' style={{ padding: "5px" }}></i>
+                                            <label style={{ color: "#e15817" }}>{item.disLikes == 0 ? "" : item.disLikes}
+                                            </label>
                                         </div>
                                     </div>
                                     <p>{item.commentDate}</p>
