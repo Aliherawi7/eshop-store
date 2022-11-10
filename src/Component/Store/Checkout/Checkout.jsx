@@ -4,6 +4,7 @@ import Button from '../../UI/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
 import { actions, getBasketTotal, getBasketTotalItems } from '../../../reducer'
+import { toast } from 'react-toastify'
 
 const Checkout = () => {
     const navigate = useNavigate()
@@ -13,6 +14,15 @@ const Checkout = () => {
         const index = basket.findIndex(item => {
             return item.id == id;
         })
+
+        // if there are not enough product in depot
+        if(index >= 0 && basket[index].quantity >= basket[index].quantityInDepot) {
+            toast.success("werptiwperoi",{
+                position:'bottom-left'
+            });
+            return;
+        }
+
         const quantity = basket[index].quantity
         dispatch({
             type: actions.CHANGE_QUANTITY,
