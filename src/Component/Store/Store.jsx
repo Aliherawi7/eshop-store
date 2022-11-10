@@ -18,7 +18,7 @@ const Store = () => {
                 }
             }).then(data => {
                 data.map(item => {
-                    item.image = BytesToFile(item.image, { contentType: "image/png" })
+                    item.image = BytesToFile(item.images[0], { contentType: "image/png" })
                     return item
                 })
                 
@@ -78,14 +78,15 @@ const Store = () => {
                 <div className="product-list">
                     {sortedProduct.map((item) => (
                         <Product
-                            id={item.id}
+                            id={item.productId}
                             image={item.image}
                             name={item.name}
                             price={item.price}
                             rating={item?.rate}
-                            key={item.id}
+                            key={item.productId}
                             color={item.color}
                             discount={item.discount}
+                            quantityInDepot = {item.quantityInDepot}
                         />
                     ))}
                 </div>
