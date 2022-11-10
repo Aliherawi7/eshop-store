@@ -19,6 +19,7 @@ const Home = () => {
                         return res.json();
                     }
                 }).then(data => {
+                    console.log(data)
                     var randomNumber = Math.random() * 10;
                     setTopSates(data.slice(randomNumber, randomNumber + 4));
                     setProducts(data);
@@ -92,8 +93,8 @@ const Home = () => {
                 <div className='most-ordered'>
                     {topSales?.map(item => {
                         return (
-                            <div className='ordered-item' key={item.id}>
-                                <img src={BytesToFile(item.image)} />
+                            <div className='ordered-item' key={item.productId}>
+                                <img src={BytesToFile(item.images[0])} />
                                 <div className='order-info'>
                                     <h1>{item.name}</h1>
                                     <Button click={() => navigate('/store/productdetails/' + item.id)}>SHOP NOW</Button>
