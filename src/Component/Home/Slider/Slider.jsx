@@ -47,12 +47,12 @@ function Slider({products, size = 5, delay = 8,}) {
                     <div className='slides-container' ref={slides} >
                         {product.map(item => {
                             return (
-                                <div className={`slider-item `} key={item.id}>
-                                    <img className='slider-image' src={BytesToFile(item.image, "image/png")} alt={item.name} />
+                                <div className={`slider-item `} key={item.productId}>
+                                    <img className='slider-image' src={BytesToFile(item.images[0], "image/png")} alt={item.name} />
                                     <div className='image-info'>
                                         <h1><span style={{ textTransform: "uppercase" }}>{item.name}</span></h1>
                                         <h2>UP TO {item.discount}% OFF ON TOP BRANDS</h2>
-                                        <Link to={'/store/productdetails/' + item.id}>SHOP NOW</Link>
+                                        <Link to={'/store/productdetails/' + item.productId}>SHOP NOW</Link>
                                     </div>
                                 </div>
                             )
