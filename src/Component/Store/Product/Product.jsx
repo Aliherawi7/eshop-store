@@ -6,7 +6,7 @@ import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
 import { toast } from 'react-toastify'
 
-const Product = ({ image, id, name, price, rating, color, discount, customeRef}) => {
+const Product = ({ image, id, name, price, rating, quantityInDepot, discount, customeRef}) => {
     const navigate = useNavigate()
     const [{ basket }, dispatch] = useStateValue()
     const addToBasket = (e) => {
@@ -14,6 +14,9 @@ const Product = ({ image, id, name, price, rating, color, discount, customeRef})
         const index = basket.findIndex(item => {
             return item.id == id;
         })
+        
+        // if there are not enough product in depot
+        if(index >= 0 && basket[index].quantity >= quantityInDepot) {return;}
 
         if (index >= 0) {
             dispatch({
@@ -34,6 +37,7 @@ const Product = ({ image, id, name, price, rating, color, discount, customeRef})
                 price: price,
                 rating: rating,
                 id: id,
+                quantityInDepot: quantityInDepot,
                 quantity: 1
             }
         })
