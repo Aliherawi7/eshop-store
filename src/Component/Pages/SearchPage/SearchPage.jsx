@@ -24,6 +24,12 @@ const SearchPage = () => {
                 throw new Error(res.status)
             }
         }).then(data => {
+            data.map(item => {
+                item.images = item.images.map(image =>{
+                    return BytesToFile(image ,"image/png")
+                })
+            })
+            console.log(data)
             setProducts(data)
         }).catch( error => console.log(error))
     }
@@ -39,8 +45,8 @@ return (
         <div className="product-list">
             {products.length == 0 ? <NotFound size="small" /> : products?.map((item) => (
                 <Product
-                    id={item.id}
-                    image={BytesToFile(item.image, "image/png")}
+                    id={item.productId}
+                    image={item.images[0]}
                     name={item.name}
                     price={item.price}
                     rating={item.rate}
