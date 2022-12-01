@@ -97,7 +97,7 @@ const Home = () => {
                                 <img src={BytesToFile(item.images[0])} />
                                 <div className='order-info'>
                                     <h1>{item.name}</h1>
-                                    <Button click={() => navigate('/store/productdetails/' + item.id)}>SHOP NOW</Button>
+                                    <Button click={() => navigate('/store/productdetails/' + item.productId)}>SHOP NOW</Button>
                                 </div>
                             </div>)
                     })}
