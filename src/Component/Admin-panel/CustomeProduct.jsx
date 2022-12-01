@@ -6,13 +6,13 @@ import { actions } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
 import { BytesToFile, getBlobOfFile } from "../Utils/BytesToFile";
 
-export function CustomeProduct({ id = '', image = '', name = '', category = '', color = '',
+export function CustomeProduct({ id = '', images = '', name = '', category = '', color = '',
     brandName = '', size = '', description = '', quantityInDepot = '',
     price = '', productionDate = '', discount = 0, back }
 ) {
     const [, dispatch] = useStateValue();
     const [state, setState] = useState({
-        image: image ? getBlobOfFile(image, "image/png") : "",
+        image: images ? getBlobOfFile(images[0], "image/png") : "",
         name,
         category,
         color,
