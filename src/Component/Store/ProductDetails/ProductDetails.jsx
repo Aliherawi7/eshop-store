@@ -100,7 +100,7 @@ const ProductDetails = () => {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem("accessToken")
             },
-            body: JSON.stringify({ productId: product.id })
+            body: JSON.stringify({ productId: product.productId })
         }).then(res => {
             if (res.ok) {
                 toast.success("successfully added", {
