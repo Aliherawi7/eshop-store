@@ -63,9 +63,9 @@ function Favorite() {
                 {product.length > 0 ?
                     product.map(item => {
                         return (
-                            <section className="card entering-animation" key={item.id} onClick={() => navigate('/store/productdetails/' + item.id)}>
+                            <section className="card entering-animation" key={item.productId} onClick={() => navigate('/store/productdetails/' + item.productId)}>
                                 <span className='discount-logo'></span>
-                                <img src={BytesToFile(item.image, "image/png")} alt="slider" />
+                                <img src={BytesToFile(item.images[0], "image/png")} alt="slider" />
                                 <RateStar rate={item.rate} size={'small'} />
                                 <div className="product-info">
                                     <h4>{item.name}</h4>
@@ -84,7 +84,7 @@ function Favorite() {
                                 </div>
                                 <div className="card-button" >
                                     <i className="bi bi-cart4" onClick={(e) => ((e))}></i>
-                                    <i className="bi bi-trash" onClick={(e) => removeFavorite(item.id, e)}></i>
+                                    <i className="bi bi-trash" onClick={(e) => removeFavorite(item.productId, e)}></i>
                                 </div>
                             </section>
                         )
