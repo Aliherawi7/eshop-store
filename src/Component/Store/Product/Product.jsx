@@ -45,7 +45,6 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
 
     const addToFavorite = (productId, e)=>{
         e.stopPropagation();
-        console.log(localStorage.getItem('accessToken'))
         fetch("http://localhost:8080/api/favorites",{
             method:"POST",
             headers:{
