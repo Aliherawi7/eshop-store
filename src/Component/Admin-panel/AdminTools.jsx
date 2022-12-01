@@ -168,6 +168,7 @@ export function ProductsPanel() {
         setState(false);
     }
     const editProduct = (item) => {
+        console.log(item)
         setProductDetail(item);
         setState(false);
     }
@@ -240,7 +241,7 @@ export function ProductsPanel() {
             back={() => setState(true)}
             id={productDetail?.id}
             name={productDetail?.name}
-            image={productDetail?.image}
+            images={productDetail?.images}
             size={productDetail?.size}
             productionDate={productDetail?.productionDate}
             price={productDetail?.price}
