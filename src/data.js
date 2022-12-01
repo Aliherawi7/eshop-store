@@ -21,6 +21,23 @@ const data = {
       icon: "bi:coin",
     },
   ],
+  6: {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "July",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    data: [250, 200, 300, 280, 100, 220, 310, 190, 200, 120, 250, 350],
+  },
   revenueByMonths: {
     labels: [
       "Jan",
