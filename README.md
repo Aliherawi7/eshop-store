@@ -4,7 +4,8 @@
 <!-- Email: Aliherawi7@gmail.com -->
 <!-- Linked in : https://linkedin.com/in/ali-herawi -->
 
-eshop-store developed and build with **React (v17.0.2)**, **JavaScript** and **React Router v6**. For Styles and animations, is used **CSS**.
+eshop-store developed and build with **React (v17.0.2)**, **JavaScript** ,
+**react-chartjs-2 (v4.3.1)**, **react-toastify (v9.0.8)** and **React Router v6**. For Styles and animations, is used **CSS**.
 
 # Demo
 
@@ -16,9 +17,11 @@ Visit: [Project eshop demo](https://eshop-demo.netlify.app/)
 
 * Responsive layout
 * React Hooks
+* React Toastify
 * React Context
-* Slider
+* Custome Slider
 * React Router v6
+* React-Chartjs
 * Bootstrap icon
 
 
@@ -27,8 +30,12 @@ Visit: [Project eshop demo](https://eshop-demo.netlify.app/)
 * home
 * Store
 * Search
+* admin panel
+* account setting
+* favorite products
 * Basket
 * Login
+* Signup
 * Product info
 * 404 Error(not found)
 
