@@ -5,7 +5,7 @@ import Button from '../../UI/Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStateValue } from "../../../StateProvider"
 import { actions } from '../../../reducer'
-import { BytesToFile } from '../../Utils/BytesToFile'
+
 const Login = () => {
     const navigate = useNavigate();
     const [loginInputState, setLoginInputState] = useState({
