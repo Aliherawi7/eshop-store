@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './ReviewPane.css'
 import Button from '../../../../UI/Button/Button'
 import RateStar from '../../../Rate-Star/RateStar'
-import { BytesToFile } from '../../../../Utils/BytesToFile'
+import { BytesToFile } from '../../../../../Utils/BytesToFile'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 
