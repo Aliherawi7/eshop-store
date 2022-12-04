@@ -6,7 +6,7 @@ import TogglerMenu from '../TogglerMenu/TogglerMenu'
 import { useNavigate, Link } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
 import { actions, getBasketTotalItems } from "../../../reducer"
-import { BytesToFile } from '../../Utils/BytesToFile'
+import { BytesToFile } from '../../../Utils/BytesToFile'
 import Modal from '../../UI/modal/Modal'
 import BasketPreview from '../BasketPreview/BasketPreview'
 
