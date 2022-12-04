@@ -35,7 +35,7 @@ const reducer = (state, action) => {
                 return item.id == action.item.id
             });
 
-            //if the item is already exist in the basket then increase item's quantity
+            //if the item is already exist in the basket then increase item quantity
             if(index>=0){
                 state.basket[index].quantity +=1;
                 return {...state, basket:state.basket};
@@ -47,7 +47,7 @@ const reducer = (state, action) => {
         }
         case actions.CHANGE_QUANTITY:{
             
-            //if the item is already exist in the basket then change item's quantity
+            //if the item is already exist in the basket then change item quantity
             if(action.item.index>=0){
                 state.basket[action.item.index].quantity = action.item.quantity;
             }
