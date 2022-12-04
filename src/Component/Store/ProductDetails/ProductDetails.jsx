@@ -7,10 +7,11 @@ import DetailsPane from './productDetailPane/DetailsPane'
 import { useStateValue } from '../../../StateProvider'
 import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
-import { BytesToFile } from '../../Utils/BytesToFile'
+import { BytesToFile } from '../../../Utils/BytesToFile'
 import { toast } from 'react-toastify'
 import Modal from '../../UI/modal/Modal'
 import Product from '../Product/Product'
+import ApiUrls from "../../../Constants/ApiUrls"
 
 const ProductDetails = () => {
     const [{ basket }, dispatch] = useStateValue()
@@ -26,7 +27,7 @@ const ProductDetails = () => {
         window.scrollTo(0, 0)
 
         const getProductInfo = () => {
-            fetch('http://localhost:8080/api/products/' + id).then(res => {
+            fetch(ApiUrls.hostName+ApiUrls.products.getProduct + id).then(res => {
                 if (res.ok) {
                     return res.json();
                 }
@@ -43,7 +44,7 @@ const ProductDetails = () => {
         }
         getProductInfo();
         function getRalatedProducts(category) {
-            fetch('http://localhost:8080/api/products/find?category=' + category).then(res => {
+            fetch(ApiUrls.hostName+ApiUrls.products.findProducts +'category=' + category).then(res => {
                 if (res.ok) {
                     return res.json();
                 }
@@ -94,7 +95,7 @@ const ProductDetails = () => {
     }
 
     const addToFavorite = () => {
-        fetch("http://localhost:8080/api/favorites", {
+        fetch(ApiUrls.favorites.addFavorite, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
