@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./Store.css"
 import SmallLoading from '../UI/Loading/SmallLoading'
 import Product from './Product/Product'
-import { BytesToFile } from '../Utils/BytesToFile'
+import { BytesToFile } from '../../Utils/BytesToFile'
 
 const Store = () => {
     let producstElement;
