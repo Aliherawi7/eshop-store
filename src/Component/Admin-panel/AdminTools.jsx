@@ -7,7 +7,7 @@ import OrderBarChart from './OrderBarChart'
 import { toast } from 'react-toastify'
 import { useStateValue } from '../../StateProvider'
 import { actions } from '../../reducer'
-import { BytesToFile, getBlobOfFile } from '../Utils/BytesToFile'
+import { BytesToFile } from '../../Utils/BytesToFile'
 import Modal from '../UI/modal/Modal'
 import ProductLineChart from './ProductLineChart'
 
