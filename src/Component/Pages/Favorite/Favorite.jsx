@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BytesToFile } from '../../Utils/BytesToFile';
+import { BytesToFile } from '../../../Utils/BytesToFile';
 import RateStar from '../../Store/Rate-Star/RateStar';
 import { useNavigate } from 'react-router-dom';
 import './Favorite.css'
