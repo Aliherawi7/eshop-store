@@ -4,7 +4,7 @@ import Button from "../UI/Button/Button";
 import { toast } from "react-toastify";
 import { actions } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
-import { BytesToFile, getBlobOfFile } from "../Utils/BytesToFile";
+import { BytesToFile, getBlobOfFile } from "../../Utils/BytesToFile";
 
 export function CustomeProduct({ id = '', images = '', name = '', category = '', color = '',
     brandName = '', size = '', description = '', quantityInDepot = '',
