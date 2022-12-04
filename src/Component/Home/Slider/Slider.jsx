@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./Slider.css"
-import { BytesToFile } from "../../Utils/BytesToFile"
+import { BytesToFile } from "../../../Utils/BytesToFile"
 import { Link } from "react-router-dom"
 
 function Slider({products, size = 5, delay = 8,}) {
