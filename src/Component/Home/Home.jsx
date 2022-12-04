@@ -3,8 +3,7 @@ import "./Home.css"
 import Slider from './Slider/Slider'
 import Button from '../UI/Button/Button'
 import { useNavigate } from 'react-router-dom'
-import { BytesToFile } from '../Utils/BytesToFile'
-import { getDatasetAtEvent } from 'react-chartjs-2'
+import { BytesToFile } from '../../Utils/BytesToFile'
 
 const Home = () => {
     const navigate = useNavigate();
