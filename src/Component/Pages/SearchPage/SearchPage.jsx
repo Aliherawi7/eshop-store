@@ -4,7 +4,7 @@ import Button from '../../UI/Button/Button'
 import Product from '../../Store/Product/Product'
 import { useParams } from 'react-router-dom'
 import NotFound from '../NotFoundPage/NotFound'
-import { BytesToFile } from '../../Utils/BytesToFile'
+import { BytesToFile } from '../../../Utils/BytesToFile'
 const SearchPage = () => {
     const { id } = useParams()
     const [searchInput, setSearchInput] = useState(id)
