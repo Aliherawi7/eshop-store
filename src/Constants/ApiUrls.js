@@ -15,8 +15,8 @@ const ApiUrls = {
         addRoleToUser: "/api/users/addRoleToUser"
     },
     favorites:{
-        allFavorites:"api/favorites",
-        addFavorite:"api/favorites"
+        allFavorites:"/api/favorites",
+        addFavorite:"/api/favorites"
 
     }
 }
