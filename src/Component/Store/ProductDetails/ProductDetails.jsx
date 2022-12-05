@@ -35,7 +35,6 @@ const ProductDetails = () => {
             setProductImage(images[0])
         }
 
-
     }, [data])
 
     const addToBasket = () => {
@@ -181,7 +180,6 @@ const ProductDetails = () => {
         <div>{productsElement}</div>
     )
     
-
 }
 
 export default ProductDetails
