@@ -28,7 +28,6 @@ const ReviewPane = () => {
                         return item
                     })
                     setReviews(data);
-                    console.log(reviews, "reivew in fetch")
                 })
         }
         getReviews();
