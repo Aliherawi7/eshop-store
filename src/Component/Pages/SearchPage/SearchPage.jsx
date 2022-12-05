@@ -4,59 +4,65 @@ import Button from '../../UI/Button/Button'
 import Product from '../../Store/Product/Product'
 import { useParams } from 'react-router-dom'
 import NotFound from '../NotFoundPage/NotFound'
+import useFetch from "../../../Hook/useFetch"
+import ApiUrls from "../../../Constants/ApiUrls"
+import Laoding from "../../UI/Loading/Loading"
 import { BytesToFile } from '../../../Utils/BytesToFile'
 const SearchPage = () => {
     const { id } = useParams()
     const [searchInput, setSearchInput] = useState(id)
-    const [products, setProducts] = useState([])
+    const [searchKey, setSearchKey] = useState(id);
+    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.findProducts + `all=${searchKey}`);
     
+    let productsElement;
     useEffect(() => {
-        findItems()
-
-    }, [])
-
-    function findItems() {
-        fetch("http://localhost:8080/api/products/find?all=" + searchInput)
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }else{
-                throw new Error(res.status)
-            }
-        }).then(data => {
-            data.map(item => {
-                item.images = item.images.map(image =>{
-                    return BytesToFile(image ,"image/png")
-                })
+        if (data) {
+            data.forEach(item => {
+                item.images[0] = BytesToFile(item.images[0], "image/png")
             })
-            console.log(data)
-            setProducts(data)
-        }).catch( error => console.log(error))
+        }
+    }, [data, id])
+    const findItems = ()=>{
+        setSearchKey(searchInput)
     }
 
-return (
-    <div className={`search-page search-entering`}>
-        <div className="search-box">
-            <input name="search" value={searchInput} onChange={(event) => (setSearchInput(event.target.value))} placeholder="what do you need?" />
-            <Button btnType="success" click={findItems}><i className="bi bi-search"></i> search</Button>
-        </div>
-        <hr />
+    if (loading) {
+        productsElement = <Laoding />
+    }
 
-        <div className="product-list">
-            {products.length == 0 ? <NotFound size="small" /> : products?.map((item) => (
-                <Product
-                    id={item.productId}
-                    image={item.images[0]}
-                    name={item.name}
-                    price={item.price}
-                    rating={item.rate}
-                    key={item.id}
-                    color={item.color}
-                    discount={item.discount}
-                />
-            ))}
+    if (error) {
+        productsElement = (
+            <NotFound />
+        )
+    }
+    if (data) {
+        productsElement = (
+            <div className="product-list">
+                {data?.map((item) => (
+                    <Product
+                        id={item.productId}
+                        image={item.images[0]}
+                        name={item.name}
+                        price={item.price}
+                        rating={item.rate}
+                        key={item.productId}
+                        color={item.color}
+                        discount={item.discount}
+                    />
+                ))}
+            </div>
+        )
+    }
+
+    return (
+        <div className={`search-page search-entering`}>
+            <div className="search-box">
+                <input name="search" value={searchInput} onChange={(event) => (setSearchInput(event.target.value))} placeholder="what do you need?" />
+                <Button btnType="success" click={findItems}><i className="bi bi-search"></i> search</Button>
+            </div>
+            <hr />
+            {productsElement}
         </div>
-    </div>
-)
+    )
 }
 export default SearchPage
