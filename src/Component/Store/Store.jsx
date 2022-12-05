@@ -2,39 +2,32 @@ import React, { useState, useEffect } from 'react'
 import "./Store.css"
 import SmallLoading from '../UI/Loading/SmallLoading'
 import Product from './Product/Product'
+import useFetch from "../../Hook/useFetch"
 import { BytesToFile } from '../../Utils/BytesToFile'
+import ApiUrls from '../../Constants/ApiUrls'
+import NotFound from "../Pages/NotFoundPage/NotFound"
 
 const Store = () => {
-    let producstElement;
+    let productsElement;
     const [products, setProducts] = useState([]);
     const [sortedProduct, setSortedProduct] = useState([])
+    const {data, error, loading} = useFetch(ApiUrls.hostName+ApiUrls.products.allProducts);
     const [categoryCounter, setCategoryCounter] = useState(0)
     const [sortByCounter, setSortByCounter] = useState(0);
+    
     useEffect(() => {
-        const getData = () => {
-            fetch('http://localhost:8080/api/products').then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-            }).then(data => {
-                data.map(item => {
-                    item.image = BytesToFile(item.images[0], { contentType: "image/png" })
-                    return item
-                })
-                
-                setProducts(data);
-                setSortedProduct(data)
-            }).catch(error => {
-                console.log(error)
-                getData();
-            })
+        const dataArray = []
+        for(let d in data){
+            let item = data[d];
+            item.images[0] = BytesToFile(item.images[0], "image/png")
+            dataArray.push(item);    
         }
+        setProducts(dataArray);
+        setSortedProduct(data)
         
-        return getData();
-    }, [])
+    }, [data])
 
     const sortByCategory = (type, id) => {
-
         const sortProduct = []
         products.forEach(item => {
             if (item.category.toLowerCase().includes(type.toLowerCase())) {
@@ -46,12 +39,23 @@ const Store = () => {
     }
 
     const sortBy = (type, id) => {
-
         setSortByCounter(id);
     }
 
-    if (products.length >0) {
-        producstElement = (
+    // if data is loading
+    if(loading){
+        productsElement = (
+            <SmallLoading visible={true} position="absolute" top="100px" left="0" bottom="0"/>
+        )
+    }
+    // if fetching data operation has failed the not found page will be show
+    if(error){
+        productsElement =(<NotFound />)
+    }
+
+    // if data has been fetched
+    if (data) {
+        productsElement = (
             <div className="store fade-in">
                 <div className='sort-product'>
                     <span className='sort-title'><i className='bi bi-sort-down'></i> Sort based on : </span>
@@ -76,10 +80,10 @@ const Store = () => {
                         Most Expensive</span>
                 </div>
                 <div className="product-list">
-                    {sortedProduct.map((item) => (
+                    {sortedProduct?.map((item) => (
                         <Product
                             id={item.productId}
-                            image={item.image}
+                            image={item.images[0]}
                             name={item.name}
                             price={item.price}
                             rating={item?.rate}
@@ -91,10 +95,6 @@ const Store = () => {
                     ))}
                 </div>
             </div>
-        )
-    } else {
-        producstElement = (
-            <SmallLoading visible={true} position="absolute" top="100px" left="0" bottom="0"/>
         )
     }
     return (
@@ -134,7 +134,7 @@ const Store = () => {
             </div>
 
             <section style={{position:"relative"}}>
-                {producstElement}
+                {productsElement}
             </section>
         </div>
     )
