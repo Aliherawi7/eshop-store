@@ -18,7 +18,6 @@ const Home = () => {
                         return res.json();
                     }
                 }).then(data => {
-                    console.log(data)
                     var randomNumber = Math.random() * 10;
                     setTopSates(data.slice(randomNumber, randomNumber + 4));
                     setProducts(data);
@@ -42,7 +41,6 @@ const Home = () => {
                     setBrands(data);
                 }).catch(error => {
                     getBrands()
-                    console.log(error)
                 })
         }
         getData();
