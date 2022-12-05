@@ -128,7 +128,7 @@ const ProductDetails = () => {
                         <div className='different_sides align_center'>
                             {product?.images.map((item) => {
                                 return (
-                                    <div className={'image_side' + (item == productImage ? ' active' : '')} onClick={() => setProductImage(item)}>
+                                    <div key={item} className={'image_side' + (item == productImage ? ' active' : '')} onClick={() => setProductImage(item)}>
                                         <img src={item} alt={product.name} />
                                     </div>
                                 )
