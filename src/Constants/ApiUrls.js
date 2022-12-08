@@ -18,6 +18,10 @@ const ApiUrls = {
         allFavorites:"/api/favorites",
         addFavorite:"/api/favorites"
 
+    },
+    comments:{
+        productComments:'/api/comments/products/',
+        
     }
 }
 export default ApiUrls
