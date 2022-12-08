@@ -50,7 +50,7 @@ function Slider({products, size = 5, delay = 8,}) {
                                 <div className={`slider-item `} key={item.productId}>
                                     <img className='slider-image' src={BytesToFile(item.images[0], "image/png")} alt={item.name} />
                                     <div className='image-info'>
-                                        <h1><span style={{ textTransform: "uppercase" }}>{item.name}</span></h1>
+                                        <h1>{item.name}</h1>
                                         <h2>UP TO {item.discount}% OFF ON TOP BRANDS</h2>
                                         <Link to={'/store/productdetails/' + item.productId}>SHOP NOW</Link>
                                     </div>
