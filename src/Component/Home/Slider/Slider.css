@@ -57,7 +57,8 @@
 
 .slider-item .image-info h1 {
     font-size: 40px;
-    font-family: "nexalight";
+    font-family: poppins_bold;
+    text-transform: uppercase;
     font-weight: 900;
     letter-spacing: 4px;
 }
