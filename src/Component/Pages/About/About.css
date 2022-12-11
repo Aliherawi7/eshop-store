@@ -8,9 +8,7 @@
     padding: 20px;
     
 }
-.about h1, .about h2, .about p{
-    font-family: "nexalight";
-}
+
 .about .part-a{
     margin: 20px;
     display: flex;
