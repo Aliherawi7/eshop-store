@@ -1,13 +1,12 @@
 .form-title{
     border-bottom: 1px ridge #e1e1e1;
-    margin: 15px 15px;
+    margin: 15px 0;
     margin-top: 40px;
     font-weight: 400;
     font-size: 14px;
 }
 .review-form{
     width: 80%;
-    margin-left: 15px;
 }
 .review-form .input-container{
     display: inline-block;
@@ -130,15 +129,12 @@
 
 
 @media (max-width:768px){
+    .product-info button,
     .review-form{
         width: 100%;
-        margin-left: 15px;
     }
     .people-review{
         flex-flow: wrap;
     }
 
-    .product-info button{
-        width: 100%;
-    }
 }
