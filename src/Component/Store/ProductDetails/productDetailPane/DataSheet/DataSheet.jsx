@@ -3,7 +3,7 @@ import './DataSheet.css'
 const DataSheet = (props) => {
     const data = []
     for (let item in props.dataSheet) {
-        if (item !== 'image' && item !== 'amount') {
+        if (item !== 'images' && item !== 'amount') {
             data.push({
                 title: item,
                 value: props.dataSheet[item]
