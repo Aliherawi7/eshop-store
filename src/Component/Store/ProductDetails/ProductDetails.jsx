@@ -119,7 +119,9 @@ const ProductDetails = () => {
                 <div className="product_details">
                     <section className='product_images'>
                         <Button btnType="transparent zoom-btn" click={() => setShowModal(!showModal)} ><i className='bi bi-zoom-in'></i></Button>
-                        <img src={productImage} className="product_image" alt={product?.name} />
+                        <div className='product_image_container'>
+                            <img src={productImage} className="product_image" alt={product?.name} />
+                        </div>
                         <Modal show={showModal} ModalClose={() => setShowModal(!showModal)}>
                             <span className='slide-left' onClick={() => modalSlide(productImage, 'left')}> <i className='bi bi-chevron-left'></i></span>
                             <img src={productImage} alt={product?.name} />
