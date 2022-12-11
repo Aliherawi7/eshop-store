@@ -1,8 +1,8 @@
-.main-container{
+.main-container {
     min-height: 74vh;
-    padding: 0 15px;
 }
-.pop-up-menu{
+
+.pop-up-menu {
     position: fixed;
     display: flex;
     left: 0px;
@@ -14,19 +14,27 @@
     transition: padding-left 0.3s;
     z-index: 100;
 }
-.pop-up-menu i{
+
+.pop-up-menu i {
     cursor: pointer;
-    padding:4px 10px;
-    transition: transform  0.3s;
+    padding: 4px 10px;
+    transition: transform 0.3s;
 }
-.pop-up-menu i:hover{
+
+.pop-up-menu i:hover {
     transform: scale(1.2);
 }
-.pop-up-menu:hover{
+
+.pop-up-menu:hover {
     padding-left: 15px;
 }
-@media(max-width:768px){
-    .pop-up-menu{
+
+@media(max-width:768px) {
+    .main-container {
+        padding: 0 15px;
+    }
+
+    .pop-up-menu {
         display: none;
     }
 }
