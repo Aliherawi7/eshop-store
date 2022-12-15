@@ -10,7 +10,8 @@ const ApiUrls = {
     },
     users: {
         getUsers: "/api/users",
-        getUser: "/api/users/user/",
+        putUser: "/api/users",
+        getUser: "/api/users/user",
         addUser: "/api/users/signup",
         addRoleToUser: "/api/users/addRoleToUser"
     },
@@ -20,8 +21,7 @@ const ApiUrls = {
 
     },
     comments:{
-        productComments:'/api/comments/products/',
-        
+        productComments:'/api/comments/products/',  
     }
 }
 export default ApiUrls
