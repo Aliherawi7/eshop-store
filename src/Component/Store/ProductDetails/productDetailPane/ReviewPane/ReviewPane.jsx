@@ -12,7 +12,7 @@ import FlexibleLoading from '../../../../UI/Loading/FlexibleLoading'
 const ReviewPane = () => {
     const [reviews, setReviews] = useState([])
     const { id } = useParams()
-    const { data, error, loading, setData } = useFetch(ApiUrls.hostName + ApiUrls.comments.productComments + id + 0, {
+    const { data, error, loading, setData } = useFetch(ApiUrls.hostName + ApiUrls.comments.productComments + id, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -179,14 +179,14 @@ const ReviewPane = () => {
                 "Authorization": localStorage.getItem("accessToken")
             }
         }).then(res => res.json())
-            .then(data => {
-                data.userImage = BytesToFile(data.userImage, "image/png")
-                const reviewIndex = reviews.findIndex(item => {
+            .then(apidata => {
+                apidata.userImage = BytesToFile(apidata.userImage, "image/png")
+                const reviewIndex = data.findIndex(item => {
                     return item.commentId == commentId
                 })
-                const temp = [...reviews];
-                temp[reviewIndex] = data
-                setReviews(temp);
+                const temp = [...data];
+                temp[reviewIndex] = apidata
+                setData(temp);
             })
     }
     // perform the like action on comment
@@ -198,14 +198,14 @@ const ReviewPane = () => {
                 "Authorization": localStorage.getItem("accessToken")
             }
         }).then(res => res.json())
-            .then(data => {
-                data.userImage = BytesToFile(data.userImage, "image/png")
-                const reviewIndex = reviews.findIndex(item => {
+            .then(apidata => {
+                apidata.userImage = BytesToFile(apidata.userImage, "image/png")
+                const reviewIndex = data.findIndex(item => {
                     return item.commentId == commentId
                 })
-                const temp = [...reviews];
-                temp[reviewIndex] = data
-                setReviews(temp);
+                const temp = [...data];
+                temp[reviewIndex] = apidata
+                setData(temp);
             })
     }
     return (
