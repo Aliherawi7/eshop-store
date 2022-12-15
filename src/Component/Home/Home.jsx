@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./Home.css"
 import Slider from './Slider/Slider'
 import Button from '../UI/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import { BytesToFile } from '../../Utils/BytesToFile'
+import FeaturedProducts from '../FeaturedProducts/FeaturedProducts'
 
 const Home = () => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [brands, setBrands] = useState([]);
     const [topSales, setTopSates] = useState([])
+    const sliderRef = useRef();
+    const sliderItemRef = useRef();
     useEffect(() => {
         const getData = () => {
             fetch('http://localhost:8080/api/products')
@@ -48,6 +51,15 @@ const Home = () => {
 
     }, [])
 
+    function slideTo(direction) {
+        const cardWidth = sliderItemRef.current.offsetWidth + 20;
+        if (direction === "left") {
+            sliderRef.current.scroll(sliderRef.current.scrollLeft - cardWidth, 0)
+        } else if (direction === "right") {
+            sliderRef.current.scroll(sliderRef.current.scrollLeft + cardWidth, 0)
+        }
+    }
+
     return (
         <div className={`home home-entering fade-in`}>
             {products.length > 0 ? <Slider size={18} products={products} /> : ""}
@@ -83,23 +95,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div>
-                <h2 className='section-title'>
-                    <span style={{ color: "var(--mainColor)" }}>Featured</span> Products
-                </h2>
-                <div className='most-ordered'>
-                    {topSales?.map(item => {
-                        return (
-                            <div className='ordered-item' key={item.productId}>
-                                <img src={BytesToFile(item.images[0])} />
-                                <div className='order-info'>
-                                    <h1>{item.name}</h1>
-                                    <Button click={() => navigate('/store/productdetails/' + item.productId)}>SHOP NOW</Button>
-                                </div>
-                            </div>)
-                    })}
-                </div>
-            </div>
+            <FeaturedProducts category={"pc"}/>
 
             <div className='popular-brands'>
                 <h2 className='section-title'>
