@@ -299,7 +299,6 @@ const Signup = () => {
                 inputs.email.warningMessage = data.error_message;
                 inputs.email.isValid = false;
                 setSignupInputState(inputs)
-                console.log(data)
                 setloading(false)
                 return 
             }
