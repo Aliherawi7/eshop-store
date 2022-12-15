@@ -1,15 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import "./AccountTools.css"
 import Button from '../../UI/Button/Button'
+import ApiUrls from '../../../Constants/ApiUrls'
+import { getBlobOfFile } from '../../../Utils/BytesToFile'
+import useFetch from "../../../Hook/useFetch"
 
 function AccountSettings() {
-    const [inputs, setInputs] = useState({
-        name: localStorage.getItem('name'),
-        lastName: localStorage.getItem('lastName'),
-        email: localStorage.getItem('email'),
-        dob: localStorage.getItem('dob'),
-        location: localStorage.getItem('location')
+    const { data, error, loading, setData } = useFetch(ApiUrls.hostName + ApiUrls.users.getUser, {
+        headers: {
+            "Authorization": localStorage.getItem("accessToken")
+        }
     })
+    console.log(data)
+    const [inputs, setInputs] = useState({});
+    useEffect(() => {
+        if (data) {
+            setInputs({
+                name: data.name,
+                lastName: data.lastName,
+                email: data.email,
+                dob: data.dob ?  data.dob : "0000-00-00",
+                location: data.location ? data.location : ""
+            })
+        }
+
+        
+    }, [data])
+
 
     const inputNames = {
         NAME: 'NAME',
@@ -23,35 +40,35 @@ function AccountSettings() {
         switch (name) {
             case inputNames.NAME: {
                 setInputs({
-                    inputs,
+                    ...inputs,
                     name: e.target.value
                 })
                 break;
             }
             case inputNames.LASTNAME: {
                 setInputs({
-                    inputs,
+                    ...inputs,
                     lastName: e.target.value
                 })
                 break;
             }
             case inputNames.EMAIL: {
                 setInputs({
-                    inputs,
+                    ...inputs,
                     email: e.target.value
                 })
                 break;
             }
             case inputNames.DOB: {
                 setInputs({
-                    inputs,
+                    ...inputs,
                     dob: e.target.value
                 })
                 break;
             }
             case inputNames.LOCATION: {
                 setInputs({
-                    inputs,
+                    ...inputs,
                     location: e.target.value
                 })
                 break;
@@ -59,6 +76,24 @@ function AccountSettings() {
             default:
                 break;
         }
+    }
+
+    const fetchData = () => {
+        const formData = new FormData();
+        for (let item in inputs) {
+            //  console.log(inputs[item])
+            formData.append(item + "", inputs[item])
+            console.log(item + " : ", inputs[item])
+        }
+        formData.append("image", getBlobOfFile(localStorage.getItem("image"), "image/png"))
+
+        fetch("http://localhost:8080/api/users", {
+            method: "PUT",
+            headers: {
+                "Authorization": localStorage.getItem("accessToken")
+            },
+            body: formData
+        }).then(res => res).then(data => console.log(data))
     }
 
     return (
@@ -119,7 +154,7 @@ function AccountSettings() {
 
                 </form>
                 <div className='button-container'>
-                    <Button btnType="success">Update</Button> 
+                    <Button btnType="success" click={fetchData}>Update</Button>
                     <Button btnType="white">Cancel</Button>
                 </div>
             </section>
