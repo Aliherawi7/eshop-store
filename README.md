@@ -11,8 +11,9 @@ eshop-store developed and build with **React (v17.0.2)**, **JavaScript** ,
 
 Visit: [Project eshop demo](https://eshop-demo.netlify.app/)
 
-![Figma eshop sketch](src/assets/eshop-demo-sketch-v2.png)
-
+![Figma eshop sketch](src/assets/eshop-demo-sketch-v2.1.png)
+![Admin panel page](src/assets/admin-panel-UI.png)
+![Store page](src/assets/store-ui.png)
 # Features
 
 * Responsive layout
