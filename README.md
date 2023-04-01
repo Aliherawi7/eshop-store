@@ -4,7 +4,7 @@
 <!-- Email: Aliherawi7@gmail.com -->
 <!-- Linked in : https://linkedin.com/in/ali-herawi -->
 
-eshop-store developed and build with **React (v17.0.2)**, **JavaScript** ,
+eshop-store was created and developed with **React (v17.0.2)**, **JavaScript** ,
 **react-chartjs-2 (v4.3.1)**, **react-toastify (v9.0.8)** and **React Router v6**. For Styles and animations, is used **CSS**.
 
 # Demo
