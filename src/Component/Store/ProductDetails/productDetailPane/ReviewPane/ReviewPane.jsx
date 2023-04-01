@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import './ReviewPane.css'
 import Button from '../../../../UI/Button/Button'
 import RateStar from '../../../Rate-Star/RateStar'
-import { BytesToFile } from '../../../../../Utils/BytesToFile'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 import useFetch from '../../../../../Hook/useFetch'
@@ -10,7 +9,6 @@ import ApiUrls from '../../../../../Constants/ApiUrls'
 import FlexibleLoading from '../../../../UI/Loading/FlexibleLoading'
 
 const ReviewPane = () => {
-    const [reviews, setReviews] = useState([])
     const { id } = useParams()
     const { data, error, loading, setData } = useFetch(ApiUrls.hostName + ApiUrls.comments.productComments + id, {
         headers: {
@@ -23,24 +21,24 @@ const ReviewPane = () => {
     const [optionState, optionSetstate] = useState({
         name: 'rate', value: '', isValid: false, rateLevel: ''
     })
-    let Elements;
 
     if (loading) {
         Element = <FlexibleLoading />
     }
 
     if (data) {
+
         if (data.length == 0) {
             Element = <h4 className="title">Be the first reviewer</h4>;
         } else {
             Element = (<>
-                <h4 className="title">All Reviews {reviews.length}</h4>
+                <h4 className="title">All Reviews {data.length}</h4>
                 <div className="last-review">
                     {data.map((item) => {
                         return (
                             <div className="people-review border-bottom" key={Math.random()}>
                                 <div className='review-header'>
-                                    <img src={item.userImage} />
+                                    <img src={ApiUrls.hostName + item.userImage} />
                                     <div className='name-rate'>
                                         <h4>{item.userName}</h4>
                                         <RateStar rate={item.rate} size={"small"} />
@@ -74,12 +72,6 @@ const ReviewPane = () => {
 
     useEffect(() => {
         if (data) {
-            data.forEach(item => {
-                // if user image is not a file and it is a byte array
-                if (!item.userImage.includes("http")) {
-                    item.userImage = BytesToFile(item.userImage, "image/png")
-                }
-            })
             setData(data)
         }
     }, [id, data])
@@ -152,7 +144,7 @@ const ReviewPane = () => {
             }
         }).then(apiData => {
             console.log(apiData)
-            apiData.userImage = BytesToFile(apiData.userImage, "image/png")
+            apiData.userImage = ApiUrls.hostName + apiData.userImage;
             clearInput();
             setData([...data, apiData])
         }).catch(error => console.log(error));
@@ -180,7 +172,6 @@ const ReviewPane = () => {
             }
         }).then(res => res.json())
             .then(apidata => {
-                apidata.userImage = BytesToFile(apidata.userImage, "image/png")
                 const reviewIndex = data.findIndex(item => {
                     return item.commentId == commentId
                 })
@@ -199,7 +190,6 @@ const ReviewPane = () => {
             }
         }).then(res => res.json())
             .then(apidata => {
-                apidata.userImage = BytesToFile(apidata.userImage, "image/png")
                 const reviewIndex = data.findIndex(item => {
                     return item.commentId == commentId
                 })
