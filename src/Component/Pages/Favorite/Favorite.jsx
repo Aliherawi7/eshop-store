@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { BytesToFile } from '../../../Utils/BytesToFile';
 import RateStar from '../../Store/Rate-Star/RateStar';
 import { useNavigate } from 'react-router-dom';
 import './Favorite.css'
 import { toast } from 'react-toastify';
+import ApiUrls from '../../../Constants/ApiUrls';
 
 
 function Favorite() {
@@ -65,7 +65,7 @@ function Favorite() {
                         return (
                             <section className="card entering-animation" key={item.productId} onClick={() => navigate('/store/productdetails/' + item.productId)}>
                                 <span className='discount-logo'></span>
-                                <img src={BytesToFile(item.images[0], "image/png")} alt="slider" />
+                                <img src={ApiUrls.hostName + item.images[0]} alt="slider" />
                                 <RateStar rate={item.rate} size={'small'} />
                                 <div className="product-info">
                                     <h4>{item.name}</h4>
@@ -88,7 +88,7 @@ function Favorite() {
                                 </div>
                             </section>
                         )
-                    }): <h2>No Product found</h2>
+                    }) : <h2>No Product found</h2>
                 }
             </div>
         </div>
