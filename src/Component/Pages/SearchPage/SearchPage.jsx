@@ -7,22 +7,15 @@ import NotFound from '../NotFoundPage/NotFound'
 import useFetch from "../../../Hook/useFetch"
 import ApiUrls from "../../../Constants/ApiUrls"
 import Laoding from "../../UI/Loading/Loading"
-import { BytesToFile } from '../../../Utils/BytesToFile'
 const SearchPage = () => {
     const { id } = useParams()
     const [searchInput, setSearchInput] = useState(id)
     const [searchKey, setSearchKey] = useState(id);
     const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.findProducts + `name=${searchKey}`);
-    
+
     let productsElement;
-    useEffect(() => {
-        if (data) {
-            data.forEach(item => {
-                item.images[0] = BytesToFile(item.images[0], "image/png")
-            })
-        }
-    }, [data, id])
-    const findItems = ()=>{
+
+    const findItems = () => {
         setSearchKey(searchInput)
     }
 
