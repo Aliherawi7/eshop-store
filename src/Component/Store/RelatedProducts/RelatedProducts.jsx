@@ -4,7 +4,6 @@ import "./RelatedProducts.css"
 import useFetch from '../../../Hook/useFetch'
 import Product from '../Product/Product'
 import FlexibleLoading from "../../UI/Loading/FlexibleLoading"
-import { BytesToFile } from '../../../Utils/BytesToFile'
 
 function RelatedProducts({ category }) {
     let Element;
@@ -15,10 +14,9 @@ function RelatedProducts({ category }) {
     if (loading) {
         Element = (<FlexibleLoading />)
     }
-    if(error){
+    if (error) {
         Element = (<h4> No Related Products </h4>)
     }
-
     if (data) {
         Element = (
             <>
@@ -27,7 +25,7 @@ function RelatedProducts({ category }) {
                     {data.map(item => {
                         return <Product
                             id={item.productId}
-                            image={BytesToFile(item.images[0], "iamge/png")}
+                            image={item.images[0]}
                             name={item.name}
                             price={item.price}
                             rating={item?.rate}
