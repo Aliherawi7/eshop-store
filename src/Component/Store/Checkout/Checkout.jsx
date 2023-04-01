@@ -6,6 +6,7 @@ import { useStateValue } from '../../../StateProvider'
 import { actions, getBasketTotal, getBasketTotalItems } from '../../../reducer'
 import { toast } from 'react-toastify'
 
+
 const Checkout = () => {
     const navigate = useNavigate()
     const [{ basket }, dispatch] = useStateValue()
@@ -16,9 +17,9 @@ const Checkout = () => {
         })
 
         // if there are not enough product in depot
-        if(index >= 0 && basket[index].quantity >= basket[index].quantityInDepot) {
-            toast.success("werptiwperoi",{
-                position:'bottom-left'
+        if (index >= 0 && basket[index].quantity >= basket[index].quantityInDepot) {
+            toast.success("werptiwperoi", {
+                position: 'bottom-left'
             });
             return;
         }
@@ -62,8 +63,8 @@ const Checkout = () => {
     return (
         <div className={`checkout checkout-entering`}>
             <div className='basket-header'>
-            <h2>My Bag</h2>
-            <span className="small-title">Total {getBasketTotalItems(basket)} {getBasketTotalItems(basket) >1? "items": "item"}</span>
+                <h2>My Bag</h2>
+                <span className="small-title">Total {getBasketTotalItems(basket)} {getBasketTotalItems(basket) > 1 ? "items" : "item"}</span>
             </div>
             <div className="table-container">
                 <div className="products-in-basket">
