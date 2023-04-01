@@ -7,7 +7,6 @@ import DetailsPane from './productDetailPane/DetailsPane'
 import { useStateValue } from '../../../StateProvider'
 import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
-import { BytesToFile } from '../../../Utils/BytesToFile'
 import { toast } from 'react-toastify'
 import Modal from '../../UI/modal/Modal'
 import ApiUrls from "../../../Constants/ApiUrls"
@@ -20,22 +19,18 @@ const ProductDetails = () => {
     const [{ basket }, dispatch] = useStateValue()
     const [product, setProduct] = useState();
     const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.getProduct + id);
-    const [productImage, setProductImage] = useState('');
     const [showModal, setShowModal] = useState(false)
+    const [productImage, setProductImage] = useState("");
 
     let productsElement;
+
 
     useEffect(() => {
         window.scrollTo(0, 0)
         if (data) {
-            const images = data?.images?.map((item) => {
-                return BytesToFile(item, { contentType: "image/png" });
-            })
-            setProduct({...data, images});
-            setProductImage(images[0])
+            setProductImage(data.images[0])
         }
-
-    }, [data])
+    }, [data, id])
 
     const addToBasket = () => {
         const index = basket.findIndex(item => {
@@ -59,10 +54,10 @@ const ProductDetails = () => {
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
-                name: product.name,
-                image: product.images[0],
-                price: product.price,
-                rating: product.rating,
+                name: data.name,
+                image: data.images[0],
+                price: data.price,
+                rating: data.rating,
                 id: id,
                 quantity: 1
             }
@@ -70,32 +65,33 @@ const ProductDetails = () => {
     }
 
     const addToFavorite = () => {
-        fetch(ApiUrls.hostName+ApiUrls.favorites.addFavorite, {
+        console.log(id)
+        fetch("http://localhost:8080/api/favorites", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem("accessToken")
             },
-            body: JSON.stringify({ productId: product.productId })
+            body: JSON.stringify({ productId: id })
         }).then(res => {
             if (res.ok) {
                 toast.success("successfully added", {
                     position: 'bottom-right'
                 });
             }
-        }).catch(error => console.log(error))
+        })
     }
 
     function modalSlide(previosImage, direction) {
-        const index = product?.images.findIndex(item => {
+        const index = data?.images.findIndex(item => {
             return item == previosImage
         })
         switch (direction) {
             case 'left':
-                setProductImage(product.images[index - 1 < 0 ? product.images.length - 1 : index - 1]);
+                setProductImage(data.images[index - 1 < 0 ? data.images.length - 1 : index - 1]);
                 break;
             case 'right':
-                setProductImage(product.images[index + 1 == product.images.length ? 0 : index + 1]);
+                setProductImage(data.images[index + 1 == data.images.length ? 0 : index + 1]);
                 break
         }
 
@@ -108,30 +104,30 @@ const ProductDetails = () => {
         )
     }
 
-    if(error){
-        productsElement = <NotFound/>
+    if (error) {
+        productsElement = <NotFound />
     }
 
     //if data have been loaded from server
-    if (product) {
+    if (data) {
         productsElement = (
             <div className="fade-in">
                 <div className="product_details">
                     <section className='product_images'>
                         <Button btnType="transparent zoom-btn" click={() => setShowModal(!showModal)} ><i className='bi bi-zoom-in'></i></Button>
                         <div className='product_image_container'>
-                            <img src={productImage} className="product_image" alt={product?.name} />
+                            <img src={productImage} className="product_image" alt={data?.name} />
                         </div>
                         <Modal show={showModal} ModalClose={() => setShowModal(!showModal)}>
                             <span className='slide-left' onClick={() => modalSlide(productImage, 'left')}> <i className='bi bi-chevron-left'></i></span>
-                            <img src={productImage} alt={product?.name} />
+                            <img src={productImage} alt={data?.name} />
                             <span className='slide-left right' onClick={() => modalSlide(productImage, 'right')}><i className='bi bi-chevron-right'></i></span>
                         </Modal>
                         <div className='different_sides align_center'>
-                            {product?.images.map((item) => {
+                            {data?.images.map((item) => {
                                 return (
                                     <div key={item} className={'image_side' + (item == productImage ? ' active' : '')} onClick={() => setProductImage(item)}>
-                                        <img src={item} alt={product.name} />
+                                        <img src={item} alt={data.name} />
                                     </div>
                                 )
                             })}
@@ -139,25 +135,25 @@ const ProductDetails = () => {
                     </section>
                     <div className="product-info border-bottom">
                         <div className='border-bottom'>
-                            <p>{product.category}</p>
-                            <h3 className="product-title">{product.name}</h3>
+                            <p>{data?.category}</p>
+                            <h3 className="product-title">{data?.name}</h3>
                             <div className='price-rate border-bottom'>
                                 <div className='product-price'>
-                                    {product.discount ?
+                                    {data.discount ?
                                         <div className='before-discount'>
-                                            <i className='bi bi-currency-dollar'></i>{product.price}
+                                            <i className='bi bi-currency-dollar'></i>{data.price}
                                         </div>
                                         : ""
                                     }
                                     <div className='after-discount'>
                                         <i className='bi bi-currency-dollar'></i>
-                                        {product.price - (product.price * product.discount / 100)}
+                                        {data.price - (data.price * data.discount / 100)}
                                     </div>
-                                    <span className='discount-value'>{product.discount ? product.discount + "% " : ""}Discount</span>
+                                    <span className='discount-value'>{data.discount ? data.discount + "% " : ""}Discount</span>
                                 </div>
                                 <div className='rate-review align_center'>
-                                    <RateStar rate={product.rate} size={"large"} />
-                                    <span>{product.reviews} Reviews</span>
+                                    <RateStar rate={data.rate} size={"large"} />
+                                    <span>{data.reviews} Reviews</span>
                                 </div>
 
                             </div>
@@ -169,19 +165,19 @@ const ProductDetails = () => {
                                 Add To Favorite
                             </Button>
                         </div>
-                        <DetailsPane dataSheet={product} description={product.description} />
+                        <DetailsPane dataSheet={data} description={data.description} />
                     </div>
                 </div>
-                <RelatedProducts category={product?.category} />
+                <RelatedProducts category={data?.category} />
             </div>
         )
-        
+
     }
 
     return (
         <div>{productsElement}</div>
     )
-    
+
 }
 
 export default ProductDetails
