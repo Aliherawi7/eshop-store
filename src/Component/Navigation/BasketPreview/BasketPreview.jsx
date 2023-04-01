@@ -5,6 +5,7 @@ import { actions } from '../../../reducer';
 import { getBasketTotal } from "../../../reducer"
 import "./BasketPreview.css"
 
+
 function BasketPreview() {
     const [{ basket }, dispatch] = useStateValue();
     const increaseQuantity = (id) => {
@@ -58,7 +59,7 @@ function BasketPreview() {
                         <div className='b-p-product' key={item.id}>
                             <span><img src={item.image} /></span>
                             <div>
-                                <span>{item.name}</span><br/>
+                                <span>{item.name}</span><br />
                                 <span>${item.price * item.quantity}</span>
                             </div>
                         </div>)
