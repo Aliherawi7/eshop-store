@@ -4,7 +4,6 @@ import Button from "../UI/Button/Button";
 import { toast } from "react-toastify";
 import { actions } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
-import { BytesToFile, getBlobOfFile } from "../../Utils/BytesToFile";
 
 export function CustomeProduct({ id = '', images = '', name = '', category = '', color = '',
     brandName = '', size = '', description = '', quantityInDepot = '',
@@ -12,7 +11,7 @@ export function CustomeProduct({ id = '', images = '', name = '', category = '',
 ) {
     const [, dispatch] = useStateValue();
     const [state, setState] = useState({
-        image: images ? getBlobOfFile(images[0], "image/png") : "",
+        image: images[0],
         name,
         category,
         color,

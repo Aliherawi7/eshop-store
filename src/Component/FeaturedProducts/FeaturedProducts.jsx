@@ -3,7 +3,6 @@ import ApiUrls from '../../Constants/ApiUrls'
 import "./FeaturedProducts.css"
 import useFetch from '../../Hook/useFetch'
 import FlexibleLoading from "../../Component/UI/Loading/FlexibleLoading"
-import { BytesToFile } from '../../Utils/BytesToFile'
 import Button from '../UI/Button/Button'
 import { useNavigate } from 'react-router-dom'
 
@@ -29,7 +28,7 @@ function FeaturedProducts({ category }) {
                     {data?.map(item => {
                         return (
                             <div className='ordered-item' key={item.productId} ref={sliderItemRef}>
-                                <img src={BytesToFile(item.images[0])} />
+                                <img src={item.images[0]} />
                                 <div className='order-info'>
                                     <h1>{item.name}</h1>
                                     <Button click={() => navigate('/store/productdetails/' + item.productId)}>SHOP NOW</Button>

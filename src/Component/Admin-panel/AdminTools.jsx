@@ -7,9 +7,9 @@ import OrderBarChart from './OrderBarChart'
 import { toast } from 'react-toastify'
 import { useStateValue } from '../../StateProvider'
 import { actions } from '../../reducer'
-import { BytesToFile } from '../../Utils/BytesToFile'
 import Modal from '../UI/modal/Modal'
 import ProductLineChart from './ProductLineChart'
+import ApiUrls from '../../Constants/ApiUrls'
 
 export function Dashboard() {
     const [state, dispatch] = useStateValue();
@@ -99,9 +99,9 @@ export function ProductsPanel() {
             if (response.ok) {
                 let data = await response.json();
                 setProducts(data)
-               
-            }else{
-                
+
+            } else {
+
             }
             dispatch({
                 type: actions.LOADING,
@@ -143,8 +143,8 @@ export function ProductsPanel() {
                     closeButton: true
                 })
                 setProducts(newProductList)
-               
-            }else{
+
+            } else {
                 toast.error("couldn't removed the product.", {
                     position: "bottom-right",
                     closeOnClick: true,
@@ -157,7 +157,7 @@ export function ProductsPanel() {
                 type: actions.LOADING,
                 item: false
             })
-            
+
 
         }
         getData();
@@ -211,7 +211,7 @@ export function ProductsPanel() {
                             return (
                                 <tr key={product.id}>
                                     <td name='id'>{product.id}</td>
-                                    <td name='name'><img src={BytesToFile(product.images[0], "image/png")} />{product.name?.toUpperCase()}</td>
+                                    <td name='name'><img src={product.images[0]} />{product.name?.toUpperCase()}</td>
                                     <td >{product.category?.toUpperCase()}</td>
                                     <td >{product.brandName?.toUpperCase()}</td>
                                     <td name="price">${product.price}</td>
@@ -258,7 +258,7 @@ export function ProductsPanel() {
 export function CategoriesPanel() {
     const [categories, setCategories] = useState([]);
     const [state, setState] = useState(true);
-    const [  ,dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     useEffect(() => {
         // dispatch({
         //     type: actions.LOADING,
@@ -268,9 +268,9 @@ export function CategoriesPanel() {
             type: actions.LOADING,
             item: false
         })
-    
+
     }, [])
-    
+
     return (
         state ?
             <div className='categories-statistics panel-statistics fade-in'>
@@ -344,9 +344,9 @@ export function OrdersPanel() {
                 let data = await response.json();
                 ordersList = data
                 setOrders(ordersList)
-               
-            }else{
-                
+
+            } else {
+
             }
             dispatch({
                 type: actions.LOADING,
@@ -355,7 +355,7 @@ export function OrdersPanel() {
 
         }
         getData();
-        
+
     }, [])
 
     return (
@@ -420,7 +420,7 @@ export function OrdersPanel() {
 
 export function UsersPanel() {
     const [users, setUsers] = useState([]);
-    const [ ,dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     useEffect(() => {
         dispatch({
             type: actions.LOADING,

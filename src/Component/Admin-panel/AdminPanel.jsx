@@ -6,14 +6,14 @@ import NotFound from "../Pages/NotFoundPage/NotFound"
 import admintTools from './AdminTools';
 import SmallLoading from '../UI/Loading/SmallLoading';
 import { actions } from '../../reducer'
-import { BytesToFile } from '../../Utils/BytesToFile';
+import ApiUrls from '../../Constants/ApiUrls';
 
 let counter = 0
 function AdminPanel() {
   const [state, dispatch] = useStateValue();
   const [currentComponent, setCurrentComponent] = useState({ component: admintTools[counter] });
   const infoPanel = useRef();
-  
+
   useEffect(() => {
     dispatch({
       type: actions.LOADING
@@ -27,26 +27,25 @@ function AdminPanel() {
     counter = id
     setCurrentComponent({ component: admintTools[counter] })
   }
-  const handleFullScreen = ()=>{
-    
+  const handleFullScreen = () => {
+
     const element = infoPanel.current;
     console.log(element.style.left)
-    if(element.style.left == "0px"){
-      element.style.left= "230px"
-      
-    }else{
+    if (element.style.left == "0px") {
+      element.style.left = "230px"
+    } else {
       element.style.left = 0
     }
-    
+
   }
-  
+
   return (
     state.userInfo.roles.includes("ADMIN") ?
       <div className='admin-panel fade-in'>
         <div className='admin-menu' >
 
           <div className='account-info'>
-            <img src={BytesToFile(localStorage.getItem("image"))? BytesToFile(localStorage.getItem("image")):""} className='bi bi-person-circle' />
+            <img src={localStorage.getItem("image") ? localStorage.getItem("image") : ""} className='bi bi-person-circle' />
             <div>
               <h3>{state.userInfo?.name + " " + state.userInfo?.lastName}</h3>
               <p>{state.userInfo?.email}</p>

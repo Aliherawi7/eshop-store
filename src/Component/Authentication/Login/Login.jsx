@@ -91,7 +91,7 @@ const Login = () => {
 
         if (checkPasswordValidation(checkEmail.value) === 'empty' || !checkEmail.isValid) {
             const holder = { ...loginInputState };
-            holder.email.warningMessage = holder.email.warningMessage.length >0 ? holder.email.warningMessage : "fill it"
+            holder.email.warningMessage = holder.email.warningMessage.length > 0 ? holder.email.warningMessage : "fill it"
             holder.email.isUsed = true
             holder.email.isValid = false
             setLoginInputState(holder)
@@ -100,7 +100,7 @@ const Login = () => {
         }
         if (checkPasswordValidation(checkPassword.value) === 'short' || !checkPassword.isValid) {
             const holder = { ...loginInputState };
-            holder.password.warningMessage = holder.password.warningMessage.length >0 ? holder.password.warningMessage : "fill it"
+            holder.password.warningMessage = holder.password.warningMessage.length > 0 ? holder.password.warningMessage : "fill it"
             holder.password.isUsed = true
             holder.password.isValid = false
             setLoginInputState(holder)
@@ -123,7 +123,7 @@ const Login = () => {
             if (res.status == 200) {
                 return res.json();
             }
-            
+
         }).then(data => {
             if (data.error_message) {
                 const updatInputMessage = { ...loginInputState };
@@ -131,8 +131,8 @@ const Login = () => {
                     console.log("in 2 if")
                     updatInputMessage.email.warningMessage = data.error_message
                     updatInputMessage.email.isValid = false
-                }else{
-                    updatInputMessage.password.warningMessage = (data.error_message +" ")+ (data.lock_expireDate? data.lock_expireDate:"")
+                } else {
+                    updatInputMessage.password.warningMessage = (data.error_message + " ") + (data.lock_expireDate ? data.lock_expireDate : "")
                     updatInputMessage.password.isValid = false
                 }
 
@@ -140,6 +140,7 @@ const Login = () => {
                 setLoginInputState(updatInputMessage)
                 return
             }
+            console.log(data)
             localStorage.setItem("accessToken", data?.access_token);
             localStorage.setItem("refreshToken", data?.refresh_token);
             localStorage.setItem("name", data?.userInformationDTO?.name)
@@ -148,7 +149,7 @@ const Login = () => {
             localStorage.setItem("image", data?.userInformationDTO?.image)
             localStorage.setItem("roles", data?.userInformationDTO?.roles)
             data.userInformationDTO.access_token = data?.access_token
-    
+
             dispatch({
                 type: actions.ADD_USER_INFORMATION,
                 item: data.userInformationDTO

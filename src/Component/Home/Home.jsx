@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import "./Home.css"
 import Slider from './Slider/Slider'
-import Button from '../UI/Button/Button'
 import { useNavigate } from 'react-router-dom'
-import { BytesToFile } from '../../Utils/BytesToFile'
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts'
+import ApiUrls from '../../Constants/ApiUrls'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -25,7 +24,6 @@ const Home = () => {
                     setTopSates(data.slice(randomNumber, randomNumber + 4));
                     setProducts(data);
                 }).catch(error => {
-                    console.log(error);
                     getData();
                 })
         }
@@ -38,9 +36,6 @@ const Home = () => {
                         throw new Error(res.status)
                     }
                 }).then(data => {
-                    data.forEach(item => {
-                        item.logo = BytesToFile(item.logo, "image/png")
-                    })
                     setBrands(data);
                 }).catch(error => {
                     getBrands()
@@ -63,6 +58,7 @@ const Home = () => {
     return (
         <div className={`home home-entering fade-in`}>
             {products.length > 0 ? <Slider size={18} products={products} /> : ""}
+
             <div className="features">
                 <div className="container">
                     <div className="feature">
@@ -95,7 +91,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <FeaturedProducts category={"pc"}/>
+            <FeaturedProducts category={"pc"} />
 
             <div className='popular-brands'>
                 <h2 className='section-title'>
