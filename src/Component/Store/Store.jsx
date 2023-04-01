@@ -3,7 +3,6 @@ import "./Store.css"
 import SmallLoading from '../UI/Loading/SmallLoading'
 import Product from './Product/Product'
 import useFetch from "../../Hook/useFetch"
-import { BytesToFile } from '../../Utils/BytesToFile'
 import ApiUrls from '../../Constants/ApiUrls'
 import NotFound from "../Pages/NotFoundPage/NotFound"
 
@@ -11,20 +10,19 @@ const Store = () => {
     let productsElement;
     const [products, setProducts] = useState([]);
     const [sortedProduct, setSortedProduct] = useState([])
-    const {data, error, loading} = useFetch(ApiUrls.hostName+ApiUrls.products.allProducts);
+    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.allProducts);
     const [categoryCounter, setCategoryCounter] = useState(0)
     const [sortByCounter, setSortByCounter] = useState(0);
-    
+
     useEffect(() => {
         const dataArray = []
-        for(let d in data){
+        for (let d in data) {
             let item = data[d];
-            item.images[0] = BytesToFile(item.images[0], "image/png")
-            dataArray.push(item);    
+            dataArray.push(item);
         }
         setProducts(dataArray);
         setSortedProduct(data)
-        
+
     }, [data])
 
     const sortByCategory = (type, id) => {
@@ -43,14 +41,14 @@ const Store = () => {
     }
 
     // if data is loading
-    if(loading){
+    if (loading) {
         productsElement = (
-            <SmallLoading visible={true} position="absolute" top="100px" left="0" bottom="0"/>
+            <SmallLoading visible={true} position="absolute" top="100px" left="0" bottom="0" />
         )
     }
     // if fetching data operation has failed the not found page will be show
-    if(error){
-        productsElement =(<NotFound />)
+    if (error) {
+        productsElement = (<NotFound />)
     }
 
     // if data has been fetched
@@ -63,20 +61,20 @@ const Store = () => {
                         className={sortByCounter == 0 ? "active" : ""}
                         onClick={() => sortBy("", 0)}>All</span>
                     <span
-                        className={sortByCounter == 1 ? "active" : ""} 
+                        className={sortByCounter == 1 ? "active" : ""}
                         onClick={() => sortBy("", 1)}>
                         Newest</span>
-                    <span 
-                    className={sortByCounter == 2 ? "active":""}
-                    onClick={() => sortBy("", 2)} >
+                    <span
+                        className={sortByCounter == 2 ? "active" : ""}
+                        onClick={() => sortBy("", 2)} >
                         Most Popular</span>
-                    <span 
-                    onClick={() => sortBy("", 3)}
-                    className={sortByCounter == 3 ? "active":""} >
+                    <span
+                        onClick={() => sortBy("", 3)}
+                        className={sortByCounter == 3 ? "active" : ""} >
                         Cheapest</span>
-                    <span 
-                    onClick={() => sortBy("", 4)}
-                    className={sortByCounter == 4 ? "active":""} >
+                    <span
+                        onClick={() => sortBy("", 4)}
+                        className={sortByCounter == 4 ? "active" : ""} >
                         Most Expensive</span>
                 </div>
                 <div className="product-list">
@@ -90,7 +88,7 @@ const Store = () => {
                             key={item.productId}
                             color={item.color}
                             discount={item.discount}
-                            quantityInDepot = {item.quantityInDepot}
+                            quantityInDepot={item.quantityInDepot}
                         />
                     ))}
                 </div>
@@ -133,7 +131,7 @@ const Store = () => {
 
             </div>
 
-            <section style={{position:"relative"}}>
+            <section style={{ position: "relative" }}>
                 {productsElement}
             </section>
         </div>
