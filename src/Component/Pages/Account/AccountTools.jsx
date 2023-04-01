@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import "./AccountTools.css"
 import Button from '../../UI/Button/Button'
 import ApiUrls from '../../../Constants/ApiUrls'
-import { getBlobOfFile } from '../../../Utils/BytesToFile'
 import useFetch from "../../../Hook/useFetch"
 
 function AccountSettings() {
@@ -19,12 +18,12 @@ function AccountSettings() {
                 name: data.name,
                 lastName: data.lastName,
                 email: data.email,
-                dob: data.dob ?  data.dob : "0000-00-00",
+                dob: data.dob ? data.dob : "0000-00-00",
                 location: data.location ? data.location : ""
             })
         }
 
-        
+
     }, [data])
 
 
@@ -85,7 +84,7 @@ function AccountSettings() {
             formData.append(item + "", inputs[item])
             console.log(item + " : ", inputs[item])
         }
-        formData.append("image", getBlobOfFile(localStorage.getItem("image"), "image/png"))
+        formData.append("image", "image/png")
 
         fetch("http://localhost:8080/api/users", {
             method: "PUT",
