@@ -1,19 +1,19 @@
-.account-setting{
-    
+.account-setting {}
+
+.account-setting .account-profile {
+    margin-top: 40px;
+    text-align: center;
 }
 
-.account-setting .account-profile{
-    margin-top: 40px;
-    text-align: center;     
-}
-.account-setting .account-profile img{
+.account-setting .account-profile img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: top;
 }
 
-.account-setting .menu{
+.account-setting .menu {
     width: 200px;
     background: #000;
     color: #fff;
@@ -22,26 +22,30 @@
     top: 100px;
     bottom: 0;
 }
-.account-setting .menu ul{
+
+.account-setting .menu ul {
     margin-top: 25px;
     list-style: none;
-    
+
 }
-.account-setting .menu ul li{
+
+.account-setting .menu ul li {
     cursor: pointer;
     position: relative;
     padding: 15px 25px;
-    padding-left: 40px; 
-}
-.account-setting .menu ul li i{
-    padding-right: 3px; 
+    padding-left: 40px;
 }
 
-.account-setting .menu ul .active{
+.account-setting .menu ul li i {
+    padding-right: 3px;
+}
+
+.account-setting .menu ul .active {
     background: #161515;
     color: var(--mainColor);
 }
-.account-setting .menu ul .active::after{
+
+.account-setting .menu ul .active::after {
     position: absolute;
     content: '';
     width: 5px;
@@ -54,7 +58,7 @@
 
 
 
-.account-setting .panel{
+.account-setting .panel {
     background: #161515;
     color: #fff;
     padding: 20px;
@@ -68,25 +72,26 @@
     transition: left .6s cubic-bezier(0.62, -0.02, 0.53, 0.98);
 }
 
-.account-setting .panel .full-screen-panel{
+.account-setting .panel .full-screen-panel {
     position: absolute;
     left: 16px;
     font-size: 40px;
     top: -5px;
     cursor: pointer;
 }
-.account-setting .panel .full-screen-panel:hover{
+
+.account-setting .panel .full-screen-panel:hover {
     color: var(--mainColor);
 }
 
 
-@media(max-width: 540px){
+@media(max-width: 540px) {
+
     .account-setting .panel,
-    .account-setting .small-loading{
-        left: 0 ;
+    .account-setting .small-loading {
+        left: 0;
     }
 
-    
+
 
 }
-
