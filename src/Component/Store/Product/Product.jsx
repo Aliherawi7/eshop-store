@@ -6,7 +6,7 @@ import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
 import { toast } from 'react-toastify'
 
-const Product = ({ image, id, name, price, rating, quantityInDepot, discount, customeRef}) => {
+const Product = ({ image, id, name, price, rating, quantityInDepot, discount, customeRef }) => {
     const navigate = useNavigate()
     const [{ basket }, dispatch] = useStateValue()
     const addToBasket = (e) => {
@@ -14,9 +14,9 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
         const index = basket.findIndex(item => {
             return item.id == id;
         })
-        
+
         // if there are not enough product in depot
-        if(index >= 0 && basket[index].quantity >= quantityInDepot) {return;}
+        if (index >= 0 && basket[index].quantity >= quantityInDepot) { return; }
 
         if (index >= 0) {
             dispatch({
@@ -29,6 +29,7 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
             })
             return;
         }
+        console.log(image)
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
@@ -43,19 +44,19 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
         })
     }
 
-    const addToFavorite = (productId, e)=>{
+    const addToFavorite = (productId, e) => {
         e.stopPropagation();
-        fetch("http://localhost:8080/api/favorites",{
-            method:"POST",
-            headers:{
+        fetch("http://localhost:8080/api/favorites", {
+            method: "POST",
+            headers: {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem("accessToken")
             },
-            body: JSON.stringify({productId: productId})
+            body: JSON.stringify({ productId: productId })
         }).then(res => {
-            if(res.ok){
-                toast.success("successfully added",{
-                    position:'bottom-right'
+            if (res.ok) {
+                toast.success("successfully added", {
+                    position: 'bottom-right'
                 });
             }
         })
@@ -63,7 +64,7 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
 
     return (
         <section className="card entering-animation" onClick={() => navigate('/store/productdetails/' + id)} ref={customeRef}>
-            {discount > 0 ? <span className='discount-value'>{discount ? discount + "% " : ""}</span> :""}
+            {discount > 0 ? <span className='discount-value'>{discount ? discount + "% " : ""}</span> : ""}
             <img src={image} alt="slider" />
             <RateStar rate={rating} size={'small'} />
             <div className="product-info">
