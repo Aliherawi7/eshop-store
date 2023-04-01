@@ -6,9 +6,9 @@ import TogglerMenu from '../TogglerMenu/TogglerMenu'
 import { useNavigate, Link } from 'react-router-dom'
 import { useStateValue } from '../../../StateProvider'
 import { actions, getBasketTotalItems } from "../../../reducer"
-import { BytesToFile } from '../../../Utils/BytesToFile'
 import Modal from '../../UI/modal/Modal'
 import BasketPreview from '../BasketPreview/BasketPreview'
+import ApiUrls from '../../../Constants/ApiUrls'
 
 const Navbar = () => {
     const [stateTogglerMenu, setstateTogglerMenu] = useState({ show: false })
@@ -42,15 +42,15 @@ const Navbar = () => {
                     <Button btnType="success" click={searchBtnHandler}><i className="bi bi-search"></i></Button>
                 </form>
                 <div className="status-box">
-                        <Modal show={showModal} ModalClose={() => setShowModal(false)}>
-                            <h2>Are you sure?</h2>
-                            <Button btnType="danger" click={logout}>Yes</Button>
-                            <Button btnType="success" click={() => setShowModal(!showModal)}>No</Button>
-                        </Modal>
+                    <Modal show={showModal} ModalClose={() => setShowModal(false)}>
+                        <h2>Are you sure?</h2>
+                        <Button btnType="danger" click={logout}>Yes</Button>
+                        <Button btnType="success" click={() => setShowModal(!showModal)}>No</Button>
+                    </Modal>
                     {localStorage.getItem("email") != null ?
                         <div className='authentication'>
                             <div className='user-account'>
-                                <img src={BytesToFile(localStorage.getItem("image"), "image/png") ? BytesToFile(localStorage.getItem("image")) : ""} className='bi bi-person-circle' />
+                                <img src={localStorage.getItem("image")} className='bi bi-person-circle' />
                             </div>
                             <div className='account-settings'>
                                 <Link to="/favorite"><i className='bi bi-heart'></i>Favorites</Link>
