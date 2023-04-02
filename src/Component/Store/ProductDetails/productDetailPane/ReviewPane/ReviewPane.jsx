@@ -38,7 +38,7 @@ const ReviewPane = () => {
                         return (
                             <div className="people-review border-bottom" key={Math.random()}>
                                 <div className='review-header'>
-                                    <img src={ApiUrls.hostName + item.userImage} />
+                                    <img src={item.userImage} />
                                     <div className='name-rate'>
                                         <h4>{item.userName}</h4>
                                         <RateStar rate={item.rate} size={"small"} />
@@ -143,8 +143,6 @@ const ReviewPane = () => {
                 throw new Error(res.statusText);
             }
         }).then(apiData => {
-            console.log(apiData)
-            apiData.userImage = ApiUrls.hostName + apiData.userImage;
             clearInput();
             setData([...data, apiData])
         }).catch(error => console.log(error));
