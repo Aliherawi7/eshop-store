@@ -22,6 +22,7 @@ const ProductDetails = () => {
     const [showModal, setShowModal] = useState(false)
     const [productImage, setProductImage] = useState("");
 
+
     let productsElement;
 
     useEffect(() => {

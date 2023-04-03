@@ -3,13 +3,14 @@ import RateStar from '../../Store/Rate-Star/RateStar';
 import { useNavigate } from 'react-router-dom';
 import './Favorite.css'
 import { toast } from 'react-toastify';
-import ApiUrls from '../../../Constants/ApiUrls';
+import { useStateValue } from '../../../StateProvider';
+import { actions } from '../../../reducer';
 
 
 function Favorite() {
     const [product, setproduct] = useState([]);
     const navigate = useNavigate();
-
+    const [{ basket }, dispatch] = useStateValue()
     useEffect(() => {
         function getDate() {
             fetch("http://localhost:8080/api/favorites", {
@@ -21,11 +22,14 @@ function Favorite() {
             }).then(res => {
                 if (res.ok) {
                     return res.json();
+                } else {
+                    throw new Error(res.statusText)
                 }
             }).then(data => {
-                console.log(data)
                 if (data)
                     setproduct(data);
+            }).catch(error => {
+                console.log(error)
             })
         }
         getDate()
@@ -53,6 +57,42 @@ function Favorite() {
         setproduct(newList)
     }
 
+    const addToBasket = (item, e) => {
+        e.stopPropagation()
+        const index = basket.findIndex(item => {
+            return item.id == item.productId;
+        })
+
+        // if there are not enough product in depot
+        if (index >= 0 && basket[index].quantity >= item.quantityInDepot) { return; }
+
+        if (index >= 0) {
+            dispatch({
+                type: actions.CHANGE_QUANTITY,
+                item: {
+                    id: item.productId,
+                    index: index,
+                    quantity: basket[index].quantity + 1
+                }
+            })
+            return;
+        }
+        console.log(item)
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                name: item.name,
+                image: item.images[0],
+                price: item.price,
+                rating: item.rating,
+                id: item.productId,
+                quantityInDepot: item.quantityInDepot,
+                quantity: 1
+            }
+        })
+    }
+
+
     return (
         <div className='favorite'>
             <div className='favorite-header'>
@@ -65,7 +105,7 @@ function Favorite() {
                         return (
                             <section className="card entering-animation" key={item.productId} onClick={() => navigate('/store/productdetails/' + item.productId)}>
                                 <span className='discount-logo'></span>
-                                <img src={ApiUrls.hostName + item.images[0]} alt="slider" />
+                                <img src={item.images[0]} alt="slider" />
                                 <RateStar rate={item.rate} size={'small'} />
                                 <div className="product-info">
                                     <h4>{item.name}</h4>
@@ -83,7 +123,7 @@ function Favorite() {
                                     </div>
                                 </div>
                                 <div className="card-button" >
-                                    <i className="bi bi-cart4" onClick={(e) => ((e))}></i>
+                                    <i className="bi bi-cart4" onClick={(e) => addToBasket(item, e)}></i>
                                     <i className="bi bi-trash" onClick={(e) => removeFavorite(item.productId, e)}></i>
                                 </div>
                             </section>
