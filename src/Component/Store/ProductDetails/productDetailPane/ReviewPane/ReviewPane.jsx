@@ -15,12 +15,15 @@ const ReviewPane = () => {
             "Content-Type": "application/json"
         }
     });
+    console.log("review pane rendered")
     const [textareaState, textareaSetState] = useState({
         name: 'review', value: '', isValid: false, warningMessage: ''
     })
     const [optionState, optionSetstate] = useState({
         name: 'rate', value: '', isValid: false, rateLevel: ''
     })
+    let Element;
+
 
     if (loading) {
         Element = <FlexibleLoading />
@@ -46,6 +49,9 @@ const ReviewPane = () => {
                                 </div>
                                 <div className='review-body'>
                                     <p className="review-text">{item.message}</p>
+                                    {
+
+                                    }
                                     <div className="likes-date-rate">
                                         <div className='likes-dislikes align_center' >
                                             <div className='align_center' onClick={() => likesTheComment(item.commentId)}>
@@ -58,7 +64,7 @@ const ReviewPane = () => {
                                                 </label>
                                             </div>
                                         </div>
-                                        <p>{item.commentDate}</p>
+                                        <p>{new Date(item.commentDate).toString()}</p>
                                     </div>
                                 </div>
                             </div>
@@ -123,6 +129,7 @@ const ReviewPane = () => {
             textareaSetState(oldState)
             return
         }
+
         fetch("http://localhost:8080/api/comments", {
             method: "POST",
             headers: {
@@ -143,6 +150,7 @@ const ReviewPane = () => {
                 throw new Error(res.statusText);
             }
         }).then(apiData => {
+            console.log(apiData)
             clearInput();
             setData([...data, apiData])
         }).catch(error => console.log(error));
@@ -162,13 +170,21 @@ const ReviewPane = () => {
 
     // perform the like action on comment
     const likesTheComment = (commentId) => {
+
         fetch(`http://localhost:8080/api/comments/${commentId}/like`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem("accessToken")
             }
-        }).then(res => res.json())
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error(res.statusText)
+                }
+            })
             .then(apidata => {
                 const reviewIndex = data.findIndex(item => {
                     return item.commentId == commentId
@@ -176,6 +192,8 @@ const ReviewPane = () => {
                 const temp = [...data];
                 temp[reviewIndex] = apidata
                 setData(temp);
+            }).catch(err => {
+                console.log(err)
             })
     }
     // perform the like action on comment
@@ -186,7 +204,14 @@ const ReviewPane = () => {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem("accessToken")
             }
-        }).then(res => res.json())
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error(res.statusText)
+                }
+            })
             .then(apidata => {
                 const reviewIndex = data.findIndex(item => {
                     return item.commentId == commentId
@@ -194,6 +219,8 @@ const ReviewPane = () => {
                 const temp = [...data];
                 temp[reviewIndex] = apidata
                 setData(temp);
+            }).catch(err => {
+                console.log(err)
             })
     }
     return (

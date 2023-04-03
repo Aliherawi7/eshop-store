@@ -1,29 +1,31 @@
-.form-title{
+.form-title {
     border-bottom: 1px ridge #e1e1e1;
     margin: 15px 0;
     margin-top: 40px;
     font-weight: 400;
     font-size: 14px;
 }
-.review-form{
+
+.review-form {
     width: 80%;
 }
-.review-form .input-container{
+
+.review-form .input-container {
     display: inline-block;
     width: 35%;
     margin-right: 5%;
 }
 
-.review-form select{
+.review-form select {
     font-size: 12px;
     width: 100px;
     outline: none;
     border-radius: 5px;
-    border:2px solid #e1e1e1;
-    padding:2px;
+    border: 2px solid #e1e1e1;
+    padding: 2px;
 }
 
-.review-form textarea{
+.review-form textarea {
     border-radius: 5px;
     margin-top: 15px;
     padding: 5px;
@@ -31,109 +33,128 @@
     width: 100%;
     height: 100px;
     outline: none;
-    border:2px solid #e1e1e1;
+    border: 2px solid #e1e1e1;
 }
-.review-form button{
+
+.review-form button {
     margin: 10px 0px;
 }
 
 /* pople review  */
-.last-review{
+.last-review {
     margin: 15px;
     max-height: 370px;
     overflow-y: scroll;
 }
-.people-review{
-    margin:10px auto;
+
+.people-review {
+    margin: 10px auto;
     display: flex;
 }
-.people-review img{
+
+.people-review img {
     vertical-align: -30px;
     width: 65px;
     height: 65px;
     border-radius: 50%;
     border: 1px solid #000;
+    object-fit: cover;
+    object-position: top;
 }
-.people-review .review-header{
+
+.people-review .review-header {
     display: flex;
     align-items: center;
 
 }
-.people-review .name-rate{
+
+.people-review .name-rate {
     margin: 0 15px;
     width: 120px;
 }
-.people-review .name-rate h4{
+
+.people-review .name-rate h4 {
     font-weight: 500;
     margin-bottom: 5px;
     font-size: 14px;
     display: inline-block;
     text-transform: capitalize;
 }
-.people-review .review-body{
+
+.people-review .review-body {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-.people-review .review-text{
+
+.people-review .review-text {
     font-size: 14px;
 }
-.people-review p{
+
+.people-review p {
     font-size: 12px;
     padding: 0 5px;
 }
-.people-review .likes-date-rate{
+
+.people-review .likes-date-rate {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
 }
 
-.people-review .likes-date-rate .likes-dislikes div{
-    margin-right:30px ;
+.people-review .likes-date-rate .likes-dislikes div {
+    margin-right: 30px;
     cursor: pointer;
     color: #b9b9b9;
     width: 20px;
 }
 
-.people-review .date-rate .CustomerReviews ul{
+.people-review .date-rate .CustomerReviews ul {
     vertical-align: 5px;
 }
-.people-review .date-rate{
+
+.people-review .date-rate {
     display: flex;
     align-items: center;
 }
 
 
 /* review rate */
-.weak{
+.weak {
     color: #fa9440;
     border: 2px solid #fa9440 !important;
 }
-.medium{
+
+.medium {
     color: #0ab3e6;
     border: 2px solid #0ab3e6 !important;
 }
-.good{
+
+.good {
     color: #1ce209;
     border: 2px solid #1ce209 !important;
 }
-.notRated,.notReview {
+
+.notRated,
+.notReview {
     color: #ee0e0e;
     border: 2px solid #ee0e0e !important;
 }
 
-.Review{
+.Review {
     border: 2px solid #1ce209 !important;
 }
 
 
-@media (max-width:768px){
+@media (max-width:768px) {
+
     .product-info button,
-    .review-form{
+    .review-form {
         width: 100%;
     }
-    .people-review{
+
+    .people-review {
         flex-flow: wrap;
     }
 }
