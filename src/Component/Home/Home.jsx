@@ -14,7 +14,7 @@ const Home = () => {
     const sliderItemRef = useRef();
     useEffect(() => {
         const getData = () => {
-            fetch('http://localhost:8080/api/products')
+            fetch(ApiUrls.hostName + ApiUrls.products.allProducts(0, 15))
                 .then(res => {
                     if (res.ok) {
                         return res.json();

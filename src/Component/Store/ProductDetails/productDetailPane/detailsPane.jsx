@@ -15,7 +15,6 @@ const DetailsPane = (props) => {
     // tab click and show active tab content
 
     useEffect(() => {
-        console.log(props.dataSheet)
         switch (state?.name) {
             case TAPS.dataSheet.name:
                 setData(props.dataSheet)

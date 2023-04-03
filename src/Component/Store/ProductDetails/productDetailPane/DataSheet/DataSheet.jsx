@@ -2,6 +2,7 @@ import React from 'react'
 import './DataSheet.css'
 const DataSheet = (props) => {
     const dataArray = []
+
     for (let item in props.data) {
         if (item !== 'images' && item !== 'amount') {
             dataArray.push({
@@ -11,7 +12,6 @@ const DataSheet = (props) => {
         }
 
     }
-    console.log(props.data)
     return (
         <table className={`data-sheet fade-in`}>
             <tbody>
@@ -24,7 +24,6 @@ const DataSheet = (props) => {
                                 <td><input type="color" value={item.value} onChange={() => ""} /></td> :
                                 <td>{item.value}</td>
                             }
-
                         </tr>
                     )
                 })}

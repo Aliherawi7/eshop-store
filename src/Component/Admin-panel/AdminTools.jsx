@@ -11,6 +11,7 @@ import Modal from '../UI/modal/Modal'
 import ProductLineChart from './ProductLineChart'
 import ApiUrls from '../../Constants/ApiUrls'
 
+
 export function Dashboard() {
     const [state, dispatch] = useStateValue();
     const [modelSummary, setmodelSummary] = useState({})
@@ -94,7 +95,7 @@ export function ProductsPanel() {
             item: true
         })
         const getData = async () => {
-            let response = await fetch('http://localhost:8080/api/products');
+            let response = await fetch(ApiUrls.hostName + ApiUrls.products.allProducts(0, 15));
 
             if (response.ok) {
                 let data = await response.json();

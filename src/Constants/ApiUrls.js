@@ -2,7 +2,7 @@
 const ApiUrls = {
     hostName: "http://localhost:8080/",
     products: {
-        allProducts: "api/products",
+        allProducts: (offset, pageSize) => `api/products/pagination/${offset}/${pageSize}`,
         getProduct: "api/products/",
         addProduct: "api/products",
         deleteProduct: "api/products/delete/",

@@ -15,66 +15,12 @@ const ReviewPane = () => {
             "Content-Type": "application/json"
         }
     });
-    console.log("review pane rendered")
     const [textareaState, textareaSetState] = useState({
         name: 'review', value: '', isValid: false, warningMessage: ''
     })
     const [optionState, optionSetstate] = useState({
         name: 'rate', value: '', isValid: false, rateLevel: ''
     })
-    let Element;
-
-
-    if (loading) {
-        Element = <FlexibleLoading />
-    }
-
-    if (data) {
-
-        if (data.length == 0) {
-            Element = <h4 className="title">Be the first reviewer</h4>;
-        } else {
-            Element = (<>
-                <h4 className="title">All Reviews {data.length}</h4>
-                <div className="last-review">
-                    {data.map((item) => {
-                        return (
-                            <div className="people-review border-bottom" key={Math.random()}>
-                                <div className='review-header'>
-                                    <img src={item.userImage} />
-                                    <div className='name-rate'>
-                                        <h4>{item.userName}</h4>
-                                        <RateStar rate={item.rate} size={"small"} />
-                                    </div>
-                                </div>
-                                <div className='review-body'>
-                                    <p className="review-text">{item.message}</p>
-                                    {
-
-                                    }
-                                    <div className="likes-date-rate">
-                                        <div className='likes-dislikes align_center' >
-                                            <div className='align_center' onClick={() => likesTheComment(item.commentId)}>
-                                                <i className='bi bi-hand-thumbs-up-fill' style={{ color: "#39a1f2", padding: "5px" }}></i>
-                                                <label style={{ color: "#6fc04b" }}>{item.likes == 0 ? "" : item.likes}</label>
-                                            </div>
-                                            <div className='align_center' onClick={() => dislikesTheComment(item.commentId)}>
-                                                <i className='bi bi-hand-thumbs-down-fill' style={{ padding: "5px" }}></i>
-                                                <label style={{ color: "#e15817" }}>{item.disLikes == 0 ? "" : item.disLikes}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <p>{new Date(item.commentDate).toString()}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-
-                </div>
-            </>)
-        }
-    }
 
     useEffect(() => {
         if (data) {
@@ -223,6 +169,60 @@ const ReviewPane = () => {
                 console.log(err)
             })
     }
+
+    let Element;
+
+
+    if (loading) {
+        Element = <FlexibleLoading />
+    }
+
+    if (data) {
+        if (data.length == 0) {
+            Element = <h4 className="title">Be the first reviewer</h4>;
+        } else {
+            Element = (<>
+                <h4 className="title">All Reviews {data.length}</h4>
+                <div className="last-review">
+                    {data.map((item) => {
+                        return (
+                            <div className="people-review border-bottom" key={Math.random()}>
+                                <div className='review-header'>
+                                    <img src={item.userImage} />
+                                    <div className='name-rate'>
+                                        <h4>{item.userName}</h4>
+                                        <RateStar rate={item.rate} size={"small"} />
+                                    </div>
+                                </div>
+                                <div className='review-body'>
+                                    <p className="review-text">{item.message}</p>
+                                    {
+
+                                    }
+                                    <div className="likes-date-rate">
+                                        <div className='likes-dislikes align_center' >
+                                            <div className='align_center' onClick={() => likesTheComment(item.commentId)}>
+                                                <i className='bi bi-hand-thumbs-up-fill' style={{ color: "#39a1f2", padding: "5px" }}></i>
+                                                <label style={{ color: "#6fc04b" }}>{item.likes == 0 ? "" : item.likes}</label>
+                                            </div>
+                                            <div className='align_center' onClick={() => dislikesTheComment(item.commentId)}>
+                                                <i className='bi bi-hand-thumbs-down-fill' style={{ padding: "5px" }}></i>
+                                                <label style={{ color: "#e15817" }}>{item.disLikes == 0 ? "" : item.disLikes}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <p>{new Date(item.commentDate).toString()}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+
+                </div>
+            </>)
+        }
+    }
+
     return (
         <div className={`review-content fade-in`}>
 

@@ -6,7 +6,6 @@ import NotFound from "../Pages/NotFoundPage/NotFound"
 import admintTools from './AdminTools';
 import SmallLoading from '../UI/Loading/SmallLoading';
 import { actions } from '../../reducer'
-import ApiUrls from '../../Constants/ApiUrls';
 
 let counter = 0
 function AdminPanel() {

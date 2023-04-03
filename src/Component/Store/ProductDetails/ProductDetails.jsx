@@ -17,13 +17,12 @@ import NotFound from "../../Pages/NotFoundPage/NotFound"
 const ProductDetails = () => {
     const { id } = useParams()
     const [{ basket }, dispatch] = useStateValue()
-    const [product, setProduct] = useState();
+
     const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.getProduct + id);
     const [showModal, setShowModal] = useState(false)
     const [productImage, setProductImage] = useState("");
 
     let productsElement;
-
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -38,7 +37,7 @@ const ProductDetails = () => {
         })
 
         // if there are not enough product in depot
-        if (index >= 0 && basket[index].quantity >= product.quantityInDepot) { return; }
+        if (index >= 0 && basket[index].quantity >= data?.quantityInDepot) { return; }
 
         if (index >= 0) {
             dispatch({
@@ -65,7 +64,6 @@ const ProductDetails = () => {
     }
 
     const addToFavorite = () => {
-        console.log(id)
         fetch("http://localhost:8080/api/favorites", {
             method: "POST",
             headers: {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./Slider.css"
 import { Link } from "react-router-dom"
-import ApiUrls from '../../../Constants/ApiUrls';
+
 
 function Slider({ products, size = 5, delay = 8, }) {
     let [product, setProduct] = useState(products);
