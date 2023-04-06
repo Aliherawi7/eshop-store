@@ -1,19 +1,22 @@
-
-.add-product-form{
+.add-product-form {
     padding: 0 40px;
 
 }
-.add-new-product .header-box{
+
+.add-new-product .header-box {
     display: flex;
     justify-content: space-between;
     padding: 0 40px;
+    margin-bottom: 20px;
 }
-.add-product-form form{
+
+.add-product-form form {
     display: flex;
     flex-direction: column;
 
 }
-.add-product-form form .input-box{
+
+.add-product-form form .input-box {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -22,7 +25,11 @@
     width: 48%;
 }
 
-.add-product-form form .input-box i{
+.add-product-form .upload .input-box {
+    width: 30%;
+}
+
+.add-product-form form .input-box i {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -35,18 +42,21 @@
     left: 0;
     bottom: 0;
 }
-.add-product-form form .input-box input[type=file]:hover + i{
+
+.add-product-form form .input-box input[type=file]:hover+i {
     cursor: pointer;
     color: var(--mainColor);
 }
-.add-product-form form .input-box img{
+
+.add-product-form form .input-box img {
     border-radius: 10px;
     margin-top: 10px;
     width: 100%;
     height: 200px;
     object-fit: contain;
 }
-.add-product-form form .input-box input[type=file]{
+
+.add-product-form form .input-box input[type=file] {
     cursor: pointer;
     top: 28px;
     position: absolute;
@@ -58,24 +68,34 @@
     z-index: 200;
     opacity: 0;
 }
-.add-product-form form .input-box .upload-button input{
+
+.add-new-product form .input_upload {
+    flex: 1 2 200px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.add-product-form form .input-box .upload-button input {
     opacity: 0;
 }
 
-.add-product-form form .input-group{
+.add-product-form form .input-group {
     display: flex;
     justify-content: space-between;
     flex-flow: wrap;
 }
-.add-product-form form .button-container{
+
+.add-product-form form .button-container {
     display: flex;
     justify-content: space-between;
 }
-.add-product-form form .input-box label{
+
+.add-product-form form .input-box label {
     font-size: 14px;
     font-weight: 300;
 }
-.add-product-form form .input-box input{
+
+.add-product-form form .input-box input {
     outline: none;
     background-color: transparent;
     border: 1px solid var(--i);
@@ -87,13 +107,14 @@
     width: 100%;
 }
 
-.add-product-form form .input-box input[type=checkbox]{
+.add-product-form form .input-box input[type=checkbox] {
     height: 20px;
     width: 40px;
     z-index: 100;
     opacity: 0;
 }
-.add-product-form .check-box{
+
+.add-product-form .check-box {
     position: absolute;
     border: 1px solid var(--i);
     width: 40px;
@@ -101,7 +122,8 @@
     top: 24px;
     border-radius: 3px;
 }
-.add-product-form input[type=checkbox]:checked + .check-box::after{
+
+.add-product-form input[type=checkbox]:checked+.check-box::after {
     content: "";
     top: 50%;
     background-color: transparent;
@@ -117,35 +139,43 @@
     left: 8px;
     box-sizing: content-box;
 }
-.add-product-form input[type=checkbox]:checked + .check-box{
+
+.add-product-form input[type=checkbox]:checked+.check-box {
     background-color: var(--i);
 }
 
 .add-product-form form .input-box input:hover,
 .add-product-form form .input-box input:active,
-.add-product-form form .input-box input:focus{
+.add-product-form form .input-box input:focus {
     border-color: var(--mainColor);
 }
-.add-product-form form button{
-   margin-top: 10px;
-   background-color: var(--i);
+
+.add-product-form form button {
+    margin-top: 10px;
+    background-color: var(--i);
 }
-.add-product-form form button i{
+
+.add-product-form form button i {
     margin-left: 5px;
- }
-.add-product-form form .incomplete-inputs{
+}
+
+.add-product-form form .incomplete-inputs {
     color: red;
 }
-@media(max-width: 786px){
+
+@media(max-width: 786px) {
+
     .add-product-form,
-    .add-new-product .header-box{
+    .add-new-product .header-box {
         padding: 0;
-    
+
     }
-    .add-product-form form .input-box{
+
+    .add-product-form form .input-box {
         width: 100%;
     }
-    .add-product-form form .input-box input[type=date]{
+
+    .add-product-form form .input-box input[type=date] {
         width: 100%;
     }
 
