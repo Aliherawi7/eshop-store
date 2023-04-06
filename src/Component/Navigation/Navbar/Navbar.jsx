@@ -50,7 +50,7 @@ const Navbar = () => {
                     {localStorage.getItem("email") != null ?
                         <div className='authentication'>
                             <div className='user-account'>
-                                <img src={localStorage.getItem("image")} className='bi bi-person-circle' />
+                                <img src={localStorage.getItem("image")} className='' />
                             </div>
                             <div className='account-settings'>
                                 <Link to="/favorite"><i className='bi bi-heart'></i>Favorites</Link>
