@@ -114,66 +114,52 @@ export function ProductsPanel() {
     }, [])
 
     const deleteProduct = (id) => {
-        setShowModal(true)
-        fetch("http://localhost:8080/api/products/delete/" + id, {
+
+        fetch("http://localhost:8080/api/products/" + id, {
             method: 'DELETE',
             headers: {
                 'Authorization': localStorage.getItem("accessToken")
             },
-
-        })
-        const getData = async () => {
-            let response = await fetch("http://localhost:8080/api/products/delete/" + id, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': localStorage.getItem("accessToken")
-                },
-            });
-
-            if (response.ok) {
-                let data = await response.json();
-                const productIndex = products.findIndex(item => {
-                    return item.id == id;
-                })
-                const newProductList = [...products];
-                newProductList.splice(productIndex, 1)
-                toast.done("product successfully deleted.", {
-                    position: "bottom-right",
-                    closeOnClick: true,
-                    autoClose: true,
-                    closeButton: true
-                })
-                setProducts(newProductList)
-
-            } else {
-                toast.error("couldn't removed the product.", {
-                    position: "bottom-right",
-                    closeOnClick: true,
-                    autoClose: true,
-                    closeButton: true,
-                    responsive: true
-                })
-            }
-            dispatch({
-                type: actions.LOADING,
-                item: false
+        }).then(res => {
+            if (!res.ok)
+                throw new Error(res.statusText)
+        }).then(data => {
+            const productIndex = products.findIndex(item => {
+                return item.id == id;
             })
-
-
-        }
-        getData();
+            const newProductList = [...products];
+            newProductList.splice(productIndex, 1)
+            toast.success("product successfully deleted.", {
+                position: "bottom-right",
+                closeOnClick: true,
+                autoClose: true,
+                closeButton: true
+            })
+            setProducts(newProductList)
+        }).catch(error => {
+            console.log(error)
+            toast.error("couldn't removed the product.", {
+                position: "bottom-right",
+                closeOnClick: true,
+                autoClose: true,
+                closeButton: true,
+                responsive: true
+            })
+        })
+        setShowModal(false)
     }
 
     const addProduct = () => {
         setProductDetail({});
         setState(false);
     }
+
     const editProduct = (item) => {
         console.log(item)
         setProductDetail(item);
         setState(false);
     }
-
+    console.log(productDetail)
     return (state ?
         <div className='products-statistics panel-statistics fade-in'>
             <div className='products-table model-table' style={{ "--i": "#32a7e1" }}>
@@ -210,7 +196,7 @@ export function ProductsPanel() {
 
                         {products.map(product => {
                             return (
-                                <tr key={product.id}>
+                                <tr key={product.productId}>
                                     <td name='id'>{product.id}</td>
                                     <td name='name'><img src={product.images[0]} />{product.name?.toUpperCase()}</td>
                                     <td >{product.category?.toUpperCase()}</td>
@@ -222,7 +208,7 @@ export function ProductsPanel() {
                                         <span className='action-buttons'>
                                             <i className='bi bi-three-dots-vertical show-actions'></i>
                                             <span className='buttons-box'>
-                                                <i className='bi bi-trash' onClick={() => setShowModal({ show: true, productId: product.id })} style={{ "--i": 'red' }}></i>
+                                                <i className='bi bi-trash' onClick={() => setShowModal({ show: true, productId: product.productId })} style={{ "--i": 'red' }}></i>
                                                 <i className='bi bi-pencil' onClick={() => editProduct(product)}></i>
                                             </span>
                                         </span>
@@ -241,16 +227,7 @@ export function ProductsPanel() {
         : <CustomeProduct
             back={() => setState(true)}
             id={productDetail?.id}
-            name={productDetail?.name}
-            images={productDetail?.images}
-            size={productDetail?.size}
-            productionDate={productDetail?.productionDate}
-            price={productDetail?.price}
-            quantityInDepot={productDetail?.quantityInDepot}
-            description={productDetail?.description}
-            category={productDetail?.category}
-            color={productDetail?.color}
-            brandName={productDetail?.brandName}
+            data={productDetail}
         />
     )
 }
@@ -299,7 +276,7 @@ export function CategoriesPanel() {
                         <tbody>
                             {categories.map(product => {
                                 return (
-                                    <tr>
+                                    <tr key={product.productId}>
                                         <td name='id'>{product?.id}</td>
                                         <td>{product?.name.toUpperCase()}</td>
                                         <td>{product?.amount}</td>
