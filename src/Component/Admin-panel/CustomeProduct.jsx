@@ -1,105 +1,129 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./AddNewProduct.css"
 import Button from "../UI/Button/Button";
 import { toast } from "react-toastify";
 import { actions } from "../../reducer";
 import { useStateValue } from "../../StateProvider";
 
-export function CustomeProduct({ id = '', images = '', name = '', category = '', color = '',
-    brandName = '', size = '', description = '', quantityInDepot = '',
-    price = '', productionDate = '', discount = 0, back }
-) {
+let initialState = {
+    productId: '',
+    imageSide1: '',
+    imageSide2: '',
+    imageSide3: '',
+    name: '',
+    category: '',
+    color: '',
+    brandName: '',
+    size: '',
+    descriptions: '',
+    quantityInDepot: '',
+    price: '',
+    discount: '',
+}
+const inputsName = {
+    IMAGE_SIDE_1: { id: "imageSide1", name: 'image side-1', type: "file", warning: "" },
+    IMAGE_SIDE_2: { id: "imageSide2", name: 'image side-2', type: "file", warning: "" },
+    IMAGE_SIDE_3: { id: "imageSide3", name: 'image side-3', type: "file", warning: "" },
+    NAME: { id: "name", name: 'name', type: "text" },
+    CATEGORY: { id: "category", name: 'category', type: "text", warning: "" },
+    COLOR: { id: "color", name: 'color', type: "text" },
+    BRANDNAME: { id: "brandName", name: 'brand name', type: "text", warning: "" },
+    SIZE: { id: "size", name: 'size', type: "text", warning: "" },
+    DESCRIPTION: { id: "descriptions", name: 'description', type: "text", warning: "" },
+    QUANTITY_IN_DEPOT: { id: "quantityInDepot", name: 'quantity in Depot', type: "text", warning: "" },
+    PRICE: { id: "price", name: 'price', type: "text", warning: "" },
+    DISCOUNT: { id: "discount", name: 'discount', type: "text", warning: "" },
+}
+
+
+
+export function CustomeProduct({ id = '', back, data }) {
     const [, dispatch] = useStateValue();
-    const [state, setState] = useState({
-        image: images[0],
-        name,
-        category,
-        color,
-        brandName,
-        size,
-        description,
-        quantityInDepot,
-        price,
-        productionDate,
-        discount
-    });
-    const inputsName = {
-        IMAGE: 'IMAGE',
-        NAME: 'NAME',
-        CATEGORY: 'CATEGORY',
-        COLOR: 'COLOR',
-        BRANDNAME: 'BRANDNAME',
-        SIZE: 'SIZE',
-        DESCRIPTION: 'DESCRIPTION',
-        QUANTITY_IN_DEPOT: 'QUANTITY_IN_DEPOT',
-        PRICE: 'PRICE',
-        PRODUTION_DATE: 'PRODUCTION',
-        DISCOUNT: "DISCOUNT"
-    }
+    const [state, setState] = useState(initialState);
+
+    useEffect(() => {
+        if (data.name) {
+            setState({
+                ...data,
+                imageSide1: data.images[0],
+                imageSide2: data.images[1],
+                imageSide3: data.images[2],
+            })
+        }
+    }, [])
+
     const inputsHandler = (e, inputName) => {
+
         const value = e.target.value;
+        console.log(inputName, value)
         switch (inputName) {
-            case inputsName.IMAGE:
+            case inputsName.IMAGE_SIDE_1.id:
                 setState({
                     ...state,
-                    image: e.target.files[0]
+                    imageSide1: e.target.files[0]
                 })
                 break;
-            case inputsName.NAME:
+            case inputsName.IMAGE_SIDE_2.id:
+                setState({
+                    ...state,
+                    imageSide2: e.target.files[0]
+                })
+                break;
+            case inputsName.IMAGE_SIDE_3.id:
+                setState({
+                    ...state,
+                    imageSide3: e.target.files[0]
+                })
+                break;
+            case inputsName.NAME.id:
                 setState({
                     ...state,
                     name: value
                 })
                 break;
-            case inputsName.CATEGORY:
+            case inputsName.CATEGORY.id:
                 setState({
                     ...state,
                     category: value
                 })
                 break;
-            case inputsName.COLOR:
+            case inputsName.COLOR.id:
                 setState({
                     ...state,
                     color: value
                 })
                 break;
-            case inputsName.BRANDNAME:
+            case inputsName.BRANDNAME.id:
                 setState({
                     ...state,
                     brandName: value
                 })
                 break;
-            case inputsName.SIZE:
+            case inputsName.SIZE.id:
                 setState({
                     ...state,
                     size: value
                 })
                 break;
-            case inputsName.PRICE:
+            case inputsName.PRICE.id:
                 setState({
                     ...state,
                     price: value
                 })
                 break;
-            case inputsName.DESCRIPTION:
+            case inputsName.DESCRIPTION.id:
                 setState({
                     ...state,
-                    description: value
+                    descriptions: value
                 })
                 break;
-            case inputsName.QUANTITY_IN_DEPOT:
+            case inputsName.QUANTITY_IN_DEPOT.id:
                 setState({
                     ...state,
                     quantityInDepot: value
                 })
                 break;
-            case inputsName.PRODUTION_DATE:
-                setState({
-                    ...state,
-                    productionDate: value
-                })
-                break;
-            case inputsName.DISCOUNT:
+            case inputsName.DISCOUNT.id:
                 setState({
                     ...state,
                     discount: value
@@ -108,8 +132,6 @@ export function CustomeProduct({ id = '', images = '', name = '', category = '',
             default:
                 break;
         }
-
-
     }
     const [warningMessage, setWarningMessage] = useState([]);
 
@@ -129,6 +151,8 @@ export function CustomeProduct({ id = '', images = '', name = '', category = '',
             }
         }
 
+
+
         //check if there is an empty input then show warning message
         if (inCompletes.length > 0) {
             setWarningMessage(inCompletes)
@@ -142,20 +166,24 @@ export function CustomeProduct({ id = '', images = '', name = '', category = '',
         })
         const formData = new FormData();
         for (let item in state) {
+            console.log(item)
+            if (item == inputsName.IMAGE_SIDE_1.id || item == inputsName.IMAGE_SIDE_2.id || item == inputsName.IMAGE_SIDE_3.id) {
+                if (typeof state[item] == 'string') {
+                    formData.append(item + "", null)
+                    continue;
+                }
+            }
             formData.append(item + "", state[item])
         }
         let httpMethod = 'POST';
-        let restApi = 'save'
         if (id != '') {
             formData.append("id", id)
             httpMethod = 'PUT'
-            restApi = id
         }
-        console.log(state)
-        fetch('http://localhost:8080/api/products/' + restApi, {
+
+        fetch('http://localhost:8080/api/products', {
             method: httpMethod,
             headers: {
-                // "Content-Type": "application/json",
                 'Authorization': localStorage.getItem('accessToken')
             },
             body: formData
@@ -178,23 +206,11 @@ export function CustomeProduct({ id = '', images = '', name = '', category = '',
         }).catch(error => console.log(error))
 
     }
-
+    /* this function is going to clear current state   */
     const clearAll = () => {
-        setState({
-            image: '',
-            name: '',
-            category: '',
-            color: '',
-            brandName: '',
-            size: '',
-            description: '',
-            quantityInDepot: '',
-            price: '',
-            productionDate: '',
-        });
+        setState(initialState);
         setWarningMessage([])
     }
-
     return (
         <div className='add-new-product fade-in'>
             <div className="header-box">
@@ -205,70 +221,50 @@ export function CustomeProduct({ id = '', images = '', name = '', category = '',
             </div>
             <div className='add-product-form'>
                 <form style={{ "--i": "#32a7e1" }}>
-                    <div className="input-group upload">
-                        <div className="input-box">
-                            <label>product image</label>
-                            <img
-                                src={state.image ? URL.createObjectURL(state.image) : "/image/slide-17.jpg"}
-                            />
-                            <input type="file" accept='image/*' placeholder="image" onChange={(e) => inputsHandler(e, inputsName.IMAGE)} />
-                            <i className="bi bi-cloud-upload"></i>
-                        </div>
-
-                    </div>
                     <div className="input-group">
-                        <div className="input-box">
-                            <label>Product Name</label>
-                            <input type="text" value={state.name} placeholder="product name" onChange={(e) => inputsHandler(e, inputsName.NAME)} />
-                        </div>
-                        <div className="input-box">
-                            <label>Categroy</label>
-                            <input type="text" value={state.category} placeholder="category" onChange={(e) => inputsHandler(e, inputsName.CATEGORY)} />
-                        </div>
-                        <div className="input-box">
-                            <label>Price</label>
-                            <input type="number" value={state.price} placeholder="price" onChange={(e) => inputsHandler(e, inputsName.PRICE)} />
-                        </div>
+                        {Object.keys(inputsName).map(item => {
+                            if (inputsName[item].type == "file") {
 
-                        <div className="input-box">
-                            <label>Product Color</label>
-                            <input type="color" value={state.color} placeholder="color" onChange={(e) => inputsHandler(e, inputsName.COLOR)} />
-                        </div>
-                    </div>
+                                let image;
+                                console.log(data)
+                                if (!data.name) {
+                                    if (state[inputsName[item].id]) {
+                                        console.log("add cond first if")
+                                        image = URL.createObjectURL(state[inputsName[item].id])
+                                    } else {
+                                        console.log("add cond second if")
+                                        image = "/image/slide-17.jpg"
+                                    }
+                                } else {
+                                    console.log(typeof state[inputsName[item].id])
 
-                    <div className="input-group">
-                        <div className="input-box">
-                            <label>Brand Name</label>
-                            <input type="text" value={state.brandName} placeholder="brand name" onChange={(e) => inputsHandler(e, inputsName.BRANDNAME)} />
-                        </div>
-                        <div className="input-box">
-                            <label>Amount in depot</label>
-                            <input type="number" value={state.quantityInDepot} min={0} placeholder="amount in depot" onChange={(e) => inputsHandler(e, inputsName.QUANTITY_IN_DEPOT)} />
-                        </div>
-                        <div className="input-box">
-                            <label>Product Size</label>
-                            <input type="text" value={state.size} placeholder="size" onChange={(e) => inputsHandler(e, inputsName.SIZE)} />
-                        </div>
-                        <div className="input-box">
-                            <label>Production date</label>
-                            <input type="date" value={state.productionDate} placeholder="Production date" onChange={(e) => inputsHandler(e, inputsName.PRODUTION_DATE)} />
-                        </div>
-
-                    </div>
-                    <div className="input-group">
-                        <div className="input-box">
-                            <label>Discount</label>
-                            <input type="number" value={state.discount} placeholder="discount" onChange={(e) => inputsHandler(e, inputsName.DISCOUNT)} />
-                        </div>
-                        <div className="input-box">
-                            <label>Descriptions</label>
-                            <input type="text" value={state.description} placeholder="descriptions" onChange={(e) => inputsHandler(e, inputsName.DESCRIPTION)} />
-                        </div>
-                    </div>
-
-
-                    <div className="input-box incomplete-inputs">
-                        <span>{warningMessage.length > 0 ? "Please fill the: " + warningMessage.map(item => ' ' + item) : ""}</span>
+                                    if (typeof state[inputsName[item].id] == 'string') {
+                                        console.log("in string state")
+                                        image = state[inputsName[item].id]
+                                    } else {
+                                        console.log("in file state")
+                                        image = URL.createObjectURL(state[inputsName[item].id])
+                                    }
+                                }
+                                console.log(image)
+                                return (
+                                    <div key={inputsName[item].id} className="input-box input_upload">
+                                        <label>{inputsName[item].name}</label>
+                                        <img
+                                            src={image}
+                                        />
+                                        <input type="file" accept='image/*' placeholder="image" onChange={(e) => inputsHandler(e, inputsName[item].id)} />
+                                        <i className="bi bi-cloud-upload"></i>
+                                    </div>
+                                )
+                            }
+                            return (
+                                <div key={inputsName[item].id} className="input-box">
+                                    <label>{inputsName[item].name}</label>
+                                    <input type={inputsName[item].type} value={state[inputsName[item].id]} placeholder={inputsName[item].name} onChange={(e) => inputsHandler(e, inputsName[item].id)} />
+                                </div>
+                            )
+                        })}
                     </div>
                     <div className="button-container" >
                         <Button btnType="success save" style={{ "--i": "#32a7e1" }} click={addProductToDB}>
