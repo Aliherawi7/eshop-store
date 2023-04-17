@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "./detailsPane.css"
+import "./DetailsPane.css"
 import ReviewPane from './ReviewPane/ReviewPane'
 import DataSheet from './DataSheet/DataSheet'
 import Descriptions from './Descriptions/Descriptions'
