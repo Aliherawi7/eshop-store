@@ -58,23 +58,23 @@ const Store = () => {
                 <div className='sort-product'>
                     <span className='sort-title'><i className='bi bi-sort-down'></i> Sort based on : </span>
                     <span
-                        className={sortByCounter == 0 ? "active" : ""}
+                        className={sortByCounter === 0 ? "active" : ""}
                         onClick={() => sortBy("", 0)}>All</span>
                     <span
-                        className={sortByCounter == 1 ? "active" : ""}
+                        className={sortByCounter === 1 ? "active" : ""}
                         onClick={() => sortBy("", 1)}>
                         Newest</span>
                     <span
-                        className={sortByCounter == 2 ? "active" : ""}
+                        className={sortByCounter === 2 ? "active" : ""}
                         onClick={() => sortBy("", 2)} >
                         Most Popular</span>
                     <span
                         onClick={() => sortBy("", 3)}
-                        className={sortByCounter == 3 ? "active" : ""} >
+                        className={sortByCounter === 3 ? "active" : ""} >
                         Cheapest</span>
                     <span
                         onClick={() => sortBy("", 4)}
-                        className={sortByCounter == 4 ? "active" : ""} >
+                        className={sortByCounter === 4 ? "active" : ""} >
                         Most Expensive</span>
                 </div>
                 <div className="product-list">
@@ -99,31 +99,31 @@ const Store = () => {
         <div className={`store store-entering`}>
             <h2 className="product">Categories</h2>
             <div className='product-categories'>
-                <span className={categoryCounter == 0 ? "active" : ""}
+                <span className={categoryCounter === 0 ? "active" : ""}
                     onClick={() => sortByCategory("", 0)} >
                     <i className='bi bi-collection-fill'></i>
                     All
                 </span>
                 <span
-                    className={categoryCounter == 1 ? "active" : ""}
+                    className={categoryCounter === 1 ? "active" : ""}
                     onClick={() => sortByCategory("pc", 1)} >
                     <i className='bi bi-laptop-fill'></i>
                     PC and accessories
                 </span>
                 <span
-                    className={categoryCounter == 2 ? "active" : ""}
+                    className={categoryCounter === 2 ? "active" : ""}
                     onClick={() => sortByCategory("mobile", 2)}>
                     <i className='bi bi-phone-fill'></i>
                     Phone and accessories
                 </span>
                 <span
-                    className={categoryCounter == 3 ? "active" : ""}
+                    className={categoryCounter === 3 ? "active" : ""}
                     onClick={() => sortByCategory("tv", 3)}>
                     <i className='bi bi-display-fill'></i>
                     TV and accessories
                 </span>
                 <span
-                    className={categoryCounter == 4 ? "active" : ""}
+                    className={categoryCounter === 4 ? "active" : ""}
                     onClick={() => sortByCategory("tools", 4)}>
                     <i className='bi bi-earbuds'></i>
                     Other

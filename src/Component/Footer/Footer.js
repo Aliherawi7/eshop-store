@@ -23,7 +23,7 @@ function Footer() {
                 <div className='quick-links footer-part'>
                     <h2 className='left-border'>Quick links</h2>
                     <Link to="/">Home</Link>
-                    <Link to="/templates">Shop</Link>
+                    <Link to="/store">Store</Link>
                     <Link to="">GitHub Repository</Link>
                     <Link to="/about">About</Link>
 
@@ -37,7 +37,8 @@ function Footer() {
                 </div>
             </div>
             <div className='copyright'>
-                <p>© 2022 eShop. All rights reserved - Designed and developed by <strong>Ali Herawi</strong></p>
+                <p>© 2022 eShop. All rights reserved - Designed and developed by <strong><a href='http://www.linkedin.com/in/ali-herawi'>
+                    Ali Herawi</a></strong></p>
             </div>
         </footer>
     )
