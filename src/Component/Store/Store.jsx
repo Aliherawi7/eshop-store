@@ -10,7 +10,7 @@ const Store = () => {
     let productsElement;
     const [products, setProducts] = useState([]);
     const [sortedProduct, setSortedProduct] = useState([])
-    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.allProducts(0, 30));
+    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.allProducts(0, 40));
     const [categoryCounter, setCategoryCounter] = useState(0)
     const [sortByCounter, setSortByCounter] = useState(0);
 
@@ -28,7 +28,7 @@ const Store = () => {
     const sortByCategory = (type, id) => {
         const sortProduct = []
         products.forEach(item => {
-            if (item.category.toLowerCase().includes(type.toLowerCase())) {
+            if (item.keywords?.toLowerCase().includes(type.toLowerCase())) {
                 sortProduct.push(item)
             }
         })
