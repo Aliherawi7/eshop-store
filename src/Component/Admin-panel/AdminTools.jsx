@@ -115,7 +115,7 @@ export function ProductsPanel() {
 
     const deleteProduct = (id) => {
 
-        fetch("http://localhost:8080/api/products/" + id, {
+        fetch(ApiUrls.products.deleteProduct + id, {
             method: 'DELETE',
             headers: {
                 'Authorization': localStorage.getItem("accessToken")
@@ -344,10 +344,6 @@ export function OrdersPanel() {
                         <h2>Recent Orders</h2>
                         <p>{orders.length} orders</p>
                     </div>
-                    <Button btnType="white">
-                        add
-                        <i className='bi bi-plus-lg'></i>
-                    </Button>
                 </div>
                 <table>
                     <thead>
@@ -436,10 +432,6 @@ export function UsersPanel() {
                         <h2>Recent Users</h2>
                         <p>{users.length} Users</p>
                     </div>
-                    <Button btnType="white">
-                        add
-                        <i className='bi bi-plus-lg'></i>
-                    </Button>
                 </div>
                 <table>
                     <thead>

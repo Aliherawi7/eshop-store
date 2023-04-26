@@ -5,12 +5,12 @@ import { useStateValue } from "../../StateProvider";
 import { actions } from "../../reducer";
 
 export function AddNewCategory(props) {
-    const [{loading},dispatch] = useStateValue(); 
+    const [{ loading }, dispatch] = useStateValue();
     const [state, setState] = useState({
         name: '',
         description: '',
         quantityInDepot: '',
-        status:false
+        status: false
     });
 
     const inputsName = {
@@ -21,7 +21,7 @@ export function AddNewCategory(props) {
     }
     const inputsHandler = (e, inputName) => {
         const value = e.target.value;
-        console.log(state) 
+        console.log(state)
         switch (inputName) {
             case inputsName.NAME:
                 setState({
@@ -80,7 +80,7 @@ export function AddNewCategory(props) {
         dispatch({
             type: actions.LOADING
         })
-        fetch('http://localhost:8080/api/categories/save', {
+        fetch('http://localhost:8080/api/categories', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -90,14 +90,13 @@ export function AddNewCategory(props) {
 
         }).then(res => {
             if (res.ok) {
-                
                 clearAll();
             }
         }).catch(error => {
             console.log(error)
         })
 
-        
+
     }
 
     const clearAll = () => {
@@ -145,8 +144,8 @@ export function AddNewCategory(props) {
                         <span>{warningMessage.length > 0 ? "Please fill the: " + warningMessage.map(item => ' ' + item) : ""}</span>
                     </div>
                     <div className="button-container" >
-                        <Button btnType="success save"  click={addProductToDB}>
-                            Save Product<i className="bi bi-file-text-fill"></i>
+                        <Button btnType="success save" click={addProductToDB}>
+                            Save<i className="bi bi-file-text-fill"></i>
                         </Button>
                         <Button btnType="danger" click={clearAll} style={{ "--i": "#ac0a0a" }}>
                             Clear<i className="bi bi-trash-fill"></i>

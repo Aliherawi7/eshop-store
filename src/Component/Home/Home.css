@@ -1,13 +1,15 @@
 .home {
     min-height: 87vh;
 }
-.section-title{
+
+.section-title {
     font-weight: 600;
     font-size: 20px;
     padding: 20px;
     text-align: center;
 }
-.featured_product{
+
+.featured_product {
     position: relative;
 }
 
@@ -66,9 +68,9 @@
 .popular-brands .brands-container {
     display: flex;
     overflow-y: hidden;
-    overflow-x: scroll ;
+    overflow-x: scroll;
     padding: 20px;
-    
+
 }
 
 .brands-container img {
@@ -102,9 +104,11 @@
         padding: 0px 5px;
         margin: 0 10px;
     }
+
     .most-ordered .ordered-item h1 {
         font-size: 12px;
     }
+
     .most-ordered .ordered-item button {
         background-color: #000;
         color: #fff;
@@ -114,9 +118,11 @@
         font-size: 12px;
 
     }
+
     .most-ordered .ordered-item img {
         width: 100px;
     }
+
     .brands-container img {
         width: 100px;
     }
