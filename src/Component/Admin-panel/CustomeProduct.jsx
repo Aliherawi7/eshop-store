@@ -145,7 +145,7 @@ export function CustomeProduct({ id = '', back, data }) {
                     inCompletes.push(data)
                 }
             } else {
-                if (data == 'image' && typeof state[data] != 'object') {
+                if (data === 'image' && typeof state[data] !== 'object') {
                     inCompletes.push(data)
                 }
             }
@@ -167,8 +167,8 @@ export function CustomeProduct({ id = '', back, data }) {
         const formData = new FormData();
         for (let item in state) {
             console.log(item)
-            if (item == inputsName.IMAGE_SIDE_1.id || item == inputsName.IMAGE_SIDE_2.id || item == inputsName.IMAGE_SIDE_3.id) {
-                if (typeof state[item] == 'string') {
+            if (item === inputsName.IMAGE_SIDE_1.id || item === inputsName.IMAGE_SIDE_2.id || item === inputsName.IMAGE_SIDE_3.id) {
+                if (typeof state[item] === 'string') {
                     formData.append(item + "", null)
                     continue;
                 }
@@ -176,7 +176,7 @@ export function CustomeProduct({ id = '', back, data }) {
             formData.append(item + "", state[item])
         }
         let httpMethod = 'POST';
-        if (id != '') {
+        if (id !== '') {
             formData.append("id", id)
             httpMethod = 'PUT'
         }
@@ -223,7 +223,7 @@ export function CustomeProduct({ id = '', back, data }) {
                 <form style={{ "--i": "#32a7e1" }}>
                     <div className="input-group">
                         {Object.keys(inputsName).map(item => {
-                            if (inputsName[item].type == "file") {
+                            if (inputsName[item].type === "file") {
 
                                 let image;
                                 console.log(data)
@@ -268,7 +268,7 @@ export function CustomeProduct({ id = '', back, data }) {
                     </div>
                     <div className="button-container" >
                         <Button btnType="success save" style={{ "--i": "#32a7e1" }} click={addProductToDB}>
-                            Save Product<i className="bi bi-file-text-fill"></i>
+                            Save<i className="bi bi-file-text-fill"></i>
                         </Button>
                         <Button btnType="danger" click={clearAll} style={{ "--i": "#ac0a0a" }}>
                             Clear<i className="bi bi-trash-fill"></i>
