@@ -1,4 +1,4 @@
-.not-found-page{
+.not-found-page {
     width: 100%;
     height: 80vh;
     display: flex;
@@ -7,20 +7,22 @@
     flex-direction: column;
     background: #fff;
 }
-.not-found-page h1{
+
+.not-found-page h1 {
     background: #f47c20;
     border-radius: 10px;
-    width: 50%;
     padding: 20px 40px;
     text-align: center;
     margin: 20px 20px;
 }
-.not-found-page p{
+
+.not-found-page p {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 500;
 }
-.not-found-page a{
+
+.not-found-page a {
     text-transform: uppercase;
     padding: 10px 20px;
     border: 1px solid #ddd;
@@ -30,17 +32,18 @@
     color: #000;
     transition: background 0.3s cubic-bezier(0.79, 0.67, 0.25, 0.87);
 }
-.not-found-page a:hover{
+
+.not-found-page a:hover {
     background: var(--mainColor);
 }
 
-@media(max-width:768px){
-    .not-found-page img{
+@media(max-width:768px) {
+    .not-found-page img {
         width: 60%;
     }
 }
 
-.not-found-entering{
+.not-found-entering {
     animation-name: left-to-right;
     animation-duration: .5s;
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
