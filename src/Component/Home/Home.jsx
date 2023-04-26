@@ -14,7 +14,7 @@ const Home = () => {
     const sliderItemRef = useRef();
     useEffect(() => {
         const getData = () => {
-            fetch(ApiUrls.hostName + ApiUrls.products.allProducts(0, 15))
+            fetch(ApiUrls.hostName + ApiUrls.products.allProducts(1, 20))
                 .then(res => {
                     if (res.ok) {
                         return res.json();
@@ -57,7 +57,7 @@ const Home = () => {
 
     return (
         <div className={`home home-entering fade-in`}>
-            {products.length > 0 ? <Slider size={18} products={products} /> : ""}
+            {products.length > 0 ? <Slider size={20} products={products} /> : ""}
 
             <div className="features">
                 <div className="container">
