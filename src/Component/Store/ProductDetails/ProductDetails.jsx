@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ProductDetails.css"
 import Button from '../../UI/Button/Button'
 import { useParams } from 'react-router-dom'
@@ -34,7 +34,7 @@ const ProductDetails = () => {
 
     const addToBasket = () => {
         const index = basket.findIndex(item => {
-            return item.id == id;
+            return item.id === id;
         })
 
         // if there are not enough product in depot
@@ -65,7 +65,7 @@ const ProductDetails = () => {
     }
 
     const addToFavorite = () => {
-        fetch("http://localhost:8080/api/favorites", {
+        fetch(ApiUrls.favorites.addFavorite, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -83,14 +83,14 @@ const ProductDetails = () => {
 
     function modalSlide(previosImage, direction) {
         const index = data?.images.findIndex(item => {
-            return item == previosImage
+            return item === previosImage
         })
         switch (direction) {
             case 'left':
                 setProductImage(data.images[index - 1 < 0 ? data.images.length - 1 : index - 1]);
                 break;
             case 'right':
-                setProductImage(data.images[index + 1 == data.images.length ? 0 : index + 1]);
+                setProductImage(data.images[index + 1 === data.images.length ? 0 : index + 1]);
                 break
         }
 
