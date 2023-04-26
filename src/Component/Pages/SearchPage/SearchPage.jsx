@@ -11,7 +11,7 @@ const SearchPage = () => {
     const { id } = useParams()
     const [searchInput, setSearchInput] = useState(id)
     const [searchKey, setSearchKey] = useState(id);
-    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.findProducts + `name=${searchKey}`);
+    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.findProducts + `keyword=${searchKey}`);
 
     let productsElement;
 
@@ -21,14 +21,11 @@ const SearchPage = () => {
 
     if (loading) {
         productsElement = <Laoding />
-    }
-
-    if (error) {
+    } else if (error || data?.length < 1) {
         productsElement = (
             <NotFound />
         )
-    }
-    if (data) {
+    } else if (data) {
         productsElement = (
             <div className="product-list">
                 {data?.map((item) => (
