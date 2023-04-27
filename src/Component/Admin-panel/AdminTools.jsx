@@ -124,7 +124,7 @@ export function ProductsPanel() {
     }
 
     const deleteProduct = (id) => {
-        console.log(id)
+
         fetch(ApiUrls.hostName + ApiUrls.products.deleteProduct + id, {
             method: 'DELETE',
             headers: {
@@ -174,7 +174,7 @@ export function ProductsPanel() {
         setProductDetail(item);
         setState(false);
     }
-    console.log(productDetail)
+
     return (state ?
         <div className='products-statistics panel-statistics fade-in'>
             <div className='products-table model-table' style={{ "--i": "#32a7e1" }}>

@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import "./Home.css"
 import Slider from './Slider/Slider'
-import { useNavigate } from 'react-router-dom'
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts'
 import ApiUrls from '../../Constants/ApiUrls'
 
 const Home = () => {
-    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [brands, setBrands] = useState([]);
-    const [topSales, setTopSates] = useState([])
     const sliderRef = useRef();
     const sliderItemRef = useRef();
     useEffect(() => {
@@ -20,9 +17,7 @@ const Home = () => {
                         return res.json();
                     }
                 }).then(data => {
-                    var randomNumber = Math.random() * 10;
-                    setTopSates(data.slice(randomNumber, randomNumber + 4));
-                    setProducts(data);
+                    setProducts(data.records);
                 }).catch(error => {
                     getData();
                 })

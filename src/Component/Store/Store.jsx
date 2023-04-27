@@ -25,7 +25,6 @@ const Store = () => {
             let item = data[d];
             dataArray.push(item);
         }
-        console.log(pagination, hasMore)
         setSortedProduct(dataArray)
 
     }, [data, pagination])
@@ -36,8 +35,7 @@ const Store = () => {
 
         lastNode.current = new IntersectionObserver(enteries => {
             if (enteries[0].isIntersecting) {
-                console.log("visible")
-                console.log(pagination, hasMore)
+
                 if (hasMore) {
                     setPagination({ offset: pagination.offset + 1, pageSize: pagination.pageSize })
                 } else {

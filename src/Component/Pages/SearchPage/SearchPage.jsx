@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './SearchPage.css'
 import Button from '../../UI/Button/Button'
 import Product from '../../Store/Product/Product'
@@ -18,14 +18,7 @@ const SearchPage = () => {
     const findItems = () => {
         setSearchKey(searchInput)
     }
-
-    if (loading) {
-        productsElement = <Laoding />
-    } else if (error || data?.length < 1) {
-        productsElement = (
-            <NotFound />
-        )
-    } else if (data) {
+    if (data?.length > 0) {
         productsElement = (
             <div className="product-list">
                 {data?.map((item) => (
@@ -41,6 +34,12 @@ const SearchPage = () => {
                     />
                 ))}
             </div>
+        )
+    } else if (loading) {
+        productsElement = <Laoding />
+    } else if (error) {
+        productsElement = (
+            <NotFound />
         )
     }
 

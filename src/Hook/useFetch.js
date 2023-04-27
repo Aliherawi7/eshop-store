@@ -28,12 +28,18 @@ function useFetch(url, options) {
                 }
 
                 const responseData = await response.json();
+                if (!responseData.records) {
+                    setData([...data, ...responseData])
+                }
                 if (data.length + responseData.records.length < responseData.recordCount) {
                     setHasMore(true);
                 } else {
                     setHasMore(false)
                 }
-                setData([...data, ...responseData.records])
+                if (responseData.records) {
+                    setData([...data, ...responseData.records])
+                }
+
             } catch (error) {
                 setError(error)
             } finally {
