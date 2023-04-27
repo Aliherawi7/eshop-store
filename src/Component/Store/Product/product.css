@@ -1,4 +1,4 @@
-.card{
+.card {
     cursor: pointer;
     position: relative;
     display: flex;
@@ -16,39 +16,45 @@
     box-sizing: border-box;
 }
 
-.card img{
+.card img {
     width: 120px;
     margin: auto;
     transition: transform 0.3s;
 }
-.card:hover img{
+
+.card:hover img {
     transform: scale(1.2);
 }
 
-.card .product-info h4{
-    font-size: 16px;
+.card .product-info h4 {
+    font-size: 14px;
     font-family: inherit;
     font-weight: 300;
     margin: 5px 0;
+    max-width: 180px;
+    max-height: 40px;
+    overflow: hidden;
 }
-.card .product-info .product-price{
+
+.card .product-info .product-price {
     display: flex;
     flex-direction: column;
 }
-.card .product-info .before-discount{
+
+.card .product-info .before-discount {
     font-size: 12px;
     color: #fd5050;
     text-decoration: line-through;
     font-weight: 700;
 }
 
-.card .product-info .after-discount{
+.card .product-info .after-discount {
     font-size: 18px;
-    
+
     font-weight: 700;
 }
 
-.card-button{
+.card-button {
     position: absolute;
     display: flex;
     justify-content: flex-end;
@@ -60,15 +66,17 @@
     right: 0;
 }
 
-.card-button i{
+.card-button i {
     font-size: 16px;
     font-weight: 900;
     margin: 4px 5px;
 }
-.card-button i:hover{
+
+.card-button i:hover {
     color: var(--mainColor);
 }
-.card .discount-value{
+
+.card .discount-value {
     position: absolute;
     right: -35px;
     background-color: #ff4000;
@@ -82,34 +90,39 @@
     justify-content: center;
 }
 
-.product-picture-animation{
-  animation-name: product-image-animation;
-  animation-duration: 1s;
+.product-picture-animation {
+    animation-name: product-image-animation;
+    animation-duration: 1s;
 }
-@keyframes product-image-animation{
-    from{
+
+@keyframes product-image-animation {
+    from {
         transform: translateY(-50px);
         transition: transform 0.3s ease-in-out;
     }
-    to{
+
+    to {
         transform: translateX(80px);
         transition: transform 0.3s ease-in-out;
     }
 }
-@media (max-width:768px){
-    .card{
+
+@media (max-width:768px) {
+    .card {
         width: 100%;
         height: 240px;
     }
-    
-    .card img{
+
+    .card img {
         width: 120px;
         transform: unset;
     }
-    .card:hover img{
+
+    .card:hover img {
         transform: unset;
     }
-    .product-info h4{
+
+    .product-info h4 {
         font-size: 12px;
     }
 }

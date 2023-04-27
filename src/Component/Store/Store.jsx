@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import "./Store.css"
 import SmallLoading from '../UI/Loading/SmallLoading'
 import Product from './Product/Product'
 import useFetch from "../../Hook/useFetch"
 import ApiUrls from '../../Constants/ApiUrls'
 import NotFound from "../Pages/NotFoundPage/NotFound"
+import { useRef } from 'react'
+import Spinner from '../UI/Loading/Spinner'
 
 const Store = () => {
     let productsElement;
-    const [products, setProducts] = useState([]);
+    const [pagination, setPagination] = useState({ offset: 0, pageSize: 15 });
+    const [InfiniteScrollLoading, setInfiniteScrollLoading] = useState(true);
+    const [endOfPage, setEndOfPage] = useState(false)
     const [sortedProduct, setSortedProduct] = useState([])
-    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.allProducts(0, 40));
+    const { data, error, loading, hasMore } = useFetch(ApiUrls.hostName + ApiUrls.products.allProducts(pagination.offset, pagination.pageSize));
     const [categoryCounter, setCategoryCounter] = useState(0)
     const [sortByCounter, setSortByCounter] = useState(0);
+    const lastNode = useRef();
 
     useEffect(() => {
         const dataArray = []
@@ -20,14 +25,35 @@ const Store = () => {
             let item = data[d];
             dataArray.push(item);
         }
-        setProducts(dataArray);
-        setSortedProduct(data)
+        console.log(pagination, hasMore)
+        setSortedProduct(dataArray)
 
-    }, [data])
+    }, [data, pagination])
 
+    const lastNodeReference = node => {
+        if (loading) return;
+        if (lastNode.current) lastNode.current.disconnect();
+
+        lastNode.current = new IntersectionObserver(enteries => {
+            if (enteries[0].isIntersecting) {
+                console.log("visible")
+                console.log(pagination, hasMore)
+                if (hasMore) {
+                    setPagination({ offset: pagination.offset + 1, pageSize: pagination.pageSize })
+                } else {
+                    setEndOfPage(true)
+                    setInfiniteScrollLoading(false)
+                }
+            }
+        })
+        if (node) lastNode.current.observe(node);
+    }
+
+
+    // this function is used to sort products by category
     const sortByCategory = (type, id) => {
         const sortProduct = []
-        products.forEach(item => {
+        data.forEach(item => {
             if (item.keywords?.toLowerCase().includes(type.toLowerCase())) {
                 sortProduct.push(item)
             }
@@ -41,18 +67,9 @@ const Store = () => {
     }
 
     // if data is loading
-    if (loading) {
-        productsElement = (
-            <SmallLoading visible={true} position="absolute" top="100px" left="0" bottom="0" />
-        )
-    }
-    // if fetching data operation has failed the not found page will be show
-    if (error) {
+    if (error) { // if fetching data operation has failed the not found page will be show
         productsElement = (<NotFound />)
-    }
-
-    // if data has been fetched
-    if (data) {
+    } else if (data) {// if data has been fetche
         productsElement = (
             <div className="store fade-in">
                 <div className='sort-product'>
@@ -78,22 +95,40 @@ const Store = () => {
                         Most Expensive</span>
                 </div>
                 <div className="product-list">
-                    {sortedProduct?.map((item) => (
-                        <Product
-                            id={item.productId}
-                            image={item.images[0]}
-                            name={item.name}
-                            price={item.price}
+                    {sortedProduct?.map((item, index) => {
+                        if (sortedProduct.length === index + 1) {
+
+                            return <Product
+                                customeRef={lastNodeReference}
+                                id={item?.productId}
+                                image={item?.images[0]}
+                                name={item?.name}
+                                price={item?.price}
+                                rating={item?.rate}
+                                key={item?.productId}
+                                color={item?.color}
+                                discount={item?.discount}
+                                priceAfterDiscount={item?.priceAfterDiscount}
+                                quantityInDepot={item?.quantityInDepot}
+                            />
+                        }
+                        return <Product
+                            id={item?.productId}
+                            image={item?.images[0]}
+                            name={item?.name}
+                            price={item?.price}
                             rating={item?.rate}
-                            key={item.productId}
-                            color={item.color}
-                            discount={item.discount}
-                            quantityInDepot={item.quantityInDepot}
+                            key={item?.productId}
+                            color={item?.color}
+                            discount={item?.discount}
+                            priceAfterDiscount={item?.priceAfterDiscount}
+                            quantityInDepot={item?.quantityInDepot}
                         />
-                    ))}
+                    })}
                 </div>
             </div>
         )
+
     }
     return (
         <div className={`store store-entering`}>
@@ -128,11 +163,12 @@ const Store = () => {
                     <i className='bi bi-earbuds'></i>
                     Other
                 </span>
-
             </div>
 
             <section style={{ position: "relative" }}>
                 {productsElement}
+                {InfiniteScrollLoading && <Spinner />}
+                {endOfPage && <h5 style={{ textAlign: "center" }}>you have seen all the products</h5>}
             </section>
         </div>
     )

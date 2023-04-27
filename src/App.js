@@ -14,7 +14,7 @@ const NotFound = React.lazy(() => import('./Component/Pages/NotFoundPage/NotFoun
 const SearchPage = React.lazy(() => import('./Component/Pages/SearchPage/SearchPage'));
 const Checkout = React.lazy(() => import('./Component/Store/Checkout/Checkout'));
 const About = React.lazy(() => import('./Component/Pages/About/About'));
-const AdminPanel = React.lazy(()=> import('./Component/Admin-panel/AdminPanel'))
+const AdminPanel = React.lazy(() => import('./Component/Admin-panel/AdminPanel'))
 const Account = React.lazy(() => import("./Component/Pages/Account/Account"))
 const Favorite = React.lazy(() => import("./Component/Pages/Favorite/Favorite"))
 function App() {
@@ -33,7 +33,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/about" element={<About />} />
             <Route path='/favorite' element={<Favorite />} />
-            <Route path='/admin-panel' element={<AdminPanel />}/>
+            <Route path='/admin-panel' element={<AdminPanel />} />
             <Route path="*" element={<NotFound size="large" />} />
           </Routes>
           <ToastContainer />

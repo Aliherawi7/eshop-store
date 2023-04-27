@@ -79,7 +79,6 @@ function AdminPanel() {
           <span className='full-screen-panel' onClick={handleFullScreen} ><i className='bi bi-filter-left'></i></span>
           <div className='panel-container'>
             <currentComponent.component />
-            <SmallLoading visible={state?.loading} backgroundColor={'#262837'} />
           </div>
         </div>
       </div> : <NotFound />

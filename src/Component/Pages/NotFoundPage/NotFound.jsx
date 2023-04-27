@@ -9,6 +9,7 @@ const NotFound = () => {
             <p>The requested URL was not found on this server.</p>
             <p>THAT IS ALL WE KNOW.</p>
             <Link to="/">Back to home page</Link>
+
         </div>
     )
 }

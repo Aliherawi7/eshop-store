@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./AdminTools.css"
 import Button from "../UI/Button/Button"
 import CustomeProduct from './CustomeProduct'
@@ -10,6 +10,8 @@ import { actions } from '../../reducer'
 import Modal from '../UI/modal/Modal'
 import ProductLineChart from './ProductLineChart'
 import ApiUrls from '../../Constants/ApiUrls'
+import useFetch from '../../Hook/useFetch'
+import Spinner from '../UI/Loading/Spinner'
 
 
 export function Dashboard() {
@@ -84,58 +86,71 @@ export function Dashboard() {
 }
 
 export function ProductsPanel() {
+    const [pagination, setPagination] = useState({ offset: 0, pageSize: 15 });
+    const [InfiniteScrollLoading, setInfiniteScrollLoading] = useState(true);
+    const [endOfPage, setEndOfPage] = useState(false)
+    const { data, error, loading, setData, hasMore } = useFetch(ApiUrls.hostName + ApiUrls.products.allProducts(pagination.offset, pagination.pageSize));
     const [state, setState] = useState(true);
     const [, dispatch] = useStateValue();
-    const [products, setProducts] = useState([]);
     const [showModal, setShowModal] = useState({ show: false, productId: -1 })
     let [productDetail, setProductDetail] = useState({});
+    const lastNode = useRef();
     useEffect(() => {
         dispatch({
             type: actions.LOADING,
             item: true
         })
-        const getData = async () => {
-            let response = await fetch(ApiUrls.hostName + ApiUrls.products.allProducts(0, 15));
-
-            if (response.ok) {
-                let data = await response.json();
-                setProducts(data)
-
-            } else {
-
-            }
-            dispatch({
-                type: actions.LOADING,
-                item: false
-            })
-        }
-        getData();
 
     }, [])
 
-    const deleteProduct = (id) => {
 
-        fetch(ApiUrls.products.deleteProduct + id, {
+    const lastNodeReference = node => {
+        if (loading) return;
+        if (lastNode.current) lastNode.current.disconnect();
+
+        lastNode.current = new IntersectionObserver(enteries => {
+            if (enteries[0].isIntersecting) {
+                console.log("visible")
+                console.log(pagination, hasMore)
+                if (hasMore) {
+                    setPagination({ offset: pagination.offset + 1, pageSize: pagination.pageSize })
+                } else {
+                    setEndOfPage(true)
+                    setInfiniteScrollLoading(false)
+                }
+            }
+        })
+        if (node) lastNode.current.observe(node);
+    }
+
+    const deleteProduct = (id) => {
+        console.log(id)
+        fetch(ApiUrls.hostName + ApiUrls.products.deleteProduct + id, {
             method: 'DELETE',
             headers: {
                 'Authorization': localStorage.getItem("accessToken")
             },
         }).then(res => {
-            if (!res.ok)
+            if (res.ok) {
+                toast.success("product successfully deleted.", {
+                    position: "bottom-right",
+                    closeOnClick: true,
+                    autoClose: true,
+                    closeButton: true
+                })
+                return
+            } else {
                 throw new Error(res.statusText)
-        }).then(data => {
-            const productIndex = products.findIndex(item => {
-                return item.id == id;
+            }
+        }).then(resData => {
+            const productIndex = data?.findIndex(item => {
+                console.log(item.productId)
+                return item.productId == id;
             })
-            const newProductList = [...products];
+            const newProductList = [...data];
             newProductList.splice(productIndex, 1)
-            toast.success("product successfully deleted.", {
-                position: "bottom-right",
-                closeOnClick: true,
-                autoClose: true,
-                closeButton: true
-            })
-            setProducts(newProductList)
+            setData(newProductList)
+
         }).catch(error => {
             console.log(error)
             toast.error("couldn't removed the product.", {
@@ -166,7 +181,7 @@ export function ProductsPanel() {
                 <div className='section-header'>
                     <div>
                         <h2>Products</h2>
-                        <p>{products.length} products</p>
+                        <p>{data?.length} products</p>
                     </div>
                     <Button btnType="white" click={addProduct}>
                         add
@@ -193,8 +208,30 @@ export function ProductsPanel() {
                     </thead>
 
                     <tbody>
+                        {data?.map((product, index) => {
+                            if (data.length === index + 1) {
+                                return (
+                                    <tr key={product.productId} ref={lastNodeReference}>
+                                        <td name='id'>{product.id}</td>
+                                        <td name='name'><img src={product.images[0]} />{product.name?.toUpperCase()}</td>
+                                        <td >{product.category?.toUpperCase()}</td>
+                                        <td >{product.brandName?.toUpperCase()}</td>
+                                        <td name="price">${product.price}</td>
+                                        <td>{product.quantityInDepot}</td>
+                                        <td>{product.quantityInDepot > 0 ? "available" : 'not available'}</td>
+                                        <td name='last'>
+                                            <span className='action-buttons'>
+                                                <i className='bi bi-three-dots-vertical show-actions'></i>
+                                                <span className='buttons-box'>
+                                                    <i className='bi bi-trash' onClick={() => setShowModal({ show: true, productId: product.productId })} style={{ "--i": 'red' }}></i>
+                                                    <i className='bi bi-pencil' onClick={() => editProduct(product)}></i>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
 
-                        {products.map(product => {
+                                )
+                            }
                             return (
                                 <tr key={product.productId}>
                                     <td name='id'>{product.id}</td>
@@ -221,6 +258,8 @@ export function ProductsPanel() {
                     </tbody>
 
                 </table>
+                {InfiniteScrollLoading && <Spinner />}
+                {endOfPage && <h5 style={{ textAlign: "center" }}>you have seen all the products</h5>}
             </div>
 
         </div>

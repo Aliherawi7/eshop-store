@@ -6,7 +6,7 @@ import RateStar from '../Rate-Star/RateStar'
 import { actions } from '../../../reducer'
 import { toast } from 'react-toastify'
 
-const Product = ({ image, id, name, price, rating, quantityInDepot, discount, customeRef }) => {
+const Product = ({ image, id, name, price, rating, quantityInDepot, discount, priceAfterDiscount, customeRef }) => {
     const navigate = useNavigate()
     const [{ basket }, dispatch] = useStateValue()
     const addToBasket = (e) => {
@@ -29,13 +29,15 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
             })
             return;
         }
-        console.log(image)
+        toast.success(name + "successfully added to basket", {
+            position: 'bottom-right'
+        });
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
                 name: name,
                 image: image,
-                price: price,
+                price: priceAfterDiscount,
                 rating: rating,
                 id: id,
                 quantityInDepot: quantityInDepot,
@@ -55,7 +57,7 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
             body: JSON.stringify({ productId: productId })
         }).then(res => {
             if (res.ok) {
-                toast.success("successfully added", {
+                toast.success(name + " successfully added to your favorite list", {
                     position: 'bottom-right'
                 });
             }
@@ -78,7 +80,7 @@ const Product = ({ image, id, name, price, rating, quantityInDepot, discount, cu
                     }
                     <span className='after-discount'>
                         <sup><i className='bi bi-currency-dollar'></i></sup>
-                        {price - (price * discount / 100)}
+                        {priceAfterDiscount}
                     </span>
                 </div>
             </div>

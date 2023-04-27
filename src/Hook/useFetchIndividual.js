@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
-const actions = {
-    LOADING: "loading",
-    FETCHED: "fetched",
-    ERROR: "error"
-}
-function useFetch(url, options) {
-    const [data, setData] = useState([]);
+function useFetchIndividual(url, options) {
+    const [data, setData] = useState();
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
-    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
         (async function () {
@@ -26,14 +20,8 @@ function useFetch(url, options) {
                     setData([])
                     return;
                 }
-
                 const responseData = await response.json();
-                if (data.length + responseData.records.length < responseData.recordCount) {
-                    setHasMore(true);
-                } else {
-                    setHasMore(false)
-                }
-                setData([...data, ...responseData.records])
+                setData(responseData)
             } catch (error) {
                 setError(error)
             } finally {
@@ -43,8 +31,8 @@ function useFetch(url, options) {
 
     }, [url])
 
-    return { data, error, loading, setData, hasMore }
+    return { data, error, loading }
 }
 
 
-export default useFetch;
+export default useFetchIndividual

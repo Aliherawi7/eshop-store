@@ -10,27 +10,32 @@ import { actions } from '../../../reducer'
 import { toast } from 'react-toastify'
 import Modal from '../../UI/modal/Modal'
 import ApiUrls from "../../../Constants/ApiUrls"
-import useFetch from '../../../Hook/useFetch'
 import RelatedProducts from '../RelatedProducts/RelatedProducts'
 import NotFound from "../../Pages/NotFoundPage/NotFound"
 
 const ProductDetails = () => {
     const { id } = useParams()
     const [{ basket }, dispatch] = useStateValue()
-
-    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.getProduct + id);
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState();
     const [showModal, setShowModal] = useState(false)
     const [productImage, setProductImage] = useState("");
-
-
     let productsElement;
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        if (data) {
-            setProductImage(data.images[0])
-        }
-    }, [data, id])
+        fetch(ApiUrls.hostName + ApiUrls.products.getProduct + id)
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .then(resData => {
+                setData(resData)
+                setLoading(false)
+                setProductImage(resData.images[0])
+            })
+    }, [id])
 
     const addToBasket = () => {
         const index = basket.findIndex(item => {
@@ -62,10 +67,13 @@ const ProductDetails = () => {
                 quantity: 1
             }
         })
+        toast.success(data?.name + " successfully added to basket", {
+            position: 'bottom-right'
+        });
     }
 
     const addToFavorite = () => {
-        fetch(ApiUrls.favorites.addFavorite, {
+        fetch("http://localhost:8080/api/favorites", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +82,12 @@ const ProductDetails = () => {
             body: JSON.stringify({ productId: id })
         }).then(res => {
             if (res.ok) {
-                toast.success("successfully added", {
+                toast.success(data?.name + " successfully added to your favorite list", {
+                    position: 'bottom-right'
+                });
+            }
+            if (res.status == 400) {
+                toast.warning(data?.name + " already exists in your favorite list", {
                     position: 'bottom-right'
                 });
             }
@@ -103,7 +116,7 @@ const ProductDetails = () => {
         )
     }
 
-    if (error) {
+    if (!data) {
         productsElement = <NotFound />
     }
 
@@ -123,7 +136,7 @@ const ProductDetails = () => {
                             <span className='slide-left right' onClick={() => modalSlide(productImage, 'right')}><i className='bi bi-chevron-right'></i></span>
                         </Modal>
                         <div className='different_sides align_center'>
-                            {data?.images.map((item) => {
+                            {data?.images?.map((item) => {
                                 return (
                                     <div key={item} className={'image_side' + (item == productImage ? ' active' : '')} onClick={() => setProductImage(item)}>
                                         <img src={item} alt={data.name} />

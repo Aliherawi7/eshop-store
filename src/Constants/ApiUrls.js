@@ -5,7 +5,7 @@ const ApiUrls = {
         allProducts: (offset, pageSize) => `api/products/pagination/${offset}/${pageSize}`,
         getProduct: "api/products/",
         addProduct: "api/products",
-        deleteProduct: "api/products/delete/",
+        deleteProduct: "api/products/",
         findProducts: "api/products/find?"
     },
     users: {

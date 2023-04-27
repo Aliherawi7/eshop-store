@@ -1,15 +1,15 @@
 import React, { useRef } from 'react'
 import ApiUrls from '../../../Constants/ApiUrls'
 import "./RelatedProducts.css"
-import useFetch from '../../../Hook/useFetch'
 import Product from '../Product/Product'
 import FlexibleLoading from "../../UI/Loading/FlexibleLoading"
+import useFetchIndividual from '../../../Hook/useFetchIndividual'
 
 function RelatedProducts({ category }) {
     let Element;
     const sliderItemRef = useRef();
     const sliderRef = useRef();
-    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.findProducts + "category=" + category);
+    const { data, error, loading } = useFetchIndividual(ApiUrls.hostName + ApiUrls.products.findProducts + "category=" + category, {});
 
     if (loading) {
         Element = (<FlexibleLoading />)
