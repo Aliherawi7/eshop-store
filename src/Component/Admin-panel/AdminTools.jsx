@@ -153,7 +153,7 @@ export function ProductsPanel() {
 
         }).catch(error => {
             console.log(error)
-            toast.error("couldn't removed the product.", {
+            toast.error("couldn't remove the product.", {
                 position: "bottom-right",
                 closeOnClick: true,
                 autoClose: true,
