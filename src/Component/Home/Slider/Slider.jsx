@@ -3,7 +3,7 @@ import "./Slider.css"
 import { Link } from "react-router-dom"
 
 
-function Slider({ products, size = 20, delay = 8, }) {
+function Slider({ products, size = 20, delay = 5, }) {
     let [product, setProduct] = useState(products);
     let counter = 0
     const slides = useRef();

@@ -52,7 +52,7 @@ const Home = () => {
 
     return (
         <div className={`home home-entering fade-in`}>
-            {products.length > 0 ? <Slider size={20} products={products} /> : ""}
+            {products.length > 0 ? <Slider size={products.length} products={products} /> : ""}
 
             <div className="features">
                 <div className="container">
