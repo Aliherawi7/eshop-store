@@ -27,7 +27,8 @@ function RelatedProducts({ category }) {
                             id={item.productId}
                             image={item.images[0]}
                             name={item.name}
-                            price={item.price}
+                            price={item?.price}
+                            priceAfterDiscount={item?.priceAfterDiscount}
                             rating={item?.rate}
                             key={item.productId}
                             color={item.color}
