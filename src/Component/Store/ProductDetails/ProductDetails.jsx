@@ -116,7 +116,7 @@ const ProductDetails = () => {
         )
     }
 
-    if (!data) {
+    if (data?.length < 1) {
         productsElement = <NotFound />
     }
 

@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react';
 
-const actions = {
-    LOADING: "loading",
-    FETCHED: "fetched",
-    ERROR: "error"
-}
 function useFetch(url, options) {
     const [data, setData] = useState([]);
     const [error, setError] = useState();
