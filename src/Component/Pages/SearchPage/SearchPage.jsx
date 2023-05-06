@@ -11,12 +11,19 @@ const SearchPage = () => {
     const { id } = useParams()
     const [searchInput, setSearchInput] = useState(id)
     const [searchKey, setSearchKey] = useState(id);
-    const { data, error, loading } = useFetch(ApiUrls.hostName + ApiUrls.products.findProducts + `keyword=${searchKey}`);
+    const { data, error, loading, setData } = useFetch(ApiUrls.hostName + ApiUrls.products.findProducts + `keyword=${searchKey}`);
 
     let productsElement;
 
     const findItems = () => {
+
+        setData([])
         setSearchKey(searchInput)
+    }
+    const findItemByPressingEnter = (e) => {
+        if (e.key == "Enter") {
+            findItems()
+        }
     }
     if (data?.length > 0) {
         productsElement = (
@@ -46,7 +53,7 @@ const SearchPage = () => {
     return (
         <div className={`search-page search-entering`}>
             <div className="search-box">
-                <input name="search" value={searchInput} onChange={(event) => (setSearchInput(event.target.value))} placeholder="what do you need?" />
+                <input name="search" value={searchInput} onKeyUp={(e) => findItemByPressingEnter(e)} onChange={(event) => (setSearchInput(event.target.value))} placeholder="what do you need?" />
                 <Button btnType="success" click={findItems}><i className="bi bi-search"></i> search</Button>
             </div>
             <hr />
