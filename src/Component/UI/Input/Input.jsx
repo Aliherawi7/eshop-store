@@ -18,11 +18,11 @@ const Input = (props) => {
     let element;
     if (props.type == 'file') {
         element = (<div className='image-input'>
-            <img src={props.value ? URL.createObjectURL(props.value) : "/image/people/avatar.png"} />
+            <img src={props.value ? URL.createObjectURL(props.value) : "/image/avatar.png"} />
             <input
                 type={props.type}
                 name={props.name}
-                
+
                 accept='image/*'
                 className={classArray.join(' ')}
                 onChange={props.change} />
