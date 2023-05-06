@@ -128,7 +128,6 @@ const Login = () => {
             if (data.error_message) {
                 const updatInputMessage = { ...loginInputState };
                 if (data.error_message.includes("email")) {
-                    console.log("in 2 if")
                     updatInputMessage.email.warningMessage = data.error_message
                     updatInputMessage.email.isValid = false
                 } else {

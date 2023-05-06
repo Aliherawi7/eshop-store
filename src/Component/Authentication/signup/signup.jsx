@@ -234,14 +234,14 @@ const Signup = () => {
 
         if (!name.isValid || !lastName.isValid || !dob.isValid) {
             const holder = { ...signupInputState };
-            if(!name.isValid){
+            if (!name.isValid) {
                 holder.name.warningMessage = "fill it"
-                holder.isUsed =true
-                
-            }else if(!lastName.isValid){
+                holder.isUsed = true
+
+            } else if (!lastName.isValid) {
                 holder.lastName.warningMessage = "fill it"
-                holder.isUsed = true; 
-            }else{
+                holder.isUsed = true;
+            } else {
                 holder.dob.warningMessage = "fill it";
                 holder.dob.isUsed = true;
             }
@@ -273,14 +273,19 @@ const Signup = () => {
             setSignupInputState(holder)
             return
         }
-        if(!image.isValid){
-            const holder = {...signupInputState}
+        if (!image.isValid) {
+            const holder = { ...signupInputState }
             holder.image.warningMessage = "choose a picture"
             holder.image.isUsed = true
             setSignupInputState(holder)
         }
         const formData = new FormData();
         for (let item in signupInputState) {
+            console.log(item)
+            if (item == "dob") {
+                formData.append(item + "", signupInputState[item].value + "")
+                console.log(signupInputState[item].value + "")
+            }
             formData.append(item + "", signupInputState[item].value)
         }
         setloading(true)
@@ -290,24 +295,24 @@ const Signup = () => {
         }).then(res => {
             if (res.ok) {
                 return res.json();
-            }else{
-                throw new Error(res.status)
+            } else {
+                throw new Error(res.statusText)
             }
         }).then(data => {
-            const inputs = {...signupInputState}
-            if(data.error_message){
+            const inputs = { ...signupInputState }
+            if (data.error_message) {
                 inputs.email.warningMessage = data.error_message;
                 inputs.email.isValid = false;
                 setSignupInputState(inputs)
                 setloading(false)
-                return 
+                return
             }
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refresh_token", data.refreshToken);
             localStorage.setItem("name", data.userInformationDTO?.name)
             localStorage.setItem("lastName", data.userInformationDTO?.lastName)
             localStorage.setItem("email", data.userInformationDTO?.email)
-            localStorage.setItem("image",data.userInformationDTO?.image)
+            localStorage.setItem("image", data.userInformationDTO?.image)
             localStorage.setItem("roles", data.userInformationDTO?.roles)
             //console.log(localStorage.getItem("roles"))
 
@@ -324,7 +329,7 @@ const Signup = () => {
             console.log(error)
             setloading(false)
         })
-        
+
 
     }
 
@@ -347,11 +352,13 @@ const Signup = () => {
                 {signUpInputArray.map((item) => {
                     return (
                         <React.Fragment key={item.id}>
+                            {/* this part add the eye icon on password input */}
                             {(item.config.name === 'password' || item.config.name === 'passwordRepeat') ?
                                 <Button btnType={'show-password'} click={() => (eyeBtnHandler(item.config.name))}>
                                     <i className={(item.config.name == 'password') ?
                                         passwordEyeState.passwordEyeIcon : passwordEyeState.repeatPasswordEyeIcon}></i>
-                                </Button> : null}
+                                </Button> : null
+                            }
                             <Input
                                 type={item.config.type}
                                 name={item.config.type}
@@ -372,7 +379,7 @@ const Signup = () => {
                 <p>By clicking the sign up you agree to the <strong>eshop</strong> Conditions of Use & Sale</p>
                 <Link to="/login" className="already-account">Already have account?</Link>
             </form>
-            <SmallLoading visible={loading} position="fixed" backgroundColor={"#ededed66"} top="100px" left="0" bottom="0"/>
+            <SmallLoading visible={loading} position="fixed" backgroundColor={"#ededed66"} top="100px" left="0" bottom="0" />
         </div>
 
 
