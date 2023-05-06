@@ -3,6 +3,7 @@ import "./ProductDetails.css"
 import Button from '../../UI/Button/Button'
 import { useParams } from 'react-router-dom'
 import Loading from '../../UI/Loading/Loading'
+import Spinner from '../../UI/Loading/Spinner'
 import DetailsPane from './productDetailPane/DetailsPane'
 import { useStateValue } from '../../../StateProvider'
 import RateStar from '../Rate-Star/RateStar'
@@ -12,6 +13,7 @@ import Modal from '../../UI/modal/Modal'
 import ApiUrls from "../../../Constants/ApiUrls"
 import RelatedProducts from '../RelatedProducts/RelatedProducts'
 import NotFound from "../../Pages/NotFoundPage/NotFound"
+
 
 const ProductDetails = () => {
     const { id } = useParams()
@@ -24,6 +26,7 @@ const ProductDetails = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        setLoading(true)
         fetch(ApiUrls.hostName + ApiUrls.products.getProduct + id)
             .then(res => {
                 if (res.ok) {
@@ -95,6 +98,7 @@ const ProductDetails = () => {
     }
 
     function modalSlide(previosImage, direction) {
+        setLoading(true)
         const index = data?.images.findIndex(item => {
             return item === previosImage
         })
@@ -128,11 +132,13 @@ const ProductDetails = () => {
                     <section className='product_images'>
                         <Button btnType="transparent zoom-btn" click={() => setShowModal(!showModal)} ><i className='bi bi-zoom-in'></i></Button>
                         <div className='product_image_container'>
-                            <img src={productImage} className="product_image" alt={data?.name} />
+                            {loading && <Spinner />}
+                            <img src={productImage} onLoad={() => setLoading(false)} className="product_image" alt={data?.name} />
                         </div>
                         <Modal show={showModal} ModalClose={() => setShowModal(!showModal)}>
                             <span className='slide-left' onClick={() => modalSlide(productImage, 'left')}> <i className='bi bi-chevron-left'></i></span>
-                            <img src={productImage} alt={data?.name} />
+                            {loading && <Spinner />}
+                            <img src={productImage} onLoad={() => setLoading(false)} alt={data?.name} />
                             <span className='slide-left right' onClick={() => modalSlide(productImage, 'right')}><i className='bi bi-chevron-right'></i></span>
                         </Modal>
                         <div className='different_sides align_center'>
