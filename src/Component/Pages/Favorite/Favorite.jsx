@@ -54,6 +54,7 @@ function Favorite() {
         })
         const newList = [...product]
         newList.splice(productIndex, 1)
+        console.log(newList)
         setproduct(newList)
     }
 
